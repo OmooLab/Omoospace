@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "omoospace"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["manan <icrdr2010@outlook.com>"]
 readme = "README.md"
@@ -14,9 +14,11 @@ pyvis = "^0.3.2"
 networkx = "^3.1"
 inquirerpy = "^0.3.4"
 rich = "^13.6.0"
+nutree = "^0.5.1"
 
 [tool.poetry.scripts]
 omoospace = "omoospace.commands:cli"
+omoos = "omoospace.commands:cli"
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"

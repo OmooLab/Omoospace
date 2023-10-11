@@ -629,6 +629,20 @@ extra = ["lxml (>=4.6)", "pydot (>=1.4.2)", "pygraphviz (>=1.10)", "sympy (>=1.1
 test = ["codecov (>=2.1)", "pytest (>=7.2)", "pytest-cov (>=4.0)"]
 
 [[package]]
+name = "nutree"
+version = "0.5.1"
+description = "A Python library for tree data structures with an intuitive, yet powerful, API."
+optional = false
+python-versions = "*"
+files = [
+    {file = "nutree-0.5.1-py3-none-any.whl", hash = "sha256:04e359b123603ad932d0e4d37aa8f683b1173c51fbfc790dd6357c5fd403c5d3"},
+    {file = "nutree-0.5.1.tar.gz", hash = "sha256:a96809529d230c30faa29e7a0f46be9e1ffbe17167788299ca3887c9667ba772"},
+]
+
+[package.extras]
+graph = ["graphviz", "pydot", "rdflib"]
+
+[[package]]
 name = "packaging"
 version = "23.2"
 description = "Core utilities for Python packages"
@@ -1248,4 +1262,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "d4b096282832a7ca408b7a8c9f4bc72e75887449c4ee03b08b89191f6473bfac"
+content-hash = "bba67d179f5df542797f35e9bbf9546d75890ba9c0383e377752ec94165aeef5"

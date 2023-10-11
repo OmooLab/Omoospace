@@ -3,15 +3,15 @@ import os
 from pathlib import Path
 import shutil
 from pypinyin import lazy_pinyin
-from omoospace.ui import console, ui_table
-
-PathLike = str | os.PathLike
+from omoospace.types import PathLike
+from omoospace import console, ui
 
 
 def format_name(string: str, verbose=False):
-    debug_info = ui_table()
-    debug_info.add_column("Step", justify="right")
-    debug_info.add_column("Result", style="highlight", justify="left")
+    debug_info = ui.Table(
+        {"header": "Step", "justify": "right"},
+        {"header": "Result", "justify": "left", "style": "highlight"}
+    )
     debug_info.add_row("Original", string)
 
     # [A-Za-z0-9_-] only
@@ -77,7 +77,6 @@ def copy_to_path(src: PathLike, dst: PathLike):
     src = Path(src).resolve()
     dst = Path(dst).resolve()
     dst.parent.mkdir(parents=True, exist_ok=True)
-    print(src,dst)
     if src.is_dir():
         shutil.copytree(src, dst)
     else:

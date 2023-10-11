@@ -4,16 +4,16 @@ import os
 import shutil
 import yaml
 from zipfile import ZipFile
-from colorama import Fore, Style
-from enum import Enum
-from typing import TypedDict
-
 
 from rich.progress import track
-from omoospace.ui import ui_table, console, ui_info, ui_board, ui_grid, ui_panel
+from omoospace.directory import DirectoryTree
+from omoospace.exceptions import CreationError, EmptyError, ExistsError, InvalidError, NotFoundError, NotIncludeError
+from omoospace.package import Package
+from omoospace.subspace import SubspaceTree
+from omoospace.ui import console
+from omoospace import ui
 from omoospace.utils import format_name, reveal_in_explorer, is_subpath, PathLike, copy_to_path
-from omoospace.tree import Tree
-from omoospace.graph import draw_graph
+from omoospace.types import Entity, Item, OmoospaceInfo, PackageInfo, Route, Structure, SubspaceInfo
 
 # TODO: more color in subspace route
 # TODO: package link in summary list
@@ -24,107 +24,7 @@ from omoospace.graph import draw_graph
 # TODO: annition to class and funtion
 
 
-Entity = Path
-
-Item = Path
-
-Route = list[str]
-
-
-class NotFoundError(Exception):
-    def __init__(self, staff: str, dir: str):
-        self.message = "No %s detected in '%s'" % (staff, dir)
-        super().__init__(self.message)
-
-
-class ExistsError(Exception):
-    def __init__(self, staff: str, dir: str):
-        self.message = "%s already exists in '%s'" % (staff, dir)
-        super().__init__(self.message)
-
-
-class Work(TypedDict):
-    name: str
-    path: str
-
-
-class Creator(TypedDict):
-    name: str
-    email: str
-    role: str
-    website: str
-
-
-class Plugin(TypedDict):
-    name: str
-    version: str
-
-
-class Softerware(TypedDict):
-    name: str
-    version: str
-    plugins: list[Plugin]
-
-
-class OmoospaceInfo(TypedDict):
-    description: str
-    creators: list[Creator]
-    softwares: list[Softerware]
-    works: list[Work]
-
-
-class OmoospaceStructure(TypedDict):
-    contents: dict
-    sourcefiles: dict
-
-
-class PackageInfo(TypedDict):
-    description: str
-    version: str
-    creators: list[Creator]
-
-
-class SubspaceType(Enum):
-    DIRECTORY = "directory"
-    FILE = "file"
-    PHANTOM = "phantom"
-
-
-class Subspace(TypedDict):
-    route: Route
-    parent: Route
-    entities: list[Entity]
-    path: Path
-    type: SubspaceType
-    flow: int
-
-
-class Package:
-    def __init__(self, dir: PathLike):
-        package_path = Path(dir).resolve()
-        if (package_path.suffix == ".zip"):
-            with ZipFile(package_path, 'r') as zip:
-                try:
-                    with zip.open('Package.yml') as file:
-                        package_info = yaml.safe_load(file)
-                except:
-                    raise NotFoundError("package", dir)
-        else:
-            package_info_path = Path(package_path, 'Package.yml')
-            if package_info_path.exists():
-                with package_info_path.open('r', encoding='utf-8') as file:
-                    package_info = yaml.safe_load(file)
-            else:
-                raise NotFoundError("package", dir)
-
-        self.root_path = package_path
-        self.name = package_info.get('name')
-        self.description = package_info.get('description')
-        self.version = package_info.get('version')
-        self.creators = package_info.get('creators')
-
-
-class Omoospace:
+class OmoospaceTree(DirectoryTree):
     MAIN_DIRS = [
         "Contents",
         "ExternalData",
@@ -133,6 +33,15 @@ class Omoospace:
         "StagedData"
     ]
 
+    def __init__(self, structure: Structure = None) -> None:
+        self.structure = structure or {}
+        for dirname in self.MAIN_DIRS:
+            if self.structure.get(dirname) is None:
+                self.structure[dirname] = None
+        super().__init__(structure=self.structure)
+
+
+class Omoospace:
     def __init__(self, detect_dir: PathLike):
         """Initialize Omoospace configuration .
 
@@ -170,36 +79,6 @@ class Omoospace:
         self.softwares = omoospace_info.get('softwares')
         self.works = omoospace_info.get('works')
 
-    @classmethod
-    def make_dirs(
-            cls,
-            dir: PathLike,
-            subdirs: dict[str, any] = {},
-            is_subspace: bool = False):
-        """Create all subdirectories in a directory.
-
-        Args:
-            dir (PathLike): The directory to create.
-            subdirs (dict[str, any], optional): The subdirectories under that directory. Defaults to {}.
-            is_subspace (bool, optional): If true, '.subspace' marker file will be created in that dicrectory. Defaults to False.
-        """
-        path = Path(dir).resolve()
-        path.mkdir(parents=True, exist_ok=True)
-        if is_subspace:
-            # make .subspace in it
-            if 'Void' not in path.name.split("_"):
-                with Path(path, ".subspace").open('w') as file:
-                    pass
-
-        subdirs = subdirs or {}  # avoid None
-        for subdir_name, subdir_subdir in subdirs.items():
-            is_subspace = subdir_name.startswith('*')
-            subdir_name = subdir_name.removeprefix("*")
-            subdir_path = Path(path, subdir_name)
-
-            # if subdir_subdir not empty, continue make dir
-            cls.make_dirs(subdir_path, subdir_subdir, is_subspace)
-
     @staticmethod
     def is_entity(path: Path) -> bool:
         """Return true if path is a subspace entity .
@@ -210,15 +89,14 @@ class Omoospace:
         Returns:
             bool: Return ture if is valid entity.
         """
+        path = path.resolve()
         if path.is_dir():
-            is_subspace = Path(path, '.subspace').exists()
+            is_subspace = Path(path, 'Subspace.yml').is_file()
             is_void = 'Void' in path.name.split("_")
-            if is_subspace or is_void:
-                return True
+            return is_subspace or is_void
         else:
-            if path.parts[-1] != '.subspace':
-                return True
-        return False
+            not_marker = path.name != 'Subspace.yml'
+            return not_marker
 
     def get_route(self, entity: Entity) -> Route:
         """Returns the route for the given entity .
@@ -229,15 +107,24 @@ class Omoospace:
         Returns:
             Route: A subspace route object to the given entity.
         """
-        relpath = entity.relative_to(self.sourcefiles_path)
+        entity = entity.resolve()
+        if not is_subpath(entity, self.sourcefiles_path):
+            raise NotIncludeError("This entity", "SourceFiles")
 
         # Get relpath parts. remove those directory that is not entity.
-        valid_parents = [parent for parent in relpath.parents
-                         if self.is_entity(parent)]
+        valid_parents = []
+        for parent in entity.parents:
+            if parent == self.sourcefiles_path:
+                break
+
+            if self.is_entity(parent):
+                valid_parents.append(parent)
         valid_parents.reverse()
+
         path_parts = [format_name(valid_parent.stem)
                       for valid_parent in valid_parents]
         path_parts.append(format_name(entity.stem))
+
         # Get route nodes. remove duplicate prefix.
         route: Route = []
         for part_name in path_parts:
@@ -266,11 +153,23 @@ class Omoospace:
         self,
         search_dir: PathLike = None,
         recursive: bool = True
-    ) -> list[Path]:
+    ) -> list[Entity]:
+        """Get all entities in the source files.
+
+        Args:
+            search_dir (PathLike, optional): [description]. Defaults to None.
+            recursive (bool, optional): [description]. Defaults to True.
+
+        Raises:
+            Exception: [description]
+
+        Returns:
+            list[Entity]: [description]
+        """
         search_dir: Path = Path(search_dir).resolve() \
             if search_dir else self.sourcefiles_path
         if not is_subpath(search_dir, self.sourcefiles_path, or_equal=True):
-            raise Exception("Search directory is out of SourceFiles")
+            raise NotIncludeError("Search directory", "SourceFiles")
 
         entities: list[Path] = []
         if recursive:
@@ -293,96 +192,50 @@ class Omoospace:
         return self.get_entities()
 
     @property
-    def subspaces(self) -> dict[str, Subspace]:
-        return self.get_subspaces(*self.entities)
+    def subspace_tree(self) -> SubspaceTree:
+        return self.get_subspace_tree(*self.entities)
 
-    def get_subspaces(
+    def get_subspace_tree(
         self,
-        *entities: list[Entity]
-    ) -> dict[str, Subspace]:
+        *entities: Entity
+    ) -> SubspaceTree:
         """Get subspaces based on entities.
 
         Args:
             entities (list[Entity]): [description]
 
         Returns:
-            dict[str, Subspace]: Subspaces
+            SubspaceTree: Subspaces
         """
-        subspace_dict: dict[str, Subspace] = {}
-        for entity in entities:
-            entity_route = self.get_route(entity)
-            # create all subspace in route
-            for i in range(len(entity_route)):
-                is_end_node = i == len(entity_route)-1
-                subspace_route = entity_route[:i+1]
-                subspace_parent = entity_route[:i] if i != 0 else None
-                subspace_route_str = "_".join(subspace_route)
-                subspace = subspace_dict.get(subspace_route_str) \
-                    or Subspace(
-                    route=subspace_route,
-                    parent=subspace_parent,
-                    entities=[],
-                    flow=0
-                )
-                if is_end_node:
-                    subspace["entities"].append(entity)
-
-                # what ever is end node or not, all nodes are passed through
-                subspace["flow"] += 1
-                subspace_dict[subspace_route_str] = subspace
-
-        # set subspace type base on entities
-        for subspace in subspace_dict.values():
-            if (len(subspace["entities"]) == 0):
-                subspace["type"] = SubspaceType.PHANTOM
-            else:
-                subspace["type"] = SubspaceType.FILE
-                for entity in subspace["entities"]:
-                    if (entity.is_dir()):
-                        subspace["type"] = SubspaceType.DIRECTORY
-
-        subspace_dict = dict(sorted(subspace_dict.items()))
-        return subspace_dict
-
-    def get_subspace_tree(self) -> Tree:
-        """
-        build subspace tree
-        """
-        subspace_dict = self.subspaces
-        subspace_tree = Tree()
-
-        for route in subspace_dict.keys():
-            subspace_tree.add(route.split("_"))
-
-        return subspace_tree
+        return SubspaceTree(*entities, omoospace=self)
 
     @property
-    def packages(self) -> dict[str, Package]:
+    def packages(self) -> list[Package]:
         """A dictionary of packages.
 
         Returns:
-            dict[str,Package]: A dictionary of packages.
+            list[Package]: A dictionary of packages.
         """
         subdirs = [subdir for subdir in self.externaldata_path.iterdir()
                    if subdir.is_dir()]
 
         # Collect all Packages in ExternalData
-        package_dict = {}
+        packages = []
         for subdir in subdirs:
-            info_filepath = Path(subdir, 'Package.yml')
-            if info_filepath.exists():
-                package_relpath = subdir.relative_to(self.externaldata_path)
-                package_dict[package_relpath] = Package(subdir)
+            info_filepath = Path(subdir, 'Package.yml').resolve()
+            if info_filepath.is_file():
+                packages.append(Package(subdir))
 
-        return package_dict
+        return packages
 
     def add_subspace(
             self,
             name: str,
             parent_dir: PathLike,
+            info: SubspaceInfo = None,
             reveal_when_success: bool = True,
             collect_entities: bool = True
-    ) -> dict[str, Subspace]:
+    ) -> Path:
         """Add a subspace to the source directory .
 
         Args:
@@ -397,37 +250,48 @@ class Omoospace:
             Exception: Parent directory is out of SourceFiles.
 
         Return:
-            dict[str, Subspace]
+            Path
         """
         parent_path = Path(parent_dir).resolve()
         # Check if name is empty
         if not len(name) > 0:
-            raise Exception(message="Name cannot be empty.")
+            raise EmptyError("name")
 
         # Check if is valid directory
         if not parent_path.is_dir():
-            raise Exception(message="'%s' is invalid dir." % parent_dir)
+            raise ExistsError(parent_dir)
 
         # Check if is in SourceFiles
         if not is_subpath(parent_path, self.sourcefiles_path, or_equal=True):
-            raise Exception(message="'%s' is out of SourceFiles." % parent_dir)
+            raise NotIncludeError(parent_dir, "SourceFiles")
 
-        subspace_name = format_name(name)
-        subspace_path = Path(parent_path, subspace_name).resolve()
+        subspace_dirname = format_name(name)
+        subspace_path = Path(parent_path, subspace_dirname).resolve()
+
+        # write subspace info to yml
+        info = info or {}
+        subspace_info: SubspaceInfo = {
+            "name": info.get("name") or name,  # can be any name style
+            "comments": info.get("comments")
+        }
 
         # make subspace dir
-        self.make_dirs(subspace_path, is_subspace=True)
+        subspace_path.mkdir(parents=True, exist_ok=True)
+        subspace_info_path = Path(subspace_path, 'Subspace.yml')
+        with subspace_info_path.open('w', encoding='utf-8') as file:
+            yaml.safe_dump(subspace_info, file,
+                           sort_keys=False, allow_unicode=True)
 
         if (collect_entities):
             entities = self.get_entities(parent_path, recursive=False)
 
             def is_match(entity: Entity):
                 entity_stem = entity.stem
-                not_itself = entity_stem != name
+                not_itself = entity_stem != subspace_dirname
 
                 is_match = False
                 entity_namespaces = format_name(entity_stem).split('_')
-                subspace_namespaces = subspace_name.split('_')
+                subspace_namespaces = subspace_dirname.split('_')
                 for i in range(len(subspace_namespaces)):
                     subspace_suffix = '_'.join(subspace_namespaces[i:])
                     entity_prefix = '_'.join(
@@ -439,13 +303,14 @@ class Omoospace:
 
             # Remove entity that not match the name
             entities = list(filter(is_match, entities))
+
             for entity in entities:
                 shutil.move(entity, Path(subspace_path, entity.name).resolve())
 
         if reveal_when_success:
             reveal_in_explorer(subspace_path)
 
-        return self.get_subspaces(subspace_path)
+        return subspace_path
 
     def is_valid_item(self, item: Item) -> bool:
         """Return True if the item is a valid file or not .
@@ -472,15 +337,16 @@ class Omoospace:
         reveal_when_success: bool = True,
         overwrite_existing: bool = True
     ):
-        package_name = name or self.name
+        name = name or self.name
         export_path = Path(export_dir).resolve() if export_dir \
             else Path(self.root_path, 'StagedData', 'Packages').resolve()
-        package_path = Path(export_path, format_name(package_name)).resolve()
+        package_dirname = format_name(name)
+        package_path = Path(export_path, package_dirname).resolve()
 
         # Check if package dir exists
         if (package_path.is_dir()):
             if (overwrite_existing):
-                shutil.rmtree(package_path)
+                shutil.rmtree(package_path, ignore_errors=True)
             else:
                 raise ExistsError('package', package_path)
 
@@ -491,24 +357,25 @@ class Omoospace:
         if (len(items) == 0):
             raise Exception('Export Failed, at least one item')
 
+        info = info or {}
         package_info = {
-            "name": package_name,
+            "name": info.get("name") or name,
             "version": info.get("version"),
             "description": info.get("description"),
             "creators": self.creators,
         }
 
         try:
-            console.print('')
-            self.make_dirs(package_path)
+            package_path.mkdir(parents=True, exist_ok=True)
             package_info_path = Path(package_path, 'Package.yml')
             package_md_path = Path(package_path, 'README.md')
 
             with package_info_path.open('w', encoding='utf-8') as file:
-                yaml.safe_dump(package_info, file, sort_keys=False)
+                yaml.safe_dump(package_info, file,
+                               sort_keys=False, allow_unicode=True)
 
             with package_md_path.open('w', encoding='utf-8') as file:
-                file.write('# %s\n' % package_name)
+                file.write('# %s\n' % package_info.get("name"))
                 file.write("%s\n" % package_info.get("description") or "")
                 file.write('## Package Info\n')
                 file.write('**version:** %s  \n' %
@@ -527,7 +394,7 @@ class Omoospace:
 
         except Exception as err:
             # Delete all if failed.
-            shutil.rmtree(package_path)
+            shutil.rmtree(package_path, ignore_errors=True)
             raise Exception("Fail to export Package", err)
 
         if reveal_when_success:
@@ -550,7 +417,7 @@ class Omoospace:
             self.root_path, 'ExternalData', format_name(package.name))
         if (package_path.is_dir()):
             if (overwrite_existing):
-                shutil.rmtree(package_path)
+                shutil.rmtree(package_path, ignore_errors=True)
             else:
                 raise ExistsError('package', package_path)
 
@@ -563,119 +430,37 @@ class Omoospace:
         if reveal_when_success:
             reveal_in_explorer(package_path)
 
-    def show_summary(self, output_dir: PathLike = None):
-        subspace_dict = self.subspaces
-        package_dict = self.packages
-        subspace_tree = self.get_subspace_tree()
+    def show_summary(
+        self,
+        output_dir: PathLike = None,
+        reveal_when_success: bool = True,
+    ):
+        """Print a summary of the omoospace.
 
-        ui_subspace_list = ui_table(
-            "Route",
-            "Parent",
-            "Entities",
-            "Type"
+        Args:
+            output_dir (PathLike, optional): [description]. Defaults to None.
+        """
+        packages = self.packages
+        subspace_tree = self.subspace_tree
+
+        ui_packages = ui.Table(
+            "Directory", "Description",
+            rows=[[package.name, package.description]
+                  for package in packages]
         )
 
-        def ui_entity_link(entity: Entity):
-            path = entity if entity.is_dir() else entity.parent
-            name = Path(entity).parts[-1]
-            return "[link=%s]%s[/link]" % (path, name)
-
-        for subspace in subspace_dict.values():
-            ui_subspace_list.add_row(
-                ' > '.join(subspace["route"]),
-                ' > '.join(subspace["parent"])
-                if subspace["parent"] else "(Root)",
-                "\n".join([ui_entity_link(entity)
-                           for entity in subspace["entities"]]),
-                subspace["type"].value
-            )
-
-        ui_package_list = ui_table("Directory", "Description")
-        for package in package_dict.values():
-            ui_package_list.add_row(
-                package.name,
-                package.description
-            )
-
-        def custom_key(nodes) -> str:
-            route = "_".join(nodes)
-            subspace = subspace_dict.get(route)
-            node = nodes[-1]
-            if subspace["type"] == SubspaceType.DIRECTORY:
-                return "📁 [bright]%s (%s)" % \
-                    (node, ui_entity_link(subspace["entities"][0]))
-            elif subspace["type"] == SubspaceType.PHANTOM:
-                return "⭕ [dim]%s" % node
-            else:
-                return "📄 [dim i]%s (%s)" % \
-                    (node, ui_entity_link(subspace["entities"][0]))
-
-        tree_instruction = "⭕ [dim]--- phantom subspace\nwhich has no entity.\n\n" \
-            + "📁 --- [bright]direcotry subspace[/bright]\nwhich contains .subspace file.\n\n" \
-            + "📄 --- [i]file subspace[/i]\nwhich refers to a leaf file.[/dim]"
-
-        ui_tree = ui_grid(
-            subspace_tree.ui(root="🏠 [dim](Root)[/dim]",
-                             custom_key=custom_key),
-            ui_panel(tree_instruction, 'instruction')
-        )
-
-        console.print(ui_board(
-            ui_info("Name", "%s [dim](%s)[/dim]" %
+        console.print(ui.Board(
+            ui.Info("Name", "%s [dim](%s)[/dim]" %
                     (self.name, self.root_path)),
-            ui_info("Description", self.description),
-            ui_info("Subspace Tree", ui_tree),
-            ui_info("Subspace List", ui_subspace_list),
-            ui_info("Imported Package List", ui_package_list),
+            ui.Info("Description", self.description),
+            ui.Info("Subspace Tree", subspace_tree.render_tree()),
+            ui.Info("Subspace Entities", subspace_tree.render_table()),
+            ui.Info("Imported Package List", ui_packages),
             title="Summary"
         ))
 
         if (output_dir):
-            node_dict = {
-                ".": {
-                    "name": "(Root)",
-                    "content": " (Root) ",
-                    "color": "#BEBEBE",
-                    "size": 20,
-                    "level": 0,
-                    "border_width": 0,
-                }
-            }
-            for subspace in subspace_dict.values():
-                route_str = "_".join(subspace["route"])
-                parent_str = "_".join(
-                    subspace["parent"]) if subspace.get("parent") else "."
-                if (subspace["type"] == SubspaceType.PHANTOM):
-                    color = "#939393"
-                    entities = ["&nbsp(None)&nbsp"]
-                elif (subspace["type"] == SubspaceType.DIRECTORY):
-                    color = "#F6B330"
-                    entities = [
-                        "&nbsp<a href='%s' target='_blank'>%s</a>&nbsp"
-                        % (entity.as_uri(), str(entity.relative_to(self.sourcefiles_path)))
-                        for entity in subspace["entities"]]
-                else:
-                    color = "#585858"
-                    entities = [
-                        "&nbsp<a href='%s' target='_blank'>%s</a>&nbsp"
-                        % (entity.parent.as_uri(), str(entity.relative_to(self.sourcefiles_path)))
-                        for entity in subspace["entities"]]
-
-                node_dict[route_str] = {
-                    "name": subspace["route"][-1],
-                    "parent": parent_str,
-                    "content": "<br>".join(entities),
-                    "color": color,
-                    "size": 5+subspace["flow"],
-                    "level": len(subspace["route"]),
-                    "border_width": 0,
-                    "edge_width": 5+subspace["flow"],
-                    "edge_color": '#3F3F3F',
-                }
-            draw_graph(node_dict,
-                       bgcolor="#111112",
-                       font_color="#F4F4F4",
-                       output_dir=output_dir)
+            subspace_tree.draw_graph(output_dir, reveal_when_success)
 
     @classmethod
     def create(
@@ -683,7 +468,7 @@ class Omoospace:
         name: str,
         create_dir: PathLike = '.',
         info: OmoospaceInfo = None,
-        structure: OmoospaceStructure = None,
+        structure: Structure = None,
         reveal_when_success: bool = True
     ):
         """Create a Omoospace .
@@ -702,48 +487,34 @@ class Omoospace:
         Returns:
             [type]: [description]
         """
-        omoospace_path = Path(create_dir, format_name(name)).resolve()
+        omoospace_dirname = format_name(name)
+        omoospace_path = Path(create_dir, omoospace_dirname).resolve()
 
         # Check if omoospace exists
         if (omoospace_path.is_dir()):
             raise ExistsError('omoospace', create_dir)
 
+        # write omoospace info to yml
+        info = info or {}
+        omoospace_info: OmoospaceInfo = {
+            "name": info.get("name") or name,  # can be any name style
+            "description": info.get("description"),
+            "creators": info.get("creators"),
+            "softwares": info.get("softwares"),
+            "works": info.get("works"),
+        }
+
         try:
-            # create root dir
-            cls.make_dirs(omoospace_path)
-
-            # create main dirs
-            for dirname in Omoospace.MAIN_DIRS:
-                cls.make_dirs(Path(omoospace_path, dirname))
-
-            # use dict not list, for subdir structure.
-            if (structure):
-                # create contents subdirs
-                contents_path = Path(omoospace_path, 'Contents')
-                contents_subdirs = structure.get("contents") or {}
-                cls.make_dirs(contents_path, contents_subdirs)
-
-                # create contents subdirs
-                sourcefiles_path = Path(omoospace_path, 'SourceFiles')
-                sourcefiles_subdirs = structure.get("sourcefiles") or {}
-                cls.make_dirs(sourcefiles_path, sourcefiles_subdirs)
-
-            # write omoospace info to yml
-            omoospace_info: OmoospaceInfo = {
-                "name": name,  # can be any name style
-                "description": info.get("description"),
-                "creators": info.get("creators"),
-                "softwares": info.get("softwares"),
-                "works": info.get("works"),
-            }
-
+            # create dirs
+            OmoospaceTree(structure).make_dirs(omoospace_path)
             omoospace_info_path = Path(
                 omoospace_path, 'Omoospace.yml').resolve()
             with omoospace_info_path.open('w', encoding='utf-8') as file:
-                yaml.safe_dump(omoospace_info, file, sort_keys=False)
+                yaml.safe_dump(omoospace_info, file,
+                               sort_keys=False, allow_unicode=True)
         except Exception as err:
-            shutil.rmtree(omoospace_path)
-            raise Exception("Fail to create dirs", err)
+            shutil.rmtree(omoospace_path, ignore_errors=True)
+            raise CreationError(err, staff="omoospace directories")
 
         if reveal_when_success:
             reveal_in_explorer(omoospace_path)
