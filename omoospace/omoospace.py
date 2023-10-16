@@ -1,30 +1,28 @@
 
 from pathlib import Path
-import os
 import shutil
-import yaml
+from typing import Union
 from zipfile import ZipFile
 
 from rich.progress import track
 from omoospace.directory import DirectoryTree
-from omoospace.exceptions import CreationError, EmptyError, ExistsError, InvalidError, NotFoundError, NotIncludeError
+from omoospace.exceptions import CreateFailed, EmptyError, ExistsError, MoveFailed, NotFoundError, NotIncludeError
 from omoospace.package import Package
 from omoospace.subspace import SubspaceTree
-from omoospace.ui import console
-from omoospace import ui
-from omoospace.utils import format_name, reveal_in_explorer, is_subpath, PathLike, copy_to_path
-from omoospace.types import Entity, Item, OmoospaceInfo, PackageInfo, Route, Structure, SubspaceInfo
+from omoospace.common import console, yaml
+from omoospace.ui import Board, Card, Info, ItemList, Table
+from omoospace.utils import format_name, replace_or_append, reveal_in_explorer, is_subpath, PathLike, copy_to_path
+from omoospace.types import Creator, Entity, Item, OmoospaceInfo, PackageInfo, Software, Structure, SubspaceInfo, Work
 
-# TODO: more color in subspace route
 # TODO: package link in summary list
 
-# TODO: add softwares and creators in summary list
-# TODO: print subspaces or packages or tree only
+# TODO: softwares and creators in summary list
 
 # TODO: annition to class and funtion
 
 
 class OmoospaceTree(DirectoryTree):
+
     MAIN_DIRS = [
         "Contents",
         "ExternalData",
@@ -42,6 +40,12 @@ class OmoospaceTree(DirectoryTree):
 
 
 class Omoospace:
+    name: str
+    description: str
+    creators: list[Creator]
+    softwares: list[Software]
+    works: list[Work]
+
     def __init__(self, detect_dir: PathLike):
         """Initialize Omoospace configuration .
 
@@ -57,9 +61,7 @@ class Omoospace:
         for detect_path_parent in detect_path_parents:
             omoospace_info_path = Path(detect_path_parent, 'Omoospace.yml')
             if omoospace_info_path.exists():
-                with omoospace_info_path.open('r', encoding='utf-8') as file:
-                    omoospace_info = yaml.safe_load(file)
-                    omoospace_path = detect_path_parent
+                omoospace_path = detect_path_parent
                 break
         if not omoospace_path:
             raise NotFoundError("omoospace", detect_dir)
@@ -71,146 +73,67 @@ class Omoospace:
         self.externaldata_path = Path(self.root_path, 'ExternalData').resolve()
         self.stageddata_path = Path(self.root_path, 'StagedData').resolve()
         self.references_path = Path(self.root_path, 'References').resolve()
+        self.info_path = Path(self.root_path, "Omoospace.yml").resolve()
 
-        # info assignment
-        self.name = omoospace_info.get('name')
-        self.description = omoospace_info.get('description')
-        self.creators = omoospace_info.get('creators')
-        self.softwares = omoospace_info.get('softwares')
-        self.works = omoospace_info.get('works')
+    def __read_info_file(self) -> OmoospaceInfo:
+        with self.info_path.open('r', encoding='utf-8') as file:
+            # aviod empty or invalid ifle
+            info = yaml.load(file) or {}
+        return info
 
-    @staticmethod
-    def is_entity(path: Path) -> bool:
-        """Return true if path is a subspace entity .
+    def __write_info_file(self, info: OmoospaceInfo):
+        with self.info_path.open('w', encoding='utf-8') as file:
+            yaml.dump(info, file)
 
-        Args:
-            path (Entity): The path to be checked.
+    def __getattr__(self, name):
+        if name in OmoospaceInfo.__annotations__.keys():
+            info = self.__read_info_file()
+            # FIXME: list attribute is not None but empty list.
+            # may have better solution.
+            if name[-1] == "s":
+                return info.get(name) or []
+            else:
+                return info.get(name)
 
-        Returns:
-            bool: Return ture if is valid entity.
-        """
-        path = path.resolve()
-        if path.is_dir():
-            is_subspace = Path(path, 'Subspace.yml').is_file()
-            is_void = 'Void' in path.name.split("_")
-            return is_subspace or is_void
-        else:
-            not_marker = path.name != 'Subspace.yml'
-            return not_marker
+        return object.__getattribute__(self, name)
 
-    def get_route(self, entity: Entity) -> Route:
-        """Returns the route for the given entity .
+    def __setattr__(self, name, value):
+        if name in OmoospaceInfo.__annotations__.keys():
+            info = self.__read_info_file()
+            info[name] = value
+            self.__write_info_file(info)
+        object.__setattr__(self, name, value)
 
-        Args:
-            entity (Entity): The entity to deal with.
-
-        Returns:
-            Route: A subspace route object to the given entity.
-        """
-        entity = entity.resolve()
-        if not is_subpath(entity, self.sourcefiles_path):
-            raise NotIncludeError("This entity", "SourceFiles")
-
-        # Get relpath parts. remove those directory that is not entity.
-        valid_parents = []
-        for parent in entity.parents:
-            if parent == self.sourcefiles_path:
-                break
-
-            if self.is_entity(parent):
-                valid_parents.append(parent)
-        valid_parents.reverse()
-
-        path_parts = [format_name(valid_parent.stem)
-                      for valid_parent in valid_parents]
-        path_parts.append(format_name(entity.stem))
-
-        # Get route nodes. remove duplicate prefix.
-        route: Route = []
-        for part_name in path_parts:
-            namespaces = part_name.split('_')
-            for i in range(len(route)):
-                route_str_suffix = '_'.join(route[i:])
-                name_prefix = '_'.join(namespaces[:len(route) - i])
-                if route_str_suffix == name_prefix:
-                    # clip matched prefix spaces
-                    namespaces = namespaces[len(route) - i:]
-                    break
-
-            route.extend(namespaces if part_name != "" else [])
-
-        # Concat namespaces after "Void".
-        for i in range(len(route)):
-            if route[i] == "Void":
-                remaining = "".join(route[i+1:])
-                route = route[:i+1]
-                if remaining:
-                    route.append(remaining)
-                break
-        return route
-
-    def get_entities(
-        self,
-        search_dir: PathLike = None,
-        recursive: bool = True
-    ) -> list[Entity]:
-        """Get all entities in the source files.
+    def is_item(self, item: Item) -> bool:
+        """Return True if the item is a valid file or not .
 
         Args:
-            search_dir (PathLike, optional): [description]. Defaults to None.
-            recursive (bool, optional): [description]. Defaults to True.
-
-        Raises:
-            Exception: [description]
+            item (Item): [description]
 
         Returns:
-            list[Entity]: [description]
+            bool: [description]
         """
-        search_dir: Path = Path(search_dir).resolve() \
-            if search_dir else self.sourcefiles_path
-        if not is_subpath(search_dir, self.sourcefiles_path, or_equal=True):
-            raise NotIncludeError("Search directory", "SourceFiles")
-
-        entities: list[Path] = []
-        if recursive:
-            # FIXME: replace this with Path.walk (python 3.12)
-            # https://docs.python.org/3/library/pathlib.html
-            for root, dirs, files in os.walk(search_dir):
-                for path in [*dirs, *files]:
-                    child = Path(root, path).resolve()
-                    if self.is_entity(child):
-                        entities.append(child)
-        else:
-            for child in search_dir.iterdir():
-                child = child.resolve()
-                if self.is_entity(child):
-                    entities.append(child)
-        return entities
+        exists = item.exists()
+        in_omoospace = is_subpath(item, self.root_path)
+        not_in_stagedata = not is_subpath(
+            item, self.stageddata_path, or_equal=True)
+        not_omoospace_yml = item.name != "Omoospace.yml"
+        return exists and in_omoospace and not_omoospace_yml and not_in_stagedata
 
     @property
-    def entities(self) -> list[Path]:
-        return self.get_entities()
+    def subspace_entities(self) -> list[Path]:
+        return SubspaceTree.get_entities(search_dir=self.sourcefiles_path)
 
     @property
     def subspace_tree(self) -> SubspaceTree:
-        return self.get_subspace_tree(*self.entities)
-
-    def get_subspace_tree(
-        self,
-        *entities: Entity
-    ) -> SubspaceTree:
-        """Get subspaces based on entities.
-
-        Args:
-            entities (list[Entity]): [description]
-
-        Returns:
-            SubspaceTree: Subspaces
-        """
-        return SubspaceTree(*entities, omoospace=self)
+        return SubspaceTree(search_dir=self.sourcefiles_path)
 
     @property
-    def packages(self) -> list[Package]:
+    def directory_tree(self,) -> DirectoryTree:
+        return DirectoryTree(search_dir=self.root_path)
+
+    @property
+    def imported_packages(self) -> list[Package]:
         """A dictionary of packages.
 
         Returns:
@@ -228,11 +151,10 @@ class Omoospace:
 
         return packages
 
-    def add_subspace(
+    def set_subspace(
             self,
-            name: str,
-            parent_dir: PathLike,
-            info: SubspaceInfo = None,
+            subspace: Union[SubspaceInfo, str],
+            parent_dir: PathLike = None,
             reveal_when_success: bool = True,
             collect_entities: bool = True
     ) -> Path:
@@ -252,10 +174,88 @@ class Omoospace:
         Return:
             Path
         """
-        parent_path = Path(parent_dir).resolve()
-        # Check if name is empty
-        if not len(name) > 0:
-            raise EmptyError("name")
+
+        parent_path = Path(parent_dir).resolve(
+        ) if parent_dir else self.sourcefiles_path
+
+        # Check if is valid directory
+        if not parent_path.is_dir():
+            raise ExistsError(parent_dir)
+
+        # Check if is in SourceFiles
+        if not is_subpath(parent_path, self.sourcefiles_path, or_equal=True):
+            raise NotIncludeError(parent_dir, "SourceFiles")
+        # FIXME: using SubspaceInfo need more code base on typing.
+        # do it later.
+        if isinstance(subspace, dict):
+            # Check if name is empty
+            if not subspace.get("name"):
+                raise EmptyError("name")
+            if not len(subspace.get("name")) > 0:
+                raise EmptyError("name")
+            subspace_info = subspace
+            subspace_dirname = format_name(subspace.get("name"))
+        else:
+            if not len(subspace) > 0:
+                raise EmptyError("name")
+
+            subspace_info = {
+                "name": subspace,
+                "comments": None
+            }
+            subspace_dirname = format_name(subspace)
+
+        subspace_path = Path(parent_path, subspace_dirname).resolve()
+
+        # make subspace dir
+        subspace_path.mkdir(parents=True, exist_ok=True)
+        subspace_info_path = Path(subspace_path, 'Subspace.yml')
+        with subspace_info_path.open('w', encoding='utf-8') as file:
+            yaml.dump(subspace_info, file)
+
+        if (collect_entities):
+            try:
+                entities = SubspaceTree.get_entities(
+                    parent_path, recursive=False)
+
+                def is_match(entity: Entity):
+                    entity_stem = entity.stem
+                    not_itself = entity_stem != subspace_dirname
+
+                    is_match = False
+                    entity_namespaces = format_name(entity_stem).split('_')
+                    subspace_namespaces = subspace_dirname.split('_')
+                    for i in range(len(subspace_namespaces)):
+                        subspace_suffix = '_'.join(subspace_namespaces[i:])
+                        entity_prefix = '_'.join(
+                            entity_namespaces[:len(subspace_namespaces) - i])
+                        if subspace_suffix == entity_prefix:
+                            is_match = True
+                            break
+                    return not_itself and is_match
+
+                # Remove entity that not match the name
+                entities = list(filter(is_match, entities))
+
+                for entity in entities:
+                    shutil.move(entity, Path(
+                        subspace_path, entity.name).resolve())
+            except:
+                raise MoveFailed('entities')
+
+        if reveal_when_success:
+            reveal_in_explorer(subspace_path)
+
+        return subspace_path
+
+    def set_process(
+            self,
+            process: Union[Structure, list[str], str],
+            parent_dir: PathLike = None,
+            reveal_when_success: bool = True
+    ) -> Path:
+        parent_path = Path(parent_dir).resolve(
+        ) if parent_dir else self.sourcefiles_path
 
         # Check if is valid directory
         if not parent_path.is_dir():
@@ -265,68 +265,51 @@ class Omoospace:
         if not is_subpath(parent_path, self.sourcefiles_path, or_equal=True):
             raise NotIncludeError(parent_dir, "SourceFiles")
 
-        subspace_dirname = format_name(name)
-        subspace_path = Path(parent_path, subspace_dirname).resolve()
+        if isinstance(process, str):
+            process = [process]
 
-        # write subspace info to yml
-        info = info or {}
-        subspace_info: SubspaceInfo = {
-            "name": info.get("name") or name,  # can be any name style
-            "comments": info.get("comments")
-        }
+        if isinstance(process, list):
+            process_structure = {}
+            for p in process:
+                process_structure[p] = None
+        else:
+            process_structure = process
 
-        # make subspace dir
-        subspace_path.mkdir(parents=True, exist_ok=True)
-        subspace_info_path = Path(subspace_path, 'Subspace.yml')
-        with subspace_info_path.open('w', encoding='utf-8') as file:
-            yaml.safe_dump(subspace_info, file,
-                           sort_keys=False, allow_unicode=True)
-
-        if (collect_entities):
-            entities = self.get_entities(parent_path, recursive=False)
-
-            def is_match(entity: Entity):
-                entity_stem = entity.stem
-                not_itself = entity_stem != subspace_dirname
-
-                is_match = False
-                entity_namespaces = format_name(entity_stem).split('_')
-                subspace_namespaces = subspace_dirname.split('_')
-                for i in range(len(subspace_namespaces)):
-                    subspace_suffix = '_'.join(subspace_namespaces[i:])
-                    entity_prefix = '_'.join(
-                        entity_namespaces[:len(subspace_namespaces) - i])
-                    if subspace_suffix == entity_prefix:
-                        is_match = True
-                        break
-                return not_itself and is_match
-
-            # Remove entity that not match the name
-            entities = list(filter(is_match, entities))
-
-            for entity in entities:
-                shutil.move(entity, Path(subspace_path, entity.name).resolve())
+        try:
+            DirectoryTree(process_structure).make_dirs(parent_path)
+        except Exception as err:
+            raise CreateFailed("process directories")
 
         if reveal_when_success:
-            reveal_in_explorer(subspace_path)
+            reveal_in_explorer(parent_path)
 
-        return subspace_path
+    def set_creator(self, creator: Creator):
+        creators = self.creators or []
+        self.creators = replace_or_append(creators, creator, 'email')
 
-    def is_valid_item(self, item: Item) -> bool:
-        """Return True if the item is a valid file or not .
+    def set_software(self, software: Software):
+        softwares = self.softwares or []
+        self.softwares = replace_or_append(softwares, software, 'name')
 
-        Args:
-            item (Item): [description]
+    def set_work(self, work: Work):
+        if "paths" not in work.keys():
+            raise NotFoundError("paths", work)
 
-        Returns:
-            bool: [description]
-        """
-        exists = item.exists()
-        in_omoospace = is_subpath(item, self.root_path)
-        not_in_stagedata = not is_subpath(
-            item, self.stageddata_path, or_equal=True)
-        not_omoospace_yml = item.name != "Omoospace.yml"
-        return exists and in_omoospace and not_omoospace_yml and not_in_stagedata
+        paths = [Path(path).resolve() for path in work["paths"]]
+        paths = [path for path in paths
+                 if path.exists() and is_subpath(path, self.contents_path)]
+
+        if len(paths) == 0:
+            raise NotFoundError("valid paths", work)
+
+        relpaths = [path.relative_to(self.contents_path) for path in paths]
+
+        work = {
+            "name": work.get("name") or relpaths[0].stem,
+            "paths": [str(relpath.as_posix())for relpath in relpaths]
+        }
+        works = self.works or []
+        self.works = replace_or_append(works, work, 'name')
 
     def export_package(
         self,
@@ -351,7 +334,7 @@ class Omoospace:
                 raise ExistsError('package', package_path)
 
         items: list[Path] = [Path(item).resolve() for item in items]
-        items = list(filter(self.is_valid_item, items))
+        items = list(filter(self.is_item, items))
 
         # Check if is enouph items
         if (len(items) == 0):
@@ -371,8 +354,7 @@ class Omoospace:
             package_md_path = Path(package_path, 'README.md')
 
             with package_info_path.open('w', encoding='utf-8') as file:
-                yaml.safe_dump(package_info, file,
-                               sort_keys=False, allow_unicode=True)
+                yaml.dump(package_info, file)
 
             with package_md_path.open('w', encoding='utf-8') as file:
                 file.write('# %s\n' % package_info.get("name"))
@@ -440,27 +422,103 @@ class Omoospace:
         Args:
             output_dir (PathLike, optional): [description]. Defaults to None.
         """
-        packages = self.packages
+        imported_packages = self.imported_packages
         subspace_tree = self.subspace_tree
 
-        ui_packages = ui.Table(
-            "Directory", "Description",
-            rows=[[package.name, package.description]
-                  for package in packages]
+        ui_creators = ItemList([
+            "%s [dim]%s[/dim]" % (creator.get("name"), creator.get("role"))
+            for creator in self.creators])
+        ui_softwares = ItemList([
+            "%s [dim]%s[/dim]" % (software.get("name"),
+                                  software.get("version"))
+            for software in self.softwares])
+
+        ui_works = Table(
+            "Name",
+            "Paths"
         )
 
-        console.print(ui.Board(
-            ui.Info("Name", "%s [dim](%s)[/dim]" %
-                    (self.name, self.root_path)),
-            ui.Info("Description", self.description),
-            ui.Info("Subspace Tree", subspace_tree.render_tree()),
-            ui.Info("Subspace Entities", subspace_tree.render_table()),
-            ui.Info("Imported Package List", ui_packages),
+        for work in self.works:
+            ui_works.add_row(
+                work.get("name"),
+                "\n".join(work.get("paths") or [])
+            )
+
+        console.print(Board(
+            Info("Name", "%s [dim](%s)[/dim]" %
+                 (self.name, self.root_path)),
+            Info("Description", self.description),
+            Info("Creators", ui_creators),
+            Info("Softwares", ui_softwares),
+            Info("Works", ui_works),
+            Info("Subspace Tree", subspace_tree.render_tree()),
+            Info("Subspace Entities", subspace_tree.render_table()),
             title="Summary"
         ))
 
         if (output_dir):
             subspace_tree.draw_graph(output_dir, reveal_when_success)
+
+    def show_info(self):
+        ui_creators = ItemList([
+            "%s [dim]%s[/dim]" % (creator.get("name"), creator.get("role"))
+            for creator in self.creators])
+        ui_softwares = ItemList([
+            "%s [dim]%s[/dim]" % (software.get("name"),
+                                  software.get("version"))
+            for software in self.softwares])
+        ui_works = Table(
+            "Name",
+            "Paths"
+        )
+        # TODO: add [link] to path
+        for work in self.works:
+            ui_works.add_row(
+                work.get("name"),
+                "\n".join(work.get("paths") or [])
+            )
+        console.print(Board(
+            Info("Name", "%s [dim](%s)[/dim]" %
+                 (self.name, self.root_path)),
+            Info("Description", self.description),
+            Info("Creators", ui_creators),
+            Info("Softwares", ui_softwares),
+            Info("Works", ui_works),
+            title="Info"
+        ))
+
+    def show_subspace_tree(self):
+        subspace_tree = self.subspace_tree
+        console.print(Board(
+            subspace_tree.render_tree(),
+            title="Subspace Tree"
+        ))
+
+    def show_directory_tree(self,):
+        directory_tree = self.directory_tree
+        console.print(Board(
+            directory_tree.render_tree(),
+            title="Directory Tree"
+        ))
+
+    def show_imported_packages(self):
+        imported_packages = self.imported_packages
+        ui_imported_packages = Table(
+            "Directory", "Description",
+            rows=[[package.name, package.description]
+                  for package in imported_packages]
+        )
+        console.print(Board(
+            ui_imported_packages,
+            title="Imported Packages"
+        ))
+
+    def show_subspace_entities(self):
+        subspace_tree = self.subspace_tree
+        console.print(Board(
+            subspace_tree.render_table(),
+            title="Subspace Entities"
+        ))
 
     @classmethod
     def create(
@@ -510,11 +568,10 @@ class Omoospace:
             omoospace_info_path = Path(
                 omoospace_path, 'Omoospace.yml').resolve()
             with omoospace_info_path.open('w', encoding='utf-8') as file:
-                yaml.safe_dump(omoospace_info, file,
-                               sort_keys=False, allow_unicode=True)
+                yaml.dump(omoospace_info, file)
         except Exception as err:
             shutil.rmtree(omoospace_path, ignore_errors=True)
-            raise CreationError(err, staff="omoospace directories")
+            raise CreateFailed("omoospace directories")
 
         if reveal_when_success:
             reveal_in_explorer(omoospace_path)

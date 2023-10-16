@@ -3,12 +3,13 @@ import os
 from pathlib import Path
 import shutil
 from pypinyin import lazy_pinyin
+from omoospace.exceptions import NotFoundError
 from omoospace.types import PathLike
-from omoospace import console, ui
-
+from omoospace.common import console
+from omoospace.ui import Table
 
 def format_name(string: str, verbose=False):
-    debug_info = ui.Table(
+    debug_info = Table(
         {"header": "Step", "justify": "right"},
         {"header": "Result", "justify": "left", "style": "highlight"}
     )
@@ -37,6 +38,48 @@ def format_name(string: str, verbose=False):
     if (verbose):
         console.print(debug_info)
     return string
+
+
+def replace_or_append(
+    object_list: list[dict],
+    new_object: dict,
+    key: str
+):
+    if key not in new_object.keys():
+        raise NotFoundError(key, new_object)
+    index = find_first_index(object_list, key, new_object.get(key))
+    if index >= 0:
+        object_list[index] = new_object
+    else:
+        object_list.append(new_object)
+    return object_list
+
+
+def find_first_index(
+    object_list: list[dict],
+    key: str,
+    value: any
+):
+    index = -1
+    for i, dict in enumerate(object_list):
+        if dict.get(key) == value:
+            index = i
+            break
+
+    return index
+
+
+def find_first(
+    object_list: list[dict],
+    key: str,
+    value: any
+):
+    index = find_first_index(object_list, key, value)
+
+    if index >= 0:
+        return object_list[index]
+    else:
+        return None
 
 
 def reveal_in_explorer(dir: str):

@@ -37,8 +37,14 @@ class EmptyError(Exception):
         super().__init__(message)
 
 
-class CreationError(Exception):
+class CreateFailed(Exception):
     def __init__(self, item: str = None):
         item_str = ' %s' % item if item else ""
         message = 'Fail to create%s.' % item_str
+        super().__init__(message)
+
+class MoveFailed(Exception):
+    def __init__(self, item: str = None):
+        item_str = ' %s' % item if item else ""
+        message = 'Fail to move%s.' % item_str
         super().__init__(message)

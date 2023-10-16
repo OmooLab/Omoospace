@@ -2,7 +2,7 @@
 from pathlib import Path
 import os
 from enum import Enum
-from typing import TypedDict
+from typing import TypedDict, Union
 
 Structure = dict[str, "Structure"]
 
@@ -12,12 +12,12 @@ Item = Path
 
 Route = list[str]
 
-PathLike = str | os.PathLike
+PathLike = Union[str, os.PathLike]
 
 
 class Work(TypedDict):
     name: str
-    path: str
+    paths: list[str]
 
 
 class Creator(TypedDict):
@@ -32,7 +32,7 @@ class Plugin(TypedDict):
     version: str
 
 
-class Softerware(TypedDict):
+class Software(TypedDict):
     name: str
     version: str
     plugins: list[Plugin]
@@ -42,7 +42,7 @@ class OmoospaceInfo(TypedDict):
     name: str
     description: str
     creators: list[Creator]
-    softwares: list[Softerware]
+    softwares: list[Software]
     works: list[Work]
 
 

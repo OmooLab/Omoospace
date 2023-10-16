@@ -1,11 +1,11 @@
 import os
 from pathlib import Path
-import yaml
 from zipfile import ZipFile
 
 
 from omoospace.exceptions import NotFoundError
 from omoospace.types import Item, PathLike
+from omoospace.common import console, yaml
 
 
 class Package:
@@ -15,14 +15,14 @@ class Package:
             with ZipFile(package_path, 'r') as zip:
                 try:
                     with zip.open('Package.yml') as file:
-                        package_info = yaml.safe_load(file)
+                        package_info = yaml.load(file)
                 except:
                     raise NotFoundError("package", dir)
         else:
             package_info_path = Path(package_path, 'Package.yml')
             if package_info_path.exists():
                 with package_info_path.open('r', encoding='utf-8') as file:
-                    package_info = yaml.safe_load(file)
+                    package_info = yaml.load(file)
             else:
                 raise NotFoundError("package", dir)
 

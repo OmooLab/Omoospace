@@ -2,6 +2,7 @@ import pytest
 import shutil
 from pathlib import Path
 from omoospace.omoospace import Omoospace
+from omoospace.utils import find_first_index
 
 
 class Fixture():
@@ -16,6 +17,9 @@ class Fixture():
 
     def __init__(self, root_dir) -> None:
         self.omoospace_path = Path(root_dir, "MyProject").resolve()
+        if (self.omoospace_path.exists()):
+            shutil.rmtree(fixture.omoospace_path, ignore_errors=True)
+            
         self.filepaths = [Path(self.omoospace_path, file)
                           for file in self.FILES]
 
@@ -36,6 +40,7 @@ class Fixture():
 
 @pytest.fixture(scope="module")
 def fixture():
+
     fixture = Fixture("temp")
     yield fixture
 
@@ -50,28 +55,82 @@ def test_create(fixture: Fixture):
 
 
 @pytest.mark.dependency(depends=["test_create"])
-def test_add_subspace(fixture: Fixture):
+def test_set_subspace(fixture: Fixture):
     omoospace = fixture.omoospace
-    EP001_path = omoospace.add_subspace(
-        name="EP001",
-        parent_dir=Path(omoospace.sourcefiles_path),
+    EP001_path = omoospace.set_subspace(
+        subspace="EP001",
+        parent_dir=omoospace.sourcefiles_path,
         reveal_when_success=False
     )
     assert Path(omoospace.sourcefiles_path, "EP001").is_dir()
     assert Path(omoospace.sourcefiles_path, "EP001", "Subspace.yml").is_file()
 
-    omoospace.add_subspace(
-        name="EP001_SQ010",
+    omoospace.set_subspace(
+        subspace="EP001_SQ010",
         parent_dir=Path(EP001_path),
         reveal_when_success=False
     )
-    omoospace.add_subspace(
-        name="SQ020",
+    omoospace.set_subspace(
+        subspace="SQ020",
         parent_dir=Path(EP001_path),
         reveal_when_success=False
     )
     assert Path(EP001_path, "SQ020").is_dir()
     assert Path(EP001_path, "SQ020", "Subspace.yml").is_file()
+
+
+@pytest.mark.dependency(depends=["test_create"])
+def test_set_process(fixture: Fixture):
+    omoospace = fixture.omoospace
+    omoospace.set_process(
+        process={
+            "Modeling": None,
+            "Texturing": None,
+            "Shading": None
+        },
+        parent_dir=omoospace.sourcefiles_path,
+        reveal_when_success=False
+    )
+    assert Path(omoospace.sourcefiles_path, "Modeling").is_dir()
+    assert Path(omoospace.sourcefiles_path, "Texturing").is_dir()
+    assert Path(omoospace.sourcefiles_path, "Shading").is_dir()
+
+
+@pytest.mark.dependency(depends=["test_create"])
+def test_set_creator(fixture: Fixture):
+    omoospace = fixture.omoospace
+    omoospace.set_creator(
+        {
+            "name": "manan",
+            "email": "x@x.com",
+            "role": "Owner"
+        }
+    )
+    assert find_first_index(omoospace.creators, "name", "manan") >= 0
+
+
+@pytest.mark.dependency(depends=["test_create"])
+def test_set_software(fixture: Fixture):
+    omoospace = fixture.omoospace
+    omoospace.set_software(
+        {
+            "name": "Blender",
+            "version": "3.6"
+        }
+    )
+    assert find_first_index(omoospace.softwares, "name", "Blender") >= 0
+
+
+@pytest.mark.dependency(depends=["test_create"])
+def test_set_work(fixture: Fixture):
+    omoospace = fixture.omoospace
+    omoospace.set_work(
+        {
+            "name": "Video",
+            "paths": fixture.filepaths
+        }
+    )
+    assert find_first_index(omoospace.works, "name", "Video") >= 0
 
 
 @pytest.mark.dependency(depends=["test_create"])
@@ -112,4 +171,4 @@ def test_import(fixture: Fixture):
         import_dir=Path(omoospace.stageddata_path, "Asset"),
         reveal_when_success=False
     )
-    assert len(omoospace.packages) == 1
+    assert len(omoospace.imported_packages) == 1

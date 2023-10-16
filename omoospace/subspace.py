@@ -1,34 +1,35 @@
 
+import os
 from pathlib import Path
+from typing import Union
 from nutree import Tree
-import yaml
+
 from omoospace.graph import draw_graph
 from omoospace.types import Entity, PathLike, Route, SubspaceInfo, SubspaceType
-from omoospace import ui, console
+from omoospace.common import console, yaml
+from omoospace.ui import Grid, Instruction, Table
+from omoospace.utils import format_name
 
 
 class Subspace():
-    __name: str
-    __comments: list[str]
-
     def __init__(
         self,
-        route: Route,
-        info: SubspaceInfo,
+        name: str,
+        info: SubspaceInfo = None,
     ):
-        self.route = route
+        self.pathname = name
         self.entities: list[Entity] = []
         self.flow: int = 0
         self.type: SubspaceType = None
 
         if isinstance(info, str):
-            self.name = route[-1]
+            self.name = name
             self.comments = [info]
         elif isinstance(info, list):
-            self.name = route[-1]
+            self.name = name
             self.comments = info
         elif isinstance(info, dict):
-            self.name = info.get('name') or route[-1]
+            self.name = info.get('name') or name
             comments = info.get('comments')
             if isinstance(comments, str) and comments:
                 self.comments = [comments]
@@ -37,11 +38,11 @@ class Subspace():
             else:
                 self.comments = []
         else:
-            self.name = route[-1]
+            self.name = name
             self.comments = []
 
     def __repr__(self):
-        return self.route[-1]
+        return self.pathname
 
     @property
     def ui_name(self):
@@ -54,17 +55,25 @@ class Subspace():
             link = self.entities[0].parent
             name_str = "[link=%s]%s[/link]" % (link, self.name)
         elif self.type == SubspaceType.PHANTOM:
-            icon = "⭕"
+            icon = "💿"
             name_str = self.name
         else:
-            icon = "🆕"
+            icon = "⛔"
             name_str = self.name
 
-        if self.route[-1] == self.name:
-            route_str = ""
+        if self.pathname == self.name:
+            pathname_str = ""
         else:
-            route_str = " [dim](%s)[/dim]" % self.route[-1]
-        return "%s %s" % (icon, name_str)+route_str
+            pathname_str = " [dim](%s)[/dim]" % self.pathname
+        return "%s %s%s" % (icon, name_str, pathname_str)
+
+    @property
+    def html_name(self):
+        if self.pathname == self.name:
+            pathname_str = ""
+        else:
+            pathname_str = " (%s)" % self.pathname
+        return "%s%s" % (self.name, pathname_str)
 
     @property
     def ui_comments(self):
@@ -92,80 +101,153 @@ class Subspace():
 class SubspaceTree(Tree):
     def __init__(
         self,
-        *entities: Entity,
-        omoospace: "Omoospace"
+        search_dir: PathLike
     ):
-        self.omoospace = omoospace
-        super().__init__(calc_data_id=self.__calc_id)
+        super().__init__()
+        if (search_dir):
+            self.from_dir(search_dir)
+
+    def from_dir(
+        self,
+        search_dir: PathLike,
+        recursive: bool = True
+    ):
+        entities = self.get_entities(search_dir, recursive=recursive)
         for entity in entities:
-            entity_route: Route = self.omoospace.get_route(entity)
-            subspace_info_path = Path(entity, "Subspace.yml").resolve()
-            # create all node as subspace in route
-            for i in range(len(entity_route)):
-                is_last = i == len(entity_route)-1
-                is_first = i == 0
+            self.add_entity(entity)
 
-                subspace_route = entity_route[:i+1]
-                parent_route = entity_route[:i]
-                parent_node = self if is_first else self.find(
-                    data_id="_".join(parent_route))
+    def add_entity(self, entity: Entity):
+        entity = entity.resolve()
 
-                if is_last and subspace_info_path.is_file():
-                    with subspace_info_path.open('r', encoding='utf-8') as file:
-                        subspace_info = yaml.safe_load(file) or {}
-                else:
-                    subspace_info = {}
+        # Get relpath parts. remove those directory that is not entity.
+        entities = [entity]
+        for parent in entity.parents:
+            if self.is_entity(parent):
+                entities.append(parent)
+        entities.reverse()
 
-                subspace_node = self.find(data_id="_".join(subspace_route))
+        parts = [{
+            "name": format_name(entity.stem),
+            "entity": entity
+        } for entity in entities]
+
+        # Get route nodes. remove duplicate prefix.
+        route: Route = []
+        node = self
+        for part in parts:
+            part_name: str = part["name"]
+            part_entity: Entity = part["entity"]
+
+            namespaces: list[str] = part_name.split('_')
+            subspace_info_path = Path(part_entity, "Subspace.yml").resolve()
+
+            # clip matched prefix spaces
+            for i in range(len(route)):
+                route_str_suffix = '_'.join(route[i:])
+                name_prefix = '_'.join(namespaces[:len(route) - i])
+                if route_str_suffix == name_prefix:
+                    namespaces = namespaces[len(route) - i:]
+                    break
+
+            # create or get subspace by namespace
+            for i in range(len(namespaces)):
+                is_last = i == len(namespaces)-1
+                subspace_route = route + namespaces[:i+1]
+                node_path = "/" + "/".join(subspace_route)
+                subspace_node = self.find(
+                    match=lambda node: node.path == node_path
+                )
                 if not subspace_node:
+                    if is_last and subspace_info_path.is_file():
+                        with subspace_info_path.open('r', encoding='utf-8') as file:
+                            subspace_info = yaml.load(file) or {}
+                    else:
+                        subspace_info = {}
                     subspace = Subspace(
-                        route=subspace_route,
+                        name=namespaces[i],
                         info=subspace_info,
                     )
-                    subspace_node = parent_node.add(subspace)
+                    subspace_node = node.add(subspace)
 
                 # if is last, add enitity to it.
-                if is_last:
-                    subspace_node.data.entities.append(entity)
+                if is_last and part_entity not in subspace_node.data.entities:
+                    subspace_node.data.entities.append(part_entity)
+
+                # assign type
+                subspace_type = subspace_node.data.type
+                if is_last and part_entity.is_dir():
+                    subspace_node.data.type = SubspaceType.DIRECTORY
+                elif subspace_type != SubspaceType.DIRECTORY \
+                        and is_last and part_entity.is_file():
+                    subspace_node.data.type = SubspaceType.FILE
+                elif subspace_type != SubspaceType.DIRECTORY \
+                        and subspace_type != SubspaceType.FILE\
+                        and part_entity.exists():
+                    subspace_node.data.type = SubspaceType.PHANTOM
 
                 # what ever is end node or not, all nodes are passed through.
                 subspace_node.data.flow += 1
 
-        for node in self:
-            subspace = node.data
-            if (len(subspace.entities) == 0):
-                subspace.type = SubspaceType.PHANTOM
-            else:
-                subspace.type = None
-                for entity in subspace.entities:
-                    if (entity.is_file()):
-                        subspace.type = SubspaceType.FILE
-                    if (entity.is_dir()):
-                        subspace.type = SubspaceType.DIRECTORY
-                        break
+                node = subspace_node
+            route.extend(namespaces)
+
+    @classmethod
+    def get_entities(
+        cls,
+        search_dir: PathLike,
+        recursive: bool = True
+    ) -> list[Entity]:
+        search_path: Path = Path(search_dir).resolve()
+        entities: list[Entity] = []
+        if recursive:
+            # FIXME: replace this with Path.walk (python 3.12)
+            # https://docs.python.org/3/library/pathlib.html
+            for root, dirs, files in os.walk(search_path):
+                for path in [*dirs, *files]:
+                    child = Path(root, path).resolve()
+                    if cls.is_entity(child):
+                        entities.append(child)
+        else:
+            for child in search_path.iterdir():
+                if cls.is_entity(child):
+                    entities.append(child)
+        return entities
 
     @staticmethod
-    def __calc_id(tree, data):
-        if isinstance(data, Subspace):
-            return "_".join(data.route)
-        return hash(data)
+    def is_entity(path: Path) -> bool:
+        """Return true if path is a subspace entity .
+
+        Args:
+            path (Entity): The path to be checked.
+
+        Returns:
+            bool: Return ture if is valid entity.
+        """
+        path = path.resolve()
+        if path.is_dir():
+            is_subspace = Path(path, 'Subspace.yml').is_file()
+            is_void = 'Void' in path.name.split("_")
+            return is_subspace or is_void
+        else:
+            not_marker = path.name != 'Subspace.yml'
+            return not_marker
 
     def render_tree(self):
 
         label_dict = {
             "📁": "direcotry subspace\nwhich contains Subspace.yml.",
             "📄": "file subspace\nwhich refers to a leaf file.",
-            "⭕": "phantom | unknown subspace\nwhich has no entity.",
-            "🆕": "new subspace\nwhich have not created yet."
+            "💿": "phantom | unknown subspace\nwhich has no entity.",
+            "⛔": "virtual subspace\nwhich have not created yet."
         }
 
-        return ui.Grid(
+        return Grid(
             self.format(repr="{node.data.ui_name}", title="(Root)"),
-            ui.Instruction(label_dict)
+            Instruction(label_dict)
         )
 
     def render_table(self):
-        table = ui.Table(
+        table = Table(
             "Subspace",
             "Comments",
             "Entities"
@@ -188,7 +270,7 @@ class SubspaceTree(Tree):
         node_dict = {
             ".": {
                 "name": "(Root)",
-                "content": " (Root) ",
+                "content": "&nbsp(Root)&nbsp",
                 "color": "#BEBEBE",
                 "size": 20,
                 "level": 0,
@@ -206,13 +288,13 @@ class SubspaceTree(Tree):
             else:
                 color = "#585858"
 
-            node_dict[node.data_id] = {
-                "name": subspace.name,
-                "parent": node.parent.data_id if parent else ".",
+            node_dict[node.path] = {
+                "name": subspace.html_name,
+                "parent": node.parent.path if parent else ".",
                 "content": "<br>".join(subspace.html_entities),
                 "color": color,
                 "size": 5+subspace.flow,
-                "level": len(subspace.route),
+                # "level": node.depth,
                 "border_width": 0,
                 "edge_width": 5+subspace.flow,
                 "edge_color": '#3F3F3F',
