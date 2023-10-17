@@ -79,9 +79,8 @@ def _set_subspace(omoospace):
     }
     
     subspace_path = Path(parent_dir, subspace_pathname).resolve()
-    console.print(SubspaceTree.get_file_route(parent_dir))
     subspace_tree = SubspaceTree()
-    parent_node = SubspaceTree().add_entity(parent_dir)
+    parent_node = subspace_tree.add_entity(parent_dir)
     parent_node.add(Subspace(pathname=subspace_pathname))
     # TODO: display new subspace with true name not dirname only.
     console.print(Board(
