@@ -73,7 +73,7 @@ def to_omoospace(detect_path: str):
     recent_list.append(omoospace_dir)
     Setting().recent_omoospaces = recent_list
     Setting().working_omoospace = omoospace_dir
-    console.print("Current working at 🛠️ [bright]%s (%s)." %
+    console.print("Current working at 🛠️ [bright]%s (%s)[/bright]." %
                   (omoospace.name, omoospace_dir))
     return omoospace
 

@@ -15,10 +15,10 @@ class Fixture():
         "SourceFiles/TestAssetC.blend",
     ]
 
-    def __init__(self, root_dir) -> None:
+    def __init__(self, root_dir):
         self.omoospace_path = Path(root_dir, "MyProject").resolve()
         if (self.omoospace_path.exists()):
-            shutil.rmtree(fixture.omoospace_path, ignore_errors=True)
+            shutil.rmtree(self.omoospace_path, ignore_errors=True)
             
         self.filepaths = [Path(self.omoospace_path, file)
                           for file in self.FILES]

@@ -16,8 +16,6 @@ from omoospace.types import Creator, Entity, Item, OmoospaceInfo, PackageInfo, S
 
 # TODO: package link in summary list
 
-# TODO: softwares and creators in summary list
-
 # TODO: annition to class and funtion
 
 
@@ -40,6 +38,25 @@ class OmoospaceTree(DirectoryTree):
 
 
 class Omoospace:
+    """The class of omoospace.
+
+    An omoospace class instance is always refer to a existed omoospace directory, not in ideal. 
+
+    Attributes:
+        name (str): Omoospace's name.
+        description (str): Omoospace's description.
+        creators (list[Creator]): Creator list.
+        softwares (list[Software]): Software list.
+        works (list[Work]): Work list.
+        root_path (Path): Root path.
+        sourcefiles_path (Path): SourceFiles directory path.
+        contents_path (Path): Contents directory path.
+        externaldata_path (Path): ExternalData directory path.
+        stageddata_path (Path): StagedData directory path.
+        references_path (Path): Reference directory path.
+        info_path (Path): Omoospace.yml file path.
+    """
+
     name: str
     description: str
     creators: list[Creator]
@@ -47,13 +64,13 @@ class Omoospace:
     works: list[Work]
 
     def __init__(self, detect_dir: PathLike):
-        """Initialize Omoospace configuration .
+        """Initialize from existed omoospace directory.
 
         Args:
             detect_dir (PathLike): The start directory for detecting omoospace. It could be the subdirectories of omoospace.
 
         Raises:
-            Exception: No omoospace detected.
+            NotFoundError: No omoospace detected.
         """
         detect_path = Path(detect_dir).resolve()
         detect_path_parents = [detect_path, *detect_path.parents]
@@ -104,15 +121,7 @@ class Omoospace:
             self.__write_info_file(info)
         object.__setattr__(self, name, value)
 
-    def is_item(self, item: Item) -> bool:
-        """Return True if the item is a valid file or not .
-
-        Args:
-            item (Item): [description]
-
-        Returns:
-            bool: [description]
-        """
+    def is_omoospace_item(self, item: Item) -> bool:
         exists = item.exists()
         in_omoospace = is_subpath(item, self.root_path)
         not_in_stagedata = not is_subpath(
@@ -121,24 +130,23 @@ class Omoospace:
         return exists and in_omoospace and not_omoospace_yml and not_in_stagedata
 
     @property
-    def subspace_entities(self) -> list[Path]:
+    def subspace_entities(self) -> list[Entity]:
+        """list[Entity]: the subspace entities in the sourcefiles directory."""
         return SubspaceTree.get_entities(search_dir=self.sourcefiles_path)
 
     @property
     def subspace_tree(self) -> SubspaceTree:
+        """SubspaceTree: The subspace tree."""
         return SubspaceTree(search_dir=self.sourcefiles_path)
 
     @property
     def directory_tree(self,) -> DirectoryTree:
+        """DirectoryTree: The directory tree."""
         return DirectoryTree(search_dir=self.root_path)
 
     @property
     def imported_packages(self) -> list[Package]:
-        """A dictionary of packages.
-
-        Returns:
-            list[Package]: A dictionary of packages.
-        """
+        """list[Package]: The list of Package objects that are imported from ExternalData."""
         subdirs = [subdir for subdir in self.externaldata_path.iterdir()
                    if subdir.is_dir()]
 
@@ -158,21 +166,24 @@ class Omoospace:
             reveal_when_success: bool = True,
             collect_entities: bool = True
     ) -> Path:
-        """Add a subspace to the source directory .
+        """Add or update subspace to this omoospace.
 
         Args:
-            name (str): [description]
-            parent_dir (PathLike): [description]
+            subspace (Union[SubspaceInfo, str]): [description]
+            parent_dir (PathLike, optional): [description]. Defaults to None.
             reveal_when_success (bool, optional): [description]. Defaults to True.
             collect_entities (bool, optional): [description]. Defaults to True.
 
         Raises:
-            Exception: Name cannot be empty.
-            Exception: Parent directory is invalid.
-            Exception: Parent directory is out of SourceFiles.
+            ExistsError: [description]
+            NotIncludeError: [description]
+            EmptyError: [description]
+            EmptyError: [description]
+            EmptyError: [description]
+            MoveFailed: [description]
 
-        Return:
-            Path
+        Returns:
+            Path: [description]
         """
 
         parent_path = Path(parent_dir).resolve(
@@ -194,7 +205,7 @@ class Omoospace:
             if not len(subspace.get("name")) > 0:
                 raise EmptyError("name")
             subspace_info = subspace
-            subspace_dirname = format_name(subspace.get("name"))
+            subspace_pathname = format_name(subspace.get("name"))
         else:
             if not len(subspace) > 0:
                 raise EmptyError("name")
@@ -203,9 +214,9 @@ class Omoospace:
                 "name": subspace,
                 "comments": None
             }
-            subspace_dirname = format_name(subspace)
+            subspace_pathname = format_name(subspace)
 
-        subspace_path = Path(parent_path, subspace_dirname).resolve()
+        subspace_path = Path(parent_path, subspace_pathname).resolve()
 
         # make subspace dir
         subspace_path.mkdir(parents=True, exist_ok=True)
@@ -220,11 +231,11 @@ class Omoospace:
 
                 def is_match(entity: Entity):
                     entity_stem = entity.stem
-                    not_itself = entity_stem != subspace_dirname
+                    not_itself = entity_stem != subspace_pathname
 
                     is_match = False
                     entity_namespaces = format_name(entity_stem).split('_')
-                    subspace_namespaces = subspace_dirname.split('_')
+                    subspace_namespaces = subspace_pathname.split('_')
                     for i in range(len(subspace_namespaces)):
                         subspace_suffix = '_'.join(subspace_namespaces[i:])
                         entity_prefix = '_'.join(
@@ -254,6 +265,21 @@ class Omoospace:
             parent_dir: PathLike = None,
             reveal_when_success: bool = True
     ) -> Path:
+        """Add or update process to this omoospace.
+
+        Args:
+            process (Union[Structure, list[str], str]): [description]
+            parent_dir (PathLike, optional): [description]. Defaults to None.
+            reveal_when_success (bool, optional): [description]. Defaults to True.
+
+        Raises:
+            ExistsError: [description]
+            NotIncludeError: [description]
+            CreateFailed: [description]
+
+        Returns:
+            Path: [description]
+        """
         parent_path = Path(parent_dir).resolve(
         ) if parent_dir else self.sourcefiles_path
 
@@ -284,14 +310,33 @@ class Omoospace:
             reveal_in_explorer(parent_path)
 
     def set_creator(self, creator: Creator):
+        """Add or update creator to this omoospace.
+
+        Args:
+            creator (Creator): [description]
+        """
         creators = self.creators or []
         self.creators = replace_or_append(creators, creator, 'email')
 
     def set_software(self, software: Software):
+        """Add or update software to this omoospace.
+
+        Args:
+            software (Software): [description]
+        """
         softwares = self.softwares or []
         self.softwares = replace_or_append(softwares, software, 'name')
 
     def set_work(self, work: Work):
+        """Add or update work to this omoospace.
+
+        Args:
+            work (Work): [description]
+
+        Raises:
+            NotFoundError: [description]
+            NotFoundError: [description]
+        """
         if "paths" not in work.keys():
             raise NotFoundError("paths", work)
 
@@ -319,7 +364,25 @@ class Omoospace:
         info: PackageInfo = None,
         reveal_when_success: bool = True,
         overwrite_existing: bool = True
-    ):
+    ) -> Package:
+        """Export a package.
+
+        Args:
+            items (list[PathLike]): [description]
+            name (str, optional): [description]. Defaults to None.
+            export_dir (PathLike, optional): [description]. Defaults to None.
+            info (PackageInfo, optional): [description]. Defaults to None.
+            reveal_when_success (bool, optional): [description]. Defaults to True.
+            overwrite_existing (bool, optional): [description]. Defaults to True.
+
+        Raises:
+            ExistsError: [description]
+            Exception: [description]
+            Exception: [description]
+
+        Returns:
+            Package: [description]
+        """
         name = name or self.name
         export_path = Path(export_dir).resolve() if export_dir \
             else Path(self.root_path, 'StagedData', 'Packages').resolve()
@@ -334,7 +397,7 @@ class Omoospace:
                 raise ExistsError('package', package_path)
 
         items: list[Path] = [Path(item).resolve() for item in items]
-        items = list(filter(self.is_item, items))
+        items = list(filter(self.is_omoospace_item, items))
 
         # Check if is enouph items
         if (len(items) == 0):
@@ -390,6 +453,16 @@ class Omoospace:
         reveal_when_success: bool = True,
         overwrite_existing: bool = True
     ):
+        """Imports the package into the ExternalData directory.
+
+        Args:
+            import_dir (PathLike): [description]
+            reveal_when_success (bool, optional): [description]. Defaults to True.
+            overwrite_existing (bool, optional): [description]. Defaults to True.
+
+        Raises:
+            ExistsError: [description]
+        """
         # get package form import directory
         import_path = Path(import_dir).resolve()
         package = Package(import_path)
@@ -460,6 +533,8 @@ class Omoospace:
             subspace_tree.draw_graph(output_dir, reveal_when_success)
 
     def show_info(self):
+        """Show profile of this omoospace.
+        """
         ui_creators = ItemList([
             "%s [dim]%s[/dim]" % (creator.get("name"), creator.get("role"))
             for creator in self.creators])
@@ -488,13 +563,17 @@ class Omoospace:
         ))
 
     def show_subspace_tree(self):
+        """Shows the subspace tree.
+        """
         subspace_tree = self.subspace_tree
         console.print(Board(
             subspace_tree.render_tree(),
             title="Subspace Tree"
         ))
 
-    def show_directory_tree(self,):
+    def show_directory_tree(self):
+        """Shows the directory tree.
+        """
         directory_tree = self.directory_tree
         console.print(Board(
             directory_tree.render_tree(),
@@ -502,6 +581,8 @@ class Omoospace:
         ))
 
     def show_imported_packages(self):
+        """Show imported packages.
+        """
         imported_packages = self.imported_packages
         ui_imported_packages = Table(
             "Directory", "Description",
@@ -514,6 +595,8 @@ class Omoospace:
         ))
 
     def show_subspace_entities(self):
+        """Shows the subspace entities.
+        """
         subspace_tree = self.subspace_tree
         console.print(Board(
             subspace_tree.render_table(),

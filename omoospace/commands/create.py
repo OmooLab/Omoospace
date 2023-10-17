@@ -38,11 +38,11 @@ def cli_create(dst: str):
 
     templates = Setting().omoospace_templates
     template_choices = [
-        Choice(name="*Empty",value=-1),
+        Choice(name="*Empty", value=-1),
         *[Choice(
-        name="%s (%s)" % (template.name, template.description),
-        value=id
-    ) for id, template in enumerate(templates)]
+            name="%s (%s)" % (template.name, template.description),
+            value=id
+        ) for id, template in enumerate(templates)]
     ]
 
     template_id: int = inquirer.select(
@@ -52,7 +52,7 @@ def cli_create(dst: str):
     ).execute()
 
     while True:
-        if template_id >=0:
+        if template_id >= 0:
             template = templates[template_id]
         else:
             template = OmoospaceTemplate()
@@ -78,7 +78,7 @@ def cli_create(dst: str):
 
     description = inquirer.text(
         message="A brief of the Omoospace",
-        default="An Omoospace for creation works",
+        default="An omoospace for creation works",
         style=inquirer_style
     ).execute()
 
@@ -95,8 +95,6 @@ def cli_create(dst: str):
         Info("Directory Tree", template.tree.render_tree()),
         title="Create Omoospace Form"
     ))
-
-    print("")
     is_confirm = inquirer.confirm(
         message="Confirm",
         default=True,

@@ -145,14 +145,6 @@ class DirectoryTree(Tree):
         node: Union[Tree, Node],
         is_subspace: bool = False
     ):
-        """Create all subdirectories in a directory.
-
-        Args:
-            dir (PathLike): The directory to create.
-            subdirs (dict[str, any], optional): The subdirectories under that directory. Defaults to {}.
-            is_subspace (bool, optional): If true, 'Subspace.yml' will be created in that dicrectory. Defaults to False.
-        """
-
         if (isinstance(node, Node)):
             dirpath = Path(path, node.path.removeprefix("/")).resolve()
             is_subspace = node.data.is_subspace

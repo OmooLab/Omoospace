@@ -17,7 +17,6 @@ rich = "^13.6.0"
 nutree = "^0.5.1"
 validators = "^0.22.0"
 
-
 [tool.poetry.scripts]
 omoospace = "omoospace.commands:cli"
 omoos = "omoospace.commands:cli"
@@ -27,6 +26,9 @@ ipykernel = "^6.25.2"
 pytest = "^7.4.2"
 pytest-dependency = "^0.5.1"
 mkdocs = "^1.5.3"
+mkdocs-material = "^9.4.6"
+mkdocstrings = {extras = ["python"], version = "^0.23.0"}
+mkdocs-click = "^0.8.1"
 
 [build-system]
 requires = ["poetry-core"]

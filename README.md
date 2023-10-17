@@ -1,5 +1,3 @@
-# Omoospace Docs
-
 # Omoospace
 
 Omoospace is a scalable directory structure solution for digital creation works. In order to follow omoospace rules easily, we provide shell commands, including creating new omoospace, shipping package, adding subspace, etc.
@@ -12,7 +10,7 @@ Omoospace is a scalable directory structure solution for digital creation works.
 
 Run the following command to install the dependencies:
 
-```bash
+```shell
 pip install omoospace
 ```
 
@@ -32,7 +30,7 @@ omoospcase create
 
 Finish the setup wizard.
 
-```bash
+```
 ? Enter Omoospace name my project
 ? Choose a template Asset
 ? A brief of the Omoospace An Omoospace for creation works

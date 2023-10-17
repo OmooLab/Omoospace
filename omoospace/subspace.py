@@ -2,7 +2,8 @@
 import os
 from pathlib import Path
 from typing import Union
-from nutree import Tree
+from nutree import Tree, Node
+from omoospace.exceptions import InvalidError
 
 from omoospace.graph import draw_graph
 from omoospace.types import Entity, PathLike, Route, SubspaceInfo, SubspaceType
@@ -14,22 +15,22 @@ from omoospace.utils import format_name
 class Subspace():
     def __init__(
         self,
-        name: str,
+        pathname: str,
         info: SubspaceInfo = None,
     ):
-        self.pathname = name
+        self.pathname = pathname
         self.entities: list[Entity] = []
         self.flow: int = 0
         self.type: SubspaceType = None
 
         if isinstance(info, str):
-            self.name = name
+            self.name = pathname
             self.comments = [info]
         elif isinstance(info, list):
-            self.name = name
+            self.name = pathname
             self.comments = info
         elif isinstance(info, dict):
-            self.name = info.get('name') or name
+            self.name = info.get('name') or pathname
             comments = info.get('comments')
             if isinstance(comments, str) and comments:
                 self.comments = [comments]
@@ -38,7 +39,7 @@ class Subspace():
             else:
                 self.comments = []
         else:
-            self.name = name
+            self.name = pathname
             self.comments = []
 
     def __repr__(self):
@@ -99,25 +100,71 @@ class Subspace():
 
 
 class SubspaceTree(Tree):
+    """The class of subspace tree.
+
+    An subspace tree instance is always refer to a existed SourceFiles directory, not in ideal. 
+
+    """
+
     def __init__(
         self,
-        search_dir: PathLike
+        search_dir: PathLike = None
     ):
+        """Initialize the subspace tree from the given directory.
+
+        Args:
+            search_dir (PathLike): [description]
+        """
         super().__init__()
         if (search_dir):
             self.from_dir(search_dir)
+
+    @classmethod
+    def get_entity_route(cls, entity_path: PathLike) -> Route:
+        """Returns a route to a entity path.
+
+        Args:
+            entity_path (PathLike): [description]
+
+        Returns:
+            Route: The list of pathname of subspace.
+        """
+        subspace_tree = cls()
+        entity_end_node = subspace_tree.add_entity(entity_path)
+        return entity_end_node.path.split("/")[1:]
 
     def from_dir(
         self,
         search_dir: PathLike,
         recursive: bool = True
     ):
+        """Set the subspace tree from the given directory.
+
+        Args:
+            search_dir (PathLike): [description]
+            recursive (bool, optional): [description]. Defaults to True.
+        """
         entities = self.get_entities(search_dir, recursive=recursive)
         for entity in entities:
             self.add_entity(entity)
 
-    def add_entity(self, entity: Entity):
-        entity = entity.resolve()
+    def add_entity(self, entity_path: PathLike) -> Node:
+        """Add subspace node to the tree based on entity.
+
+        The entity path must be real, not in ideal.
+
+        Args:
+            entity (Entity): [description]
+
+        Returns:
+            Route: List of subspace name along the route.
+
+        Raises:
+            InvalidError: entity path is invalid.
+        """
+        entity = Path(entity_path).resolve()
+        if not self.is_entity(entity) == 0:
+            InvalidError(entity, 'entity')
 
         # Get relpath parts. remove those directory that is not entity.
         entities = [entity]
@@ -150,9 +197,15 @@ class SubspaceTree(Tree):
                     break
 
             # create or get subspace by namespace
-            for i in range(len(namespaces)):
+            for i in range(len(namespaces)+1):
+                # if all namespace is match,the entity will be add to current route
+                # so the index is start from -1
+                i = i - 1
                 is_last = i == len(namespaces)-1
                 subspace_route = route + namespaces[:i+1]
+                if (len(subspace_route) == 0):
+                    continue
+
                 node_path = "/" + "/".join(subspace_route)
                 subspace_node = self.find(
                     match=lambda node: node.path == node_path
@@ -164,7 +217,7 @@ class SubspaceTree(Tree):
                     else:
                         subspace_info = {}
                     subspace = Subspace(
-                        name=namespaces[i],
+                        pathname=namespaces[i],
                         info=subspace_info,
                     )
                     subspace_node = node.add(subspace)
@@ -190,6 +243,7 @@ class SubspaceTree(Tree):
 
                 node = subspace_node
             route.extend(namespaces)
+        return node
 
     @classmethod
     def get_entities(
@@ -197,6 +251,11 @@ class SubspaceTree(Tree):
         search_dir: PathLike,
         recursive: bool = True
     ) -> list[Entity]:
+        """Add subspace node to the tree based on entity.
+
+        Args:
+            entity (Entity): [description]
+        """
         search_path: Path = Path(search_dir).resolve()
         entities: list[Entity] = []
         if recursive:
@@ -215,13 +274,13 @@ class SubspaceTree(Tree):
 
     @staticmethod
     def is_entity(path: Path) -> bool:
-        """Return true if path is a subspace entity .
+        """Return True if path is a valid entity.
 
         Args:
-            path (Entity): The path to be checked.
+            path (Path): [description]
 
         Returns:
-            bool: Return ture if is valid entity.
+            bool: [description]
         """
         path = path.resolve()
         if path.is_dir():
@@ -233,6 +292,11 @@ class SubspaceTree(Tree):
             return not_marker
 
     def render_tree(self):
+        """Render the tree as rich str.
+
+        Returns:
+            [type]: [description]
+        """
 
         label_dict = {
             "📁": "direcotry subspace\nwhich contains Subspace.yml.",
@@ -247,6 +311,12 @@ class SubspaceTree(Tree):
         )
 
     def render_table(self):
+        """List subspaces in table as rich str.
+
+        Returns:
+            [type]: [description]
+        """
+
         table = Table(
             "Subspace",
             "Comments",
@@ -267,6 +337,12 @@ class SubspaceTree(Tree):
         output_dir: PathLike,
         reveal_when_success: bool = True
     ):
+        """Draws the graph and export html file.
+
+        Args:
+            output_dir (PathLike): [description]
+            reveal_when_success (bool, optional): [description]. Defaults to True.
+        """
         node_dict = {
             ".": {
                 "name": "(Root)",

@@ -1,0 +1,57 @@
+site_name: Omoospace Docs
+site_url: https://example.com/
+repo_url: https://github.com/OmooLab/omoospace
+
+nav:
+  - Getting Stared:
+      - index.md
+      - What is omoospace?: omoospace.md
+      - Features Roadmap: roadmap.md
+  - CLI Command:
+      - clis/index.md
+      - Create: clis/create.md
+      - Set: clis/set.md
+      - Show: clis/show.md
+      - Export: clis/export.md
+      - Import: clis/import.md
+  - API Reference:
+      - Omoospace: apis/omoospace.md
+      - Package: apis/package.md
+      - Subspace: apis/subspace.md
+      - Directory: apis/directory.md
+
+theme:
+  name: material
+  logo: assets/Logo.png
+  font:
+    text: Noto Sans
+    code: Cascadia Code
+  palette:
+    scheme: default
+    primary: black
+  features:
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - content.code.copy
+    - content.code.select
+
+plugins:
+  - search
+  - mkdocstrings
+
+markdown_extensions:
+  - mkdocs-click
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true

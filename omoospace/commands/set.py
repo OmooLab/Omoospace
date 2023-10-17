@@ -8,7 +8,7 @@ from prompt_toolkit.validation import ValidationError, Validator
 
 from omoospace.directory import DirectoryTree
 from omoospace.setting import Setting
-from omoospace.subspace import SubspaceTree
+from omoospace.subspace import Subspace, SubspaceTree
 from omoospace.types import Creator, Software, Work
 from omoospace.ui import Board, CreatorProfile, Info, Transfer
 from omoospace.utils import find_first, format_name, is_subpath
@@ -25,7 +25,7 @@ SET_WORK_HELP = "Add or update work filepath."
 
 def _set_subspace(omoospace):
     omoospace: Omoospace = get_omoospace(omoospace)
-
+    
     class SubspaceParentDirValidator(Validator):
         def validate(self, document):
             # Check if is empty
@@ -66,7 +66,7 @@ def _set_subspace(omoospace):
         validate=EmptyInputValidator("Name cannot be empty."),
         style=inquirer_style
     ).execute()
-    subspace_dirname = format_name(subspace_name)
+    subspace_pathname = format_name(subspace_name)
 
     subspace_comment = inquirer.text(
         message="Enter a comment of this subspace (Optional)",
@@ -77,10 +77,12 @@ def _set_subspace(omoospace):
         "name": subspace_name,
         "comments": subspace_comment or None
     }
-
-    subspace_path = Path(parent_dir, subspace_dirname).resolve()
-    subspace_tree = SubspaceTree(search_dir=parent_dir)
-    subspace_tree.add_entity(subspace_path)
+    
+    subspace_path = Path(parent_dir, subspace_pathname).resolve()
+    console.print(SubspaceTree.get_file_route(parent_dir))
+    subspace_tree = SubspaceTree()
+    parent_node = SubspaceTree().add_entity(parent_dir)
+    parent_node.add(Subspace(pathname=subspace_pathname))
     # TODO: display new subspace with true name not dirname only.
     console.print(Board(
         Info("Name", "%s [dim](%s)[/dim]" %

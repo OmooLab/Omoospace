@@ -1,0 +1,16 @@
+{
+  "languageToolLinter.languageTool.ignoredWordsInWorkspace": [
+    "externaldata",
+    "fbx",
+    "mymodel",
+    "omoospace",
+    "omoospaces",
+    "pascalcase",
+    "polyhaven",
+    "pureref",
+    "scenebuilding",
+    "sourcefiles",
+    "stageddata",
+    "subspace"
+  ]
+}

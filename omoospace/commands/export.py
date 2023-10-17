@@ -20,7 +20,7 @@ def cli_export(omoospace, dst):
     omoospace = get_omoospace(omoospace)
 
     package_items: list[Path] = collect_item_prompt(
-        omoospace.root_path, omoospace.is_item)
+        omoospace.root_path, omoospace.is_omoospace_item)
 
     package_name = inquirer.text(
         message="Name this package",
