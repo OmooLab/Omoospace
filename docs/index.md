@@ -264,7 +264,7 @@ Finish the setup wizard.
 Current working at 🛠️ my project
 (C:\path\to\MyProject).
 ? Enter the item path or path pattern
-'C:\Users\manan\Codes\omoospace\temp\MyProject\Contents\MyModel'
+'C:\path\to\MyProject\Contents\MyModel'
 ╭──────── Pending ─────────╮    ╭──── Checked ────╮
 │                          │    │                 │
 │    ? Contents\MyModel    │ => │                 │
@@ -283,7 +283,7 @@ Current working at 🛠️ my project
 │                                                                           │
 │   Name                                                                    │
 │   my asset                                                                │
-│   (C:\path\to\MyProject\StagedData\Packages\MyAsset                       │
+│   (C:\path\to\MyProject\StagedData\Packages\MyAsset)                      │
 │                                                                           │
 │   Description                                                             │
 │   An omoospace package for sharing                                        │
