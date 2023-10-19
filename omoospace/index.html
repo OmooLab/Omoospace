@@ -440,6 +440,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#version-or-number-will-not-be-regarded-as-subspace-name" class="md-nav__link">
+    Version or number will not be regarded as subspace name
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -638,6 +645,8 @@
       
         
       
+        
+      
     
     
     
@@ -772,6 +781,26 @@
   
   <span class="md-ellipsis">
     Import
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clis/unregister/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unregister
   </span>
   
 
@@ -987,6 +1016,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#version-or-number-will-not-be-regarded-as-subspace-name" class="md-nav__link">
+    Version or number will not be regarded as subspace name
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1146,7 +1182,7 @@
 
 
 <h1 id="what-is-omoospace">What is omoospace?</h1>
-<p>Omoospace is a scalable directory structure solution for digital creation works. Its aim are universality, flexibility, and annotation. Not only for large projects and teamwork, but also for small projects and solo works. Whether it is a 3d modeling task or a series production, it all fits 😊.</p>
+<p><strong>Omoospace</strong> is a scalable directory structure solution for digital creation works. Its aim are universality, flexibility, and annotation. Not only for large projects and teamwork, but also for small projects and solo works. Whether it is a 3d modeling task or a series production, it all fits 😊.</p>
 <h2 id="overview">Overview</h2>
 <p>The rules are simple:</p>
 <ol>
@@ -1164,8 +1200,8 @@
 <li>
 <p>Subdirectories rules:</p>
 <ul>
-<li>SourceFiles subdirectories are set by process names.</li>
-<li>Contents subdirectories are set by content types.</li>
+<li><code>SourceFiles</code> subdirectories are set by process names.</li>
+<li><code>Contents</code> subdirectories are set by content types.</li>
 </ul>
 </li>
 <li>
@@ -1243,49 +1279,59 @@
 <p>In above example, subspace <code>EP001</code> has no entity to present itself. we call it <strong>Phantom Subspace</strong></p>
 </div>
 <p>There is no strict rules of when to use concatenating or overlapping. It all up to user's decision. Creator should design the subspace name to fit the project needs.</p>
+<h4 id="version-or-number-will-not-be-regarded-as-subspace-name">Version or number will not be regarded as subspace name</h4>
+<p>Version or number as file's suffix is common naming convention. But for most time, the sub-version file has the same creation object as the main file. For example:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>AssetA.blend<span class="w"> </span><span class="c1"># (Root) &gt; AssetA</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>AssetA_v001.blend<span class="w"> </span><span class="c1"># (Root) &gt; AssetA</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>AssetA_001.blend<span class="w"> </span><span class="c1"># (Root) &gt; AssetA</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001_SQ010
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>EP001_SQ010_v001.blend<span class="w"> </span><span class="c1"># (Root) &gt; EP001 &gt; SQ010</span>
+</span></code></pre></div>
+<p><code>AssetA_v001</code> is just another version <code>AssetA</code>. There is no new creation object be set.</p>
 <h3 id="sourcefiles">SourceFiles</h3>
 <p>It stores the source files of the software, or executable scripts, pipelines, etc.</p>
 <p><code>SourceFiles</code> stores processes, and <code>Contents</code> stores results. The former needs to be opened with specific software or executed by the program and need to be precomputed. The latter generally allows cross-software reading, and without any pre-computation.</p>
 <p>For example, using Blender's geometry node for procedural modeling. The source file of blender should be placed in <code>SourceFiles</code>. However, in order to load the procedural model in Unity, it is necessary to export as a general format, such as .fbx, and the exported file should be placed in <code>Contents</code>.</p>
 <h4 id="subdirectories-by-process-name-optional">Subdirectories by process name (optional)</h4>
 <p>Some optional process name:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Film production processes</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Production
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>PostProduction
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Post-production subprocesses</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Film production processes</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Compositing
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SoundEditing
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>VideoEditing
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Production
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>PostProduction
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 3D modeling processes</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Post-production subprocesses</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Modeling
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Texturing
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Rendering
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Shading
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Compositing
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SoundEditing
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>VideoEditing
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Processes sorted by number</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 3D modeling processes</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">001</span>-Preprocessing
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">002</span>-Scuplting
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">003</span>-Texturing
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">004</span>-Animation
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">005</span>-Lighting
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span><span class="m">006</span>-Typography
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Modeling
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Texturing
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Rendering
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Shading
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Processes sorted by number</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">001</span>-Preprocessing
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">002</span>-Scuplting
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">003</span>-Texturing
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">004</span>-Animation
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">005</span>-Lighting
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span><span class="m">006</span>-Compositing
 </span></code></pre></div>
 <p>Process directories and subspace directories can be mixed.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>&lt;SeriesTitle&gt;<span class="w"> </span><span class="c1"># (Root)</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>&lt;ModelName&gt;<span class="w"> </span><span class="c1"># (Root) &gt; &lt;ModelName&gt;</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>&lt;Episode&gt;<span class="w"> </span><span class="c1"># (Root) &gt; &lt;Episode&gt;</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Production
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>PostProduction
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;SeriesTitle&gt;<span class="w"> </span><span class="c1"># (Root)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>&lt;ModelName&gt;<span class="w"> </span><span class="c1"># (Root) &gt; &lt;ModelName&gt;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>&lt;Episode&gt;<span class="w"> </span><span class="c1"># (Root) &gt; &lt;Episode&gt;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Production
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>PostProduction
 </span></code></pre></div>
 <p>Custom process subdirectories should fit your own workflow. But be aware of the following rules:</p>
 <ul>
@@ -1299,12 +1345,12 @@
 <p>Any subspaces in <strong>Void</strong> are also <strong>Void Subspace</strong>.</p>
 </div>
 <p>Void subspace can be in filename prefix or as directory.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart
-</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Void_HowToBeat.hip
-</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Void_RnD_MetaBall.blend
-</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Void
-</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>MaNan.hip
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Void_HowToBeat.hip
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Void_RnD_MetaBall.blend
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Void
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>MaNan.hip
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1314,44 +1360,44 @@
 <p>It stores digital content in a common format, whether it is a work result or a resource, whether it is an internal or external. All files in here are organized to rules.</p>
 <h4 id="subdirectories-by-content-type-optional">Subdirectories by content type (optional)</h4>
 <p>Some optional content type:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># For modeling propose</span>
-</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
-</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
-</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Renders
-</span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># For short video production propose</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># For modeling propose</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Audios
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
-</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
-</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
-</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
-</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
-</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Renders
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># For film production propose</span>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># For short video production propose</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Audios
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
-</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Fonts
-</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>HDAs<span class="w"> </span><span class="c1"># Houdini Digital Assets</span>
-</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
-</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
-</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
-</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Characters
-</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Nature
-</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Props
-</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
-</span><span id="__span-15-14"><a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Presets
-</span><span id="__span-15-15"><a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
-</span><span id="__span-15-16"><a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Scenes
-</span><span id="__span-15-17"><a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>ScientificData
-</span><span id="__span-15-18"><a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Scripts
-</span><span id="__span-15-19"><a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Settings
-</span><span id="__span-15-20"><a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Shaders
-</span><span id="__span-15-21"><a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># For film production propose</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Audios
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Fonts
+</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>HDAs<span class="w"> </span><span class="c1"># Houdini Digital Assets</span>
+</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
+</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
+</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
+</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Characters
+</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Nature
+</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Props
+</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
+</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Presets
+</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
+</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Scenes
+</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>ScientificData
+</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Scripts
+</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Settings
+</span><span id="__span-16-20"><a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Shaders
+</span><span id="__span-16-21"><a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
 </span></code></pre></div>
 <p>Custom type subdirectories should fit your own workflow. But be aware of the following rules:</p>
 <ul>
@@ -1360,94 +1406,94 @@
 <li>It is not recommended to set multi-level subdirectories, nor to adjust the type subdirectories as the project expands. Because content files, always as an IO path, need stability.</li>
 </ul>
 <h4 id="the-output-of-source-file-is-named-after-its-entire-subspace-route">The output of source file is named after its entire subspace route.</h4>
-<p>There is no subspace directory in <code>Contents</code>. but use subspace route as file namespaces.</p>
+<p>There is no subspace directory in <code>Contents</code>. But use the entire subspace route as file namespaces.</p>
 <p><img alt="Untitled" src="../assets/Untitled%202.png" /></p>
 <p>Observe their correspondence through specific examples.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>BloodCellAndVessel
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
-</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
-</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells_Platelet.fbx
-</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells_RBC.fbx
-</span><span id="__span-16-6"><a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells_WBC.fbx
-</span><span id="__span-16-7"><a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
-</span><span id="__span-16-8"><a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.png
-</span><span id="__span-16-9"><a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SkyHDRI.exr
-</span><span id="__span-16-10"><a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
-</span><span id="__span-16-11"><a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCellAndVessel
-</span><span id="__span-16-12"><a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.0001.png
-</span><span id="__span-16-13"><a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>...
-</span><span id="__span-16-14"><a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
-</span><span id="__span-16-15"><a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>BloodCellAndVessel.mp4
-</span><span id="__span-16-16"><a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-16-17"><a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.blend
-</span><span id="__span-16-18"><a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.pptx
-</span><span id="__span-16-19"><a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells.blend
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>BloodCellAndVessel
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells_Platelet.fbx
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells_RBC.fbx
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells_WBC.fbx
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.png
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SkyHDRI.exr
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCellAndVessel
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.0001.png
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>...
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>BloodCellAndVessel.mp4
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.blend
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCellAndVessel.pptx
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells.blend<span class="w"> </span>
 </span></code></pre></div>
 <p><img alt="Untitled" src="../assets/Untitled%203.png" /></p>
 <p>More complex example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>HowOrganWorks
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
-</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
-</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Heart
-</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Heart.usd
-</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Textures
-</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_CuttedHeart
-</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_CuttedHeart.usd
-</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Textures
-</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
-</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_Fog.vdb
-</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_SQ010_Beating.abc
-</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
-</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_VisualEffect
-</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_VisualEffect.1001.png
-</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
-</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
-</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0100
-</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0100.1001.png
-</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
-</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0200
-</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0200.1001.png
-</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>...
-</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Videos
-</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart.mp4
-</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Modeling
-</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Heart
-</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Heart.blend
-</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Heart.spp
-</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Valves.blend
-</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart
-</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart
-</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart.blend
-</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart.zpr
-</span><span id="__span-17-39"><a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Valves.blend
-</span><span id="__span-17-40"><a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart.prproj
-</span><span id="__span-17-41"><a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ010
-</span><span id="__span-17-42"><a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-17-43"><a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Beating.hip
-</span><span id="__span-17-44"><a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Fog.EmberGen
-</span><span id="__span-17-45"><a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>VisualEffect.aep
-</span><span id="__span-17-46"><a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ010.blend
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>HowOrganWorks
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Heart
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Heart.usd
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Textures
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_CuttedHeart
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_CuttedHeart.usd
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Textures
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_Fog.vdb
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_SQ010_Beating.abc
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
+</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_VisualEffect
+</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_VisualEffect.1001.png
+</span><span id="__span-18-16"><a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
+</span><span id="__span-18-17"><a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
+</span><span id="__span-18-18"><a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0100
+</span><span id="__span-18-19"><a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0100.1001.png
+</span><span id="__span-18-20"><a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>...
+</span><span id="__span-18-21"><a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0200
+</span><span id="__span-18-22"><a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart_SQ010_SH0200.1001.png
+</span><span id="__span-18-23"><a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>...
+</span><span id="__span-18-24"><a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Videos
+</span><span id="__span-18-25"><a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BeatingHeart.mp4
+</span><span id="__span-18-26"><a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-18-27"><a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Modeling
+</span><span id="__span-18-28"><a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Heart
+</span><span id="__span-18-29"><a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
+</span><span id="__span-18-30"><a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Heart.blend
+</span><span id="__span-18-31"><a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Heart.spp
+</span><span id="__span-18-32"><a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Valves.blend
+</span><span id="__span-18-33"><a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart
+</span><span id="__span-18-34"><a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
+</span><span id="__span-18-35"><a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart
+</span><span id="__span-18-36"><a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
+</span><span id="__span-18-37"><a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart.blend
+</span><span id="__span-18-38"><a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CuttedHeart.zpr
+</span><span id="__span-18-39"><a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Valves.blend
+</span><span id="__span-18-40"><a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart.prproj
+</span><span id="__span-18-41"><a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ010
+</span><span id="__span-18-42"><a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
+</span><span id="__span-18-43"><a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Beating.hip
+</span><span id="__span-18-44"><a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Fog.EmberGen
+</span><span id="__span-18-45"><a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>VisualEffect.aep
+</span><span id="__span-18-46"><a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ010.blend
 </span></code></pre></div>
 <p><img alt="Untitled" src="../assets/Untitled%204.png" /></p>
 <h3 id="externaldata">ExternalData</h3>
-<p>It stores all data files from external sources. The “external” here means that it is not generated by the creator of this Omoospace, and not produced within this Omoospace, either. The most common usage of <code>ExternalData</code> is to store resources from network. You can also put your own 3D assets' library directory into <code>ExternalData</code> as a soft link.</p>
+<p>It stores all data files from external sources. The “external” here means that it is not generated by the creator of this omoospace, and not produced within this omoospace, either. The most common usage of <code>ExternalData</code> is to store resources from network. You can also put your own 3D assets' library directory into <code>ExternalData</code> as a soft link.</p>
 <h4 id="no-need-to-follow-the-naming-rules-do-not-set-any-type-subdirectories">No need to follow the naming rules, do not set any type subdirectories</h4>
 <p>Just keep its original file structure and naming style. For example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>www.models.com_CT_Scanner
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CT_Scanner.fbx
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>tex
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>textures_pack-4k
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>wood
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>metal
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>MyResources
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Textures
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>www.models.com_CT_Scanner
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CT_Scanner.fbx
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>tex
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>textures_pack-4k
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>wood
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>metal
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>MyResources
+</span><span id="__span-19-9"><a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Textures
+</span><span id="__span-19-10"><a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
+</span><span id="__span-19-11"><a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1461,15 +1507,15 @@
 <p>Categorizing, renaming are not fun works, so it is recommended to store external source data directly into <code>ExternalData</code> unless you can ensure files under <code>Contents</code> | <code>SourceFiles</code> strict to the rules.</p>
 </div>
 <h4 id="it-stores-omoospace-packages">It stores omoospace packages</h4>
-<p>Package is an Omoospace data package designed for sharing. The loaded Package will be stored in <code>ExternalData</code>. The source file can directly reference the file here.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells<span class="w"> </span><span class="c1"># Package</span>
-</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
-</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Contents
-</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
-</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>RedBooldCell.fbx
-</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>RedBooldCell.blend
+<p>Package is an omoospace data package designed for sharing. The loaded Package will be stored in <code>ExternalData</code>. The source file can directly reference the file here.</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells<span class="w"> </span><span class="c1"># Package</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Contents
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>RedBooldCell.fbx
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>RedBooldCell.blend
 </span></code></pre></div>
 <h3 id="references">References</h3>
 <p>It stores PureRef, Figma, Paper PDF, Storyboard. Although they will not be used directly by the source file, but still need to be saved. Put them here.</p>
@@ -1483,75 +1529,75 @@
 <h3 id="omoospaceyml">Omoospace.yml</h3>
 <p>It stores profile info such as creators, software versions, etc.</p>
 <!-- prettier-ignore -->
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Omoospace&#39;s name</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A brief of this Omoospace (Optional)</span>
-</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="nt">creators</span><span class="p">:</span><span class="w"> </span><span class="c1"># Creator list of this Omoospace</span>
-</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s name</span>
-</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s email (Optional)</span>
-</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s role in this Omoospace (Optional)</span>
-</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s website (Optional)</span>
-</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="nt">softwares</span><span class="p">:</span><span class="w"> </span><span class="c1"># Software list of this Omoospace</span>
-</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Software&#39;s name</span>
-</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Software&#39;s version</span>
-</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span><span class="w"> </span><span class="c1"># Plugins list of this Omoospace (Optional)</span>
-</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plugin&#39;s name</span>
-</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plugin&#39;s version</span>
-</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="nt">works</span><span class="p">:</span><span class="w"> </span><span class="c1"># Work list of this Omoospace</span>
-</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Work&#39;s name</span>
-</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Work&#39;s path under Contents</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Omoospace&#39;s name</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A brief of this omoospace (Optional)</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nt">creators</span><span class="p">:</span><span class="w"> </span><span class="c1"># Creator list of this omoospace</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s name</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s email (Optional)</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s role in this omoospace (Optional)</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s website (Optional)</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nt">softwares</span><span class="p">:</span><span class="w"> </span><span class="c1"># Software list of this omoospace</span>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Software&#39;s name</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Software&#39;s version</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span><span class="w"> </span><span class="c1"># Plugins list of this omoospace (Optional)</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plugin&#39;s name</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">        </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plugin&#39;s version</span>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="nt">works</span><span class="p">:</span><span class="w"> </span><span class="c1"># Work list of this omoospace</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Work&#39;s name</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Work&#39;s path under Contents</span>
 </span></code></pre></div>
 <p>For example:</p>
 <!-- prettier-ignore -->
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my project</span>
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An Omoospace for creation works</span>
-</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nt">creators</span><span class="p">:</span>
-</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manan</span>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icrdr2010@outlook.com</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span>
-</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Owner</span>
-</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="nt">softwares</span><span class="p">:</span>
-</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blender</span>
-</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.6.4</span>
-</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Zbrush</span>
-</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2023.2</span>
-</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Substance 3D Painter</span>
-</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.0.0</span>
-</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="nt">works</span><span class="p">:</span>
-</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MyModel</span>
-</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
-</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MyModel</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my project</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An omoospace for creation works</span>
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nt">creators</span><span class="p">:</span>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">manan</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">icrdr2010@outlook.com</span>
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Owner</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="nt">softwares</span><span class="p">:</span>
+</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Blender</span>
+</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3.6.4</span>
+</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Zbrush</span>
+</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2023.2</span>
+</span><span id="__span-22-14"><a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-22-15"><a id="__codelineno-22-15" name="__codelineno-22-15" href="#__codelineno-22-15"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Substance 3D Painter</span>
+</span><span id="__span-22-16"><a id="__codelineno-22-16" name="__codelineno-22-16" href="#__codelineno-22-16"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9.0.0</span>
+</span><span id="__span-22-17"><a id="__codelineno-22-17" name="__codelineno-22-17" href="#__codelineno-22-17"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
+</span><span id="__span-22-18"><a id="__codelineno-22-18" name="__codelineno-22-18" href="#__codelineno-22-18"></a><span class="nt">works</span><span class="p">:</span>
+</span><span id="__span-22-19"><a id="__codelineno-22-19" name="__codelineno-22-19" href="#__codelineno-22-19"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MyModel</span>
+</span><span id="__span-22-20"><a id="__codelineno-22-20" name="__codelineno-22-20" href="#__codelineno-22-20"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+</span><span id="__span-22-21"><a id="__codelineno-22-21" name="__codelineno-22-21" href="#__codelineno-22-21"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MyModel</span>
 </span></code></pre></div>
 <h2 id="omoospace-package">Omoospace Package</h2>
-<p>Inspired by Unity Package, Package is an Omoospace data package designed for sharing.</p>
-<p>ExternalData acts like a Packages of Unity project, that storing data from other Omoospaces.</p>
+<p>Inspired by Unity Package, Package is an omoospace data package designed for sharing.</p>
+<p>ExternalData acts like a Packages of Unity project, that storing data from other omoospaces.</p>
 <p><a href="https://docs.unity3d.com/2020.1/Documentation/Manual/HOWTO-exportpackage.html">Unity - Manual: Reusing Assets between Projects</a></p>
-<p>The internal structure of Package is part of its source Omoospace</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>&lt;PackageName&gt;
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="p">|</span>--<span class="w"> </span>Contents<span class="w"> </span><span class="c1"># (Optional)</span>
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">|</span>--<span class="w"> </span>ExternalData<span class="w"> </span><span class="c1"># (Optional)</span>
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">|</span>--<span class="w"> </span>References<span class="w"> </span><span class="c1"># (Optional)</span>
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles<span class="w"> </span><span class="c1"># (Optional)</span>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">|</span>--<span class="w"> </span>StagedData<span class="w"> </span><span class="c1"># (Optional)</span>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="p">|</span>--<span class="w"> </span>README.md
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="sb">`</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
+<p>The internal structure of Package is part of its source omoospace</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>&lt;PackageName&gt;
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="p">|</span>--<span class="w"> </span>Contents<span class="w"> </span><span class="c1"># (Optional)</span>
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="p">|</span>--<span class="w"> </span>ExternalData<span class="w"> </span><span class="c1"># (Optional)</span>
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="p">|</span>--<span class="w"> </span>References<span class="w"> </span><span class="c1"># (Optional)</span>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles<span class="w"> </span><span class="c1"># (Optional)</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">|</span>--<span class="w"> </span>StagedData<span class="w"> </span><span class="c1"># (Optional)</span>
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">|</span>--<span class="w"> </span>README.md
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="sb">`</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
 </span></code></pre></div>
 <!-- prettier-ignore -->
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># Package.yml</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Package&#39;s name</span>
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Package&#39;s version</span>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A brief of this Package (Optional)</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="nt">creators</span><span class="p">:</span><span class="w"> </span><span class="c1"># Creator list of this Package</span>
-</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s name</span>
-</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s email (Optional)</span>
-</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s role in this Omoospace (Optional)</span>
-</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s website (Optional)</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># Package.yml</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Package&#39;s name</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Package&#39;s version</span>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A brief of this Package (Optional)</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="nt">creators</span><span class="p">:</span><span class="w"> </span><span class="c1"># Creator list of this Package</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s name</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">    </span><span class="nt">email</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s email (Optional)</span>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="w">    </span><span class="nt">role</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s role in this omoospace (Optional)</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="w">    </span><span class="nt">website</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creator&#39;s website (Optional)</span>
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Once Package is exported, it has nothing to do with its source Omoospace</p>
+<p>Once Package is exported, it has nothing to do with its source omoospace</p>
 </div>
 <h2 id="comparison-with-other-software-project-structures">Comparison with other software project structures</h2>
 <p>There are some common concepts to help understand.</p>
@@ -1599,7 +1645,7 @@
 <h2 id="qa">Q&amp;A</h2>
 <ul>
 <li>
-<p><strong>Q: Most directory structure solutions of CG work have no distinction between <code>Contents</code> and <code>SourceFiles</code>. Why Omoospace emphasize their differences ?</strong></p>
+<p><strong>Q: Most directory structure solutions of CG work have no distinction between <code>Contents</code> and <code>SourceFiles</code>. Why omoospace emphasize their differences ?</strong></p>
 <p>A: This is due to the different purposes of them. The content files, always as an IO path, need stability. So, <code>Contents</code> should be centralized, and its structure should be as flat as possible. Meanwhile, the source files, as entries of human operations, need accessible. People split their works by processes and objects, which are the best subdirectory rule of <code>SourceFiles</code>.
 Therefore, it is better to isolate the source files that store "processes" and the content files that stores "results".</p>
 </li>

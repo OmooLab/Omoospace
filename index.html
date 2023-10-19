@@ -419,6 +419,8 @@
       
         
       
+        
+      
     
     
     
@@ -553,6 +555,26 @@
   
   <span class="md-ellipsis">
     Import
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="clis/unregister/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unregister
   </span>
   
 
@@ -808,20 +830,21 @@
 <h1 id="omoospace">Omoospace</h1>
 <p>Omoospace is a scalable directory structure solution for digital creation works. In order to follow omoospace rules easily, we provide CLI tools, including creating omoospace, shipping package, setting subspace, etc.</p>
 <p><a href="omoospace/">What is "Omoospace", how does it rule all your creation files?</a></p>
+<p>The CLIs we provide is not a necessary tool, but just an auxiliary tool for managing omoospace. Because omoospace is just a directory structure guide, and is simple enough to create manually. By using the ClIs you can avoid the repetitive work of creating directories and have more global view of the whole project structure which consist of nested subspaces.</p>
 <h2 id="installation">Installation</h2>
+<p>This tool requires python version 3.9 or above <a href="https://www.python.org/downloads/">(python official download link)</a>. You can use <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> for managing multiple python versions on a single machine.</p>
 <p>Run the following command to install the dependencies:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>omoospace
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>omoospace
 </span></code></pre></div>
 <p>Check if omoospace CLI tools is installed correctly.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>omoospace<span class="w"> </span>--help
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>$<span class="w"> </span>omoospace<span class="w"> </span>--help
 </span></code></pre></div>
 <p>All commands are start with <code>omoospace</code>, however you can use alias <code>omoos</code>.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>omoos<span class="w"> </span>--help
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>--help
 </span></code></pre></div>
 <h2 id="create-new-omoospace">Create New Omoospace</h2>
-<p>The CLIs we provide is not a necessary tool, but just an auxiliary tool for managing omoospace. Because omoospace is just a directory structure guide, and is simple enough to create manually. By using the ClIs you can avoid the repetitive work of creating directories and have more global view of the whole project structure which consist of nested subspaces.</p>
 <p>First things first, let's create a new omoospace, run the following command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>omoos<span class="w"> </span>create
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>create
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -852,7 +875,7 @@
 <p>Now, you can start your creation works by saving source files to <code>SourceFiles/</code> 🎉</p>
 <h2 id="set-subspace-directory">Set Subspace Directory</h2>
 <p>For better organization of source files, we need to separate the main goal into several secondary goals by set subspaces. Just create a directory with <code>Subspace.yml</code> in itself under <code>SourceFiles/</code>. Or run the following command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>subspace
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$<span class="w"> </span>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>subspace
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -887,13 +910,13 @@
 <h2 id="set-omoospace-profile">Set Omoospace Profile</h2>
 <p>You can simply edit <code>Omoospace.yml</code> manually to edit omoospace profile. Or you can do it by using CLIs.</p>
 <p>To set creator</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>creator
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>$<span class="w"> </span>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>creator
 </span></code></pre></div>
 <p>To set software</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>software
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>$<span class="w"> </span>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>software
 </span></code></pre></div>
 <p>To set work</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>work
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>$<span class="w"> </span>omoos<span class="w"> </span><span class="nb">set</span><span class="w"> </span>work
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -904,7 +927,7 @@
 </div>
 <h2 id="omoospace-summary-visualization">Omoospace Summary Visualization</h2>
 <p>Another main feature of this CLI tools is overview of whole omoospace. We provide several graphs for better understanding the project structure. Run the following command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>omoos<span class="w"> </span>show
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>show
 </span></code></pre></div>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Current<span class="w"> </span>working<span class="w"> </span>at<span class="w"> </span>🛠️<span class="w"> </span>my<span class="w"> </span>project
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="o">(</span>C:<span class="se">\p</span>ath<span class="se">\t</span>o<span class="se">\M</span>yProject<span class="o">)</span>.
@@ -963,7 +986,7 @@
 </span><span id="__span-14-55"><a id="__codelineno-14-55" name="__codelineno-14-55" href="#__codelineno-14-55"></a>╰───────────────────────────────────────────────────────────────────────────╯
 </span></code></pre></div>
 <p>You can set the structure graph HTML file path by option <code>-r</code> to visualize the subspace tree.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>omoos<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>.
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>show<span class="w"> </span>-r<span class="w"> </span>.
 </span></code></pre></div>
 <p><img alt="subspace tree graph" src="assets/image.png" />
 <a href="assets/Structure.html">subspace tree graph</a></p>
@@ -979,7 +1002,7 @@
 <li>if <code>Omoospace.yml</code> is not found, then it read the <code>working omoospace</code> in global setting. <code>working omoospace</code> is the target omoospace of last executed command.</li>
 </ol>
 <p>Every time you run a command, it will do the 3 step to find the proper target. However, you still can change the <code>working omoospace</code> by yourself. Run the following command:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>omoos<span class="w"> </span>to<span class="w"> </span>path/to/omoospace
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>to<span class="w"> </span>path/to/omoospace
 </span></code></pre></div>
 <p>If you leave the path empty, only <code>omoos to</code>, it will search from shell working directory. If it still not found, it will pop out a selection of recent target omoospaces for you.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>No<span class="w"> </span>omoospace<span class="w"> </span>found<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>.
@@ -989,7 +1012,7 @@
 </span></code></pre></div>
 <h2 id="export-package">Export Package</h2>
 <p>Omoospace package is a data package for creative content sharing. To export a package, run the following command:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>omoos export
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>$<span class="w"> </span>omoos<span class="w"> </span><span class="nb">export</span>
 </span></code></pre></div>
 <p>Finish the setup wizard.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Current<span class="w"> </span>working<span class="w"> </span>at<span class="w"> </span>🛠️<span class="w"> </span>my<span class="w"> </span>project
@@ -1046,7 +1069,7 @@
 <p>Now you can share the package directory any way you like, attaching to email, upload to cloud, publish to GitHub etc.</p>
 <h2 id="import-package">Import Package</h2>
 <p>Importing is easy, run the following command at omoospace root directory:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>omoos<span class="w"> </span>import<span class="w"> </span>~/Downloads/MyAsset.zip
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>$<span class="w"> </span>omoos<span class="w"> </span>import<span class="w"> </span>~/Downloads/MyAsset.zip
 </span></code></pre></div>
 <p>After that, a package directory will create in <code>ExternalData/</code></p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
