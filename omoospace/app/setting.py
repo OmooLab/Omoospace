@@ -3,7 +3,7 @@ from pathlib import Path
 from omoospace.directory import DirectoryTree, Structure
 from omoospace.exceptions import InvalidError
 from omoospace.types import Creator, OmoospaceStructure
-from omoospace.omoospace import OmoospaceTree
+from omoospace.omoospace import Omoospace, OmoospaceTree
 from omoospace.common import console, yaml
 
 
@@ -183,3 +183,20 @@ class Setting():
                 - set(self.DEFAULT_SETTING["role_choices"]))
         setting[key] = value
         self.__write_setting_file(setting)
+
+
+def to_omoospace(detect_path: str):
+    omoospace = Omoospace(detect_path)
+    recent_list = Setting().recent_omoospaces or []
+    omoospace_dir = str(omoospace.root_path)
+    # remove old record in settings
+    try:
+        recent_list.remove(omoospace_dir)
+    except:
+        pass
+    recent_list.append(omoospace_dir)
+    Setting().recent_omoospaces = recent_list
+    Setting().working_omoospace = omoospace_dir
+    console.print("Current working at 🛠️ [bright]%s (%s)[/bright]." %
+                  (omoospace.name, omoospace_dir))
+    return omoospace

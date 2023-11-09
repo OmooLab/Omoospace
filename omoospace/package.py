@@ -5,10 +5,11 @@ from zipfile import ZipFile
 
 from omoospace.exceptions import NotFoundError
 from omoospace.types import Item, PathLike
-from omoospace.common import console, yaml
+from omoospace.common import ProfileContainer, yaml
+from omoospace.utils import is_subpath
 
 
-class Package:
+class Package(ProfileContainer):
     """The class of omoospace package.
 
     A package class instance is always refer to a existed package directory, not in ideal. 
@@ -20,8 +21,11 @@ class Package:
         creators (list[Creator]): Creator list.
         root_path (Path): Root path.
     """
+    name: str
+    description: str
+    version: str
 
-    def __init__(self, detect_dir: PathLike):
+    def __init__(self, package_dir: PathLike):
         """Initialize package .
 
         Args:
@@ -31,34 +35,31 @@ class Package:
             NotFoundError: [description]
             NotFoundError: [description]
         """
-        package_path = Path(detect_dir).resolve()
+        package_path = Path(package_dir).resolve()
         if (package_path.suffix == ".zip"):
             with ZipFile(package_path, 'r') as zip:
                 try:
                     with zip.open('Package.yml') as file:
-                        package_info = yaml.load(file)
+                        pass
                 except:
-                    raise NotFoundError("package", detect_dir)
+                    raise NotFoundError("package", package_path)
         else:
             package_info_path = Path(package_path, 'Package.yml')
-            if package_info_path.exists():
-                with package_info_path.open('r', encoding='utf-8') as file:
-                    package_info = yaml.load(file)
-            else:
-                raise NotFoundError("package", detect_dir)
+            if not package_info_path.exists():
+                raise NotFoundError("package", package_path)
 
         self.root_path = package_path
-        self.name = package_info.get('name')
-        self.description = package_info.get('description')
-        self.version = package_info.get('version')
-        self.creators = package_info.get('creators')
+        self.profile_path = Path(self.root_path, "Package.yml").resolve()
 
-    # TODO: omoospace also has is_package_item. Keep one only.
-    @staticmethod
-    def is_package_item(path: Path) -> bool:
-        not_marker = path.name != '.subspace'
-        not_package_info = path.name != 'Package.yml'
-        return not_marker and not_package_info
+    def is_package_item(self, item: Item) -> bool:
+        exists = item.exists()
+        in_package = is_subpath(item, self.root_path)
+        not_profile_file = \
+            'Omoospace.yml' != item.name \
+            and 'Package.yml' != item.name \
+            and 'Subspace.yml' not in item.name
+
+        return exists and in_package and not_profile_file
 
     @property
     def items(self) -> list[Item]:

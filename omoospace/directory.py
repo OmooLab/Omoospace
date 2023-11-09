@@ -1,13 +1,12 @@
 
-from os import PathLike
 import os
 from typing import Union
 from nutree import Tree, Node
 from pathlib import Path
 from omoospace.exceptions import InvalidError, NotFoundError, NotIncludeError
-from omoospace.types import Structure, SubspaceInfo
-from omoospace.ui import Grid, Instruction
+from omoospace.types import Structure, PathLike
 from omoospace.utils import format_name, is_subpath
+from omoospace.validators import is_entity
 
 
 class Directory():
@@ -22,18 +21,8 @@ class Directory():
     def __repr__(self):
         return self.path.name
 
-    @property
-    def ui_name(self):
-        if self.is_subspace:
-            icon = "🎯"
-        else:
-            icon = "📂"
-        name_str = "[link=%s]%s[/link]" % (self.path, self.path.name)
-        return "%s %s" % (icon, name_str)
-
 
 class DirectoryTree(Tree):
-
     def __init__(self, structure: Structure = None, search_dir: PathLike = None):
         self.root_path = None
         super().__init__()
@@ -84,7 +73,7 @@ class DirectoryTree(Tree):
                 match=lambda node: node.path == node_path
             )
             if not directory_node:
-                is_subspace = self.is_subspace(
+                is_subspace = is_entity(
                     Path(self.root_path, directory_path))
                 directory = Directory(
                     path=directory_path,
@@ -93,21 +82,6 @@ class DirectoryTree(Tree):
                 directory_node = node.add(directory)
             node = directory_node
         return node
-
-    @staticmethod
-    def is_subspace(path: Path) -> bool:
-        """Return true if path is a subspace entity .
-
-        Args:
-            path (Entity): The path to be checked.
-
-        Returns:
-            bool: Return ture if is valid entity.
-        """
-        path = path.resolve()
-        is_subspace = Path(path, 'Subspace.yml').is_file()
-        is_void = 'Void' in path.name.split("_")
-        return is_subspace or is_void
 
     @classmethod
     def get_dirs(
@@ -186,13 +160,3 @@ class DirectoryTree(Tree):
                     node=directory_node,
                     structure=sub_structure,
                 )
-
-    def render_tree(self):
-        label_dict = {
-            "📂": "ordinary direcotry\nwhich is for file classification.",
-            "🎯": "subspace direcotry\nwhich is for presenting subspace.",
-        }
-        return Grid(
-            self.format(repr="{node.data.ui_name}", title="(Root)"),
-            Instruction(label_dict)
-        )

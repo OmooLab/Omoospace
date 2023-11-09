@@ -9,17 +9,10 @@ readme = "README.md"
 python = "^3.9"
 ruamel-yaml = "^0.17.35"
 pypinyin = "^0.49.0"
-click = "^8.1.7"
-pyvis = "^0.3.2"
-networkx = "^3.1"
-inquirerpy = "^0.3.4"
-rich = "^13.6.0"
 nutree = "^0.5.1"
-validators = "^0.22.0"
 
 [tool.poetry.scripts]
-omoospace = "omoospace.commands:cli"
-omoos = "omoospace.commands:cli"
+
 
 [tool.poetry.group.dev.dependencies]
 ipykernel = "^6.25.2"
@@ -27,8 +20,10 @@ pytest = "^7.4.2"
 pytest-dependency = "^0.5.1"
 mkdocs = "^1.5.3"
 mkdocs-material = "^9.4.6"
-mkdocstrings = {extras = ["python"], version = "^0.23.0"}
+mkdocstrings = { extras = ["python"], version = "^0.23.0" }
 mkdocs-click = "^0.8.1"
+autopep8 = "^2.0.4"
+pytest-cov = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core"]

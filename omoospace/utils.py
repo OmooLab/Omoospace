@@ -3,84 +3,55 @@ import os
 from pathlib import Path
 import shutil
 from pypinyin import lazy_pinyin
-from omoospace.exceptions import NotFoundError
 from omoospace.types import PathLike
-from omoospace.common import console
-from omoospace.ui import Table
+from omoospace.validators import is_autosave, is_number, is_version
 
-def format_name(string: str, verbose=False):
-    debug_info = Table(
-        {"header": "Step", "justify": "right"},
-        {"header": "Result", "justify": "left", "style": "highlight"}
-    )
-    debug_info.add_row("Original", string)
+
+def format_name(string: str):
+    def is_semantic(string: str):
+        return (not is_number(string)) \
+            and (not is_version(string)) \
+            and (not is_autosave(string))
+
+    # get rid of no semantic string parts.
+    string = " ".join([s for s in string.split(' ')
+                       if is_semantic(s)])
+    string = "_".join([s for s in string.split('_')
+                       if is_semantic(s)])
+    string = ".".join([s for s in string.split('.')
+                       if is_semantic(s)])
 
     # [A-Za-z0-9_-] only
     string = re.sub(r'[^\w-]', ' ', string)
-    parts = [string for string in string.split()]
-    debug_info.add_row("to Parts",
-                       " [white]|[/white] ".join(parts))
 
     # Chinese character to pinyin
-    parts = [char
-             for string in parts
-             for char in lazy_pinyin(string)]
-
-    debug_info.add_row("to PinYin",
-                       " [white]|[/white] ".join(parts))
+    string = ' '.join([
+        string
+        for string in string.split()
+        for string in lazy_pinyin(string)
+    ])
 
     # to PascalCase
-    parts = [string.title() if string.islower() else string
-             for string in parts]
-    debug_info.add_row("to PascalCase",
-                       " [white]|[/white] ".join(parts))
-    string = ''.join(parts)
-    if (verbose):
-        console.print(debug_info)
+    string = ' '.join([
+        string.title() if string.islower() else string
+        for string in string.split()
+    ])
+    string = '_'.join([
+        string.title() if string.islower() else string
+        for string in string.split("_") if string != ''
+    ])
+
+    string = string.replace(" ", "")
     return string
 
-
-def replace_or_append(
-    object_list: list[dict],
-    new_object: dict,
-    key: str
-):
-    if key not in new_object.keys():
-        raise NotFoundError(key, new_object)
-    index = find_first_index(object_list, key, new_object.get(key))
-    if index >= 0:
-        object_list[index] = new_object
-    else:
-        object_list.append(new_object)
-    return object_list
-
-
-def find_first_index(
-    object_list: list[dict],
-    key: str,
-    value: any
-):
-    index = -1
-    for i, dict in enumerate(object_list):
-        if dict.get(key) == value:
-            index = i
-            break
-
-    return index
-
-
-def find_first(
-    object_list: list[dict],
-    key: str,
-    value: any
-):
-    index = find_first_index(object_list, key, value)
-
-    if index >= 0:
-        return object_list[index]
-    else:
-        return None
-
+def remove_duplicates(list, key):
+    seen = set()
+    new_list = []
+    for d in list:
+        if d[key] not in seen:
+            seen.add(d[key])
+            new_list.append(d)
+    return new_list
 
 def reveal_in_explorer(dir: str):
     try:
@@ -110,7 +81,7 @@ def is_subpath(child: PathLike, parent: PathLike, or_equal=False):
         return is_subpath
 
 
-def copy_to_path(src: PathLike, dst: PathLike):
+def copy_to(src: PathLike, dst: PathLike):
     """Copies the contents form src to dst .
 
     Args:
@@ -124,3 +95,12 @@ def copy_to_path(src: PathLike, dst: PathLike):
         shutil.copytree(src, dst)
     else:
         shutil.copy(src, dst)
+
+
+def rm_children(dir: PathLike):
+    dirpath = Path(dir).resolve()
+    for child in dirpath.iterdir():
+        if child.is_file():
+            child.unlink()
+        else:
+            shutil.rmtree(child, ignore_errors=True)
