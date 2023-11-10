@@ -1,6 +1,10 @@
 site_name: Omoospace Docs
-site_url: https://example.com/
-repo_url: https://github.com/OmooLab/omoospace
+site_url: https://omoolab.github.io/omoospace/
+site_author: OmooLab
+site_description: Omoospace is a scalable directory structure solution for digital creation works.
+
+repo_name: omoolab/omoospace
+repo_url: https://github.com/omoolab/omoospace
 
 nav:
   - Getting Stared:
@@ -17,6 +21,7 @@ nav:
 theme:
   name: material
   logo: assets/Logo.png
+  language: en
   font:
     text: Noto Sans
     code: Cascadia Code
@@ -24,6 +29,7 @@ theme:
     scheme: default
     primary: black
   features:
+    - header.autohide
     - navigation.footer
     - navigation.indexes
     - navigation.sections
@@ -31,6 +37,12 @@ theme:
     - navigation.tabs.sticky
     - content.code.copy
     - content.code.select
+
+extra:
+  version:
+    provider: mike
+
+copyright: Copyright &copy; 2020 - 2024 Omoolab
 
 plugins:
   - search

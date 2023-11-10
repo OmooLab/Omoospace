@@ -5,6 +5,8 @@
 ### Create New Omoospace
 
 ```python
+from omoospace import create_omoospace
+
 omoos = create_omoospace(
     name='new project',
     root_dir='temp',
@@ -46,6 +48,8 @@ path/to/MyProject
 ```
 
 ```python
+from omoospace import Omoospace
+
 omoos = Omoospace('path/to/MyProject')
 assert omoos.root_path == 'path/to/MyProject'
 assert omoos.sourcefiles_path == Path('path/to/MyProject', 'SourceFiles')
@@ -99,6 +103,9 @@ path/to/MyProject
 ```
 
 ```python
+from omoospace import Omoospace
+
+omoos = Omoospace('path/to/MyProject')
 subs_Heart = omoos.add_subspace(
     name="heart",
     reveal_in_explorer=False
@@ -124,6 +131,9 @@ assert subs_Valves.description == 'The valves of heart.'
 ### Manage Process
 
 ```python
+from omoospace import Omoospace
+
+omoos = Omoospace('path/to/MyProject')
 omoos.add_process(
     'modeling', 'texturing', 'shading', 'rendering',
     reveal_in_explorer=False
@@ -158,6 +168,9 @@ assert subs_Heart.route == ['Heart']
 ### Manage Creator
 
 ```python
+from omoospace import Omoospace
+
+omoos = Omoospace('path/to/MyProject')
 creator = omoos.add_creator(
     email='manan@abc.com',
     name='manan',
@@ -183,6 +196,9 @@ assert omoos.creators[0].role == 'Director'
 ### Manage Software
 
 ```python
+from omoospace import Omoospace
+
+omoos = Omoospace('path/to/MyProject')
 software = omoos.add_software(
     name='Blender',
     version='3.6.5'
@@ -235,6 +251,9 @@ path/to/MyProject
 ```
 
 ```python
+from omoospace import Omoospace
+
+omoos = Omoospace('path/to/MyProject')
 work = omoos.add_work(
     Path(omoos.contents_path, 'Models/Heart')
 )
@@ -267,6 +286,8 @@ assert len(omoos.works[0].items) == 1
 ### Get Source File Route.
 
 ```python
+from omoospace import get_route
+
 assert get_route('SQ010/AssetA.blend') == ['SQ010', 'AssetA']
 ```
 
@@ -291,6 +312,8 @@ More examples:
 ### Get Source File Output Name.
 
 ```python
+from omoospace import get_route
+
 assert get_route_str('SQ010/AssetA.blend','HighRes','v001') \
    == 'SQ010_SH0100_AssetA_HighRes_v001'
 ```
