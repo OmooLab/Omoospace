@@ -517,8 +517,8 @@ There are some common concepts to help understand.
 | Contents      | Assets         | Content                               |
 | ExternalData  | Packages       |                                       |
 | References    |                |                                       |
-| SourceFiles   | Assets         | Source、Content                       |
-| StagedData    | Temp           | Intermediate、Saved、DerivedDataCache |
+| SourceFiles   | Assets         | Source, Content                       |
+| StagedData    | Temp           | Intermediate, Saved, DerivedDataCache |
 | Omoospace.yml | PorjectSetting | Config                                |
 
 ## Q&A

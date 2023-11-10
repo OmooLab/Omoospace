@@ -30,6 +30,12 @@ class SubspaceData():
 
 
 class Subspace():
+    """Subspace object.
+
+    Attributes:
+        name (str): Subsapce display name.
+        description (str): Subsapce description.
+    """
     name: str
     description: str
 
@@ -74,7 +80,16 @@ class Subspace():
             object.__setattr__(self, name, value)
 
     @property
-    def profile_path(self):
+    def root_path(self) -> Path:
+        """Path: Subspace root path (directory subspace only)."""
+        for entity in self.entities:
+            if entity.is_dir():
+                return entity
+        return None
+
+    @property
+    def profile_path(self) -> Path:
+        """Path: Subspace profile file path."""
         if self.type == SubspaceType.DIRECTORY:
             return Path(self.root_path, 'Subspace.yml').resolve()
         elif self.type != SubspaceType.DUMMY:
@@ -97,7 +112,8 @@ class Subspace():
             return None
 
     @property
-    def type(self):
+    def type(self) -> SubspaceType:
+        """SubspaceType: Subspace type."""
         if len(self.entities) != 0:
             if len(self.endpoint_entities) != 0:
                 if self.root_path:
@@ -110,7 +126,8 @@ class Subspace():
             return SubspaceType.DUMMY
 
     @property
-    def endpoint_entities(self):
+    def endpoint_entities(self) -> list[Entity]:
+        """list[Entity]: Subspace endpoint entities."""
         phantom_entities = []
         for entity in self.entities:
             node_names = format_name(entity.stem).split("_")
@@ -119,14 +136,8 @@ class Subspace():
         return phantom_entities
 
     @property
-    def root_path(self) -> Path:
-        for entity in self.entities:
-            if entity.is_dir():
-                return entity
-        return None
-
-    @property
-    def entities(self):
+    def entities(self) -> list[Entity]:
+        """list[Entity]: Subspace entities."""
         entities = self._node.data.entities
 
         def is_vaild(entity: Entity):
@@ -141,48 +152,56 @@ class Subspace():
 
     @property
     def node_name(self) -> str:
+        """str: Subspace node name."""
         return self._node.data.node_name
 
     @property
     def parent(self) -> "Subspace":
+        """Subspace: Parent subspace."""
         node = self._node.parent
         return Subspace(node) if node else None
 
     @property
     def route(self) -> Route:
+        """Route: Substance route."""
         path = self._node.path
         return path.split("/")[1:]
 
     @property
     def children(self) -> list["Subspace"]:
+        """list["Subspace"]: Children subspace."""
         nodes = self._node.children
         return [Subspace(node) for node in nodes]
 
-    def add_entity(self, *entities: Entity):
+    def _add_entity(self, *entities: Entity):
         for entity in entities:
             if entity not in self.entities:
                 self._node.data.entities.append(entity)
 
     def add(self, node_name: str) -> "Subspace":
+        """Add dummy subpace to it.
+
+        Args:
+            node_name (str): New add subspace node name.
+
+        Returns:
+            Subspace: New added dummy subspace.
+        """
         node = self._node.add(SubspaceData(node_name))
         return Subspace(node)
 
 
 class SubspaceTree():
-    """The class of subspace tree.
-
-    An subspace tree instance is always refer to a existed SourceFiles directory, not in ideal. 
-
-    """
+    """Subspace tree object."""
 
     def __init__(
         self,
         path: PathLike = None
     ):
-        """Initialize the subspace tree from the given directory.
+        """Initialize the subspace tree from the directory or certain entity.
 
         Args:
-            search_dir (PathLike): [description]
+            path (PathLike, optional): Build subspace from path. Defaults to None.
         """
         self._tree = Tree()
         if path:
@@ -199,45 +218,65 @@ class SubspaceTree():
         search_dir: PathLike,
         recursive: bool = True
     ):
-        """Set the subspace tree from the given directory.
+        """Build the subspace tree from directory.
+
+        It will search all vaild entities in giving directory, then build the tree based on those entities.
 
         Args:
-            search_dir (PathLike): [description]
-            recursive (bool, optional): [description]. Defaults to True.
+            search_dir (PathLike): The search directory.
+            recursive (bool, optional): Whether recursive or not. Defaults to True.
         """
         entities = get_entities(search_dir, recursive=recursive)
         for entity in entities:
             self.from_entity(entity)
 
     def get(self, route: Route) -> Subspace:
+        """Get subspace by route.
+
+        Args:
+            route (Route): Input.
+
+        Returns:
+            Subspace: Result.
+        """
         node = self._tree.find(
             match=lambda node: node.path == "/" + "/".join(route)
         )
         return Subspace(node) if node else None
 
     def add(self, node_name: str) -> Subspace:
+        """Add dummy subpace to tree root.
+
+        Args:
+            node_name (str): New add subspace node name.
+
+        Returns:
+            Subspace: New added dummy subspace.
+        """
         node = self._tree.add(SubspaceData(node_name))
         return Subspace(node)
 
     def to_dict(self) -> dict:
+        """Convert the tree to a common dict.
+
+        Returns:
+            dict: Result.
+        """
         def mapper(node: Node, data: dict):
             data['data'] = Subspace(node)
             return data
         return self._tree.to_dict_list(mapper=mapper)
 
-    def from_entity(self, entity_path: PathLike) -> Node:
-        """Add subspace node to the tree based on entity.
+    def from_entity(self, entity_path: PathLike):
+        """Build the subspace tree from one certain entity.
 
-        The entity path must be real, not in ideal.
+        The path must be real, not dummy.
 
         Args:
-            entity (Entity): [description]
-
-        Returns:
-            Route: List of subspace name along the route.
+            entity_path (Entity): The giving entity.
 
         Raises:
-            InvalidError: entity path is invalid.
+            InvalidError: Invalid entity.
         """
         route_entities = get_route_entities(entity_path)
 
@@ -250,7 +289,7 @@ class SubspaceTree():
             subspace = self.get(route)
             if not subspace:
                 subspace = node.add(node_name)
-            subspace.add_entity(*entities)
+            subspace._add_entity(*entities)
             node = subspace
 
 
@@ -258,10 +297,11 @@ def get_entities(
     search_dir: PathLike,
     recursive: bool = True
 ) -> list[Entity]:
-    """Add subspace node to the tree based on entity.
+    """Search all vaild entities in giving directory.
 
     Args:
-        entity (Entity): [description]
+        search_dir (PathLike): The search directory.
+        recursive (bool, optional): Whether recursive or not. Defaults to True.
     """
     search_path: Path = Path(search_dir).resolve()
     entities: list[Entity] = []
@@ -330,20 +370,40 @@ def get_route_entities(entity_path: PathLike) -> list:
 
 
 def get_route(entity_path: PathLike) -> Route:
-    """Returns a route to a entity path.
+    """Returns the subspace route of a entity.
 
+    Super useful for creating path of source file outputs. For example:
+    ```python
+    route = get_route("path/to/SQ010/SQ010_AssetA.blend")
+    # >>> ['SQ010','AssetA']
+    ```
+    
     Args:
-        entity_path (PathLike): [description]
+        entity_path (PathLike): The giving entity.
 
     Returns:
-        Route: The list of route name of subspace.
+        Route: Subspace route.
     """
     route_entities = get_route_entities(entity_path)
     route: Route = [d.get('node_name') for d in route_entities]
     return route
 
 
-def get_route_str(entity_path: PathLike, *subsets: str) -> Route:
+def get_route_str(entity_path: PathLike, *subsets: str) -> str:
+    """Returns the string based on entity's subspace route.
+
+    Super useful for creating path of source file outputs. For example:
+    ```python
+    string = get_route_str("path/to/SQ010/SQ010_AssetA.blend","HighRes","v001")
+    # >>> SQ010_AssetA_HighRes_v001
+    ```
+    
+    Args:
+        entity_path (PathLike): The giving entity.
+
+    Returns:
+        str: Result.
+    """
     route = get_route(entity_path)
     route.extend(subsets)
     return "_".join(route)

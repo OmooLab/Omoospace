@@ -10,7 +10,7 @@ def test_create_omoospace():
         name='new project',
         root_dir='temp',
         description='A new project for testing.',
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
 
     assert omoos.root_path == Path('temp', 'NewProject').resolve()
@@ -83,7 +83,7 @@ def test_add_subspace(mini_omoos_path: Path):
     )
     subs_Heart = omoos.add_subspace(
         name="heart",
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
     assert subs_Heart.name == "heart"
 
@@ -96,7 +96,7 @@ def test_add_subspace(mini_omoos_path: Path):
         name="valves",
         parent_dir=subs_Heart.root_path,
         description='The valves of heart.',
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
 
     assert subs_Valves.route == ['Heart', 'Valves']
@@ -106,8 +106,8 @@ def test_add_subspace(mini_omoos_path: Path):
 def test_add_process(mini_omoos_path: Path):
     omoos = Omoospace(mini_omoos_path)
     omoos.add_process(
-        ['modeling', 'texturing', 'shading', 'rendering'],
-        reveal_when_success=False
+        'modeling', 'texturing', 'shading', 'rendering',
+        reveal_in_explorer=False
     )
     assert Path(omoos.sourcefiles_path, '001-Modeling').is_dir()
     assert Path(omoos.sourcefiles_path, '002-Texturing').is_dir()
@@ -115,14 +115,14 @@ def test_add_process(mini_omoos_path: Path):
     assert Path(omoos.sourcefiles_path, '004-Rendering').is_dir()
 
     omoos.add_process(
-        ['modeling', 'texturing', 'shading', 'rendering'],
-        reveal_when_success=False
+        'modeling', 'texturing', 'shading', 'rendering',
+        reveal_in_explorer=False
     )
 
     omoos.add_process(
         "sculpting",
         parent_dir=Path(omoos.sourcefiles_path, '001-Modeling'),
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
 
     assert Path(omoos.sourcefiles_path, '001-Modeling', 'Sculpting').is_dir()

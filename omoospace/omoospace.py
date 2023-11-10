@@ -11,53 +11,46 @@ from omoospace.subspace import Subspace, SubspaceTree, get_entities, get_route
 from omoospace.common import ProfileContainer, ProfileItem, ProfileItemList, yaml
 from omoospace.utils import format_name, remove_duplicates, reveal_in_explorer, is_subpath, copy_to
 from omoospace.types import Entity, Item, PathLike, Route, Structure
-from omoospace.validators import is_email, is_url
+from omoospace.validators import is_email, is_url, is_version
 
 
 class Creator(ProfileItem):
+    """Creator
+
+    Attributes:
+        email (str): Creator email
+        name (str): Creator name
+        website (str, optional): Creator website. 
+        role (str, optional): Creator role in omoospace.
+    """
     name: str
     email: str
     role: str
     website: str
-    item_list_key = 'creators'
-    item_id_key = 'email'
+    _item_list_key = 'creators'
+    _item_id_key = 'email'
 
 
-class Work(ProfileItem):
+class Plugin(TypedDict):
     name: str
-    description: str
-    item_list_key = 'works'
-    item_id_key = 'name'
-
-    @property
-    def items(self):
-        items = self._get_data('items')
-
-        # to remove invaild items
-        item_paths = self._container._to_work_item_paths(items)
-        vaild_items = self._container._to_work_items(item_paths)
-
-        self._set_data('items', vaild_items)
-        return vaild_items
-
-    def add_item(self, *items: PathLike):
-        items = self._container._to_work_items(items)
-        # remove duplicates
-        self._set_data('items', list(dict.fromkeys([*self.items, *items])))
-
-    def set_items(self, *items: PathLike):
-        items = self._container._to_work_items(items)
-        self._set_data('items', items)
+    version: str
 
 
 class Software(ProfileItem):
+    """Software
+
+    Attributes:
+        name (str): Software name
+        version (str): Software version.
+    """
     name: str
     version: str
-    item_list_key = 'softwares'
-    item_id_key = 'name'
+    _item_list_key = 'softwares'
+    _item_id_key = 'name'
 
     @property
-    def plugins(self):
+    def plugins(self) -> list[Plugin]:
+        """list[Plugin]: Software plugin list."""
         plugins = self._get_data('plugins') or []
         # remove plugin that is not dict
         plugins = [plugin for plugin in plugins
@@ -76,6 +69,12 @@ class Software(ProfileItem):
         return plugins
 
     def set_plugin(self, name: str, version: str):
+        """Add or change plugin.
+
+        Args:
+            name (str): Plugin name.
+            version (str): Plugin version.
+        """
         plugins = self.plugins
         for i, plugin in enumerate(plugins):
             if plugin['name'] == name:
@@ -85,6 +84,50 @@ class Software(ProfileItem):
 
         plugins.append({"name": name, "verison": version})
         self._set_data('plugins', plugins)
+
+
+class Work(ProfileItem):
+    """Work
+
+    Attributes:
+        name (str): Work name.
+        description (str): Work description.
+    """
+    name: str
+    description: str
+    _item_list_key = 'works'
+    _item_id_key = 'name'
+
+    @property
+    def items(self) -> list[str]:
+        """list[str]: Work item list."""
+        items = self._get_data('items')
+
+        # to remove invaild items
+        item_paths = self._container._to_work_item_paths(items)
+        vaild_items = self._container._to_work_items(item_paths)
+
+        self._set_data('items', vaild_items)
+        return vaild_items
+
+    def add_item(self, *items: PathLike):
+        """Add item to this work.
+
+        Args:
+            *items (PathLike): Item paths.
+        """
+        items = self._container._to_work_items(items)
+        # remove duplicates
+        self._set_data('items', list(dict.fromkeys([*self.items, *items])))
+
+    def set_items(self, *items: PathLike):
+        """Set items to this work. Replace current itmes.
+
+        Args:
+            *items (PathLike): Item paths.
+        """
+        items = self._container._to_work_items(items)
+        self._set_data('items', items)
 
 
 class OmoospaceStructure(TypedDict):
@@ -113,31 +156,32 @@ class OmoospaceTree(DirectoryTree):
 class Omoospace(ProfileContainer):
     """The class of omoospace.
 
-    An omoospace class instance is always refer to a existed omoospace directory, not in ideal. 
+    An omoospace class instance is always refer to a existed omoospace directory, not dummy. 
+
+    Usage:
+    ```python
+    omoos = Omoospace('path/to/omoospace')
+    print(omoos.root_path)
+    # >>> path/to/omoospace
+    ```
 
     Attributes:
-        name (str): Omoospace's name.
-        description (str): Omoospace's description.
-        creators (list[Creator]): Creator list.
-        softwares (list[Software]): Software list.
-        works (list[Work]): Work list.
-        root_path (Path): Root path.
-        sourcefiles_path (Path): SourceFiles directory path.
-        contents_path (Path): Contents directory path.
-        externaldata_path (Path): ExternalData directory path.
-        stageddata_path (Path): StagedData directory path.
-        references_path (Path): Reference directory path.
-        profile_path (Path): Omoospace.yml file path.
+        name (str): Omoospace name.
+        description (str): Omoospace description.
     """
 
     name: str
     description: str
 
     def __init__(self, detect_dir: PathLike):
-        """Initialize from existed omoospace directory.
+        """Initialize from existed omoospace.
 
         Args:
             detect_dir (PathLike): The start directory for detecting omoospace. It could be the subdirectories of omoospace.
+
+        Attributes:
+            name (str): Omoospace's name.
+            description (str): Omoospace's description.
 
         Raises:
             NotFoundError: No omoospace detected.
@@ -154,13 +198,14 @@ class Omoospace(ProfileContainer):
             raise NotFoundError("omoospace", detect_dir)
 
         # path assignment
-        self.root_path = omoos_path
-        self.sourcefiles_path = Path(self.root_path, 'SourceFiles').resolve()
-        self.contents_path = Path(self.root_path, 'Contents').resolve()
-        self.externaldata_path = Path(self.root_path, 'ExternalData').resolve()
-        self.stageddata_path = Path(self.root_path, 'StagedData').resolve()
-        self.references_path = Path(self.root_path, 'References').resolve()
-        self.profile_path = Path(self.root_path, "Omoospace.yml").resolve()
+        self._root_path = omoos_path
+        self._sourcefiles_path = Path(self.root_path, 'SourceFiles').resolve()
+        self._contents_path = Path(self.root_path, 'Contents').resolve()
+        self._externaldata_path = Path(
+            self.root_path, 'ExternalData').resolve()
+        self._stageddata_path = Path(self.root_path, 'StagedData').resolve()
+        self._references_path = Path(self.root_path, 'References').resolve()
+        self._profile_path = Path(self.root_path, "Omoospace.yml").resolve()
 
     def __check_parent_dir(self, parent_dir: PathLike):
         parent_path = Path(parent_dir).resolve(
@@ -192,16 +237,54 @@ class Omoospace(ProfileContainer):
         return list(dict.fromkeys(items))
 
     @property
-    def creators(self):
+    def root_path(self) -> Path:
+        """Path: Root path."""
+        return self._root_path
+
+    @property
+    def sourcefiles_path(self) -> Path:
+        """Path: SourceFiles directory path."""
+        return self._sourcefiles_path
+
+    @property
+    def contents_path(self) -> Path:
+        """Path: Contents directory path."""
+        return self._contents_path
+
+    @property
+    def externaldata_path(self) -> Path:
+        """Path: ExternalData directory path."""
+        return self._externaldata_path
+
+    @property
+    def stageddata_path(self) -> Path:
+        """Path: StagedData directory path."""
+        return self._stageddata_path
+
+    @property
+    def references_path(self) -> Path:
+        """Path: Reference directory path."""
+        return self._references_path
+
+    @property
+    def profile_path(self) -> Path:
+        """Path: Omoospace.yml file path."""
+        return self._profile_path
+
+    @property
+    def creators(self) -> list[Creator]:
+        """list[Creator]: Creator List"""
         return self._get_item_list(Creator)
 
     @property
-    def works(self):
-        return self._get_item_list(Work)
+    def softwares(self) -> list[Software]:
+        """list[Software]: Software List"""
+        return self._get_item_list(Software)
 
     @property
-    def softwares(self):
-        return self._get_item_list(Software)
+    def works(self) -> list[Work]:
+        """list[Work]: Work List"""
+        return self._get_item_list(Work)
 
     @property
     def entities(self) -> list[Entity]:
@@ -210,22 +293,22 @@ class Omoospace(ProfileContainer):
 
     @property
     def subspace_tree(self) -> SubspaceTree:
-        """SubspaceTree: The subspace tree."""
+        """SubspaceTree: The subspace tree of this omoospace."""
         return SubspaceTree(self.sourcefiles_path)
 
     @property
     def subspace_tree_dict(self) -> dict:
-        """dict: The dict of subspace tree."""
+        """dict: The tree dict of subspace tree."""
         return self.subspace_tree.to_dict()
 
     @property
     def directory_tree(self,) -> DirectoryTree:
-        """DirectoryTree: The directory tree."""
+        """DirectoryTree: The directory tree of this omoospace."""
         return DirectoryTree(search_dir=self.root_path)
 
     @property
     def imported_packages(self) -> list[Package]:
-        """list[Package]: The list of Package objects that are imported from ExternalData."""
+        """list[Package]: The imported package list of this omoospace."""
         subdirs = [subdir for subdir in self.externaldata_path.iterdir()
                    if subdir.is_dir()]
 
@@ -238,25 +321,52 @@ class Omoospace(ProfileContainer):
 
         return packages
 
-    def is_contents_item(self, item: Item) -> bool:
-        exists = item.exists()
-        in_contents = is_subpath(item, self.contents_path)
+    def is_contents_item(self, path: Path) -> bool:
+        """Check if path is contents item
+
+        Args:
+            path (Path): Input
+
+        Returns:
+            bool: result
+        """
+        exists = path.exists()
+        in_contents = is_subpath(path, self.contents_path)
         return exists and in_contents
 
-    def is_omoospace_item(self, item: Item) -> bool:
-        exists = item.exists()
-        in_omoospace = is_subpath(item, self.root_path)
+    def is_omoospace_item(self, path: Path) -> bool:
+        """Check if path is this omoospace item
+
+        Args:
+            path (Path): Input
+
+        Returns:
+            bool: result
+        """
+        exists = path.exists()
+        in_omoospace = is_subpath(path, self.root_path)
         not_in_stagedata = not is_subpath(
-            item, self.stageddata_path, or_equal=True)
+            path, self.stageddata_path, or_equal=True)
 
         not_profile_file = \
-            'Omoospace.yml' != item.name \
-            and 'Package.yml' != item.name \
-            and 'Subspace.yml' not in item.name
+            'Omoospace.yml' != path.name \
+            and 'Package.yml' != path.name \
+            and 'Subspace.yml' not in path.name
 
         return exists and in_omoospace and not_in_stagedata and not_profile_file
 
-    def get_subspace(self, identify: Union[Route, PathLike]):
+    def get_subspace(self, identify: Union[Route, PathLike]) -> Subspace:
+        """Get subspace object by route or entity.
+
+        Args:
+            identify (Union[Route, PathLike]): Could be route or entity path
+
+        Raises:
+            TypeError: Not vaild identify type
+
+        Returns:
+            Subspace: The wanted subspace.
+        """
         if isinstance(identify, get_args(Route)):
             route = identify
             return self.subspace_tree.get(route)
@@ -271,24 +381,26 @@ class Omoospace(ProfileContainer):
         name: str,
         parent_dir: PathLike = None,
         description: str = None,
-        reveal_when_success: bool = True,
+        reveal_in_explorer: bool = True,
         collect_entities: bool = True
     ) -> Subspace:
-        """Add or update subspace to this omoospace.
+        """Add subspace to this omoospace.
 
         Args:
-            subspace (str): [description]
-            parent_dir (PathLike, optional): [description]. Defaults to None.
-            reveal_when_success (bool, optional): [description]. Defaults to True.
-            collect_entities (bool, optional): [description]. Defaults to True.
+            name (str): Subspace name
+            parent_dir (PathLike, optional): Add subspace to which directory. Defaults to None.
+            description (str): str = Subspace description. Defaults to None.
+            reveal_in_explorer (bool, optional): Whether open directory after or not. Defaults to True.
+            collect_entities (bool, optional): Whether collect relative entities into it or not. Defaults to True.
 
         Raises:
-            ExistsError: [description]
-            NotIncludeError: [description]
-            MoveFailed: [description]
+            ExistsError: Target path already has one.
+            NotIncludeError: Parent directory is outside SourceFiles.
+            MoveFailed: Cannot move files.
+            CreateFailed: Cannot create directory.
 
         Returns:
-            Path: [description]
+            Subspace: New added subspace.
         """
         parent_path = self.__check_parent_dir(parent_dir)
 
@@ -306,9 +418,12 @@ class Omoospace(ProfileContainer):
         }
 
         # create directory
-        subs_path.mkdir(parents=True, exist_ok=True)
-        with subs_profile_path.open('w', encoding='utf-8') as file:
-            yaml.dump(subs_profile, file)
+        try:
+            subs_path.mkdir(parents=True, exist_ok=True)
+            with subs_profile_path.open('w', encoding='utf-8') as file:
+                yaml.dump(subs_profile, file)
+        except Exception as err:
+            raise CreateFailed("subspace directory")
 
         # collect entities that matched.
         if (collect_entities):
@@ -343,65 +458,59 @@ class Omoospace(ProfileContainer):
             except:
                 raise MoveFailed('entities')
 
-        if reveal_when_success:
+        if reveal_in_explorer:
             reveal_in_explorer(subs_path)
 
         return self.get_subspace(subs_path)
 
     def add_process(
         self,
-        process: Union[Structure, list[str], str],
+        *processes: str,
         parent_dir: PathLike = None,
         add_sequence_number=True,
-        reveal_when_success: bool = True
+        reveal_in_explorer: bool = True
     ):
-        """Add or update process to this omoospace.
+        """Add process to this omoospace.
 
         Args:
-            process (Union[Structure, list[str], str]): [description]
-            parent_dir (PathLike, optional): [description]. Defaults to None.
-            reveal_when_success (bool, optional): [description]. Defaults to True.
+            *processes (str): a name list of processes, or single process name.
+            parent_dir (PathLike, optional): Add process to which directory.. Defaults to None.
+            add_sequence_number (str): Add sequence number to name. Defaults to True
+            reveal_in_explorer (bool, optional): Whether open directory after or not. Defaults to True.
 
         Raises:
-            ExistsError: [description]
-            NotIncludeError: [description]
-            CreateFailed: [description]
-
-        Returns:
-            Path: [description]
+            ExistsError: Target path already has one.
+            NotIncludeError: Parent directory is outside SourceFiles.
+            CreateFailed: Cannot create directory.
         """
         parent_path = self.__check_parent_dir(parent_dir)
 
         process_structure = {}
-        if isinstance(process, get_args(Structure)):
-            process_structure = process
-        elif isinstance(process, str):
-            process_dirname = format_name(process)
-            process_structure[process_dirname] = None
-        elif isinstance(process, list):
-            for i, p in enumerate(process):
-                dirname = format_name(p)
-                if add_sequence_number:
-                    dirname = '%03d-%s' % (i+1, dirname)
-                process_structure[dirname] = None
-        else:
-            raise TypeError
+        for i, p in enumerate(processes):
+            dirname = format_name(p)
+            if add_sequence_number and len(processes) > 1:
+                dirname = '%03d-%s' % (i+1, dirname)
+            process_structure[dirname] = None
 
         try:
+            # TODO: may not need directory any more.
             DirectoryTree(process_structure).make_dirs(parent_path)
         except Exception as err:
-            raise CreateFailed("process directories")
+            raise CreateFailed("process directory")
 
-        if reveal_when_success:
+        if reveal_in_explorer:
             reveal_in_explorer(parent_path)
 
-    def get_creator(self, email: str):
+    def get_creator(self, email: str) -> Creator:
+        """Get Creator by email."""
         return ProfileItemList(self.creators).find('email', email)
 
-    def get_software(self, name: str):
+    def get_software(self, name: str) -> Software:
+        """Get Software by name."""
         return ProfileItemList(self.softwares).find('name', name)
 
-    def get_work(self, name: str):
+    def get_work(self, name: str) -> Work:
+        """Get Work by name."""
         return ProfileItemList(self.works).find('name', name)
 
     def add_creator(
@@ -410,8 +519,22 @@ class Omoospace(ProfileContainer):
         name: str,
         website: str = None,
         role: str = None,
-    ):
-        """Add or update creator to this omoospace."""
+    ) -> Creator:
+        """Add creator to this omoospace.
+
+        Args:
+            email (str): Creator email
+            name (str): Creator name
+            website (str, optional): Creator website. Defaults to None.
+            role (str, optional): Creator role in omoospace. Defaults to None.
+
+        Raises:
+            InvalidError: Invalid email.
+            InvalidError: Invalid website.
+
+        Returns:
+            Creator: New added creator.
+        """
         if not is_email(email):
             raise InvalidError(email, 'email')
 
@@ -433,9 +556,29 @@ class Omoospace(ProfileContainer):
         self,
         name: str,
         version: str,
-        plugins: list[dict] = None,
-    ):
-        """Add or update software to this omoospace."""
+        plugins: list[Plugin] = None,
+    ) -> Software:
+        """Add software to this omoospace.
+
+        Args:
+            name (str): Software name
+            version (str): Software version.
+            plugins (list[Plugin], optional): Software plugins. Defaults to None.
+
+        Raises:
+            InvalidError: Invalid version.
+            InvalidError: Invalid plugin.
+
+        Returns:
+            Software: New added software.
+        """
+
+        if not is_version(version):
+            raise InvalidError(version, 'version')
+
+        for plugin in plugins or []:
+            if (not plugin.get('name')) or (not plugin.get('version')):
+                raise InvalidError(plugin, 'plugin')
 
         software = Software({
             'name': name,
@@ -452,8 +595,17 @@ class Omoospace(ProfileContainer):
         *items: PathLike,
         name: str = None,
         description: str = None
-    ):
-        """Add or update work to this omoospace."""
+    ) -> wORK:
+        """Add work to this omoospace.
+
+        Args:
+            *items (list[PathLike]): Work items.
+            name (str): Work name. Defaults to None.
+            description (str, optional): Work description. Defaults to None.
+
+        Returns:
+            Work: New added work.
+        """
 
         items = self._to_work_items(items)
         name = name or format_name(items[0].split('/')[-1])
@@ -475,21 +627,25 @@ class Omoospace(ProfileContainer):
         export_dir: PathLike = '.',
         description: str = None,
         version: str = '0.1.0',
-        reveal_when_success: bool = True,
+        reveal_in_explorer: bool = True,
         overwrite_existing: bool = True
     ) -> Package:
         """Export a package.
 
         Args:
-            *items (list[PathLike]): [description]
-            name (str, optional): [description]. Defaults to None.
-            export_dir (PathLike, optional): [description]. Defaults to None.
-            description (str, optional): [description]. Defaults to None.
-            reveal_when_success (bool, optional): [description]. Defaults to True.
-            overwrite_existing (bool, optional): [description]. Defaults to True.
+            *items (PathLike): Items to export.
+            name (str, optional): Package name. Defaults to None.
+            export_dir (PathLike, optional): Package export directory. Defaults to None.
+            description (str, optional): Package description. Defaults to None.
+            reveal_in_explorer (bool, optional): Whether open directory after or not. Defaults to True.
+            overwrite_existing (bool, optional): Whether overwrite existing or not. Defaults to True.
+
+        Raises:
+            ExistsError: Target path already exists.
+            NotFoundError: No vaild item found.
 
         Returns:
-            Package: [description]
+            Package: New exported package.
         """
         name = name or self.name
         pkg_dirname = format_name(name)
@@ -508,7 +664,7 @@ class Omoospace(ProfileContainer):
 
         # Check if is enouph items
         if (len(items) == 0):
-            raise Exception('Export Failed, at least one item')
+            raise NotFoundError('vaild item')
 
         pkg_profile = {
             "name": name,
@@ -534,30 +690,30 @@ class Omoospace(ProfileContainer):
             shutil.rmtree(pkg_path, ignore_errors=True)
             raise Exception("Fail to export Package", err)
 
-        if reveal_when_success:
+        if reveal_in_explorer:
             reveal_in_explorer(pkg_path)
 
         return Package(pkg_path)
 
     def import_package(
         self,
-        import_dir: PathLike,
-        reveal_when_success: bool = True,
+        package_path: PathLike,
+        reveal_in_explorer: bool = True,
         overwrite_existing: bool = True
     ):
         """Imports the package into the ExternalData directory.
 
         Args:
-            import_dir (PathLike): [description]
-            reveal_when_success (bool, optional): [description]. Defaults to True.
-            overwrite_existing (bool, optional): [description]. Defaults to True.
+            package_path (PathLike): Package directory.
+            reveal_in_explorer (bool, optional): Whether open directory after or not. Defaults to True.
+            overwrite_existing (bool, optional): Whether overwrite existing or not. Defaults to True.
 
         Raises:
-            ExistsError: [description]
+            ExistsError: Target path already exists.
         """
         # get package form import directory
-        import_path = Path(import_dir).resolve()
-        package = Package(import_path)
+        package_path = Path(package_path).resolve()
+        package = Package(package_path)
 
         # check if destination directory exists
         pkg_path = Path(
@@ -568,13 +724,13 @@ class Omoospace(ProfileContainer):
             else:
                 raise ExistsError('package', pkg_path)
 
-        if (import_path.suffix == ".zip"):
-            with ZipFile(import_path, 'r') as zip:
+        if (package_path.suffix == ".zip"):
+            with ZipFile(package_path, 'r') as zip:
                 zip.extractall(pkg_path)
         else:
-            copy_to(import_path, pkg_path)
+            copy_to(package_path, pkg_path)
 
-        if reveal_when_success:
+        if reveal_in_explorer:
             reveal_in_explorer(pkg_path)
 
 
@@ -583,23 +739,23 @@ def create_omoospace(
     root_dir: PathLike = '.',
     description: str = None,
     structure: OmoospaceStructure = None,
-    reveal_when_success: bool = True
-):
-    """Create a Omoospace .
+    reveal_in_explorer: bool = True
+) -> Omoospace:
+    """Create an omoospace.
 
     Args:
-        name (str): [description]
-        create_dir (PathLike, optional): [description]. Defaults to '.'.
-        description (str, optional): [description]. Defaults to None.
-        structure (OmoospaceStructure, optional): [description]. Defaults to None.
-        reveal_when_success (bool, optional): [description]. Defaults to True.
+        name (str): Omoospace name
+        root_dir (PathLike, optional): Add omoospace to which directory. Defaults to '.'.
+        description (str, optional): Omoospace description. Defaults to None.
+        structure (OmoospaceStructure, optional): Omoospace structure. Defaults to None.
+        reveal_in_explorer (bool, optional): Whether open directory after or not. Defaults to True.
 
     Raises:
-        ExistsError: [description]
-        Exception: [description]
+        ExistsError: Target path already exists.
+        CreateFailed: Fail to create directories.
 
     Returns:
-        [type]: [description]
+        Omoospace: New created omoospace.
     """
     omoos_dirname = format_name(name)
     omoos_path = Path(root_dir, omoos_dirname).resolve()
@@ -625,7 +781,7 @@ def create_omoospace(
         shutil.rmtree(omoos_path, ignore_errors=True)
         raise CreateFailed("omoospace directories")
 
-    if reveal_when_success:
+    if reveal_in_explorer:
         reveal_in_explorer(omoos_path)
 
     return Omoospace(omoos_path)

@@ -29,7 +29,7 @@ def test_export_package(mini_omoos_path: Path):
         Path(omoos.contents_path, 'Models/Heart'),
         name='Organs',
         export_dir='temp',
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
     assert pkg.root_path.is_dir()
     assert Path(pkg.root_path, 'Contents/Models/Heart/Textures').is_dir()
@@ -60,7 +60,7 @@ def test_import_package(mini_omoos_path: Path):
     )
     omoos.import_package(
         pkg_path,
-        reveal_when_success=False
+        reveal_in_explorer=False
     )
 
     assert Path(omoos.externaldata_path, 'Organs').is_dir()

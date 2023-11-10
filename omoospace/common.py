@@ -30,8 +30,8 @@ class AttributeDict(ABC):
 
 
 class ProfileItem(AttributeDict):
-    item_list_key = 'items'
-    item_id_key = 'id'
+    _item_list_key = 'items'
+    _item_id_key = 'id'
 
     def __init__(self, dict: dict, container: 'ProfileContainer') -> None:
         self._dict = dict
@@ -41,7 +41,7 @@ class ProfileItem(AttributeDict):
         return self._dict.get(name)
 
     def _set_data(self, name, value):
-        identify = self._dict[self.item_id_key]
+        identify = self._dict[self._item_id_key]
         self._dict[name] = value
         self._container._set_profile_data(self, identify)
 
@@ -55,10 +55,10 @@ class ProfileItemList():
         data: ProfileItem,
         identify: str = None
     ):
-        item_id_key = data.item_id_key
-        identify = identify or getattr(data, item_id_key)
+        _item_id_key = data._item_id_key
+        identify = identify or getattr(data, _item_id_key)
 
-        index = self.__get_matched_index(item_id_key, identify)
+        index = self.__get_matched_index(_item_id_key, identify)
 
         if index >= 0:
             self._item_list[index] = data
@@ -112,8 +112,8 @@ class ProfileContainer(AttributeDict):
         return profile.get(name)
 
     def _get_item_list(self, data_class):
-        item_list_key = data_class.item_list_key
-        item_id_key = data_class.item_id_key
+        item_list_key = data_class._item_list_key
+        item_id_key = data_class._item_id_key
 
         profile = self._read_profile_file()
         item_list = profile.get(item_list_key) or []
@@ -141,7 +141,7 @@ class ProfileContainer(AttributeDict):
         self._write_profile_file(profile)
 
     def _set_profile_data(self, data: ProfileItem, identify: str = None):
-        item_list_key = data.item_list_key
+        item_list_key = data._item_list_key
 
         item_list = ProfileItemList(getattr(self, item_list_key))
         item_list.set(data, identify)
