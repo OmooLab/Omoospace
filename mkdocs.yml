@@ -6,19 +6,13 @@ nav:
   - Getting Stared:
       - index.md
       - What is omoospace?: omoospace.md
+      - For Artists: artists.md
+      - For Developers: developers.md
       - Features Roadmap: roadmap.md
-  - CLI Command:
-      - clis/index.md
-      - Create: clis/create.md
-      - Set: clis/set.md
-      - Show: clis/show.md
-      - Export: clis/export.md
-      - Import: clis/import.md
   - API Reference:
       - Omoospace: apis/omoospace.md
-      - Package: apis/package.md
       - Subspace: apis/subspace.md
-      - Directory: apis/directory.md
+      - Package: apis/package.md
 
 theme:
   name: material

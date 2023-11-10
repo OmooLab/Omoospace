@@ -1,6 +1,6 @@
 # Omoospace
 
-Omoospace is a scalable directory structure solution for digital creation works. In order to follow omoospace rules easily, we provide CLI tools, including creating omoospace, shipping package, setting subspace, etc.
+Omoospace is a scalable directory structure solution for digital creation works. We provide a python library for managing omoospace, including creating omoospace, shipping package, setting subspace, etc.
 
 [What is "Omoospace", how does it rule all your creation files?](https://omoolab.github.io/omoospace/omoospace/)
 
@@ -13,12 +13,6 @@ Run the following command to install omoospace:
 pip install omoospace
 ```
 
-Check if omoospace CLI tools is installed correctly.
-
-```shell
-omoos --help
-```
-
 ## Usage
 
-[How to use CLI tools to manage a omoospace](https://omoolab.github.io/omoospace/)
+[How to manage an omoospace](https://omoolab.github.io/omoospace/developers)

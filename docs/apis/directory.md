@@ -1,1 +1,0 @@
-::: omoospace.directory
