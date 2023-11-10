@@ -595,7 +595,7 @@ class Omoospace(ProfileContainer):
         *items: PathLike,
         name: str = None,
         description: str = None
-    ) -> wORK:
+    ) -> Work:
         """Add work to this omoospace.
 
         Args:
