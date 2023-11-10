@@ -1,7 +1,7 @@
 import pytest
 from pathlib import Path
-from omoospace.subspace import SubspaceTree, SubspaceType, get_route, get_route_str
-from omoospace.types import Route
+from omoospace import SubspaceTree, SubspaceType, get_route, get_route_str
+from omoospace import Route
 from tests.helper import factory_omoospace_file_paths, write_file, write_file_content
 
 

@@ -13,11 +13,6 @@ from omoospace.utils import format_name
 from omoospace.validators import is_entity
 
 
-class SubspaceProfile(TypedDict):
-    name: str
-    description: str
-
-
 class SubspaceType(Enum):
     DIRECTORY = "directory"
     FILE = "file"
@@ -44,7 +39,7 @@ class Subspace():
     def __repr__(self):
         return self.node_name
 
-    def __read_profile_file(self) -> SubspaceProfile:
+    def __read_profile_file(self):
         if self.profile_path.is_file():
             with self.profile_path.open('r', encoding='utf-8') as file:
                 # aviod empty or invalid file
@@ -53,12 +48,12 @@ class Subspace():
         else:
             return {}
 
-    def __write_profile_file(self, profile: SubspaceProfile):
+    def __write_profile_file(self, profile):
         with self.profile_path.open('w', encoding='utf-8') as file:
             yaml.dump(profile, file)
 
     def __getattr__(self, name):
-        if name in SubspaceProfile.__annotations__.keys():
+        if name in self.__annotations__.keys():
             if self.type == SubspaceType.DUMMY:
                 return None
             else:
@@ -68,7 +63,7 @@ class Subspace():
             return object.__getattribute__(self, name)
 
     def __setattr__(self, name, value):
-        if name in SubspaceProfile.__annotations__.keys():
+        if name in self.__annotations__.keys():
             if self.type == SubspaceType.DUMMY:
                 pass
             else:

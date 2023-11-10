@@ -1,6 +1,6 @@
 import pytest
 from pathlib import Path
-from omoospace.types import PathLike
+from omoospace import PathLike
 from ruamel.yaml import YAML
 yaml = YAML()
 

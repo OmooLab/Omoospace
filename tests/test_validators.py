@@ -1,4 +1,4 @@
-from omoospace.validators import is_number, is_email, is_url, is_version, is_autosave
+from omoospace import is_number, is_email, is_url, is_version, is_autosave
 
 
 def test_is_number():

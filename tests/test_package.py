@@ -1,7 +1,7 @@
 
 
 from pathlib import Path
-from omoospace.omoospace import Omoospace
+from omoospace import Omoospace, Package
 from tests.helper import write_file, write_file_content
 
 

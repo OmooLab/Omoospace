@@ -1,7 +1,5 @@
-
-
 import pytest
-from omoospace.utils import format_name
+from omoospace import format_name
 
 
 @pytest.mark.parametrize("name,expected", [

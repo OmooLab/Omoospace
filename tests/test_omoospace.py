@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import pytest
-from omoospace.omoospace import Omoospace, create_omoospace
+from omoospace import Omoospace, create_omoospace
 from tests.helper import write_file, write_file_content
 
 
