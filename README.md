@@ -15,4 +15,4 @@ pip install omoospace
 
 ## Usage
 
-[How to manage an omoospace](https://omoolab.github.io/omoospace/developers)
+[For Developers](https://omoolab.github.io/omoospace/developers)
