@@ -66,12 +66,16 @@
   
     
     
+      
+    
     
     
     
     <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -125,6 +129,40 @@
       </div>
     </div>
     
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 256c0-106-86-192-192-192v384c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3 0 98 62.8 181.4 150.4 211.7-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256c0 123.7 100 224 223.5 224 47.8 0 92-15 128.4-40.6 1.9-1.3 3.7-2.7 5.5-4 4.8-3.6 9.4-7.4 13.9-11.4 2.7-2.4 5.3-4.8 7.9-7.3 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7.6-7.4 1.2-11.1 1.6-5 .5-10.1.9-15.3 1h-4c-96.8-.2-175.2-78.9-175.2-176 0-54.8 24.9-103.7 64.1-136 1-.9 2.1-1.7 3.2-2.6 4-3.2 8.2-6.2 12.5-9 3.1-2 6.3-4 9.6-5.8 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6-2.7-.1-5.5-.1-8.2-.1-3.3 0-6.5.1-9.8.2-2.3.1-4.6.2-6.9.4z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M223.5 32C100 32 0 132.3 0 256s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
+      </label>
+    
+  
+</form>
       
     
     
@@ -542,8 +580,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#it-stores-resource-library-contents-outside-omoospace-by-soft-link" class="md-nav__link">
-    It stores resource library contents outside omoospace by soft link.
+  <a href="#access-to-own-resource-library-contents-by-creating-soft-links-in-it" class="md-nav__link">
+    Access to own resource library contents by creating soft links in it.
   </a>
   
 </li>
@@ -970,8 +1008,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#it-stores-resource-library-contents-outside-omoospace-by-soft-link" class="md-nav__link">
-    It stores resource library contents outside omoospace by soft link.
+  <a href="#access-to-own-resource-library-contents-by-creating-soft-links-in-it" class="md-nav__link">
+    Access to own resource library contents by creating soft links in it.
   </a>
   
 </li>
@@ -1079,7 +1117,7 @@
 <li>
 <p>Set <strong>Subspaces</strong> by filename prefix or subdirectory based on creation objects.</p>
 </li>
-<li>Write the project profile into <strong>Omoospace.yml</strong>. Such as creators, software versions, etc.</li>
+<li><strong>Omoospace.yml</strong> stores the workspace profile such as creator profiles, software versions, etc.</li>
 </ol>
 <p><img alt="A diagram illustrating the structure of omoospace" src="../assets/Untitled.png" /></p>
 <p>A diagram illustrating the structure of omoospace</p>
@@ -1229,7 +1267,7 @@
 <p>Although the source files under void subspace have no creation objects, they still allow outputing. However their outputs are not rigorous and necessary, but somewhat experimental and temporary. For example, <code>Void/HeartBeating.blend</code> can still render <code>Void_HeartBeating.0001.png</code>. The prefix <code>Void</code> indicates the results are experimental.</p>
 </div>
 <h4 id="sourcefiles-structure-are-always-dynamic-when-project-in-progress">SourceFiles structure are always dynamic when project in progress.</h4>
-<p>As mater of fact, no one knows exactly what to do or how to do their creation. Plans never keep up with flashing of inspiration. Creation objects always changing in progress. Although we make a rule for <code>SourceFiles</code> subdirectories, but it's for semantic structure, it does not mean subdirectories should be static.</p>
+<p>As mater of fact, no one knows exactly what to do or how to do their creation work before starting. Plans never keep up with flashing of inspiration. Creation objects always changing in progress. Although we make a rule for <code>SourceFiles</code> subdirectories, but it's for semantic structure, it does not mean subdirectories should be static.</p>
 <p><strong>Feel free to organize files in <code>SourceFiles</code>, following the inspiration during creation.</strong></p>
 <h3 id="contents">Contents</h3>
 <p>It stores digital content in a common format, whether it is a work result or a resource, whether it is an internal or external. All files in here are organized to rules.</p>
@@ -1305,7 +1343,7 @@
 <h4 id="keep-contents-structure-flat-and-static-as-much-as-possible">Keep Contents structure flat and static as much as possible.</h4>
 <p>In most operating system, when file changes its name or being moved, the link will be lost. The content files, always as IO paths for source files, need to be stability. So, <code>Contents</code> should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make a super complex multi-level subdirectories changes frequently. Plan the structure ahead.</p>
 <h3 id="externaldata">ExternalData</h3>
-<p>It stores all data files from external sources. The “external” here means that it is not generated by the creator of this Omoospace, and not produced within this Omoospace, either. The most common usage of <code>ExternalData</code> is to store resources from network. You can also put your own 3D assets' library directory into <code>ExternalData</code> as a soft link.</p>
+<p>It stores all data files from external sources. The “external” here means that it is not generated by the creator of this Omoospace, and not produced within this omoospace, either. The most common usage of <code>ExternalData</code> is to store resources from network.</p>
 <h4 id="no-need-to-follow-the-naming-rules-do-not-set-any-type-subdirectories">No need to follow the naming rules, do not set any type subdirectories</h4>
 <p>Just keep its original file structure and naming style. For example:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
@@ -1331,9 +1369,9 @@
 <p class="admonition-title">Note</p>
 <p>Categorizing, renaming are not fun works, so it is recommended to store external source data directly into <code>ExternalData</code> unless you can ensure files under <code>Contents</code> | <code>SourceFiles</code> strict to the rules.</p>
 </div>
-<h4 id="it-stores-resource-library-contents-outside-omoospace-by-soft-link">It stores resource library contents outside omoospace by soft link.</h4>
-<p>You may have your own resource library for different kinds of 3D assets in local directory or network directory (NAS). In most times, you don't know what asset suits the 3D scene most until you try, like HDRI. It is annoying shipping resource file from library to current working directory repeatedly just for trial.</p>
-<p>So we prefer create a soft link to the library, then you can easily access the assets from library.</p>
+<h4 id="access-to-own-resource-library-contents-by-creating-soft-links-in-it">Access to own resource library contents by creating soft links in it.</h4>
+<p>You may have your own resource library of all kinds of 3D assets in local directory or network directory (NAS). In most times, you don't know what asset suits the 3D scene most until you try, like HDRI. It is annoying shipping resource file from library to current working directory repeatedly just for trial.</p>
+<p>So we prefer create a soft link to the library in <code>ExternalData</code>, then you can easily access the assets from the library.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Resouces<span class="w"> </span><span class="c1"># Soft link</span>
 </span></code></pre></div>
@@ -1346,7 +1384,7 @@
 </span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>...
 </span></code></pre></div>
 <h4 id="it-stores-omoospace-packages">It stores omoospace packages</h4>
-<p>Package is an Omoospace data package designed for sharing. The imported package will be stored in <code>ExternalData</code>. The source file can directly use the files here.</p>
+<p>Package is an data package designed for sharing. The imported package will be stored in <code>ExternalData</code>. The source file can directly use the files here.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells<span class="w"> </span><span class="c1"># Package</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
@@ -1364,9 +1402,9 @@
 </div>
 <h3 id="stageddata">StagedData</h3>
 <p>It stores any software-generated data that can be rebuilt after deletion, such as temporary files, caches, software bridging files, etc. There is no need to browser <code>StagedData</code> unless necessary.</p>
-<p>Directory structure automatically generated by software.</p>
+<p>There are no rules of its subdirectory structure.</p>
 <h3 id="omoospaceyml">Omoospace.yml</h3>
-<p>It stores profile info such as creators, software versions, etc.</p>
+<p>It stores workspace profile such as creator profiles, software versions, etc.</p>
 <!-- prettier-ignore -->
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Omoospace&#39;s name</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A brief of this Omoospace (Optional)</span>
