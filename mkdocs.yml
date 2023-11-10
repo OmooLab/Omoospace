@@ -26,8 +26,29 @@ theme:
     text: Noto Sans
     code: Cascadia Code
   palette:
-    scheme: default
-    primary: black
+    
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: black
+      toggle:
+        icon: fontawesome/solid/circle-half-stroke
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      primary: black
+      toggle:
+        icon: fontawesome/regular/moon
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      toggle:
+        icon: fontawesome/solid/moon
+        name: Switch to system preference
   features:
     - header.autohide
     - navigation.footer
