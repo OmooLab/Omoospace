@@ -1,6 +1,6 @@
 # What is omoospace?
 
-Omoospace is a scalable directory structure solution for digital creation works. Its aim is universality, flexibility, and annotation. Not only for large projects and teamwork, but also for small projects and solo works. Whether it is a 3d modeling task or a series production, it all fits 😊.
+Omoospace is a scalable directory structure solution for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
 
 ## Overview
 
@@ -10,18 +10,18 @@ The rules are simple:
 2. 5 main directories:
 
     - `SourceFiles` stores source files of the software.
-    - `Contents` stores digital content in common format.
+    - `Contents` stores digital content in a common format.
     - `ExternalData` stores data from external sources.
     - `References` stores reference resources (optional).
     - `StagedData` stores temporary data (optional).
 
 3. Subdirectories rules:
 
-    - `SourceFiles` subdirectories are set by process names.
-    - `Contents` subdirectories are set by content types.
+    - Process names set the`SourceFiles` subdirectories.
+    - Content types set the `Contents` subdirectories.
 
 4. Set **Subspaces** by filename prefix or subdirectory based on creation objects.
-5. **Omoospace.yml** stores the workspace profile such as creator profiles, software versions, etc.
+5. **Omoospace.yml** stores the workspace profile, such as creator profiles, software versions, etc.
 
 ![A diagram illustrating the structure of omoospace](assets/Untitled.png)
 
@@ -31,26 +31,26 @@ A diagram illustrating the structure of omoospace
 
 ### Subspace
 
-**Subspace** is a sub-workspace based on creation objects, which is conducive to finding, sorting and understanding. Subspace can be nested, for example, an anime series project, each episode is a creation object, and under that object, multiple secondary objects can be set based on episode’s sequences, and each secondary object can continue to be split. Each object is a sub-workspace of the main workspace. **We call those sub-workspaces as "Subspace", and they are named after their objects.**
+**Subspace** is a sub-workspace based on objects of creation conducive to finding, sorting, and understanding. Subspace can be nested. For example, an anime series project, each episode is a creation object. Under that object, multiple secondary objects can be set based on the episode’s sequences, and you can continue to split each secondary object. Each object is a sub-workspace of the main workspace. We call those sub-workspaces **Subspace**, and name them after their objects.
 
-It is conceivable that the nested subspaces can generate a tree-like graph which presents the structure of the entire project, as shown in the figure below.
+The nested subspaces can generate a tree-like graph that presents the structure of the entire project, as shown in the figure below.
 
 ![Object tree](assets/object_tree.png)
 
-So how to set subspace? And what is worth noting when setting subspaces?
+So, how should you set subspace? And what is worth noting when setting subspaces?
 
 #### Subspace can be set by filename prefix or subdirectory
 
-The phrases that separated by `_` are subspaces, for example:
+The phrases that are separated by `_` are subspaces, for example:
 
 ```shell
 |-- SourceFiles
 |   `-- EP001_SQ010_AssetA.blend
 ```
 
-It is obvious that this blender file is for creating `Asset A (AssetA)` of `Sequence 010 (SQ010)` of `Episode 001 (EP001)`. The nested subspaces form a route from parent to child: `EP001 > SQ010 > AssetA`. We call it **Subspace Route**.
+It is evident that this blender file is for creating `Asset A (AssetA)` of `Sequence 010 (SQ010)` of `Episode 001 (EP001)`. The nested subspaces form a route from parent to child: `EP001 > SQ010 > AssetA`. We call it **Subspace Route**.
 
-You can also use subdirectories instead of filename prefix. In order to distinguish **Subspace Directory** from ordinary directories, subspace directory must contain a marker file named `Subspace.yml`.
+You can also use subdirectories instead of filename prefixes. To distinguish **Subspace Directory** from ordinary directories, the subspace directory must contain a marker file named `Subspace.yml`.
 
 ```shell
 |-- SourceFiles
@@ -63,7 +63,7 @@ You can also use subdirectories instead of filename prefix. In order to distingu
 
 The subspace route above is also `EP001 > SQ010 > AssetA`.
 
-Subspace is concept, its existence is relied on files or directories. We call those files and directories **Subspace Entities** of their subspace. As you can imagine, one subspace may have multiple entities to present them.
+Subspace is just a concept, and its existence relies on files or directories. We call those files and directories **Subspace Entities** of their subspace. As you can imagine, one subspace may have multiple entities to present them.
 
 ```shell
 |-- SourceFiles
@@ -74,7 +74,7 @@ Subspace is concept, its existence is relied on files or directories. We call th
 |       `-- SQ010.blend
 ```
 
-File `SQ010.prproj` and file `SQ010.blend` are both for `Sequence 010 (SQ010)`. They are its subspace entities. Similarly, directory `EP001` and file `EP001.blend` are both `Episode 001 (EP001)`'s entities. According to their entities, subspaces are classified into three kind:
+`SQ010.prproj` and `SQ010.blend` are both for `Sequence 010 (SQ010)`. They are its entities. Similarly, directory `EP001` and file `EP001.blend` are both `Episode 001 (EP001)` entities. According to subspace entities, we classify subspaces into three kinds:
 
 -   **Directory Subspace** has a directory to present it.
 -   **File Subspace** has only files to present it, no directory.
@@ -82,11 +82,11 @@ File `SQ010.prproj` and file `SQ010.blend` are both for `Sequence 010 (SQ010)`. 
 
 !!! note
 
-    The file `EP001_SQ010_AssetA.blend` only contains `Asset A` object. `EP001`, `SQ010` are just pure concepts. They are phantom subspaces
+    The file `EP001_SQ010_AssetA.blend` only contains the `Asset A` object. `EP001` and `SQ010` are just pure concepts. They are phantom subspaces.
 
-#### A subspace route is formed by subspace directory and filename prefix together.
+#### A subspace route is formed by combining the subspace directory and filename prefix.
 
-A subspace route of entity is formed by all its parent subspace directory and name prefix. If the entity name prefix contains its parent subspace name. They should overlap each other as much as possible, for example:
+Parent subspace directories and filename prefixes form the subspace route. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:
 
 ```shell
 |-- SourceFiles
@@ -109,21 +109,20 @@ A subspace route of entity is formed by all its parent subspace directory and na
 |   |   `-- EP001_SQ010_AssetA.blend
 ```
 
-All examples' route are all `EP001 > SQ010 > AssetA`
+All examples' routes are all `EP001 > SQ010 > AssetA`.
 
 !!! note
 
-    There is no strict rules of when to use overlapping form of directory structure. It all up to user's decision. Creators should design the directory structure to fit the project needs.
+    There are no strict rules of when to use overlapping forms of directory structure. It is all up to the user's decision. Creators should design the directory structure to fit the project needs.
 
-#### A subspace name should not be pure number or version or autosave.
+#### A subspace name should not be pure numbers or versions or autosave.
 
-For example, `EP001_SQ010_AssetA_v001.blend`, `v001` is definitely not a new object. The file is still for creating `AssetA`. According to the definition of subspace, a subspace is for a certain creation object, therefor `v001` is not a subspace.
+Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, `v001` in `EP001_SQ010_AssetA_v001.blend`,  is not a new creation object. The file is still for creating `AssetA`. The subspace definition defines a subspace as a particular creation object. So `v001` is not a subspace.
 
-Numbers, version, autosave semantic are not for new object, so they should not as subspace name.
 
 #### Write the subspace profile into Subspace.yml.
 
-Besides as marker file, `Subspace.yml` also stores profile info.
+Besides a marker file, `Subspace.yml` is also a subspace profile.
 
 ```yaml
 # Subspace.yml
@@ -131,7 +130,7 @@ name: Subspace's name
 description: Comments to this subspace.
 ```
 
-You can create the profile file to any kind of subspace with route as its filename.
+You can create the profile file to any subspace with route as its filename. Not the entire route but the subroute to the parent subspace.
 
 ```shell
 |-- SourceFiles
@@ -154,17 +153,17 @@ description: A 3d model.
 
 ### SourceFiles
 
-It stores the source files of the software, or executable scripts, pipelines, etc.
+It stores the source files of the software or executable scripts, pipelines, etc.
 
-`SourceFiles` stores processes, and `Contents` stores results. The former needs to be opened with specific software or executed by the program and need to be precomputed. The latter generally allows cross-software reading, and without any pre-computation.
+`SourceFiles` stores processes, and `Contents` stores results. The former must be opened with specific software, executed by the program, and pre-computed. The latter generally allows cross-software reading without any pre-computation.
 
-For example, using Blender's geometry node for procedural modeling. The source file of blender should be placed in `SourceFiles`. However, in order to load the procedural model in Unity, it is necessary to export as a general format, such as .fbx, and the exported file should be placed in `Contents`.
+For example, I am using Blender's geometry node for procedural modeling. I should place the source file of Blender in `SourceFiles`. However, to load the procedural model in Unity, it is necessary to export it as a general format, such as .fbx, and I should place the exported file in `Contents`.
 
 #### Subdirectories by process name (optional)
 
-When project grows, you may need to seprate large mount of source files into directories. Besides subspace directory, we recommend set subdirectories by process name.
+When a project grows, you may need to separate many source files into directories. Besides the subspace directory, we recommend setting subdirectories by process name.
 
-Some optional process name:
+Some optional process names:
 
 ```shell
 # Film production processes
@@ -191,7 +190,7 @@ Some optional process name:
 |   `-- 004-Shading
 ```
 
-Process directories and subspace directories can be mixed.
+You can mix use process directories and subspace directories.
 
 ```shell
 <SeriesTitle> # (Root)
@@ -204,20 +203,20 @@ Process directories and subspace directories can be mixed.
 |       `-- PostProduction
 ```
 
-Process subdirectories should fit your own workflow. But be aware of the following rules:
+Process subdirectories should fit your workflow. But be aware of the following rules:
 
--   Pay attention to the naming style. It should be a gerund for the process. For example, not "Models" but **"Modeling"**, not "Scenes" but **"SceneAssembling"**. In this way, the **Process** is emphasized, not the result.
+-   Pay attention to the naming style. It should be a gerund for the process. For example, not "Models" but **"Modeling"**, not "Scenes" but **"SceneAssembling"**. This way, the **Process** is emphasized, not the result.
 -   You can adjust the process subdirectories freely as the project expands.
 
 #### Put source files without creation object under Void (optional)
 
-Most source files have its object, such as rendering images or export a 3D model. However, some source files are not used as the main process and have no certain object, but have storage needs. We put such source files in a special subspace called **Void**, which don’t need `Subspace.yml`.
+Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a special subspace called **Void**, which doesn’t need `Subspace.yml`.
 
 !!! note
 
     Any subspaces in **Void** are also **Void Subspace**.
 
-Void subspace can be in filename prefix or as directory.
+Void subspace can be in a filename prefix or as a directory.
 
 ```shell
 |-- SourceFiles
@@ -230,21 +229,21 @@ Void subspace can be in filename prefix or as directory.
 
 !!! note
 
-    Although the source files under void subspace have no creation objects, they still allow outputing. However their outputs are not rigorous and necessary, but somewhat experimental and temporary. For example, `Void/HeartBeating.blend` can still render `Void_HeartBeating.0001.png`. The prefix `Void` indicates the results are experimental.
+    Although the source files under void subspace have no creation objects, they still allow outputting. However, their outputs are not rigorous and necessary but experimental and temporary. For example, `Void/HeartBeating.blend` can still render `Void_HeartBeating.0001.png`. The prefix `Void` indicates the results are experimental.
 
-#### SourceFiles structure are always dynamic when project in progress.
+#### SourceFiles structure is always dynamic when a project is in progress.
 
-As mater of fact, no one knows exactly what to do or how to do their creation work before starting. Plans never keep up with flashing of inspiration. Creation objects always changing in progress. Although we make a rule for `SourceFiles` subdirectories, but it's for semantic structure, it does not mean subdirectories should be static.
+No one knows precisely what to do and how to do their creation work before starting. Plans never keep up with flashing of inspiration. Creation objects constantly change in progress. Although we make a rule for `SourceFiles` subdirectories, it's for semantic structure and does not mean subdirectories should be static.
 
-**Feel free to organize files in `SourceFiles`, following the inspiration during creation.**
+**Feel free to organize files in `SourceFiles` and follow the inspiration during creation!**
 
 ### Contents
 
-It stores digital content in a common format, whether it is a work result or a resource, whether it is an internal or external. All files in here are organized to rules.
+It stores digital content in a common format, whether internal or external, whether a work result or a resource. You should organize all content files here and stick to the rules.
 
 #### Subdirectories by content type (optional)
 
-Some optional content type:
+Some optional content types:
 
 ```shell
 # For modeling propose
@@ -291,13 +290,13 @@ Some optional content type:
 |   `-- Videos
 ```
 
-Type subdirectories should fit your own workflow. But be aware of the following rules:
+Type subdirectories should fit your workflow. But be aware of the following rules:
 
--   Pay attention to the naming style. Should be the plural of the content type noun.
--   To avoid confusion and misplacement, try to merge similar content types into one.
--   It is not recommended to set multi-level subdirectories, nor to add more type subdirectories as the project expands.
+-   Pay attention to the naming style. It should be the plural of the content type noun.
+-   To avoid confusion and misplacement, merge similar content types into one.
+-   It is not recommended to set multi-level subdirectories or add more subdirectories by content type as the project expands.
 
-#### The output of source file is named after its source file subspace route.
+#### The output of the source file is named after its source file subspace route.
 
 There is no subspace directory setting in `Contents`. But use subspace route as filename prefix to hint the relationship to its source file.
 
@@ -310,9 +309,9 @@ There is no subspace directory setting in `Contents`. But use subspace route as 
 |   `-- BloodCells.blend
 ```
 
-In the above example, `BloodCells_RBC.fbx` `BloodCells_WBC.fbx` are coming from `BloodCells.blend`. `RBC`, `WBC` are subsets of `BloodCells.blend`. You can easily guess the relationship between them by their filenames.
+In the above example, `BloodCells_RBC.fbx` and `BloodCells_WBC.fbx` come from `BloodCells.blend`. `RBC`, and `WBC` are subsets of `BloodCells.blend`. You can easily guess the relationship between them by their filenames.
 
-In some cases, a content is a collection of multiple files. e.g. a 3d model with textures, or an image sequence of render output. The name of those sub files is not necessary contains route name, as they keep together with their main directory, which already hint its source. For example:
+In some cases, content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh. 
 
 ```shell
 |-- Contents
@@ -326,17 +325,19 @@ In some cases, a content is a collection of multiple files. e.g. a 3d model with
 |   `-- Organs.blend
 ```
 
-The texture filename has no need to have `Organs`, because you wouldn't use textures without the mesh. However, it does not mean the full route name is forbidden for sub files, or you can them whatever you want, either. Their filenames must have certain semantics.
+**However, it does not mean using the entire route name is forbidden for sub-files, or you can name them randomly. Their name must be semantic.**
 
-#### Keep Contents structure flat and static as much as possible.
+#### Keep the Contents structure flat and static as much as possible.
 
-In most operating system, when file changes its name or being moved, the link will be lost. The content files, always as IO paths for source files, need to be stability. So, `Contents` should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make a super complex multi-level subdirectories changes frequently. Plan the structure ahead.
+In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, `Contents` should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. 
+
+**Plan the structure.**
 
 ### ExternalData
 
-It stores all data files from external sources. The “external” here means that it is not generated by the creator of this Omoospace, and not produced within this omoospace, either. The most common usage of `ExternalData` is to store resources from network.
+It stores all data files from external sources. The “external” here means that it is created by the creator outside omoospace or not produced within this omoospace. The most common usage of `ExternalData` is to store resources from the network.
 
-#### No need to follow the naming rules, do not set any type subdirectories
+#### No need to follow the naming rules; do not set any subdirectories by content type
 
 Just keep its original file structure and naming style. For example:
 
@@ -356,23 +357,23 @@ Just keep its original file structure and naming style. For example:
 
 !!! note
 
-    Do not put files at root directory of `ExternalData`, always under subdirectory.
+    Do not put files in the root directory of `ExternalData`; always under the subdirectory.
 
 #### It is not the only repository for all external data
 
-`Contents` and `SourceFiles` also store external data. However, compared with `ExternalData`, they are stricter, all files need to be categorized and renamed properly. Meanwhile, `ExternalData` is a storage place that allows users to shipping data freely.
+`Contents` and `SourceFiles` also store external data. However, compared with `ExternalData`, they are stricter. All files need to be categorized and renamed correctly. Meanwhile, `ExternalData` is a storage place that allows users to ship data freely.
 
-For external source data, if it has been stored in `Contents` | `SourceFiles`, it has no need to be stored in `ExternalData` again. For example, a HDRI downloaded from the PolyHaven, as long as it is renamed to PascalCase style, it could be directly put under `Contents`.
+If you have stored external source data in `Contents` | `SourceFiles`, it is unnecessary to hold it in `ExternalData` again. For example, an HDRI downloaded from PolyHaven could be directly put under `Contents` if you rename it to PascalCase style.
 
 !!! note
 
-    Categorizing, renaming are not fun works, so it is recommended to store external source data directly into `ExternalData` unless you can ensure files under `Contents` | `SourceFiles` strict to the rules.
+    Categorizing and renaming are not fun works, so storing external source data directly into `ExternalData` is recommended unless you can ensure files under `Contents` | `SourceFiles` are strict to the rules.
 
 #### Access to own resource library contents by creating soft links in it.
 
-You may have your own resource library of all kinds of 3D assets in local directory or network directory (NAS). In most times, you don't know what asset suits the 3D scene most until you try, like HDRI. It is annoying shipping resource file from library to current working directory repeatedly just for trial.
+You may have your resource library of 3D assets in a local or network directory (NAS). You usually don't know which asset suits the 3D scene most until you try, like HDRI. Repeating to move resource files from the library to the current working directory for trial isn't enjoyable.
 
-So we prefer create a soft link to the library in `ExternalData`, then you can easily access the assets from the library.
+So we prefer to create a soft link to the library in `ExternalData`, then you can easily access the assets from the library.
 
 ```shell
 |-- ExternalData
@@ -381,7 +382,7 @@ So we prefer create a soft link to the library in `ExternalData`, then you can e
 
 ```shell
 D:
-|-- Resouces # My super 3D resouce library for everything 
+|-- Resouces # My super 3D resource library for everything 
 |   |-- Models
 |   |   |-- Cars
 |   |   |-- Animals
@@ -391,7 +392,7 @@ D:
 
 #### It stores omoospace packages
 
-Package is an data package designed for sharing. The imported package will be stored in `ExternalData`. The source file can directly use the files here.
+The omoospace package is designed for sharing omoospace data. You store them in `ExternalData`. 
 
 ```shell
 |-- ExternalData
@@ -406,21 +407,21 @@ Package is an data package designed for sharing. The imported package will be st
 
 ### References
 
-It stores PureRef, Figma, Paper PDF, Storyboard. Although they will not be used directly by the source file, but still need to be saved. Put them here.
+It stores PureRef, Figma, Paper PDF, and Storyboard. Although you are not using them directly, you need to save them. Put them here.
 
 !!! tip
 
-    If it is figma online, put the link as file.
+    If it is Figma online, put the link as a file.
 
 ### StagedData
 
-It stores any software-generated data that can be rebuilt after deletion, such as temporary files, caches, software bridging files, etc. There is no need to browser `StagedData` unless necessary.
+It stores any software-generated data that the source file can rebuild after deletion, such as temporary files, caches, software bridging files, etc. There is no need to browse `StagedData` unless necessary.
 
-There are no rules of its subdirectory structure.
+There are no rules for its subdirectory structure.
 
 ### Omoospace.yml
 
-It stores workspace profile such as creator profiles, software versions, etc.
+It stores workspace profiles such as creator profiles, software versions, etc.
 
 <!-- prettier-ignore -->
 ```yaml
@@ -450,7 +451,7 @@ For example:
 name: my project
 description: An omoospace for creation works
 creators:
-  - name: manan
+  - name: MaNan
     email: icrdr@abc.com
     website:
     role: Owner
@@ -472,13 +473,13 @@ works:
 
 ## Omoospace Package
 
-Inspired by Unity Package, Package is an Omoospace data package designed for sharing.
+Inspired by the Unity Package, Package is an Omoospace data package designed for sharing.
 
-ExternalData acts like a Packages of Unity project, that storing data from other Omoospaces.
+ExternalData acts like a Packages of Unity project that stores data from other Omoospaces.
 
 [Unity - Manual: Reusing Assets between Projects](https://docs.unity3d.com/2020.1/Documentation/Manual/HOWTO-exportpackage.html)
 
-The internal structure of Package is part of its source Omoospace
+The internal structure of the package is part of its source omoospace
 
 ```shell
 <PackageName>
@@ -497,7 +498,7 @@ The internal structure of Package is part of its source Omoospace
 name: Package's name
 version: Package's version
 description: A brief of this Package (Optional)
-creators: # Creator list of this Package
+creators: # Creator list of this package
   - name: Creator's name
     email: Creator's email (Optional)
     role: Creator's role in this Omoospace (Optional)
@@ -506,7 +507,7 @@ creators: # Creator list of this Package
 
 !!! note
 
-    Once Package is exported, it has nothing to do with its source Omoospace
+    Once you export a package, it has nothing to do with its source omoospace
 
 ## Comparison with other software project structures
 
@@ -523,15 +524,11 @@ There are some common concepts to help understand.
 
 ## Q&A
 
--   **Q: Most directory structure solutions of CG work have no distinction between `Contents` and `SourceFiles`. Why Omoospace emphasize their differences ?**
+-   **Q: Most directory structure solutions of CG work have no distinction between `Contents` and `SourceFiles`. Why does omoospace emphasize their differences ?**
 
-    A: This is due to the different purposes of them. The content files, always as an IO path, need stability. So, `Contents` should be centralized, and its structure should be as flat as possible. Meanwhile, the source files, as entries of human operations, need accessible. People split their works by processes and objects, which are the best subdirectory rule of `SourceFiles`.
-    Therefore, it is better to isolate the source files that store "processes" and the content files that stores "results".
+    A: This is due to the different purposes of them. The content files, always as an IO path, need stability. So, `Contents` should be centralized, and its structure should be as flat as possible. Meanwhile, the source files, as entries of human operations, need to be accessible. People split their works by processes and objects, which are the best subdirectory rule of `SourceFiles`.
+    Therefore, isolating the source files that store "processes" and the content files that hold "results" is better.
 
--   **Q: Why `Contents` has no subspace directories?**
+-   **Q: Why does `Contents` have no subspace directories?**
 
-    The previous answer has explained the different purposes of `Contents` and `SourceFiles`. Although the `Contents` structure should be as flat as possible. But in order to avoid duplicate names, Subspace Prefixes are used. `SourceFiles`, on the other hand, sets up Subspace Directories for ease of finding.
-
--   **Q: Why does the Omoospace.yml field not using PascalCase style?**
-
-    Because the official tool is written by shell. The field style should be snake_case.
+    The previous answer has explained the different purposes of `Contents` and `SourceFiles`. However, the `Contents` structure should be as flat as possible. But to avoid duplicate names, Subspace Prefixes are used. `SourceFiles`, on the other hand, sets up Subspace Directories for ease of finding.

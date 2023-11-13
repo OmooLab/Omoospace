@@ -295,13 +295,13 @@ More examples:
 
 | Files                                                               | Expected Result               |
 | ------------------------------------------------------------------- | ----------------------------- |
-| SQ010_AssetA.blend                                                  | ['SQ010', 'AssetA']           |
+| SQ010_AssetA.blend                                                  | ['SQ010','AssetA']           |
 | SQ010/AssetA.blend                                                  | ['AssetA']                    |
-| SQ010/AssetA.blend<br>SQ010/Subspace.yml                            | ['SQ010', 'AssetA']           |
-| SQ010_SH0100/AssetA.blend<br>SQ010_SH0100/Subspace.yml              | ['SQ010', 'SH0100', 'AssetA'] |
-| SQ010_SH0100/SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml       | ['SQ010', 'SH0100', 'AssetA'] |
-| SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010', 'SH0100', 'AssetA'] |
-| SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010', 'SH0100', 'AssetA'] |
+| SQ010/AssetA.blend<br>SQ010/Subspace.yml                            | ['SQ010','AssetA']           |
+| SQ010_SH0100/AssetA.blend<br>SQ010_SH0100/Subspace.yml              | ['SQ010','SH0100','AssetA'] |
+| SQ010_SH0100/SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml       | ['SQ010','SH0100','AssetA'] |
+| SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010','SH0100','AssetA'] |
+| SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010','SH0100','AssetA'] |
 | AssetA_001.blend                                                    | ['AssetA']                    |
 | AssetA\_\_v001.blend                                                | ['AssetA']                    |
 | Asset-A\_\_v001.blend                                               | ['AssetA']                    |

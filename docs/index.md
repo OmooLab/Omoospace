@@ -1,10 +1,10 @@
 # Omoospace
 
-Omoospace is a scalable directory structure solution for digital creation works. We provide a python library for managing omoospace, including creating omoospace, shipping package, setting subspace, etc.
+Omoospace is a scalable directory structure solution for digital creation works. We provide a Python library for managing omoospace, including creating omoospace, shipping packages, setting subspace, etc.
 
-[What is "Omoospace", how does it rule all your creation files?](omoospace.md)
+[What is "Omoospace", and how does it rule all your creation files?](omoospace.md)
 
-This library is for developing DCC plugins like blender add-ons for integration of omoospace to software. But remember, omoospace is just a directory guide, it should be easy to maintain manually. Any over design that only works by using plugin is not recommended. The aim of this library is to build plugins to avoid the repetitive works and have more global view of the whole project structure which consist of nested subspaces, not to managing a project fully on program without touching the folders.
+This library is for developing DCC plugins like blender add-ons to integrate omoospace into software. But remember, omoospace is just a directory guide. It should be easy to maintain manually. We do not recommend any over-design that only works by using the plugin. This library aims to build plugins to avoid repetitive work and have a more global view of the whole project structure, which consists of nested subspaces, not to manage a project entirely on a program without touching the folders.
 
 ## Installation
 
@@ -14,3 +14,6 @@ Run the following command to install the dependencies:
 pip install omoospace
 ```
 
+## Usage
+
+[For Developers](developers.md)
