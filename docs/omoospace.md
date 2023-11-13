@@ -20,7 +20,7 @@ The rules are simple:
     - Process names set the `SourceFiles` subdirectories.
     - Content types set the `Contents` subdirectories.
 
-4. Name source files and directory after their creation object as **Subspace**.
+4. Name source files and directories by **Subspaces** based on creation objects.
 5. **Omoospace.yml** stores the workspace profile, such as creator profiles, software versions, etc.
 
 ![A diagram illustrating the structure of omoospace](assets/overview.png)
@@ -37,7 +37,7 @@ The nested subspaces can generate a tree-like graph that presents the structure 
 
 ![Object tree](assets/object_tree.png)
 
-#### Name source files and directory after their creation object as subspace.
+#### Name source files and directories by subspaces based on creation objects.
 
 ```bash
 |-- SourceFiles
