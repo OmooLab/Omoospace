@@ -15,7 +15,7 @@ The rules are simple:
     - `References` stores reference resources (optional).
     - `StagedData` stores temporary data (optional).
 
-3. Subdirectories rules:
+3. `SourceFiles` `Contents` subdirectories (optional):
 
     - Process names set the `SourceFiles` subdirectories.
     - Content types set the `Contents` subdirectories.
@@ -23,7 +23,7 @@ The rules are simple:
 4. Set **Subspaces** by filename prefix or subdirectory based on creation objects.
 5. **Omoospace.yml** stores the workspace profile, such as creator profiles, software versions, etc.
 
-![A diagram illustrating the structure of omoospace](assets/Untitled.png)
+![A diagram illustrating the structure of omoospace](assets/overview.png)
 
 A diagram illustrating the structure of omoospace
 
@@ -43,38 +43,38 @@ So, how should you set subspace? And what is worth noting when setting subspaces
 
 The phrases that are separated by `_` are subspaces, for example:
 
-```shell
+```bash
 |-- SourceFiles
-|   `-- EP001_SQ010_AssetA.blend
+|   `-- FilmA_SQ020_ModelB.blend
 ```
 
-It is evident that this blender file is for creating `Asset A (AssetA)` of `Sequence 010 (SQ010)` of `Episode 001 (EP001)`. The nested subspaces form a route from parent to child: `EP001 > SQ010 > AssetA`. We call it **Subspace Route**.
+Evidently, this blender file is for creating `Model B` of `Sequence 010` of `Film A`. The nested subspaces form a route from parent to child: `FilmA > SQ020 > ModelB`. We call it **Subspace Route**.
 
 You can also use subdirectories instead of filename prefixes. To distinguish **Subspace Directory** from ordinary directories, the subspace directory must contain a marker file named `Subspace.yml`.
 
-```shell
+```bash
 |-- SourceFiles
-|   `-- EP001
+|   `-- FilmA
 |       |-- Subspace.yml # marker
-|       `-- SQ010
+|       `-- SQ020
 |           |-- Subspace.yml # marker
-|           `-- AssetA.blend
+|           `-- ModelB.blend
 ```
 
-The subspace route above is also `EP001 > SQ010 > AssetA`.
+The subspace route above is also `FilmA > SQ020 > ModelB`.
 
 Subspace is just a concept, and its existence relies on files or directories. We call those files and directories **Subspace Entities** of their subspace. As you can imagine, one subspace may have multiple entities to present them.
 
-```shell
+```bash
 |-- SourceFiles
-|   `-- EP001
+|   `-- FilmA
 |       |-- Subspace.yml # marker
-|       |-- EP001.blend
-|       |-- SQ010.prproj
-|       `-- SQ010.blend
+|       |-- FilmA.prproj
+|       |-- SQ020.prproj
+|       `-- SQ020.blend
 ```
 
-`SQ010.prproj` and `SQ010.blend` are both for `Sequence 010 (SQ010)`. They are its entities. Similarly, directory `EP001` and file `EP001.blend` are both `Episode 001 (EP001)` entities. According to subspace entities, we classify subspaces into three kinds:
+File `SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Similarly, the directory `FilmA` and file `FilmA.prproj` are `Film A (FilmA)` entities. According to subspace entities, we classify subspaces into three kinds:
 
 -   **Directory Subspace** has a directory to present it.
 -   **File Subspace** has only files to present it, no directory.
@@ -82,34 +82,34 @@ Subspace is just a concept, and its existence relies on files or directories. We
 
 !!! note
 
-    The file `EP001_SQ010_AssetA.blend` only contains the `Asset A` object. `EP001` and `SQ010` are just pure concepts. They are phantom subspaces.
+    The file `FilmA_SQ020_ModelB.blend` only contains the `Model B` object. `FilmA` and `SQ020` are just pure concepts. They are typical phantom subspaces.
 
 #### A subspace route is formed by combining the subspace directory and filename prefix.
 
-Parent subspace directories and filename prefixes form the subspace route. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:
+Parent subspace directories and filename prefixes form the subspace route of an entity. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:
 
-```shell
+```bash
 |-- SourceFiles
-|   |-- EP001
+|   |-- FilmA
 |   |   |-- Subspace.yml
-|   |   `-- SQ010_AssetA.blend
+|   |   `-- SQ020_ModelB.blend
 ```
 
-```shell
+```bash
 |-- SourceFiles
-|   |-- EP001
+|   |-- FilmA
 |   |   |-- Subspace.yml
-|   |   `-- EP001_SQ010_AssetA.blend
+|   |   `-- FilmA_SQ020_ModelB.blend
 ```
 
-```shell
+```bash
 |-- SourceFiles
-|   |-- EP001_SQ010
+|   |-- FilmA_SQ020
 |   |   |-- Subspace.yml
-|   |   `-- EP001_SQ010_AssetA.blend
+|   |   `-- FilmA_SQ020_ModelB.blend
 ```
 
-All examples' routes are all `EP001 > SQ010 > AssetA`.
+All examples' routes are all `FilmA > SQ020 > ModelB`.
 
 !!! note
 
@@ -117,7 +117,7 @@ All examples' routes are all `EP001 > SQ010 > AssetA`.
 
 #### A subspace name should not be pure numbers or versions or autosave.
 
-Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, `v001` in `EP001_SQ010_AssetA_v001.blend`,  is not a new creation object. The file is still for creating `AssetA`. The subspace definition defines a subspace as a particular creation object. So `v001` is not a subspace.
+Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, `v001` in `FilmA_SQ020_ModelB_v001.blend`,  is not a new creation object. The file is still for creating `ModelB`. The subspace definition defines a subspace as a particular creation object. So `v001` is not a subspace.
 
 
 #### Write the subspace profile into Subspace.yml.
@@ -132,22 +132,22 @@ description: Comments to this subspace.
 
 You can create the profile file to any subspace with the route as its filename, not the entire route but the subroute to the parent subspace.
 
-```shell
+```bash
 |-- SourceFiles
-|   |-- EP001
+|   |-- FilmA
 |   |   |-- Subspace.yml
-|   |   |-- SQ010.yml
-|   |   |-- SQ010_AssetA.yml
-|   |   `-- SQ010_AssetA.blend
+|   |   |-- SQ020.yml
+|   |   |-- SQ020_ModelB.yml
+|   |   `-- SQ020_ModelB.blend
 ```
 
 ```yaml
-# SQ010.yml
-name: Sequence 010
+# SQ020.yml
+name: Sequence 020
 description: The beginning scene of the story.
 
-# SQ010_AssetA.yml
-name: Asset A
+# SQ020_ModelB.yml
+name: Model B
 description: A 3d model.
 ```
 
@@ -165,7 +165,7 @@ When a project grows, you may need to separate many source files into directorie
 
 Some optional process names:
 
-```shell
+```bash
 # Film production processes
 |-- SourceFiles
 |   |-- PreProduction
@@ -173,15 +173,16 @@ Some optional process names:
 |   `-- PostProduction
 ```
 
-```shell
+```bash
 # Post-production subprocesses
 |-- SourceFiles
 |   |-- Compositing
 |   |-- SoundEditing
 |   `-- VideoEditing
 ```
+You can add sequence numbers in front.
 
-```shell
+```bash
 # 3D modeling processes
 |-- SourceFiles
 |   |-- 001-Modeling
@@ -192,7 +193,7 @@ Some optional process names:
 
 You can mix use process directories and subspace directories.
 
-```shell
+```bash
 <SeriesTitle> # (Root)
 |-- SourceFiles
 |   |-- PreProduction
@@ -218,7 +219,7 @@ Most source files have their object, such as rendering images or exporting a 3D 
 
 Void subspace can be in a filename prefix or as a directory.
 
-```shell
+```bash
 |-- SourceFiles
 |   |-- BeatingHeart
 |   |   `-- Void_HowToBeat.hip
@@ -245,7 +246,7 @@ It stores digital content in a common format, whether internal or external, whet
 
 Some optional content types:
 
-```shell
+```bash
 # For modeling propose
 |-- Contents
 |   |-- Images
@@ -254,7 +255,7 @@ Some optional content types:
 |   `-- Renders
 ```
 
-```shell
+```bash
 # For short video production propose
 |-- Contents
 |   |-- Audios
@@ -266,7 +267,7 @@ Some optional content types:
 |   `-- Videos
 ```
 
-```shell
+```bash
 # For film production propose
 |-- Contents
 |   |-- Audios
@@ -300,7 +301,7 @@ Type subdirectories should fit your workflow. But be aware of the following rule
 
 There is no subspace directory setting in `Contents`. But use subspace route as filename prefix to hint the relationship to its source file.
 
-```shell
+```bash
 |-- Contents
 |   `-- Models
 |       |-- BloodCells_RBC.fbx
@@ -313,7 +314,7 @@ In the above example, `BloodCells_RBC.fbx` and `BloodCells_WBC.fbx` come from `B
 
 In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh. 
 
-```shell
+```bash
 |-- Contents
 |   `-- Models
 |       `-- Organs_Heart
@@ -341,7 +342,7 @@ It stores all data files from external sources. The “external” here means th
 
 Just keep its original file structure and naming style. For example:
 
-```shell
+```bash
 |-- ExternalData
 |   |-- www.models.com_CT_Scanner
 |   |   |-- CT_Scanner.fbx
@@ -375,12 +376,12 @@ You may have your resource library of 3D assets in a local or network directory 
 
 So we prefer to create a soft link to the library in `ExternalData`, then you can easily access the assets from the library.
 
-```shell
+```bash
 |-- ExternalData
 |   `-- Resouces # Soft link
 ```
 
-```shell
+```bash
 D:
 |-- Resouces # My super 3D resource library for everything 
 |   |-- Models
@@ -394,7 +395,7 @@ D:
 
 The omoospace package is designed for sharing omoospace data. You store them in `ExternalData`. 
 
-```shell
+```bash
 |-- ExternalData
 |   |-- BloodCells # Package
 |   |   |-- Package.yml # Package info
@@ -481,7 +482,7 @@ ExternalData acts like a Packages directory of the Unity project that stores dat
 
 The internal structure of the package is part of its source omoospace
 
-```shell
+```bash
 <PackageName>
 |-- Contents # (Optional)
 |-- ExternalData # (Optional)

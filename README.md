@@ -12,7 +12,7 @@ This library requires Python version 3.9 or above (python official download link
 
 Run the following command to install omoospace:
 
-```shell
+```bash
 pip install omoospace
 ```
 
