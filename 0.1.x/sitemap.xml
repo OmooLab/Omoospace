@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/artists/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/developers/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/omoospace/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/roadmap/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/apis/omoospace/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/apis/package/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/omoospace/0.1.x/apis/subspace/</loc>
-         <lastmod>2023-11-10</lastmod>
+         <lastmod>2023-11-13</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
