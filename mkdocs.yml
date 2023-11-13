@@ -7,7 +7,7 @@ repo_name: omoolab/omoospace
 repo_url: https://github.com/omoolab/omoospace
 
 nav:
-  - Getting Stared:
+  - Getting Started:
       - index.md
       - What is omoospace?: omoospace.md
       - For Artists: artists.md
