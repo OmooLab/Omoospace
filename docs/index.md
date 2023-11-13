@@ -8,7 +8,9 @@ This library is for developing DCC plugins like blender add-ons to integrate omo
 
 ## Installation
 
-Run the following command to install the dependencies:
+This library requires Python version 3.9 or above (python official download link). You can use pyenv or conda for managing multiple Python versions on a single machine.
+
+Run the following command to install omoospace:
 
 ```shell
 pip install omoospace
