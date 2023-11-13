@@ -471,8 +471,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#a-subspace-name-should-not-be-pure-number-or-version-or-autosave" class="md-nav__link">
-    A subspace name should not be pure number or version or autosave.
+  <a href="#a-subspace-name-should-not-be-pure-numbers-or-versions-or-autosave" class="md-nav__link">
+    A subspace name should not be pure numbers or versions or autosave.
   </a>
   
 </li>
@@ -899,8 +899,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#a-subspace-name-should-not-be-pure-number-or-version-or-autosave" class="md-nav__link">
-    A subspace name should not be pure number or version or autosave.
+  <a href="#a-subspace-name-should-not-be-pure-numbers-or-versions-or-autosave" class="md-nav__link">
+    A subspace name should not be pure numbers or versions or autosave.
   </a>
   
 </li>
@@ -1123,10 +1123,10 @@
 <p>A diagram illustrating the structure of omoospace</p>
 <h2 id="omoospace-structure">Omoospace Structure</h2>
 <h3 id="subspace">Subspace</h3>
-<p><strong>Subspace</strong> is a sub-workspace based on objects of creation conducive to finding, sorting, and understanding. Subspace can be nested. For example, an anime series project, each episode is a creation object, and under that object, multiple secondary objects can be set based on the episode’s sequences, and each secondary object can continue to be split. Each object is a sub-workspace of the main workspace. <strong>We call those sub-workspaces "Subspace" named after their objects.</strong></p>
+<p><strong>Subspace</strong> is a sub-workspace based on objects of creation conducive to finding, sorting, and understanding. Subspace can be nested. For example, an anime series project, each episode is a creation object. Under that object, multiple secondary objects can be set based on the episode’s sequences, and you can continue to split each secondary object. Each object is a sub-workspace of the main workspace. We call those sub-workspaces <strong>Subspace</strong>, and name them after their objects.</p>
 <p>The nested subspaces can generate a tree-like graph that presents the structure of the entire project, as shown in the figure below.</p>
 <p><img alt="Object tree" src="../assets/object_tree.png" /></p>
-<p>So, how do you set subspace? And what is worth noting when setting subspaces?</p>
+<p>So, how should you set subspace? And what is worth noting when setting subspaces?</p>
 <h4 id="subspace-can-be-set-by-filename-prefix-or-subdirectory">Subspace can be set by filename prefix or subdirectory</h4>
 <p>The phrases that are separated by <code>_</code> are subspaces, for example:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
@@ -1150,7 +1150,7 @@
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>SQ010.prproj
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ010.blend
 </span></code></pre></div>
-<p><code>SQ010.prproj</code> and <code>SQ010.blend</code> are both for <code>Sequence 010 (SQ010)</code>. They are its subspace entities. Similarly, directory <code>EP001</code> and file <code>EP001.blend</code> are both <code>Episode 001 (EP001)</code> entities. According to their entities, we classify subspaces into three kinds:</p>
+<p><code>SQ010.prproj</code> and <code>SQ010.blend</code> are both for <code>Sequence 010 (SQ010)</code>. They are its entities. Similarly, directory <code>EP001</code> and file <code>EP001.blend</code> are both <code>Episode 001 (EP001)</code> entities. According to subspace entities, we classify subspaces into three kinds:</p>
 <ul>
 <li><strong>Directory Subspace</strong> has a directory to present it.</li>
 <li><strong>File Subspace</strong> has only files to present it, no directory.</li>
@@ -1161,7 +1161,7 @@
 <p>The file <code>EP001_SQ010_AssetA.blend</code> only contains the <code>Asset A</code> object. <code>EP001</code> and <code>SQ010</code> are just pure concepts. They are phantom subspaces.</p>
 </div>
 <h4 id="a-subspace-route-is-formed-by-combining-the-subspace-directory-and-filename-prefix">A subspace route is formed by combining the subspace directory and filename prefix.</h4>
-<p>A subspace route of an entity is formed by all its parent subspace directories and name prefixes. Suppose the entity name prefix contains its parent subspace name. They should overlap each other as much as possible, for example:</p>
+<p>Parent subspace directories and filename prefixes form the subspace route. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
@@ -1182,16 +1182,15 @@
 <p class="admonition-title">Note</p>
 <p>There are no strict rules of when to use overlapping forms of directory structure. It is all up to the user's decision. Creators should design the directory structure to fit the project needs.</p>
 </div>
-<h4 id="a-subspace-name-should-not-be-pure-number-or-version-or-autosave">A subspace name should not be pure number or version or autosave.</h4>
-<p>For example, <code>v001</code> in <code>EP001_SQ010_AssetA_v001.blend</code>,  is not a new creation object. The file is still for creating <code>AssetA</code>. According to the subspace definition, a subspace is for a particular creation object; <code>v001</code> is not a subspace.</p>
-<p>Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names.</p>
+<h4 id="a-subspace-name-should-not-be-pure-numbers-or-versions-or-autosave">A subspace name should not be pure numbers or versions or autosave.</h4>
+<p>Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, <code>v001</code> in <code>EP001_SQ010_AssetA_v001.blend</code>,  is not a new creation object. The file is still for creating <code>AssetA</code>. The subspace definition defines a subspace as a particular creation object. So <code>v001</code> is not a subspace.</p>
 <h4 id="write-the-subspace-profile-into-subspaceyml">Write the subspace profile into Subspace.yml.</h4>
 <p>Besides a marker file, <code>Subspace.yml</code> is also a subspace profile.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Subspace.yml</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subspace&#39;s name</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comments to this subspace.</span>
 </span></code></pre></div>
-<p>You can create the profile file to any subspace with route as its filename.</p>
+<p>You can create the profile file to any subspace with route as its filename. Not the entire route but the subroute to the parent subspace.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
@@ -1209,8 +1208,8 @@
 </span></code></pre></div>
 <h3 id="sourcefiles">SourceFiles</h3>
 <p>It stores the source files of the software or executable scripts, pipelines, etc.</p>
-<p><code>SourceFiles</code> stores processes, and <code>Contents</code> stores results. The former must be opened with specific software or executed by the program and precomputed. The latter generally allows cross-software reading without any pre-computation.</p>
-<p>For example, I am using Blender's geometry node for procedural modeling. The source file of Blender should be placed in <code>SourceFiles</code>. However, to load the procedural model in Unity, it is necessary to export it as a general format, such as .fbx, and the exported file should be placed in <code>Contents</code>.</p>
+<p><code>SourceFiles</code> stores processes, and <code>Contents</code> stores results. The former must be opened with specific software, executed by the program, and pre-computed. The latter generally allows cross-software reading without any pre-computation.</p>
+<p>For example, I am using Blender's geometry node for procedural modeling. I should place the source file of Blender in <code>SourceFiles</code>. However, to load the procedural model in Unity, it is necessary to export it as a general format, such as .fbx, and I should place the exported file in <code>Contents</code>.</p>
 <h4 id="subdirectories-by-process-name-optional">Subdirectories by process name (optional)</h4>
 <p>When a project grows, you may need to separate many source files into directories. Besides the subspace directory, we recommend setting subdirectories by process name.</p>
 <p>Some optional process names:</p>
@@ -1233,7 +1232,7 @@
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">003</span>-Rendering
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span><span class="m">004</span>-Shading
 </span></code></pre></div>
-<p>Process directories and subspace directories can be mixed.</p>
+<p>You can mix use process directories and subspace directories.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;SeriesTitle&gt;<span class="w"> </span><span class="c1"># (Root)</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
@@ -1249,7 +1248,7 @@
 <li>You can adjust the process subdirectories freely as the project expands.</li>
 </ul>
 <h4 id="put-source-files-without-creation-object-under-void-optional">Put source files without creation object under Void (optional)</h4>
-<p>Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a subspace called <strong>Void</strong>, which doesn’t need <code>Subspace.yml</code>.</p>
+<p>Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a special subspace called <strong>Void</strong>, which doesn’t need <code>Subspace.yml</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Any subspaces in <strong>Void</strong> are also <strong>Void Subspace</strong>.</p>
@@ -1268,7 +1267,7 @@
 </div>
 <h4 id="sourcefiles-structure-is-always-dynamic-when-a-project-is-in-progress">SourceFiles structure is always dynamic when a project is in progress.</h4>
 <p>No one knows precisely what to do and how to do their creation work before starting. Plans never keep up with flashing of inspiration. Creation objects constantly change in progress. Although we make a rule for <code>SourceFiles</code> subdirectories, it's for semantic structure and does not mean subdirectories should be static.</p>
-<p><strong>Feel free to organize files in <code>SourceFiles</code>, following the inspiration during creation.</strong></p>
+<p><strong>Feel free to organize files in <code>SourceFiles</code> and follow the inspiration during creation!</strong></p>
 <h3 id="contents">Contents</h3>
 <p>It stores digital content in a common format, whether internal or external, whether a work result or a resource. You should organize all content files here and stick to the rules.</p>
 <h4 id="subdirectories-by-content-type-optional">Subdirectories by content type (optional)</h4>
@@ -1328,7 +1327,7 @@
 </span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells.blend
 </span></code></pre></div>
 <p>In the above example, <code>BloodCells_RBC.fbx</code> and <code>BloodCells_WBC.fbx</code> come from <code>BloodCells.blend</code>. <code>RBC</code>, and <code>WBC</code> are subsets of <code>BloodCells.blend</code>. You can easily guess the relationship between them by their filenames.</p>
-<p>In some cases, content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are kept together with their root directory, which already hints at its source. For example, the texture filename does not need to have <code>Organs</code>, because you wouldn't use those textures without the mesh. </p>
+<p>In some cases, content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have <code>Organs</code>, because you wouldn't use those textures without the mesh. </p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Organs_Heart
@@ -1339,11 +1338,12 @@
 </span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Organs.blend
 </span></code></pre></div>
-<p>However, it does not mean using the full route name is forbidden for sub-files, or you can name them randomly. Their name must be semantic.</p>
+<p><strong>However, it does not mean using the entire route name is forbidden for sub-files, or you can name them randomly. Their name must be semantic.</strong></p>
 <h4 id="keep-the-contents-structure-flat-and-static-as-much-as-possible">Keep the Contents structure flat and static as much as possible.</h4>
-<p>In most software, it will lose the link when a file changes its name or is moved. The content files, always as IO paths for source files, must be stable. So, <code>Contents</code> should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. Plan the structure.</p>
+<p>In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, <code>Contents</code> should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. </p>
+<p><strong>Plan the structure.</strong></p>
 <h3 id="externaldata">ExternalData</h3>
-<p>It stores all data files from external sources. The “external” here means that the creator of this omoospace does not generate it and is not produced within this omoospace, either. The most common usage of <code>ExternalData</code> is to store resources from the network.</p>
+<p>It stores all data files from external sources. The “external” here means that it is created by the creator outside omoospace or not produced within this omoospace. The most common usage of <code>ExternalData</code> is to store resources from the network.</p>
 <h4 id="no-need-to-follow-the-naming-rules-do-not-set-any-subdirectories-by-content-type">No need to follow the naming rules; do not set any subdirectories by content type</h4>
 <p>Just keep its original file structure and naming style. For example:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
@@ -1364,13 +1364,13 @@
 </div>
 <h4 id="it-is-not-the-only-repository-for-all-external-data">It is not the only repository for all external data</h4>
 <p><code>Contents</code> and <code>SourceFiles</code> also store external data. However, compared with <code>ExternalData</code>, they are stricter. All files need to be categorized and renamed correctly. Meanwhile, <code>ExternalData</code> is a storage place that allows users to ship data freely.</p>
-<p>If you have stored external source data in <code>Contents</code> | <code>SourceFiles</code>, it is not necessary to hold it in <code>ExternalData</code> again. For example, an HDRI downloaded from PolyHaven could be directly put under' Contents' as long as you rename it to PascalCase style.</p>
+<p>If you have stored external source data in <code>Contents</code> | <code>SourceFiles</code>, it is unnecessary to hold it in <code>ExternalData</code> again. For example, an HDRI downloaded from PolyHaven could be directly put under <code>Contents</code> if you rename it to PascalCase style.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Categorizing and renaming are not fun works, so storing external source data directly into <code>ExternalData</code> is recommended unless you can ensure files under <code>Contents</code> | <code>SourceFiles</code> are strict to the rules.</p>
 </div>
 <h4 id="access-to-own-resource-library-contents-by-creating-soft-links-in-it">Access to own resource library contents by creating soft links in it.</h4>
-<p>You may have your resource library of 3D assets in a local or network directory (NAS). You usually don't know which asset suits the 3D scene most until you try, like HDRI. It isn't enjoyable to repeatedly ship resource files from the library to the current working directory for trial.</p>
+<p>You may have your resource library of 3D assets in a local or network directory (NAS). You usually don't know which asset suits the 3D scene most until you try, like HDRI. Repeating to move resource files from the library to the current working directory for trial isn't enjoyable.</p>
 <p>So we prefer to create a soft link to the library in <code>ExternalData</code>, then you can easily access the assets from the library.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Resouces<span class="w"> </span><span class="c1"># Soft link</span>
@@ -1395,7 +1395,7 @@
 </span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>RedBooldCells.blend
 </span></code></pre></div>
 <h3 id="references">References</h3>
-<p>It stores PureRef, Figma, Paper PDF, and Storyboard. Although they are not being used directly, you need to save them. Put them here.</p>
+<p>It stores PureRef, Figma, Paper PDF, and Storyboard. Although you are not using them directly, you need to save them. Put them here.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If it is Figma online, put the link as a file.</p>
@@ -1475,7 +1475,7 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Once the package is exported, it has nothing to do with its source omoospace</p>
+<p>Once you export a package, it has nothing to do with its source omoospace</p>
 </div>
 <h2 id="comparison-with-other-software-project-structures">Comparison with other software project structures</h2>
 <p>There are some common concepts to help understand.</p>
