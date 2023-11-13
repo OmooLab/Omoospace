@@ -17,7 +17,7 @@ The rules are simple:
 
 3. Subdirectories rules:
 
-    - Process names set the`SourceFiles` subdirectories.
+    - Process names set the `SourceFiles` subdirectories.
     - Content types set the `Contents` subdirectories.
 
 4. Set **Subspaces** by filename prefix or subdirectory based on creation objects.
