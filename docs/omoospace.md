@@ -130,7 +130,7 @@ name: Subspace's name
 description: Comments to this subspace.
 ```
 
-You can create the profile file to any subspace with route as its filename. Not the entire route but the subroute to the parent subspace.
+You can create the profile file to any subspace with the route as its filename, not the entire route but the subroute to the parent subspace.
 
 ```shell
 |-- SourceFiles
@@ -210,7 +210,7 @@ Process subdirectories should fit your workflow. But be aware of the following r
 
 #### Put source files without creation object under Void (optional)
 
-Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a special subspace called **Void**, which doesn’t need `Subspace.yml`.
+Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a unique subspace called **Void**, which doesn’t need `Subspace.yml`.
 
 !!! note
 
@@ -229,7 +229,7 @@ Void subspace can be in a filename prefix or as a directory.
 
 !!! note
 
-    Although the source files under void subspace have no creation objects, they still allow outputting. However, their outputs are not rigorous and necessary but experimental and temporary. For example, `Void/HeartBeating.blend` can still render `Void_HeartBeating.0001.png`. The prefix `Void` indicates the results are experimental.
+    Although the source files under void subspace have no creation objects, they still allow outputting. However, their outputs could be more rigorous and necessary but experimental and temporary. For example, `Void/HeartBeating.blend` can still render `Void_HeartBeating.0001.png`. The prefix `Void` indicates the results are experimental.
 
 #### SourceFiles structure is always dynamic when a project is in progress.
 
@@ -311,7 +311,7 @@ There is no subspace directory setting in `Contents`. But use subspace route as 
 
 In the above example, `BloodCells_RBC.fbx` and `BloodCells_WBC.fbx` come from `BloodCells.blend`. `RBC`, and `WBC` are subsets of `BloodCells.blend`. You can easily guess the relationship between them by their filenames.
 
-In some cases, content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh. 
+In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh. 
 
 ```shell
 |-- Contents
@@ -331,7 +331,7 @@ In some cases, content is a collection of multiple files. e.g., a 3d model with 
 
 In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, `Contents` should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. 
 
-**Plan the structure.**
+**Plan the structure at the beginning.**
 
 ### ExternalData
 
@@ -473,9 +473,9 @@ works:
 
 ## Omoospace Package
 
-Inspired by the Unity Package, Package is an Omoospace data package designed for sharing.
+Inspired by the Unity Package, the omoospace package is designed for sharing omoospace data.
 
-ExternalData acts like a Packages of Unity project that stores data from other Omoospaces.
+ExternalData acts like a Packages directory of the Unity project that stores data from other omoospaces.
 
 [Unity - Manual: Reusing Assets between Projects](https://docs.unity3d.com/2020.1/Documentation/Manual/HOWTO-exportpackage.html)
 
