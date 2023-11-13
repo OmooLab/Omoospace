@@ -20,7 +20,7 @@ The rules are simple:
     - Process names set the `SourceFiles` subdirectories.
     - Content types set the `Contents` subdirectories.
 
-4. Set **Subspaces** by filename prefix or subdirectory based on creation objects.
+4. Name source files and directory after their creation object as **Subspace**.
 5. **Omoospace.yml** stores the workspace profile, such as creator profiles, software versions, etc.
 
 ![A diagram illustrating the structure of omoospace](assets/overview.png)
@@ -37,20 +37,27 @@ The nested subspaces can generate a tree-like graph that presents the structure 
 
 ![Object tree](assets/object_tree.png)
 
-So, how should you set subspace? And what is worth noting when setting subspaces?
+#### Name source files and directory after their creation object as subspace.
 
-#### Subspace can be set by filename prefix or subdirectory
+```bash
+|-- SourceFiles
+|   `-- ModelB.blend
+```
 
-The phrases that are separated by `_` are subspaces, for example:
+The filename hints that it is for creating `Model B`. But what if `Model B` is only a secondary object of `Sequence 010`?
+
+![Subspace route](assets/subspace_route.png)
+
+Just use `_` to separate multi-level subspaces in the filename:
 
 ```bash
 |-- SourceFiles
 |   `-- FilmA_SQ020_ModelB.blend
 ```
 
-Evidently, this blender file is for creating `Model B` of `Sequence 010` of `Film A`. The nested subspaces form a route from parent to child: `FilmA > SQ020 > ModelB`. We call it **Subspace Route**.
+The purpose can be told by its filename that it is for creating `Model B` of `Sequence 010` of `Film A`.
 
-You can also use subdirectories instead of filename prefixes. To distinguish **Subspace Directory** from ordinary directories, the subspace directory must contain a marker file named `Subspace.yml`.
+You can also create a **Subspace Directory** to avoid long filename prefixes. A subspace directory must contain a marker file named `Subspace.yml` to distinguish it from an ordinary directory.
 
 ```bash
 |-- SourceFiles
@@ -61,9 +68,7 @@ You can also use subdirectories instead of filename prefixes. To distinguish **S
 |           `-- ModelB.blend
 ```
 
-The subspace route above is also `FilmA > SQ020 > ModelB`.
-
-Subspace is just a concept, and its existence relies on files or directories. We call those files and directories **Subspace Entities** of their subspace. As you can imagine, one subspace may have multiple entities to present them.
+We call those source files and subspace directories **Entities** of their subspace. As you can imagine, one subspace may have multiple entities to present them.
 
 ```bash
 |-- SourceFiles
@@ -74,7 +79,7 @@ Subspace is just a concept, and its existence relies on files or directories. We
 |       `-- SQ020.blend
 ```
 
-File `SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Similarly, the directory `FilmA` and file `FilmA.prproj` are `Film A (FilmA)` entities. According to subspace entities, we classify subspaces into three kinds:
+`SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Similarly, the directory `FilmA` and file `FilmA.prproj` are `Film A (FilmA)` entities. According to subspace entities, we classify subspaces into three kinds:
 
 -   **Directory Subspace** has a directory to present it.
 -   **File Subspace** has only files to present it, no directory.
@@ -84,29 +89,34 @@ File `SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Simil
 
     The file `FilmA_SQ020_ModelB.blend` only contains the `Model B` object. `FilmA` and `SQ020` are just pure concepts. They are typical phantom subspaces.
 
-#### A subspace route is formed by combining the subspace directory and filename prefix.
+#### A subspace route is formed by combining the subspace names from root to leaf.
 
-Parent subspace directories and filename prefixes form the subspace route of an entity. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:
+The multi-level subspaces in `FilmA_SQ020_ModelB.blend` form a route from root to leaf: `FilmA > SQ020 > ModelB`. We call it **Subspace Route**.
+
+Suppose the entity subspace nodes contain its parent subspace nodes. They should overlap each other as much as possible, for example:
 
 ```bash
+# No overlap
 |-- SourceFiles
-|   |-- FilmA
+|   |-- FilmA # FilmA
 |   |   |-- Subspace.yml
-|   |   `-- SQ020_ModelB.blend
+|   |   `-- SQ020_ModelB.blend # SQ020 > ModelB
 ```
 
 ```bash
+# `FilmA` is overlapped
 |-- SourceFiles
-|   |-- FilmA
+|   |-- FilmA # FilmA
 |   |   |-- Subspace.yml
-|   |   `-- FilmA_SQ020_ModelB.blend
+|   |   `-- FilmA_SQ020_ModelB.blend # FilmA > SQ020 > ModelB
 ```
 
 ```bash
+# `FilmA`, `SQ020` are overlapped
 |-- SourceFiles
-|   |-- FilmA_SQ020
+|   |-- FilmA_SQ020 # FilmA > SQ020
 |   |   |-- Subspace.yml
-|   |   `-- FilmA_SQ020_ModelB.blend
+|   |   `-- FilmA_SQ020_ModelB.blend # FilmA > SQ020 > ModelB
 ```
 
 All examples' routes are all `FilmA > SQ020 > ModelB`.
@@ -117,8 +127,7 @@ All examples' routes are all `FilmA > SQ020 > ModelB`.
 
 #### A subspace name should not be pure numbers or versions or autosave.
 
-Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, `v001` in `FilmA_SQ020_ModelB_v001.blend`,  is not a new creation object. The file is still for creating `ModelB`. The subspace definition defines a subspace as a particular creation object. So `v001` is not a subspace.
-
+Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, `v001` in `FilmA_SQ020_ModelB_v001.blend`, is not a new creation object. The file is still for creating `ModelB`. The subspace definition defines a subspace as a particular creation object. So `v001` is not a subspace.
 
 #### Write the subspace profile into Subspace.yml.
 
@@ -180,6 +189,7 @@ Some optional process names:
 |   |-- SoundEditing
 |   `-- VideoEditing
 ```
+
 You can add sequence numbers in front.
 
 ```bash
@@ -312,7 +322,7 @@ There is no subspace directory setting in `Contents`. But use subspace route as 
 
 In the above example, `BloodCells_RBC.fbx` and `BloodCells_WBC.fbx` come from `BloodCells.blend`. `RBC`, and `WBC` are subsets of `BloodCells.blend`. You can easily guess the relationship between them by their filenames.
 
-In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh. 
+In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh.
 
 ```bash
 |-- Contents
@@ -330,7 +340,7 @@ In some cases, one content is a collection of multiple files. e.g., a 3d model w
 
 #### Keep the Contents structure flat and static as much as possible.
 
-In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, `Contents` should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. 
+In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, `Contents` should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often.
 
 **Plan the structure at the beginning.**
 
@@ -383,7 +393,7 @@ So we prefer to create a soft link to the library in `ExternalData`, then you ca
 
 ```bash
 D:
-|-- Resouces # My super 3D resource library for everything 
+|-- Resouces # My super 3D resource library for everything
 |   |-- Models
 |   |   |-- Cars
 |   |   |-- Animals
@@ -393,7 +403,7 @@ D:
 
 #### It stores omoospace packages
 
-The omoospace package is designed for sharing omoospace data. You store them in `ExternalData`. 
+The omoospace package is designed for sharing omoospace data. You store them in `ExternalData`.
 
 ```bash
 |-- ExternalData
@@ -527,7 +537,7 @@ There are some common concepts to help understand.
 
 -   **Q: Most directory structure solutions of CG work have no distinction between `Contents` and `SourceFiles`. Why does omoospace emphasize their differences ?**
 
-    A: This is due to the different purposes of them. The content files, always as an IO path, need stability. So, `Contents` should be centralized, and its structure should be as flat as possible. Meanwhile, the source files, as entries of human operations, need to be accessible. People split their works by processes and objects, which are the best subdirectory rule of `SourceFiles`.
+    A: This is due to their different purposes of them. The content files, always as an IO path, need stability. So, `Contents` should be centralized, and its structure should be as flat as possible. Meanwhile, the source files, as entries of human operations, need to be accessible. People split their works by processes and objects, which are the best subdirectory rule of `SourceFiles`.
     Therefore, isolating the source files that store "processes" and the content files that hold "results" is better.
 
 -   **Q: Why does `Contents` have no subspace directories?**
