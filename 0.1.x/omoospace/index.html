@@ -1190,7 +1190,7 @@
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Subspace&#39;s name</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comments to this subspace.</span>
 </span></code></pre></div>
-<p>You can create the profile file to any subspace with route as its filename. Not the entire route but the subroute to the parent subspace.</p>
+<p>You can create the profile file to any subspace with the route as its filename, not the entire route but the subroute to the parent subspace.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
@@ -1248,7 +1248,7 @@
 <li>You can adjust the process subdirectories freely as the project expands.</li>
 </ul>
 <h4 id="put-source-files-without-creation-object-under-void-optional">Put source files without creation object under Void (optional)</h4>
-<p>Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a special subspace called <strong>Void</strong>, which doesn’t need <code>Subspace.yml</code>.</p>
+<p>Most source files have their object, such as rendering images or exporting a 3D model. However, some source files are not used as the primary process and have no particular object but have storage needs. We put such source files in a unique subspace called <strong>Void</strong>, which doesn’t need <code>Subspace.yml</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Any subspaces in <strong>Void</strong> are also <strong>Void Subspace</strong>.</p>
@@ -1263,7 +1263,7 @@
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Although the source files under void subspace have no creation objects, they still allow outputting. However, their outputs are not rigorous and necessary but experimental and temporary. For example, <code>Void/HeartBeating.blend</code> can still render <code>Void_HeartBeating.0001.png</code>. The prefix <code>Void</code> indicates the results are experimental.</p>
+<p>Although the source files under void subspace have no creation objects, they still allow outputting. However, their outputs could be more rigorous and necessary but experimental and temporary. For example, <code>Void/HeartBeating.blend</code> can still render <code>Void_HeartBeating.0001.png</code>. The prefix <code>Void</code> indicates the results are experimental.</p>
 </div>
 <h4 id="sourcefiles-structure-is-always-dynamic-when-a-project-is-in-progress">SourceFiles structure is always dynamic when a project is in progress.</h4>
 <p>No one knows precisely what to do and how to do their creation work before starting. Plans never keep up with flashing of inspiration. Creation objects constantly change in progress. Although we make a rule for <code>SourceFiles</code> subdirectories, it's for semantic structure and does not mean subdirectories should be static.</p>
@@ -1327,7 +1327,7 @@
 </span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>BloodCells.blend
 </span></code></pre></div>
 <p>In the above example, <code>BloodCells_RBC.fbx</code> and <code>BloodCells_WBC.fbx</code> come from <code>BloodCells.blend</code>. <code>RBC</code>, and <code>WBC</code> are subsets of <code>BloodCells.blend</code>. You can easily guess the relationship between them by their filenames.</p>
-<p>In some cases, content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have <code>Organs</code>, because you wouldn't use those textures without the mesh. </p>
+<p>In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have <code>Organs</code>, because you wouldn't use those textures without the mesh. </p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Organs_Heart
@@ -1341,7 +1341,7 @@
 <p><strong>However, it does not mean using the entire route name is forbidden for sub-files, or you can name them randomly. Their name must be semantic.</strong></p>
 <h4 id="keep-the-contents-structure-flat-and-static-as-much-as-possible">Keep the Contents structure flat and static as much as possible.</h4>
 <p>In most software, it will lose the link when the imported file changes its name, or someone moves it. The content files, always as IO paths for source files, must be stable. So, <code>Contents</code> should be centralized, and its structure should be flat and static, which means you should not move content files frequently or make super complex multi-level subdirectories changes often. </p>
-<p><strong>Plan the structure.</strong></p>
+<p><strong>Plan the structure at the beginning.</strong></p>
 <h3 id="externaldata">ExternalData</h3>
 <p>It stores all data files from external sources. The “external” here means that it is created by the creator outside omoospace or not produced within this omoospace. The most common usage of <code>ExternalData</code> is to store resources from the network.</p>
 <h4 id="no-need-to-follow-the-naming-rules-do-not-set-any-subdirectories-by-content-type">No need to follow the naming rules; do not set any subdirectories by content type</h4>
@@ -1449,8 +1449,8 @@
 </span><span id="__span-24-21"><a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MyModel</span>
 </span></code></pre></div>
 <h2 id="omoospace-package">Omoospace Package</h2>
-<p>Inspired by the Unity Package, Package is an Omoospace data package designed for sharing.</p>
-<p>ExternalData acts like a Packages of Unity project that stores data from other Omoospaces.</p>
+<p>Inspired by the Unity Package, the omoospace package is designed for sharing omoospace data.</p>
+<p>ExternalData acts like a Packages directory of the Unity project that stores data from other omoospaces.</p>
 <p><a href="https://docs.unity3d.com/2020.1/Documentation/Manual/HOWTO-exportpackage.html">Unity - Manual: Reusing Assets between Projects</a></p>
 <p>The internal structure of the package is part of its source omoospace</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>&lt;PackageName&gt;
