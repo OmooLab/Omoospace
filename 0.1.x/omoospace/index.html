@@ -47,12 +47,14 @@
         
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans:300,300i,400,400i,700,700i%7CCascadia+Code:400,400i,700,700i&display=fallback">
-        <style>:root{--md-text-font:"Noto Sans";--md-code-font:"Cascadia Code"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CCascadia+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Cascadia Code"}</style>
       
     
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
     
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
@@ -105,7 +107,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Omoospace Docs" class="md-header__button md-logo" aria-label="Omoospace Docs" data-md-component="logo">
       
-  <img src="../assets/Logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -297,7 +299,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Omoospace Docs" class="md-nav__button md-logo" aria-label="Omoospace Docs" data-md-component="logo">
       
-  <img src="../assets/Logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     Omoospace Docs
@@ -1108,7 +1110,7 @@
 </ul>
 </li>
 <li>
-<p>Subdirectories rules:</p>
+<p><code>SourceFiles</code> <code>Contents</code> subdirectories (optional):</p>
 <ul>
 <li>Process names set the <code>SourceFiles</code> subdirectories.</li>
 <li>Content types set the <code>Contents</code> subdirectories.</li>
@@ -1119,7 +1121,7 @@
 </li>
 <li><strong>Omoospace.yml</strong> stores the workspace profile, such as creator profiles, software versions, etc.</li>
 </ol>
-<p><img alt="A diagram illustrating the structure of omoospace" src="../assets/Untitled.png" /></p>
+<p><img alt="A diagram illustrating the structure of omoospace" src="../assets/overview.png" /></p>
 <p>A diagram illustrating the structure of omoospace</p>
 <h2 id="omoospace-structure">Omoospace Structure</h2>
 <h3 id="subspace">Subspace</h3>
@@ -1129,28 +1131,28 @@
 <p>So, how should you set subspace? And what is worth noting when setting subspaces?</p>
 <h4 id="subspace-can-be-set-by-filename-prefix-or-subdirectory">Subspace can be set by filename prefix or subdirectory</h4>
 <p>The phrases that are separated by <code>_</code> are subspaces, for example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001_SQ010_AssetA.blend
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>FilmA_SQ020_ModelB.blend
 </span></code></pre></div>
-<p>It is evident that this blender file is for creating <code>Asset A (AssetA)</code> of <code>Sequence 010 (SQ010)</code> of <code>Episode 001 (EP001)</code>. The nested subspaces form a route from parent to child: <code>EP001 &gt; SQ010 &gt; AssetA</code>. We call it <strong>Subspace Route</strong>.</p>
+<p>Evidently, this blender file is for creating <code>Model B</code> of <code>Sequence 010</code> of <code>Film A</code>. The nested subspaces form a route from parent to child: <code>FilmA &gt; SQ020 &gt; ModelB</code>. We call it <strong>Subspace Route</strong>.</p>
 <p>You can also use subdirectories instead of filename prefixes. To distinguish <strong>Subspace Directory</strong> from ordinary directories, the subspace directory must contain a marker file named <code>Subspace.yml</code>.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>FilmA
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml<span class="w"> </span><span class="c1"># marker</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ010
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ020
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">|</span><span class="w">           </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml<span class="w"> </span><span class="c1"># marker</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">|</span><span class="w">           </span><span class="sb">`</span>--<span class="w"> </span>AssetA.blend
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">|</span><span class="w">           </span><span class="sb">`</span>--<span class="w"> </span>ModelB.blend
 </span></code></pre></div>
-<p>The subspace route above is also <code>EP001 &gt; SQ010 &gt; AssetA</code>.</p>
+<p>The subspace route above is also <code>FilmA &gt; SQ020 &gt; ModelB</code>.</p>
 <p>Subspace is just a concept, and its existence relies on files or directories. We call those files and directories <strong>Subspace Entities</strong> of their subspace. As you can imagine, one subspace may have multiple entities to present them.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>FilmA
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml<span class="w"> </span><span class="c1"># marker</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>EP001.blend
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>SQ010.prproj
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ010.blend
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>FilmA.prproj
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>SQ020.prproj
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>SQ020.blend
 </span></code></pre></div>
-<p><code>SQ010.prproj</code> and <code>SQ010.blend</code> are both for <code>Sequence 010 (SQ010)</code>. They are its entities. Similarly, directory <code>EP001</code> and file <code>EP001.blend</code> are both <code>Episode 001 (EP001)</code> entities. According to subspace entities, we classify subspaces into three kinds:</p>
+<p>File <code>SQ020.prproj</code> and <code>SQ020.blend</code> are <code>Sequence 010 (SQ020)</code> entities. Similarly, the directory <code>FilmA</code> and file <code>FilmA.prproj</code> are <code>Film A (FilmA)</code> entities. According to subspace entities, we classify subspaces into three kinds:</p>
 <ul>
 <li><strong>Directory Subspace</strong> has a directory to present it.</li>
 <li><strong>File Subspace</strong> has only files to present it, no directory.</li>
@@ -1158,32 +1160,32 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The file <code>EP001_SQ010_AssetA.blend</code> only contains the <code>Asset A</code> object. <code>EP001</code> and <code>SQ010</code> are just pure concepts. They are phantom subspaces.</p>
+<p>The file <code>FilmA_SQ020_ModelB.blend</code> only contains the <code>Model B</code> object. <code>FilmA</code> and <code>SQ020</code> are just pure concepts. They are typical phantom subspaces.</p>
 </div>
 <h4 id="a-subspace-route-is-formed-by-combining-the-subspace-directory-and-filename-prefix">A subspace route is formed by combining the subspace directory and filename prefix.</h4>
-<p>Parent subspace directories and filename prefixes form the subspace route. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
+<p>Parent subspace directories and filename prefixes form the subspace route of an entity. Suppose the entity filename prefix contains its parent subspace name. They should overlap each other as much as possible, for example:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>FilmA
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ010_AssetA.blend
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ020_ModelB.blend
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>FilmA
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001_SQ010_AssetA.blend
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>FilmA_SQ020_ModelB.blend
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001_SQ010
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>FilmA_SQ020
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>EP001_SQ010_AssetA.blend
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>FilmA_SQ020_ModelB.blend
 </span></code></pre></div>
-<p>All examples' routes are all <code>EP001 &gt; SQ010 &gt; AssetA</code>.</p>
+<p>All examples' routes are all <code>FilmA &gt; SQ020 &gt; ModelB</code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There are no strict rules of when to use overlapping forms of directory structure. It is all up to the user's decision. Creators should design the directory structure to fit the project needs.</p>
 </div>
 <h4 id="a-subspace-name-should-not-be-pure-numbers-or-versions-or-autosave">A subspace name should not be pure numbers or versions or autosave.</h4>
-<p>Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, <code>v001</code> in <code>EP001_SQ010_AssetA_v001.blend</code>,  is not a new creation object. The file is still for creating <code>AssetA</code>. The subspace definition defines a subspace as a particular creation object. So <code>v001</code> is not a subspace.</p>
+<p>Numbers, versions, and autosave semantics are not for new objects, so they should not be subspace names. For example, <code>v001</code> in <code>FilmA_SQ020_ModelB_v001.blend</code>,  is not a new creation object. The file is still for creating <code>ModelB</code>. The subspace definition defines a subspace as a particular creation object. So <code>v001</code> is not a subspace.</p>
 <h4 id="write-the-subspace-profile-into-subspaceyml">Write the subspace profile into Subspace.yml.</h4>
 <p>Besides a marker file, <code>Subspace.yml</code> is also a subspace profile.</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Subspace.yml</span>
@@ -1191,19 +1193,19 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comments to this subspace.</span>
 </span></code></pre></div>
 <p>You can create the profile file to any subspace with the route as its filename, not the entire route but the subroute to the parent subspace.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>EP001
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>FilmA
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Subspace.yml
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SQ010.yml
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SQ010_AssetA.yml
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ010_AssetA.blend
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SQ020.yml
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SQ020_ModelB.yml
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>SQ020_ModelB.blend
 </span></code></pre></div>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># SQ010.yml</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sequence 010</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># SQ020.yml</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sequence 020</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The beginning scene of the story.</span>
 </span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># SQ010_AssetA.yml</span>
-</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Asset A</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># SQ020_ModelB.yml</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Model B</span>
 </span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A 3d model.</span>
 </span></code></pre></div>
 <h3 id="sourcefiles">SourceFiles</h3>
@@ -1213,19 +1215,20 @@
 <h4 id="subdirectories-by-process-name-optional">Subdirectories by process name (optional)</h4>
 <p>When a project grows, you may need to separate many source files into directories. Besides the subspace directory, we recommend setting subdirectories by process name.</p>
 <p>Some optional process names:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Film production processes</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Film production processes</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Production
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>PostProduction
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Post-production subprocesses</span>
+<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Post-production subprocesses</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Compositing
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>SoundEditing
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>VideoEditing
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 3D modeling processes</span>
+You can add sequence numbers in front.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 3D modeling processes</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">001</span>-Modeling
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span><span class="m">002</span>-Texturing
@@ -1233,7 +1236,7 @@
 </span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span><span class="m">004</span>-Shading
 </span></code></pre></div>
 <p>You can mix use process directories and subspace directories.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;SeriesTitle&gt;<span class="w"> </span><span class="c1"># (Root)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>&lt;SeriesTitle&gt;<span class="w"> </span><span class="c1"># (Root)</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>PreProduction
 </span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>&lt;ModelName&gt;<span class="w"> </span><span class="c1"># (Root) &gt; &lt;ModelName&gt;</span>
@@ -1254,7 +1257,7 @@
 <p>Any subspaces in <strong>Void</strong> are also <strong>Void Subspace</strong>.</p>
 </div>
 <p>Void subspace can be in a filename prefix or as a directory.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">|</span>--<span class="w"> </span>SourceFiles
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BeatingHeart
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Void_HowToBeat.hip
 </span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Void_RnD_MetaBall.blend
@@ -1272,14 +1275,14 @@
 <p>It stores digital content in a common format, whether internal or external, whether a work result or a resource. You should organize all content files here and stick to the rules.</p>
 <h4 id="subdirectories-by-content-type-optional">Subdirectories by content type (optional)</h4>
 <p>Some optional content types:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># For modeling propose</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># For modeling propose</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Images
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Materials
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
 </span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Renders
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># For short video production propose</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># For short video production propose</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Audios
 </span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
@@ -1289,7 +1292,7 @@
 </span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Renders
 </span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Videos
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># For film production propose</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># For film production propose</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Audios
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Dynamics
@@ -1319,7 +1322,7 @@
 </ul>
 <h4 id="the-output-of-the-source-file-is-named-after-its-source-file-subspace-route">The output of the source file is named after its source file subspace route.</h4>
 <p>There is no subspace directory setting in <code>Contents</code>. But use subspace route as filename prefix to hint the relationship to its source file.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">|</span><span class="w">       </span><span class="p">|</span>--<span class="w"> </span>BloodCells_RBC.fbx
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>BloodCells_WBC.fbx
@@ -1328,7 +1331,7 @@
 </span></code></pre></div>
 <p>In the above example, <code>BloodCells_RBC.fbx</code> and <code>BloodCells_WBC.fbx</code> come from <code>BloodCells.blend</code>. <code>RBC</code>, and <code>WBC</code> are subsets of <code>BloodCells.blend</code>. You can easily guess the relationship between them by their filenames.</p>
 <p>In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have <code>Organs</code>, because you wouldn't use those textures without the mesh. </p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">|</span>--<span class="w"> </span>Contents
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Models
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="p">|</span><span class="w">       </span><span class="sb">`</span>--<span class="w"> </span>Organs_Heart
 </span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">|</span><span class="w">           </span><span class="p">|</span>--<span class="w"> </span>Organs_Heart.fbx
@@ -1346,7 +1349,7 @@
 <p>It stores all data files from external sources. The “external” here means that it is created by the creator outside omoospace or not produced within this omoospace. The most common usage of <code>ExternalData</code> is to store resources from the network.</p>
 <h4 id="no-need-to-follow-the-naming-rules-do-not-set-any-subdirectories-by-content-type">No need to follow the naming rules; do not set any subdirectories by content type</h4>
 <p>Just keep its original file structure and naming style. For example:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>www.models.com_CT_Scanner
 </span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>CT_Scanner.fbx
 </span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>tex
@@ -1372,10 +1375,10 @@
 <h4 id="access-to-own-resource-library-contents-by-creating-soft-links-in-it">Access to own resource library contents by creating soft links in it.</h4>
 <p>You may have your resource library of 3D assets in a local or network directory (NAS). You usually don't know which asset suits the 3D scene most until you try, like HDRI. Repeating to move resource files from the library to the current working directory for trial isn't enjoyable.</p>
 <p>So we prefer to create a soft link to the library in <code>ExternalData</code>, then you can easily access the assets from the library.</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="p">|</span><span class="w">   </span><span class="sb">`</span>--<span class="w"> </span>Resouces<span class="w"> </span><span class="c1"># Soft link</span>
 </span></code></pre></div>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>D:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>D:
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="p">|</span>--<span class="w"> </span>Resouces<span class="w"> </span><span class="c1"># My super 3D resource library for everything </span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Models
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Cars
@@ -1385,7 +1388,7 @@
 </span></code></pre></div>
 <h4 id="it-stores-omoospace-packages">It stores omoospace packages</h4>
 <p>The omoospace package is designed for sharing omoospace data. You store them in <code>ExternalData</code>. </p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="p">|</span>--<span class="w"> </span>ExternalData
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>BloodCells<span class="w"> </span><span class="c1"># Package</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Package.yml<span class="w"> </span><span class="c1"># Package info</span>
 </span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="p">|</span><span class="w">   </span><span class="p">|</span><span class="w">   </span><span class="p">|</span>--<span class="w"> </span>Contents
@@ -1453,7 +1456,7 @@
 <p>ExternalData acts like a Packages directory of the Unity project that stores data from other omoospaces.</p>
 <p><a href="https://docs.unity3d.com/2020.1/Documentation/Manual/HOWTO-exportpackage.html">Unity - Manual: Reusing Assets between Projects</a></p>
 <p>The internal structure of the package is part of its source omoospace</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>&lt;PackageName&gt;
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>&lt;PackageName&gt;
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="p">|</span>--<span class="w"> </span>Contents<span class="w"> </span><span class="c1"># (Optional)</span>
 </span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="p">|</span>--<span class="w"> </span>ExternalData<span class="w"> </span><span class="c1"># (Optional)</span>
 </span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="p">|</span>--<span class="w"> </span>References<span class="w"> </span><span class="c1"># (Optional)</span>
