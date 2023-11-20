@@ -6,8 +6,7 @@ Omoospace is a scalable directory structure solution for digital creation works.
 
 The rules are simple:
 
-1. Naming everything with **PascalCase**.
-2. 5 main directories:
+1. Set 5 main directories:
 
     - `SourceFiles` stores source files of the software.
     - `Contents` stores digital content in a common format.
@@ -15,13 +14,14 @@ The rules are simple:
     - `References` stores reference resources (optional).
     - `StagedData` stores temporary data (optional).
 
-3. `SourceFiles` `Contents` subdirectories (optional):
+2. Set `SourceFiles` and `Contents` subdirectories (optional):
 
-    - Process names set the `SourceFiles` subdirectories.
-    - Content types set the `Contents` subdirectories.
+    - Set subdirectories by process name in the `SourceFiles`.
+    - Set subdirectories by content type in the `Contents` .
 
-4. Name source files and directories by **Subspaces** based on creation objects.
-5. **Omoospace.yml** stores the workspace profile, such as creator profiles, software versions, etc.
+3. Name anything using **UpperCamelCase** style.
+4. Name source files and directories with their creation objects as **Subspaces**.
+5. Write workspace profiles into **Omoospace.yml**, such as creator profiles, software versions, etc.
 
 ![A diagram illustrating the structure of omoospace](assets/overview.png)
 
@@ -31,33 +31,31 @@ A diagram illustrating the structure of omoospace
 
 ### Subspace
 
-**Subspace** is a sub-workspace based on objects of creation conducive to finding, sorting, and understanding. Subspace can be nested. For example, an anime series project, each episode is a creation object. Under that object, multiple secondary objects can be set based on the episode’s sequences, and you can continue to split each secondary object. Each object is a sub-workspace of the main workspace. We call those sub-workspaces **Subspace**, and name them after their objects.
+**Subspace** is a sub-workspace based on a creation object. It can be a directory or a single source file. Subspaces can be nested. For example, an anime series project, each episode is a creation object. Under that object, multiple secondary objects can be set based on the episode’s sequences, and you can continue to split each of those secondary objects. Each object is a sub-workspace of the main workspace. We call those sub-workspaces **Subspace**, and name them after their objects.
 
 The nested subspaces can generate a tree-like graph that presents the structure of the entire project, as shown in the figure below.
 
 ![Object tree](assets/object_tree.png)
 
-#### Name source files and directories by subspaces based on creation objects.
+#### Name source files and directories with their creation objects as subspaces.
 
 ```bash
 |-- SourceFiles
 |   `-- ModelB.blend
 ```
 
-The filename hints that it is for creating `Model B`. But what if `Model B` is only a secondary object of `Sequence 010`?
+The filename `ModelB.blend` hints that it is for creating `Model B`. 
 
-![Subspace route](assets/subspace_route.png)
-
-Just use `_` to separate multi-level subspaces in the filename:
+But what if `Model B` is only a secondary object of `Sequence 010` of `Film A`? Just use `_` to separate multi-level subspaces in the filename:
 
 ```bash
 |-- SourceFiles
 |   `-- FilmA_SQ020_ModelB.blend
 ```
 
-The purpose can be told by its filename that it is for creating `Model B` of `Sequence 010` of `Film A`.
+Its filename makes the purpose clear that it is for creating `Model B` of `Sequence 010` of `Film A`.
 
-You can also create a **Subspace Directory** to avoid long filename prefixes. A subspace directory must contain a marker file named `Subspace.yml` to distinguish it from an ordinary directory.
+You can also create a **Subspace Directory** to avoid lengthy filename prefixes. To distinguish it from an ordinary directory, a subspace directory must contain a marker file named `Subspace.yml`.
 
 ```bash
 |-- SourceFiles
@@ -92,6 +90,8 @@ We call those source files and subspace directories **Entities** of their subspa
 #### A subspace route is formed by combining the subspace names from root to leaf.
 
 The multi-level subspaces in `FilmA_SQ020_ModelB.blend` form a route from root to leaf: `FilmA > SQ020 > ModelB`. We call it **Subspace Route**.
+
+![Subspace route](assets/subspace_route.png)
 
 Suppose the entity subspace nodes contain its parent subspace nodes. They should overlap each other as much as possible, for example:
 
@@ -145,17 +145,17 @@ You can create the profile file to any subspace with the route as its filename, 
 |-- SourceFiles
 |   |-- FilmA
 |   |   |-- Subspace.yml
-|   |   |-- SQ020.yml
-|   |   |-- SQ020_ModelB.yml
+|   |   |-- SQ020.Subspace.yml
+|   |   |-- SQ020_ModelB.Subspace.yml
 |   |   `-- SQ020_ModelB.blend
 ```
 
 ```yaml
-# SQ020.yml
+# SQ020.Subspace.yml
 name: Sequence 020
 description: The beginning scene of the story.
 
-# SQ020_ModelB.yml
+# SQ020_ModelB.Subspace.yml
 name: Model B
 description: A 3d model.
 ```
@@ -314,15 +314,17 @@ There is no subspace directory setting in `Contents`. But use subspace route as 
 ```bash
 |-- Contents
 |   `-- Models
-|       |-- BloodCells_RBC.fbx
-|       `-- BloodCells_WBC.fbx
+|       |-- SQ010_BloodCells_RBC.fbx
+|       `-- SQ010_BloodCells_WBC.fbx
 |-- SourceFiles
-|   `-- BloodCells.blend
+|   `-- SQ010
+|       |-- Subspace.yml
+|       `-- BloodCells_RBC.fbx # Subspace route: SQ010 > BloodCells
 ```
 
-In the above example, `BloodCells_RBC.fbx` and `BloodCells_WBC.fbx` come from `BloodCells.blend`. `RBC`, and `WBC` are subsets of `BloodCells.blend`. You can easily guess the relationship between them by their filenames.
+You can easily guess that `SQ010_BloodCells_RBC.fbx` and `SQ010_BloodCells_WBC.fbx` come from `SQ010/BloodCells.blend`.
 
-In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are with their root directory, which already hints at its source. As the example below, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh.
+In some cases, one content is a collection of multiple files. e.g., a 3d model with textures or an image sequence of render output. Those sub-file names do not necessarily contain route names, as they are always with their root directory, which already hints at its source.
 
 ```bash
 |-- Contents
@@ -335,6 +337,8 @@ In some cases, one content is a collection of multiple files. e.g., a 3d model w
 |-- SourceFiles
 |   `-- Organs.blend
 ```
+
+As the example above, the texture filename does not need to have `Organs`, because you wouldn't use those textures without the mesh.
 
 **However, it does not mean using the entire route name is forbidden for sub-files, or you can name them randomly. Their name must be semantic.**
 
@@ -378,7 +382,7 @@ If you have stored external source data in `Contents` | `SourceFiles`, it is unn
 
 !!! note
 
-    Categorizing and renaming are not fun works, so storing external source data directly into `ExternalData` is recommended unless you can ensure files under `Contents` | `SourceFiles` are strict to the rules.
+    Categorizing and renaming are not fun, so storing external source data directly into `ExternalData` is recommended unless you can ensure files under `Contents` | `SourceFiles` are strict to the rules.
 
 #### Access to own resource library contents by creating soft links in it.
 
@@ -440,7 +444,7 @@ name: Omoospace's name
 description: A brief of this Omoospace (Optional)
 creators: # Creator list of this Omoospace
   - name: Creator's name
-    email: Creator's email (Optional)
+    email: Creator's email 
     role: Creator's role in this Omoospace (Optional)
     website: Creator's website (Optional)
 softwares: # Software list of this Omoospace
