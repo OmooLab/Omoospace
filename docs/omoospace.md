@@ -39,26 +39,22 @@ The nested subspaces can generate a tree-like graph that presents the structure 
 
 #### Name source files and directories with their creation objects as subspaces.
 
-```bash
-|-- SourceFiles
-|   `-- ModelB.blend
-```
-
-The filename `ModelB.blend` hints that it is for creating `Model B`. 
-
-But what if `Model B` is only a secondary object of `Sequence 010` of `Film A`? Just use `_` to separate multi-level subspaces in the filename:
+Use `_` to separate multi-level subspaces in the filename
 
 ```bash
 |-- SourceFiles
+|   |-- ModelA.blend
 |   `-- FilmA_SQ020_ModelB.blend
 ```
 
-Its filename makes the purpose clear that it is for creating `Model B` of `Sequence 010` of `Film A`.
+The filename `ModelA.blend` hints that it is for creating `Model A`. The filename `FilmA_SQ020_ModelB.blend` hints that it is for creating `Model B` of `Sequence 010` of `Film A`.
+
 
 You can also create a **Subspace Directory** to avoid lengthy filename prefixes. To distinguish it from an ordinary directory, a subspace directory must contain a marker file named `Subspace.yml`.
 
 ```bash
 |-- SourceFiles
+|   |-- ModelA.blend
 |   `-- FilmA
 |       |-- Subspace.yml # marker
 |       `-- SQ020
@@ -70,6 +66,8 @@ We call those source files and subspace directories **Entities** of their subspa
 
 ```bash
 |-- SourceFiles
+|   |-- ModelA.blend
+|   |-- ModelA.zpr
 |   `-- FilmA
 |       |-- Subspace.yml # marker
 |       |-- FilmA.prproj
@@ -77,15 +75,14 @@ We call those source files and subspace directories **Entities** of their subspa
 |       `-- SQ020.blend
 ```
 
-`SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Similarly, the directory `FilmA` and file `FilmA.prproj` are `Film A (FilmA)` entities. According to subspace entities, we classify subspaces into three kinds:
+`SQ020.prproj` and `SQ020.blend` are `Sequence 010 (SQ020)` entities. Similarly, the directory `FilmA` and file `FilmA.prproj` are `Film A (FilmA)` entities. According to subspace entities, we classify subspaces into two kinds:
 
--   **Directory Subspace** has a directory to present it.
--   **File Subspace** has only files to present it, no directory.
--   **Phantom Subspace** has no direct content in its files.
+-   **File Subspace** has only files to present itself, no directory.
+-   **Directory Subspace** has at least one directory to present itself.
 
 !!! note
 
-    The file `FilmA_SQ020_ModelB.blend` only contains the `Model B` object. `FilmA` and `SQ020` are just pure concepts. They are typical phantom subspaces.
+    The file `FilmA_SQ020_ModelB.blend` only contains the `Model B` object. `FilmA` and `SQ020` are just pure concepts. They are **Phantom Subspaces**.
 
 #### A subspace route is formed by combining the subspace names from root to leaf.
 
