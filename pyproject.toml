@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "omoospace"
-version = "0.1.6"
+version = "0.1.7"
 description = ""
 authors = ["manan <icrdr2010@outlook.com>"]
 readme = "README.md"
