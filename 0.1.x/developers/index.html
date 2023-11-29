@@ -564,6 +564,33 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+    <nav class="md-nav" aria-label="Utils">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reveal-in-file-explorer" class="md-nav__link">
+    Reveal in File Explorer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-to-clipboard" class="md-nav__link">
+    Copy to Clipboard
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -607,6 +634,8 @@
   
     
     
+      
+        
       
         
       
@@ -698,6 +727,26 @@
   
   <span class="md-ellipsis">
     Package
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utils
   </span>
   
 
@@ -820,6 +869,33 @@
           <li class="md-nav__item">
   <a href="#get-source-file-output-name" class="md-nav__link">
     Get Source File Output Name.
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+    <nav class="md-nav" aria-label="Utils">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reveal-in-file-explorer" class="md-nav__link">
+    Reveal in File Explorer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#copy-to-clipboard" class="md-nav__link">
+    Copy to Clipboard
   </a>
   
 </li>
@@ -1168,7 +1244,7 @@
 </tbody>
 </table>
 <h3 id="get-source-file-output-name">Get Source File Output Name.</h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">get_route</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">get_route_str</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">assert</span> <span class="n">get_route_str</span><span class="p">(</span><span class="s1">&#39;SQ010/AssetA.blend&#39;</span><span class="p">,</span><span class="s1">&#39;HighRes&#39;</span><span class="p">,</span><span class="s1">&#39;v001&#39;</span><span class="p">)</span> \
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>   <span class="o">==</span> <span class="s1">&#39;SQ010_SH0100_AssetA_HighRes_v001&#39;</span>
@@ -1205,6 +1281,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="utils">Utils</h2>
+<h3 id="reveal-in-file-explorer">Reveal in File Explorer</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">reveal_in_explorer</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">omoos</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s2">&quot;path/to/omoospace&quot;</span><span class="p">)</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">reveal_in_explorer</span><span class="p">(</span><span class="n">omoos</span><span class="o">.</span><span class="n">root_path</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Then it will open the directory of giving omoospace in the file explorer.</p>
+<h3 id="copy-to-clipboard">Copy to Clipboard</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">get_route_str</span><span class="p">,</span> <span class="n">copy_to_clipboard</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">route_str</span> <span class="o">=</span> <span class="n">get_route_str</span><span class="p">(</span><span class="s1">&#39;SQ010/AssetA.blend&#39;</span><span class="p">,</span><span class="s1">&#39;HighRes&#39;</span><span class="p">,</span><span class="s1">&#39;v001&#39;</span><span class="p">)</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">copy_to_clipboard</span><span class="p">(</span><span class="n">route_str</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Then you will get <code>SQ010_SH0100_AssetA_HighRes_v001</code> in your clipboard.</p>
 
 
 
