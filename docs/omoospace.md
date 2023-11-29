@@ -39,7 +39,7 @@ The nested subspaces can generate a tree-like graph that presents the structure 
 
 #### Name source files and directories with their creation objects as subspaces.
 
-Use `_` to separate multi-level subspaces in the filename
+Use `_` to separate multi-level subspaces in the filename.
 
 ```bash
 |-- SourceFiles

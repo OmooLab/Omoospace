@@ -28,6 +28,13 @@ def is_autosave(string: str) -> bool:
     pattern = r'auto[-_\s]?save'
     return bool(re.match(pattern, string, re.IGNORECASE))
 
+def is_buckup(string: str) -> bool:
+    pattern = r"^bak\d*$|^backup$"
+    return bool(re.match(pattern, string, re.IGNORECASE))
+
+def is_recovered(string: str) -> bool:
+    pattern = r"^recovered$"
+    return bool(re.match(pattern, string, re.IGNORECASE))
 
 def is_entity(path: str) -> bool:
     path: Path = Path(path).resolve()

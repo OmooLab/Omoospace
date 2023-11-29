@@ -17,6 +17,7 @@ nav:
       - Omoospace: apis/omoospace.md
       - Subspace: apis/subspace.md
       - Package: apis/package.md
+      - Utils: apis/utils.md
 
 theme:
   name: material
@@ -26,7 +27,6 @@ theme:
     text: Open Sans
     code: Cascadia Code
   palette:
-    
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
       primary: black
@@ -36,7 +36,7 @@ theme:
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default 
+      scheme: default
       primary: black
       toggle:
         icon: fontawesome/regular/moon

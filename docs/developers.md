@@ -293,26 +293,26 @@ assert get_route('SQ010/AssetA.blend') == ['SQ010', 'AssetA']
 
 More examples:
 
-| Files                                                               | Expected Result               |
-| ------------------------------------------------------------------- | ----------------------------- |
-| SQ010_AssetA.blend                                                  | ['SQ010','AssetA']           |
-| SQ010/AssetA.blend                                                  | ['AssetA']                    |
-| SQ010/AssetA.blend<br>SQ010/Subspace.yml                            | ['SQ010','AssetA']           |
+| Files                                                               | Expected Result             |
+| ------------------------------------------------------------------- | --------------------------- |
+| SQ010_AssetA.blend                                                  | ['SQ010','AssetA']          |
+| SQ010/AssetA.blend                                                  | ['AssetA']                  |
+| SQ010/AssetA.blend<br>SQ010/Subspace.yml                            | ['SQ010','AssetA']          |
 | SQ010_SH0100/AssetA.blend<br>SQ010_SH0100/Subspace.yml              | ['SQ010','SH0100','AssetA'] |
 | SQ010_SH0100/SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml       | ['SQ010','SH0100','AssetA'] |
 | SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010','SH0100','AssetA'] |
 | SQ010_SH0100/SQ010_SH0100_AssetA.blend<br>SQ010_SH0100/Subspace.yml | ['SQ010','SH0100','AssetA'] |
-| AssetA_001.blend                                                    | ['AssetA']                    |
-| AssetA\_\_v001.blend                                                | ['AssetA']                    |
-| Asset-A\_\_v001.blend                                               | ['AssetA']                    |
-| AssetA_v001_autosave.blend                                          | ['AssetA']                    |
-| AssetA_AssetA.blend                                                 | ['AssetA','AssetA']           |
-| Asset A/AssetA.blend<br>Asset A/Subspace.yml                        | ['AssetA']                    |
+| AssetA_001.blend                                                    | ['AssetA']                  |
+| AssetA\_\_v001.blend                                                | ['AssetA']                  |
+| Asset-A\_\_v001.blend                                               | ['AssetA']                  |
+| AssetA_v001_autosave.blend                                          | ['AssetA']                  |
+| AssetA_AssetA.blend                                                 | ['AssetA','AssetA']         |
+| Asset A/AssetA.blend<br>Asset A/Subspace.yml                        | ['AssetA']                  |
 
 ### Get Source File Output Name.
 
 ```python
-from omoospace import get_route
+from omoospace import get_route_str
 
 assert get_route_str('SQ010/AssetA.blend','HighRes','v001') \
    == 'SQ010_SH0100_AssetA_HighRes_v001'
@@ -326,3 +326,27 @@ More examples:
 | SQ010/AssetA.blend<br>SQ010/Subspace.yml               | 'LowRes'          | 'SQ010_AssetA_LowRes'              |
 | SQ010_SH0100/AssetA.blend<br>SQ010_SH0100/Subspace.yml | 'HighRes', 'v001' | 'SQ010_SH0100_AssetA_HighRes_v001' |
 | AssetA_AssetA.blend                                    |                   | 'AssetA_AssetA'                    |
+
+## Utils
+
+### Reveal in File Explorer
+
+```python
+from omoospace import Omoospace, reveal_in_explorer
+
+omoos = Omoospace("path/to/omoospace")
+reveal_in_explorer(omoos.root_path)
+```
+
+Then it will open the directory of giving omoospace in the file explorer.
+
+### Copy to Clipboard
+
+```python
+from omoospace import get_route_str, copy_to_clipboard
+
+route_str = get_route_str('SQ010/AssetA.blend','HighRes','v001')
+copy_to_clipboard(route_str)
+```
+
+Then you will get `SQ010_SH0100_AssetA_HighRes_v001` in your clipboard.

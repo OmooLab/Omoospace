@@ -1,5 +1,6 @@
+import pyperclip
 import pytest
-from omoospace import format_name
+from omoospace import format_name, copy_to_clipboard
 
 
 @pytest.mark.parametrize("name,expected", [
@@ -13,10 +14,18 @@ from omoospace import format_name
     ('头骨_v001', 'TouGu'),
     ('头骨_0001', 'TouGu'),
     ('Asset头骨_0001', 'AssetTouGu'),
+    ('AssetA_bak3', 'AssetA'),
+    ('AssetA_bak001', 'AssetA'),
+    ('AssetA_recovered', 'AssetA'),
+    ('AssetA_recovered_bak1', 'AssetA'),
+    ('backup', ''),
 ])
 def test_format_name(name: str, expected: str):
     assert format_name(name) == expected
 
 
-def test_set():
-    assert set(['a']) == set('a')
+@pytest.mark.skipif(not pyperclip.is_available(), reason="Clipboard unavailable.")
+def test_copy_to_clipboard():
+
+    copy_to_clipboard("The text to be copied to the clipboard.")
+    assert pyperclip.paste() == "The text to be copied to the clipboard."
