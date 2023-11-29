@@ -7,7 +7,7 @@ repo_name: omoolab/omoospace
 repo_url: https://github.com/omoolab/omoospace
 
 nav:
-  - Getting Stared:
+  - Getting Started:
       - index.md
       - What is omoospace?: omoospace.md
       - For Artists: artists.md
@@ -17,16 +17,16 @@ nav:
       - Omoospace: apis/omoospace.md
       - Subspace: apis/subspace.md
       - Package: apis/package.md
+      - Utils: apis/utils.md
 
 theme:
   name: material
-  logo: assets/Logo.png
+  logo: assets/logo.png
   language: en
   font:
-    text: Noto Sans
+    text: Open Sans
     code: Cascadia Code
   palette:
-    
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
       primary: black
@@ -36,7 +36,7 @@ theme:
 
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
-      scheme: default 
+      scheme: default
       primary: black
       toggle:
         icon: fontawesome/regular/moon
@@ -62,6 +62,9 @@ theme:
 extra:
   version:
     provider: mike
+
+extra_css:
+  - stylesheets/extra.css
 
 copyright: Copyright &copy; 2020 - 2024 Omoolab
 

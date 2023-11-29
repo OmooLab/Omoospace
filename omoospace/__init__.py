@@ -19,7 +19,9 @@ from omoospace.package import (
 )
 
 from omoospace.utils import (
-    format_name
+    format_name,
+    copy_to_clipboard,
+    reveal_in_explorer
 )
 
 from omoospace.types import *

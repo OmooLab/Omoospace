@@ -4,14 +4,17 @@ from pathlib import Path
 import shutil
 from pypinyin import lazy_pinyin
 from omoospace.types import PathLike
-from omoospace.validators import is_autosave, is_number, is_version
+from omoospace.validators import is_autosave, is_number, is_version, is_recovered, is_buckup
+import pyperclip
 
 
 def format_name(string: str):
     def is_semantic(string: str):
         return (not is_number(string)) \
             and (not is_version(string)) \
-            and (not is_autosave(string))
+            and (not is_autosave(string)) \
+            and (not is_recovered(string)) \
+            and (not is_buckup(string))
 
     # get rid of no semantic string parts.
     string = " ".join([s for s in string.split(' ')
@@ -44,6 +47,7 @@ def format_name(string: str):
     string = string.replace(" ", "")
     return string
 
+
 def remove_duplicates(list, key):
     seen = set()
     new_list = []
@@ -53,23 +57,29 @@ def remove_duplicates(list, key):
             new_list.append(d)
     return new_list
 
-def reveal_in_explorer(dir: str):
+
+def reveal_in_explorer(dir: PathLike):
+    """Open the directory in file exploarer
+
+    Args:
+        dir (PathLike): The directory want to open
+    """
     try:
         os.startfile(Path(dir).resolve())
     except Exception as err:
         print("Fail to reveal", err)
 
 
-def is_subpath(child: PathLike, parent: PathLike, or_equal=False):
+def is_subpath(child: PathLike, parent: PathLike, or_equal=False) -> bool:
     """Return True if child is a subpath of parent .
 
     Args:
-        child (str): [description]
-        parent (str): [description]
+        child (PathLike): Child path
+        parent (PathLike): Parent path
         or_equal (bool, optional): [description]. Defaults to False.
 
     Returns:
-        [type]: [description]
+        bool: Result.
     """
     parent = Path(parent).resolve()
     child = Path(child).resolve()
@@ -95,6 +105,19 @@ def copy_to(src: PathLike, dst: PathLike):
         shutil.copytree(src, dst)
     else:
         shutil.copy(src, dst)
+
+
+def copy_to_clipboard(string: str):
+    """Copy to clipboard
+
+    Args:
+        string (str): The string want to be copyed.
+    """
+    if not pyperclip.is_available():
+        print("Clipboard unavailable.")
+        return
+
+    pyperclip.copy(string)
 
 
 def rm_children(dir: PathLike):
