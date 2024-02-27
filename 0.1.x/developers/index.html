@@ -582,6 +582,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#format-name" class="md-nav__link">
+    Format Name
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#reveal-in-file-explorer" class="md-nav__link">
     Reveal in File Explorer
   </a>
@@ -921,6 +928,13 @@
   
     <nav class="md-nav" aria-label="Utils">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#format-name" class="md-nav__link">
+    Format Name
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#reveal-in-file-explorer" class="md-nav__link">
@@ -1323,18 +1337,93 @@
 </tbody>
 </table>
 <h2 id="utils">Utils</h2>
-<h3 id="reveal-in-file-explorer">Reveal in File Explorer</h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">reveal_in_explorer</span>
+<h3 id="format-name">Format Name</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">format_name</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">omoos</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s2">&quot;path/to/omoospace&quot;</span><span class="p">)</span>
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="n">reveal_in_explorer</span><span class="p">(</span><span class="n">omoos</span><span class="o">.</span><span class="n">root_path</span><span class="p">)</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">assert</span> <span class="n">format_name</span><span class="p">(</span><span class="s1">&#39;SQ010_SH0100_001&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;SQ010_SH0100&#39;</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Original Name</th>
+<th>Format Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQ010_SH0100_001</td>
+<td>SQ010_SH0100</td>
+</tr>
+<tr>
+<td>SQ010_SH0100_v001</td>
+<td>SQ010_SH0100</td>
+</tr>
+<tr>
+<td>Asset A v001</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>Asset A autosave</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>Asset_A autosave</td>
+<td>Asset_A</td>
+</tr>
+<tr>
+<td>Asset_a_autosave_001</td>
+<td>Asset_A</td>
+</tr>
+<tr>
+<td>Asset_a_autosave_v001</td>
+<td>Asset_A</td>
+</tr>
+<tr>
+<td>头骨_v001</td>
+<td>TouGu</td>
+</tr>
+<tr>
+<td>头骨_0001</td>
+<td>TouGu</td>
+</tr>
+<tr>
+<td>Asset 头骨_0001</td>
+<td>AssetTouGu</td>
+</tr>
+<tr>
+<td>AssetA_bak3</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>AssetA_bak001</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>AssetA_recovered</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>AssetA_recovered_bak1</td>
+<td>AssetA</td>
+</tr>
+<tr>
+<td>backup</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reveal-in-file-explorer">Reveal in File Explorer</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">reveal_in_explorer</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">omoos</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s2">&quot;path/to/omoospace&quot;</span><span class="p">)</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">reveal_in_explorer</span><span class="p">(</span><span class="n">omoos</span><span class="o">.</span><span class="n">root_path</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Then it will open the directory of giving omoospace in the file explorer.</p>
 <h3 id="copy-to-clipboard">Copy to Clipboard</h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">get_route_str</span><span class="p">,</span> <span class="n">copy_to_clipboard</span>
-</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">route_str</span> <span class="o">=</span> <span class="n">get_route_str</span><span class="p">(</span><span class="s1">&#39;SQ010/AssetA.blend&#39;</span><span class="p">,</span><span class="s1">&#39;HighRes&#39;</span><span class="p">,</span><span class="s1">&#39;v001&#39;</span><span class="p">)</span>
-</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">copy_to_clipboard</span><span class="p">(</span><span class="n">route_str</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">get_route_str</span><span class="p">,</span> <span class="n">copy_to_clipboard</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">route_str</span> <span class="o">=</span> <span class="n">get_route_str</span><span class="p">(</span><span class="s1">&#39;SQ010/AssetA.blend&#39;</span><span class="p">,</span><span class="s1">&#39;HighRes&#39;</span><span class="p">,</span><span class="s1">&#39;v001&#39;</span><span class="p">)</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">copy_to_clipboard</span><span class="p">(</span><span class="n">route_str</span><span class="p">)</span>
 </span></code></pre></div>
 <p>Then you will get <code>SQ010_SH0100_AssetA_HighRes_v001</code> in your clipboard.</p>
 
