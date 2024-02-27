@@ -44,6 +44,21 @@ file_paths = factory_omoospace_file_paths('SourceFiles')
     (["AssetA_AssetA.blend"],
      ['AssetA', 'AssetA']),
 
+    (["Void_AssetA.blend"],
+     ['Void', 'AssetA']),
+
+    (["Void/Void_AssetA.blend"],
+     ['Void', 'AssetA']),
+    
+    (["Void/AssetA.blend"],
+     ['Void', 'AssetA']),
+
+    (["SQ010_SH0100/Void_AssetA.blend", "SQ010_SH0100/Subspace.yml"],
+     ['Void', 'SQ010', 'SH0100', 'AssetA']),
+    
+    (["Void/SQ010_SH0100/Void_AssetA.blend", "Void/SQ010_SH0100/Subspace.yml"],
+     ['Void', 'SQ010', 'SH0100', 'AssetA']),
+
 ], indirect=['file_paths'])
 def test_get_route(file_paths: list[Path], expected: Route):
     assert get_route(file_paths[0]) == expected
@@ -59,7 +74,7 @@ def test_get_route(file_paths: list[Path], expected: Route):
      'SQ010_AssetA_LowRes'),
 
     (["SQ010_SH0100/AssetA.blend", "SQ010_SH0100/Subspace.yml"],
-     ['HighRes','v001'],
+     ['HighRes', 'v001'],
      'SQ010_SH0100_AssetA_HighRes_v001'),
 
     (["SQ010_SH0100/SH0100_AssetA.blend", "SQ010_SH0100/Subspace.yml"],
@@ -67,7 +82,7 @@ def test_get_route(file_paths: list[Path], expected: Route):
      'SQ010_SH0100_AssetA'),
 
     (["SQ010_SH0100/SQ010_SH0100_AssetA.blend", "SQ010_SH0100/Subspace.yml"],
-     ['HighRes','v001'],
+     ['HighRes', 'v001'],
      'SQ010_SH0100_AssetA_HighRes_v001'),
 
 
@@ -77,7 +92,7 @@ def test_get_route(file_paths: list[Path], expected: Route):
 
 ], indirect=['file_paths'])
 def test_get_route_str(file_paths: list[Path], subsets: list[str], expected: Route):
-    assert get_route_str(file_paths[0],*subsets) == expected
+    assert get_route_str(file_paths[0], *subsets) == expected
 
 
 def test_subspace_node(empty_omoos_path: Path):

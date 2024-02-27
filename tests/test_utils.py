@@ -1,4 +1,4 @@
-import pyperclip
+import pyclip
 import pytest
 from omoospace import format_name, copy_to_clipboard
 
@@ -24,8 +24,6 @@ def test_format_name(name: str, expected: str):
     assert format_name(name) == expected
 
 
-@pytest.mark.skipif(not pyperclip.is_available(), reason="Clipboard unavailable.")
 def test_copy_to_clipboard():
-
     copy_to_clipboard("The text to be copied to the clipboard.")
-    assert pyperclip.paste() == "The text to be copied to the clipboard."
+    assert pyclip.paste(text=True) == "The text to be copied to the clipboard."
