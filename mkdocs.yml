@@ -10,8 +10,9 @@ nav:
   - Getting Started:
       - index.md
       - What is omoospace?: omoospace.md
-      - For Artists: artists.md
-      - For Developers: developers.md
+      - For CG Artists: artists.md
+      - For Plugin Developers: developers.md
+      - For Code Contributors: contributors.md
       - Features Roadmap: roadmap.md
   - API Reference:
       - Omoospace: apis/omoospace.md

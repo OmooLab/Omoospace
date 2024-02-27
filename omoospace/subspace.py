@@ -366,6 +366,21 @@ def get_route_entities(entity_path: PathLike) -> list:
         if len(node_names) == 0:
             route_entities[-1].get('entities').append(entity)
 
+    # Left only one "Void" in front of node names
+    if 'Void' in [d.get('node_name') for d in route_entities]:
+        route_entities = [d for d in route_entities
+                          if d.get('node_name') != 'Void']
+
+        void_entities = []
+        for d in route_entities:
+            if d.get('node_name') == 'Void':
+                void_entities.extend(d.get('entities'))
+
+        route_entities.insert(0, {
+            'node_name': 'Void',
+            'entities': void_entities
+        })
+
     return route_entities
 
 
@@ -377,7 +392,7 @@ def get_route(entity_path: PathLike) -> Route:
     route = get_route("path/to/SQ010/SQ010_AssetA.blend")
     # >>> ['SQ010','AssetA']
     ```
-    
+
     Args:
         entity_path (PathLike): The giving entity.
 
@@ -397,7 +412,7 @@ def get_route_str(entity_path: PathLike, *subsets: str) -> str:
     string = get_route_str("path/to/SQ010/SQ010_AssetA.blend","HighRes","v001")
     # >>> SQ010_AssetA_HighRes_v001
     ```
-    
+
     Args:
         entity_path (PathLike): The giving entity.
 

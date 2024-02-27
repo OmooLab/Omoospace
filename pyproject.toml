@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "omoospace"
-version = "0.1.7"
+version = "0.1.8"
 description = ""
 authors = ["manan <icrdr2010@outlook.com>"]
 readme = "README.md"
@@ -10,7 +10,7 @@ python = "^3.9"
 ruamel-yaml = "^0.17.35"
 pypinyin = "^0.49.0"
 nutree = "^0.5.1"
-pyperclip = "^1.8.2"
+pyclip = "^0.7.0"
 
 [tool.poetry.scripts]
 

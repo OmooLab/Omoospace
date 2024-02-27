@@ -1,4 +1,14 @@
-# For Developers
+# For Plugin Developers
+
+## Installation
+
+This library requires Python version 3.9 or above (python official download link). You can use pyenv or conda for managing multiple Python versions on a single machine.
+
+Run the following command to install omoospace:
+
+```bash
+pip install omoospace
+```
 
 ## Omoospace
 
@@ -283,7 +293,7 @@ assert len(omoos.works[0].items) == 1
 
 ## Subspace
 
-### Get Source File Route.
+### Get Source File Route
 
 ```python
 from omoospace import get_route
@@ -309,7 +319,7 @@ More examples:
 | AssetA_AssetA.blend                                                 | ['AssetA','AssetA']         |
 | Asset A/AssetA.blend<br>Asset A/Subspace.yml                        | ['AssetA']                  |
 
-### Get Source File Output Name.
+### Get Source File Output Name
 
 ```python
 from omoospace import get_route_str

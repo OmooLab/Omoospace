@@ -16,11 +16,11 @@ The rules are simple:
 
 2. Set `SourceFiles` and `Contents` subdirectories (optional):
 
-    - Set subdirectories by process name in the `SourceFiles`.
+    - Set subdirectories by process or object in the `SourceFiles`.
     - Set subdirectories by content type in the `Contents` .
 
-3. Name anything using **UpperCamelCase** style.
-4. Name source files and directories with their creation objects as **Subspaces**.
+3. Name anything using **UpperCamelCase** style with most unique name not object type name.
+4. Name source files with their creation objects as same as their outputs, those creation objects are the **Subspaces** of entire workspace.
 5. Write workspace profiles into **Omoospace.yml**, such as creator profiles, software versions, etc.
 
 ![A diagram illustrating the structure of omoospace](assets/overview.png)
@@ -222,7 +222,8 @@ Most source files have their object, such as rendering images or exporting a 3D 
 
 !!! note
 
-    Any subspaces in **Void** are also **Void Subspace**.
+    Any subspaces in **Void** are also **Void Subspace**. So if any "Void" apperaed in subspace route, it will be only one "Void" in front of all subspaces. 
+    e.g. `Void/RnD_Void_HowToBeat.hip` subspace route should be `Void_RnD_HowToBeat`
 
 Void subspace can be in a filename prefix or as a directory.
 
