@@ -654,16 +654,36 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-cg-artists" class="md-nav__link">
+    For CG Artists
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-plugin-developers" class="md-nav__link">
+    For Plugin Developers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-code-contributors" class="md-nav__link">
+    For Code Contributors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -686,16 +706,19 @@
 
 
 <h1 id="omoospace">Omoospace</h1>
+<p><a href="https://www.figma.com/proto/JsTmI3JwGQ3Q3qEThAJv15/Omoospace?page-id=0%3A1&amp;type=design&amp;node-id=1-2&amp;viewport=-726%2C827%2C0.2&amp;t=gOuR9PgBJRNM62R0-1&amp;scaling=contain&amp;mode=design">In Chinese</a></p>
 <p>Omoospace is a scalable directory structure solution for digital creation works. We provide a Python library for managing omoospace, including creating omoospace, shipping packages, setting subspace, etc.</p>
 <p><a href="omoospace/">What is "Omoospace", and how does it rule all your creation files?</a></p>
-<p>This library is for developing DCC plugins like blender add-ons to integrate omoospace into software. But remember, omoospace is just a directory guide. It should be easy to maintain manually. We do not recommend any over-design that only works by using the plugin. This library aims to build plugins to avoid repetitive work and have a more global view of the whole project structure, which consists of nested subspaces, not to manage a project entirely on a program without touching the folders.</p>
-<h2 id="installation">Installation</h2>
-<p>This library requires Python version 3.9 or above (python official download link). You can use pyenv or conda for managing multiple Python versions on a single machine.</p>
-<p>Run the following command to install omoospace:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>omoospace
-</span></code></pre></div>
+<p>This library is for developing DCC plugins like blender add-ons to integrate omoospace into software. Remember, omoospace is just a directory guide. It should be easy to maintain manually. We do not recommend any over-design that only works by using plugins. This library aims to build plugins to avoid repetitive work and have a global view of the entire workspace structure, which consists of nested subspaces, not to manage a project entirely on a program without touching the folders.</p>
+<p>We developed some plugins already:</p>
+<ul>
+<li><a href="https://github.com/OmooLab/Omoospace-Houdini">Houdini</a></li>
+<li><a href="https://github.com/OmooLab/Omoospace-Blender">Blender</a></li>
+</ul>
 <h2 id="usage">Usage</h2>
-<p><a href="developers/">For Developers</a></p>
+<h3 id="for-cg-artists"><a href="artists/">For CG Artists</a></h3>
+<h3 id="for-plugin-developers"><a href="developers/">For Plugin Developers</a></h3>
+<h3 id="for-code-contributors"><a href="contributors/">For Code Contributors</a></h3>
 
 
 
