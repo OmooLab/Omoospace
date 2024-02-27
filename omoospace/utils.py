@@ -5,7 +5,7 @@ import shutil
 from pypinyin import lazy_pinyin
 from omoospace.types import PathLike
 from omoospace.validators import is_autosave, is_number, is_version, is_recovered, is_buckup
-import pyclip
+import pyperclip
 
 
 def format_name(string: str):
@@ -114,7 +114,7 @@ def copy_to_clipboard(string: str):
         string (str): The string want to be copyed.
     """
 
-    pyclip.copy(string)
+    pyperclip.copy(string)
 
 
 def rm_children(dir: PathLike):
