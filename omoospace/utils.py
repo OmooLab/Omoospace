@@ -58,14 +58,14 @@ def remove_duplicates(list, key):
     return new_list
 
 
-def reveal_in_explorer(dir: PathLike):
+def reveal_in_explorer(dst: PathLike):
     """Open the directory in file exploarer
 
     Args:
-        dir (PathLike): The directory want to open
+        dst (PathLike): The directory want to open
     """
     try:
-        os.startfile(Path(dir).resolve())
+        os.startfile(Path(dst))
     except Exception as err:
         print("Fail to reveal", err)
 

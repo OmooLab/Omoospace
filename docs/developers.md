@@ -12,7 +12,7 @@ pip install omoospace
 
 ## Omoospace
 
-### Create New Omoospace
+### Create a Omoospace
 
 ```python
 from omoospace import create_omoospace
@@ -31,7 +31,7 @@ assert len(omoos.entities) == 0
 assert len(omoos.subspace_tree_dict) == 0
 ```
 
-### Manage Omoospace
+### Manage Omoospaces
 
 Example omoospace:
 
@@ -95,7 +95,7 @@ assert tree_dict[1]['data'].node_name == "AssetC"
 assert len(tree_dict[1]['data'].children) == 2
 ```
 
-### Manage Subspace
+### Manage Subspaces
 
 Example omoospace:
 
@@ -138,7 +138,7 @@ assert subs_Valves.route == ['Heart', 'Valves']
 assert subs_Valves.description == 'The valves of heart.'
 ```
 
-### Manage Process
+### Manage Processes
 
 ```python
 from omoospace import Omoospace
@@ -175,7 +175,7 @@ subs_Heart = omoos.get_subspace(file_path)
 assert subs_Heart.route == ['Heart']
 ```
 
-### Manage Creator
+### Manage Creators
 
 ```python
 from omoospace import Omoospace
@@ -203,7 +203,7 @@ creator.role = 'Director'
 assert omoos.creators[0].role == 'Director'
 ```
 
-### Manage Software
+### Manage Softwares
 
 ```python
 from omoospace import Omoospace
@@ -238,7 +238,7 @@ software.set_plugin(
 assert len(software.plugins) == 1
 ```
 
-### Manage Work
+### Manage Works
 
 Example omoospace:
 
@@ -338,6 +338,32 @@ More examples:
 | AssetA_AssetA.blend                                    |                   | 'AssetA_AssetA'                    |
 
 ## Utils
+
+### Format a Name
+
+```python
+from omoospace import format_name
+
+assert format_name('SQ010_SH0100_001') == 'SQ010_SH0100'
+```
+
+| Original Name         | Format Name  |
+| --------------------- | ------------ |
+| SQ010_SH0100_001      | SQ010_SH0100 |
+| SQ010_SH0100_v001     | SQ010_SH0100 |
+| Asset A v001          | AssetA       |
+| Asset A autosave      | AssetA       |
+| Asset_A autosave      | Asset_A      |
+| Asset_a_autosave_001  | Asset_A      |
+| Asset_a_autosave_v001 | Asset_A      |
+| 头骨\_v001            | TouGu        |
+| 头骨\_0001            | TouGu        |
+| Asset 头骨\_0001      | AssetTouGu   |
+| AssetA_bak3           | AssetA       |
+| AssetA_bak001         | AssetA       |
+| AssetA_recovered      | AssetA       |
+| AssetA_recovered_bak1 | AssetA       |
+| backup                |              |
 
 ### Reveal in File Explorer
 
