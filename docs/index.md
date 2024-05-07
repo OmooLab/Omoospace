@@ -11,4 +11,4 @@ We provide some DCC plugins for CG artists to easily manage your projects follow
 -   [Blender](https://omoolab.github.io/Omoospace/latest/plugins/blender)
 -   [Houdini](https://omoolab.github.io/Omoospace/latest/plugins/houdini)
 
-We also provide a python library for developing plugins, [read me for more info.](https://omoolab.github.io/Omoospace/latest/plugins/develop_plugin)
+We also provide a python library for developing plugins, [read me for more info.](https://omoolab.github.io/Omoospace/latest/develop_plugin)
