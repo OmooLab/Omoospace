@@ -1,22 +1,14 @@
+[中文文档](https://uj6xfhbzp0.feishu.cn/wiki/XOtgwlQ3Hism0MkzOeBcMXrqnQe?from=from_copylink)
+
 # Omoospace
 
-[中文文档](https://www.figma.com/proto/JsTmI3JwGQ3Q3qEThAJv15/Omoospace?page-id=0%3A1&type=design&node-id=1-2&viewport=-726%2C827%2C0.2&t=gOuR9PgBJRNM62R0-1&scaling=contain&mode=design)
+Omoospace is a directory structure guideline for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
 
-Omoospace is a scalable directory structure solution for digital creation works. We provide a Python library for managing omoospace, including creating omoospace, shipping packages, setting subspace, etc.
+If you are not sure how to design your project directory right, you can follow the omoospace rules, [click here to start](https://omoolab.github.io/Omoospace/latest/why_omoospace)
 
-[What is "Omoospace", and how does it rule all your creation files?](https://omoolab.github.io/Omoospace/latest/)
+We provide some DCC plugins for CG artists to easily manage your projects following omoospace rules.
 
-This library is for developing DCC plugins like blender add-ons to integrate omoospace into software. Remember, omoospace is just a directory guide. It should be easy to maintain manually. We do not recommend any over-design that only works by using plugins. This library aims to build plugins to avoid repetitive work and have a global view of the entire workspace structure, which consists of nested subspaces, not to manage a project entirely on a program without touching the folders.
+-   [Blender](https://omoolab.github.io/Omoospace/latest/plugins/blender)
+-   [Houdini](https://omoolab.github.io/Omoospace/latest/plugins/houdini)
 
-We developed some plugins already:
-
--   [Houdini](https://github.com/OmooLab/Omoospace-Houdini)
--   [Blender](https://github.com/OmooLab/Omoospace-Blender)
-
-## Usage
-
-### [For CG Artists](https://omoolab.github.io/Omoospace/latest/artists/)
-
-### [For Plugin Developers](https://omoolab.github.io/Omoospace/latest/developers/)
-
-### [For Code Contributors](https://omoolab.github.io/Omoospace/latest/contributors/)
+We also provide a python library for developing plugins, [read me for more info.](https://omoolab.github.io/Omoospace/latest/plugins/develop_plugin)

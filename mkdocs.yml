@@ -7,18 +7,21 @@ repo_name: omoolab/omoospace
 repo_url: https://github.com/omoolab/omoospace
 
 nav:
-  - Getting Started:
+  - Overview:
       - index.md
-      - What is omoospace?: omoospace.md
-      - For CG Artists: artists.md
-      - For Plugin Developers: developers.md
-      - For Code Contributors: contributors.md
-      - Features Roadmap: roadmap.md
-  - API Reference:
-      - Omoospace: apis/omoospace.md
-      - Subspace: apis/subspace.md
-      - Package: apis/package.md
-      - Utils: apis/utils.md
+      - Why Omoospace?: why_omoospace.md
+      - Omoospace Rules: omoospace_rules.md
+  - Omoospace Plugins:
+      - Blender: plugins/blender.md
+      - Houdini: plugins/houdini.md
+  - Develop a Plugin:
+      - develop_plugin.md
+      - API Reference:
+          - Omoospace: apis/omoospace.md
+          - Subspace: apis/subspace.md
+          - Package: apis/package.md
+          - Utils: apis/utils.md
+  - Contribution: contribution.md
 
 theme:
   name: material

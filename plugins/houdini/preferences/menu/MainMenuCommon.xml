@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mainMenu>
+  <menuBar>
+    <subMenu id="omoospace">
+      <insertBefore />
+      <label>Omoospace</label>
+
+      <scriptItem id="omoospace_create_omoospace">
+        <label>Create an Omoospace</label>
+        <scriptCode>
+          <![CDATA[
+from omoospacehoudini import create_omoospace
+create_omoospace()
+]]>
+        </scriptCode>
+      </scriptItem>
+      <separatorItem></separatorItem>
+
+      <scriptItem>
+        <labelExpression>f"$JOB ({hou.getenv('PATH_FORMAT') or 'UNC'}): {hou.getenv('JOB')}"</labelExpression>
+        <scriptCode>
+          <![CDATA[
+import os
+from pathlib import Path
+os.startfile(Path(hou.getenv('JOB')))
+]]>
+        </scriptCode>
+      </scriptItem>
+
+      <scriptItem>
+        <labelExpression>f"$ROUTE: {hou.getenv('ROUTE')}"</labelExpression>
+        <scriptCode>
+          <![CDATA[
+from omoospace import copy_to_clipboard
+copy_to_clipboard(hou.getenv('ROUTE'))
+print(f"Copy to Clipboard: {hou.getenv('ROUTE')}")
+]]>
+        </scriptCode>
+      </scriptItem>
+
+      <scriptItem>
+        <label>Update Envs</label>
+        <scriptCode>
+          <![CDATA[
+from omoospacehoudini import on_hip_save
+on_hip_save()
+]]>
+        </scriptCode>
+      </scriptItem>
+
+      <scriptItem>
+        <label>Change Path Format</label>
+        <scriptCode>
+          <![CDATA[
+from omoospacehoudini import on_hip_save
+path_format = "UNC" if hou.getenv('PATH_FORMAT') == "MNT" else "MNT"
+on_hip_save(path_format)
+]]>
+        </scriptCode>
+      </scriptItem>
+
+
+    </subMenu>
+  </menuBar>
+</mainMenu>

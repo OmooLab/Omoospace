@@ -125,3 +125,8 @@ dmypy.json
 
 # Test OmooSpace
 temp
+
+# python env
+pythonlib*
+
+.secrets

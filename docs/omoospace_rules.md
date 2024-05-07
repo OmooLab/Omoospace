@@ -1,8 +1,4 @@
-# What is omoospace?
-
-Omoospace is a scalable directory structure solution for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
-
-## Overview
+# Omoospace Rules
 
 The rules are simple:
 

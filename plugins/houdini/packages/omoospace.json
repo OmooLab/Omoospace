@@ -1,0 +1,22 @@
+{
+  "enable": "houdini_os == 'windows' and houdini_version >= '19.5'",
+  "load_package_once": true,
+  "env": [
+    { "OMOOSPACE_PATH": "$HOUDINI_PACKAGE_PATH/.." },
+    { "OMOOSPACE_PREFERS": "$OMOOSPACE_PATH/preferences" },
+    { "HOUDINI_MENU_PATH": "$OMOOSPACE_PREFERS/menu" },
+    { "HOUDINI_BACKUP_FILENAME": "$BASENAME/$BASENAME_bak$N" },
+    {
+      "PYTHONPATH": [
+        "$OMOOSPACE_PATH/python",
+        {
+          "houdini_python == 'python3.9'": "$OMOOSPACE_PATH/pythonlib3.9/Lib/site-packages"
+        },
+        {
+          "houdini_python == 'python3.10'": "$OMOOSPACE_PATH/pythonlib3.10/Lib/site-packages"
+        }
+      ]
+    }
+  ],
+  "hpath": "$OMOOSPACE_PREFERS"
+}

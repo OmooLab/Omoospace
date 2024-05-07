@@ -1,4 +1,4 @@
-# For Plugin Developers
+# Develop a Plugin
 
 ## Installation
 
