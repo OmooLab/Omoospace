@@ -19,7 +19,7 @@ The rules are simple:
 4. Name source files with their creation objects as same as their outputs, those creation objects are the **Subspaces** of entire workspace.
 5. Write workspace profiles into **Omoospace.yml**, such as creator profiles, software versions, etc.
 
-![A diagram illustrating the structure of omoospace](assets/overview.png)
+![A diagram illustrating the structure of omoospace](/docs/assets/overview.png)
 
 A diagram illustrating the structure of omoospace
 
@@ -31,7 +31,7 @@ A diagram illustrating the structure of omoospace
 
 The nested subspaces can generate a tree-like graph that presents the structure of the entire project, as shown in the figure below.
 
-![Object tree](assets/object_tree.png)
+![Object tree](/docs/assets/object_tree.png)
 
 #### Name source files and directories with their creation objects as subspaces.
 
@@ -84,7 +84,7 @@ We call those source files and subspace directories **Entities** of their subspa
 
 The multi-level subspaces in `FilmA_SQ020_ModelB.blend` form a route from root to leaf: `FilmA > SQ020 > ModelB`. We call it **Subspace Route**.
 
-![Subspace route](assets/subspace_route.png)
+![Subspace route](/docs/assets/subspace_route.png)
 
 Suppose the entity subspace nodes contain its parent subspace nodes. They should overlap each other as much as possible, for example:
 

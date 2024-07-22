@@ -1,9 +1,12 @@
 import bpy
 from .utils import get_subspace_route, get_omoospace_root
-from .preferences import REQUIREMENTS_DIR
 from .manage_paths import MakePathAbsolute, MakePathRelative, ManageInputPaths, ManageOutputPaths
 from .omoospace import CreateOmoospace, OpenOmoospaceRoot, CopySubspaceRoute
-from .externalpackage import PackageInstaller
+try:
+    from .externalpackage import PackageInstaller
+    from .preferences import REQUIREMENTS_DIR
+except:
+    pass
 
 
 class OmoospaceMenu(bpy.types.Menu):
@@ -31,11 +34,14 @@ class OmoospaceMenu(bpy.types.Menu):
 
 def TOPBAR(self, context):
     layout = self.layout
-    installer = PackageInstaller(requirements_dir=REQUIREMENTS_DIR)
-    if installer.is_installed('omoospace'):
+    try:
+        installer = PackageInstaller(requirements_dir=REQUIREMENTS_DIR)
+        if installer.is_installed('omoospace'):
+            layout.menu(OmoospaceMenu.bl_idname)
+        else:
+            layout.label(text="Omoospace (Disabled)")
+    except:
         layout.menu(OmoospaceMenu.bl_idname)
-    else:
-        layout.label(text="Omoospace (Disabled)")
 
 
 def FILE_BROWSER(self, context):
@@ -54,11 +60,11 @@ def FILE_BROWSER(self, context):
     )
 
 
-def register():
+def add():
     bpy.types.TOPBAR_MT_editor_menus.prepend(TOPBAR)
     bpy.types.FILEBROWSER_PT_bookmarks_favorites.prepend(FILE_BROWSER)
 
 
-def unregister():
+def remove():
     bpy.types.TOPBAR_MT_editor_menus.remove(TOPBAR)
     bpy.types.FILEBROWSER_PT_bookmarks_favorites.remove(FILE_BROWSER)

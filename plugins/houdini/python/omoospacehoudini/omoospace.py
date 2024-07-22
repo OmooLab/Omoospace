@@ -6,7 +6,7 @@ import hou
 
 from omoospace import (
     Omoospace,
-    create_omoospace,
+    create_omoospace as _create_omoospace,
     format_name
 )
 
@@ -138,7 +138,7 @@ class CreateOmoospace(QDialog):
             )
             return
 
-        omoospace = create_omoospace(
+        omoospace = _create_omoospace(
             name=self.omoospace_name,
             root_dir=self.omoospace_home,
             reveal_in_explorer=False

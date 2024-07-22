@@ -1183,16 +1183,6 @@ files = [
 diagrams = ["jinja2", "railroad-diagrams"]
 
 [[package]]
-name = "pyperclip"
-version = "1.8.2"
-description = "A cross-platform clipboard module for Python. (Only handles plain text for now.)"
-optional = false
-python-versions = "*"
-files = [
-    {file = "pyperclip-1.8.2.tar.gz", hash = "sha256:105254a8b04934f0bc84e9c24eb360a591aaf6535c9def5f29d92af107a9bf57"},
-]
-
-[[package]]
 name = "pypinyin"
 version = "0.49.0"
 description = "汉字拼音转换模块/工具."
@@ -1869,4 +1859,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "0d0251f5845ce00cc607e0688992e4e91edd22d6c600c40a635e7034790b7ceb"
+content-hash = "98b6bf491339d8ca80b9cc4ab7c35edca782f9da2e5f064e841890c762b39df5"

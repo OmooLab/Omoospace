@@ -2,7 +2,7 @@ import bpy
 from pathlib import Path
 from .utils import (copy_to_dir, eval_raw_path, get_omoospace_root,
                     get_parm_raw_path, get_subspace_route, get_type, set_parm_raw_path)
-from .props import InputPath, OutputPath
+from .props import OMOOSPACE_InputPath, OMOOSPACE_OutputPath
 try:
     from omoospace import format_name
 except:
@@ -172,7 +172,7 @@ class OMOOSPACE_UL_InputPathList(bpy.types.UIList):
     )  # type: ignore
 
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
-        path_item: InputPath = item
+        path_item: OMOOSPACE_InputPath = item
 
         if self.layout_type in {'DEFAULT', 'COMPACT'}:
             row = layout.split(factor=0.02)
@@ -229,7 +229,7 @@ class ManageInputPaths(bpy.types.Operator):
     bl_options = {'UNDO'}
 
     input_paths: bpy.props.CollectionProperty(
-        type=InputPath,
+        type=OMOOSPACE_InputPath,
         options={"SKIP_SAVE"}
     )  # type: ignore
 
@@ -243,7 +243,7 @@ class ManageInputPaths(bpy.types.Operator):
     def invoke(self, context, event):
 
         for parm, item in collect_input_paths().items():
-            path_item: InputPath = self.input_paths.add()
+            path_item: OMOOSPACE_InputPath = self.input_paths.add()
             raw_path = get_parm_raw_path(parm)
 
             if raw_path and eval_raw_path(raw_path) == item["orig_path"]:
@@ -266,9 +266,9 @@ class ManageInputPaths(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def execute(self, context):
-        input_paths: list[InputPath] = self.input_paths
+        input_paths: list[OMOOSPACE_InputPath] = self.input_paths
 
-        def manage_path(path_item: InputPath):
+        def manage_path(path_item: OMOOSPACE_InputPath):
             # skip
             if not path_item.do_manage:
                 return
@@ -357,7 +357,7 @@ class OMOOSPACE_UL_OutputPathList(bpy.types.UIList):
     )  # type: ignore
 
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname):
-        path_item: OutputPath = item
+        path_item: OMOOSPACE_OutputPath = item
 
         if self.layout_type in {'DEFAULT', 'COMPACT'}:
             row = layout.split(factor=0.02)
@@ -424,7 +424,7 @@ class ManageOutputPaths(bpy.types.Operator):
     bl_options = {'UNDO'}
 
     output_paths: bpy.props.CollectionProperty(
-        type=OutputPath,
+        type=OMOOSPACE_OutputPath,
         options={"SKIP_SAVE"}
     )  # type: ignore
 
@@ -437,7 +437,7 @@ class ManageOutputPaths(bpy.types.Operator):
 
     def invoke(self, context, event):
         for parm, item in collect_output_paths().items():
-            path_item: OutputPath = self.output_paths.add()
+            path_item: OMOOSPACE_OutputPath = self.output_paths.add()
             raw_path = get_parm_raw_path(parm)
 
             if raw_path and eval_raw_path(raw_path) == item["orig_path"]:
@@ -470,9 +470,9 @@ class ManageOutputPaths(bpy.types.Operator):
         return {'RUNNING_MODAL'}
 
     def execute(self, context):
-        output_paths: list[OutputPath] = self.output_paths
+        output_paths: list[OMOOSPACE_OutputPath] = self.output_paths
 
-        def manage_path(path_item: OutputPath):
+        def manage_path(path_item: OMOOSPACE_OutputPath):
             # skip
             if not path_item.do_manage:
                 return

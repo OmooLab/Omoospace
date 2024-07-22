@@ -1,7 +1,7 @@
 import bpy
 
 
-class InputPath(bpy.types.PropertyGroup):
+class OMOOSPACE_InputPath(bpy.types.PropertyGroup):
     do_manage: bpy.props.BoolProperty(default=True)   # type: ignore
     icon: bpy.props.StringProperty(default="None")   # type: ignore
     label: bpy.props.StringProperty()   # type: ignore
@@ -13,7 +13,7 @@ class InputPath(bpy.types.PropertyGroup):
     include_dir: bpy.props.BoolProperty(default=False)   # type: ignore
 
 
-class OutputPath(bpy.types.PropertyGroup):
+class OMOOSPACE_OutputPath(bpy.types.PropertyGroup):
     do_manage: bpy.props.BoolProperty(default=True)   # type: ignore
     icon: bpy.props.StringProperty(default="None")   # type: ignore
     label: bpy.props.StringProperty()   # type: ignore
@@ -28,7 +28,7 @@ class OutputPath(bpy.types.PropertyGroup):
     is_staged: bpy.props.BoolProperty(default=False)   # type: ignore
 
 
-class QuickDir(bpy.types.PropertyGroup):
+class OMOOSPACE_QuickDir(bpy.types.PropertyGroup):
     label: bpy.props.StringProperty()   # type: ignore
     path: bpy.props.StringProperty(subtype="DIR_PATH")   # type: ignore
 
@@ -44,8 +44,8 @@ def update_quick_dirs(self, context):
 
         quick_dir_list.quick_dirs_active = -1
 
-class QuickDirList(bpy.types.PropertyGroup):
-    quick_dirs: bpy.props.CollectionProperty(type=QuickDir)  # type: ignore
+class OMOOSPACE_QuickDirList(bpy.types.PropertyGroup):
+    quick_dirs: bpy.props.CollectionProperty(type=OMOOSPACE_QuickDir)  # type: ignore
     quick_dirs_active: bpy.props.IntProperty(
         default=-1,
         name="Quick Directories",

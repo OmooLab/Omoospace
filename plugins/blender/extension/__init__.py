@@ -5,17 +5,6 @@ from . import menus
 import bpy
 
 
-bl_info = {
-    "name": "Omoospace",
-    "author": "Ma Nan",
-    "description": "",
-    "blender": (4, 0, 0),
-    "version": (0, 1, 1),
-    "location": "Omoospace",
-    "warning": "",
-    "category": "System"
-}
-
 auto_load.init()
 
 

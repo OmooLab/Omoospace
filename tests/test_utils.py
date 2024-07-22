@@ -1,4 +1,4 @@
-import pyperclip
+from omoospace import pyperclip
 import pytest
 from omoospace import format_name, copy_to_clipboard
 

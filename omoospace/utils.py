@@ -5,7 +5,7 @@ import shutil
 from pypinyin import lazy_pinyin
 from omoospace.types import PathLike
 from omoospace.validators import is_autosave, is_number, is_version, is_recovered, is_buckup
-import pyperclip
+from omoospace import pyperclip
 
 
 def format_name(string: str):

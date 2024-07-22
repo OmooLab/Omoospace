@@ -1,21 +1,21 @@
 site_name: Omoospace Docs
-site_url: https://omoolab.github.io/omoospace/
+site_url: https://omoolab.github.io/Omoospace/
 site_author: OmooLab
 site_description: Omoospace is a scalable directory structure solution for digital creation works.
 
-repo_name: omoolab/omoospace
-repo_url: https://github.com/omoolab/omoospace
+repo_name: OmooLab/Omoospace
+repo_url: https://github.com/OmooLab/Omoospace
 
 nav:
   - Overview:
       - index.md
-      - Why Omoospace?: why_omoospace.md
-      - Omoospace Rules: omoospace_rules.md
+      - Why Omoospace?: why-omoospace.md
+      - Omoospace Rules: omoospace-rules.md
   - Omoospace Plugins:
       - Blender: plugins/blender.md
       - Houdini: plugins/houdini.md
   - Develop a Plugin:
-      - develop_plugin.md
+      - develop-plugin.md
       - API Reference:
           - Omoospace: apis/omoospace.md
           - Subspace: apis/subspace.md
