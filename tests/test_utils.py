@@ -4,21 +4,21 @@ from omoospace import format_name, copy_to_clipboard
 
 
 @pytest.mark.parametrize("name,expected", [
-    ('SQ010_SH0100_001', 'SQ010_SH0100'),
-    ('SQ010_SH0100_v001', 'SQ010_SH0100'),
+    ('Seq010_001', 'Seq010'),
+    ('Seq010_Shot0100.v001', 'Seq010_Shot0100'),
     ('Asset A v001', 'AssetA'),
-    ('Asset A autosave', 'AssetA'),
-    ('Asset_A autosave', 'Asset_A'),
-    ('Asset_a_autosave_001', 'Asset_A'),
+    ('Asset A_autosave', 'AssetA'),
+    ('Asset_A.autosave', 'Asset_A'),
+    ('Asset_aa 001', 'Asset_Aa'),
     ('Asset_a_autosave_v001', 'Asset_A'),
-    ('头骨_v001', 'TouGu'),
-    ('头骨_0001', 'TouGu'),
-    ('Asset头骨_0001', 'AssetTouGu'),
-    ('AssetA_bak3', 'AssetA'),
-    ('AssetA_bak001', 'AssetA'),
-    ('AssetA_recovered', 'AssetA'),
-    ('AssetA_recovered_bak1', 'AssetA'),
-    ('backup', ''),
+    ('头骨2.v001', '头骨2'),
+    ('头骨.2.0001', '头骨'),
+    ('Asset头骨.0001', 'Asset头骨'),
+    ('AssetA-1.v3', 'AssetA-1'),
+    ('AssetAA.v3', 'AssetAA'),
+    ('AssetAa.v001', 'AssetAa'),
+    ('AssetA_recovered 1', 'AssetA'),
+    ('AssetA_recovered.v001', 'AssetA')
 ])
 def test_format_name(name: str, expected: str):
     assert format_name(name) == expected

@@ -10,10 +10,7 @@ nav:
   - Overview:
       - index.md
       - Why Omoospace?: why-omoospace.md
-      - Omoospace Rules: omoospace-rules.md
-  - Omoospace Plugins:
-      - Blender: plugins/blender.md
-      - Houdini: plugins/houdini.md
+      - Omoospace Principles: principles.md
   - Develop a Plugin:
       - develop-plugin.md
       - API Reference:

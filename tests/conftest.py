@@ -15,20 +15,35 @@ def mini_omoos_path():
     # create the test omoospace.
     omoos_path.mkdir(parents=True, exist_ok=True)
     Path(omoos_path, "Contents").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "SourceFiles").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "ExternalData").mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "Subspaces").mkdir(parents=True, exist_ok=True)
     write_file_content(
-        ("Omoospace.yml", """
+        ("Omoospace.md", """
         name: Mini
         description: A mini omoospace.
         """),
         root_dir=omoos_path)
     yield omoos_path
 
-    # # delete omoospcae after test
-    # if (omoos_path.exists()):
-    #     shutil.rmtree(omoos_path, ignore_errors=True)
+@pytest.fixture()
+def bad_omoos_path():
+    omoos_path = Path("temp", "BadProject").resolve()
+    # delete omoospace dir if exists.
+    if (omoos_path.exists()):
+        shutil.rmtree(omoos_path, ignore_errors=True)
 
+    # create the test omoospace.
+    omoos_path.mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "Content").mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "Subspace").mkdir(parents=True, exist_ok=True)
+    write_file_content(
+        ("Omoospace.yml", """
+        name: Mini
+        description: A mini omoospace.
+        contents_mapping: Content
+        subspaces_mapping: Subspace
+        """),
+        root_dir=omoos_path)
+    yield omoos_path
 
 @pytest.fixture()
 def empty_omoos_path():
@@ -40,10 +55,9 @@ def empty_omoos_path():
     # create the test omoospace.
     omoos_path.mkdir(parents=True, exist_ok=True)
     Path(omoos_path, "Contents").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "SourceFiles").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "ExternalData").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "Reference").mkdir(parents=True, exist_ok=True)
-    Path(omoos_path, "StagedData").mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "Subspaces").mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "References").mkdir(parents=True, exist_ok=True)
+    Path(omoos_path, "Void").mkdir(parents=True, exist_ok=True)
     write_file_content(
         ("Omoospace.yml", """
         name: Empty
@@ -53,10 +67,6 @@ def empty_omoos_path():
     )
 
     yield omoos_path
-
-    # # delete omoospcae after test
-    # if (omoos_path.exists()):
-    #     shutil.rmtree(omoos_path, ignore_errors=True)
 
 
 @pytest.fixture(autouse=True)

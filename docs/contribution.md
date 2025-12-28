@@ -8,7 +8,7 @@ Install Poetry
 Install Dependencies
 
 ```bash
-poetry install
+uv sync
 ```
 
 ## Other Commands
@@ -16,23 +16,23 @@ poetry install
 Test Coverage
 
 ```bash
-poetry run pytest --cov=omoospace tests/
+uv run pytest --cov=omoospace tests/
 ```
 
 Server Mkdocs
 ```bash
-poetry run mkdocs serve
+uv run mkdocs serve
 ```
 
 Deploy Github Pages
 
 ```bash
-poetry run mike deploy --push --update-aliases 0.1.x latest
+uv run mike deploy --push --update-aliases 0.2.x latest
 ```
 
 Publish to Pypi
 
 ```bash
-poetry build
-poetry publish
+uv build
+uv publish
 ```

@@ -1,31 +1,37 @@
-[tool.poetry]
+[project]
 name = "omoospace"
-version = "0.1.10"
+version = "0.2.0"
 description = ""
-authors = ["manan <icrdr2010@outlook.com>"]
+authors = [{ name = "manan", email = "icrdr2010@outlook.com" }]
+requires-python = ">=3.10,<4"
 readme = "README.md"
+dependencies = [
+    "ruamel-yaml>=0.17.35,<0.18",
+    "pypinyin>=0.49.0,<0.50",
+    "nutree>=0.5.1,<0.6",
+    "typer>=0.20.1",
+    "inquirerpy>=0.3.4",
+]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-ruamel-yaml = "^0.17.35"
-pypinyin = "^0.49.0"
-nutree = "^0.5.1"
+[dependency-groups]
+dev = [
+    "ipykernel>=6.25.2,<7",
+    "pytest>=7.4.2,<8",
+    "pytest-dependency>=0.5.1,<0.6",
+    "mkdocs>=1.5.3,<2",
+    "mkdocs-material>=9.4.6,<10",
+    "mkdocstrings[python]>=0.23.0,<0.24",
+    "mkdocs-click>=0.8.1,<0.9",
+    "autopep8>=2.0.4,<3",
+    "pytest-cov>=4.1.0,<5",
+    "mike>=2.0.0,<3",
+    "pip>=25.3",
+]
 
-[tool.poetry.scripts]
-
-
-[tool.poetry.group.dev.dependencies]
-ipykernel = "^6.25.2"
-pytest = "^7.4.2"
-pytest-dependency = "^0.5.1"
-mkdocs = "^1.5.3"
-mkdocs-material = "^9.4.6"
-mkdocstrings = { extras = ["python"], version = "^0.23.0" }
-mkdocs-click = "^0.8.1"
-autopep8 = "^2.0.4"
-pytest-cov = "^4.1.0"
-mike = "^2.0.0"
+[project.scripts]
+omoospace = "omoospace.commands:app"
+omoos = "omoospace.commands:app"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"

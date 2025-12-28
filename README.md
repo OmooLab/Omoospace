@@ -1,10 +1,36 @@
-[中文文档](https://uj6xfhbzp0.feishu.cn/wiki/XOtgwlQ3Hism0MkzOeBcMXrqnQe?from=from_copylink)
+[中文文档](https://wcn96x0h20lt.feishu.cn/wiki/TAduwcqV3izhJ2kM3VpcZBW0n1d)
 
 # Omoospace
-
+![alt text](docs/assets/layout.png)
 Omoospace is a directory structure guideline for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
 
 If you are not sure how to design your project directory right, you can follow the omoospace rules, [click here to start](https://omoolab.github.io/Omoospace/latest/why-omoospace)
+
+
+## Usage
+
+1. Install uv
+for windows
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+for macOS or linux
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+More info from https://docs.astral.sh/uv/getting-started/installation/
+
+3. Install tool
+```bash
+uv tool install omoospace
+```
+
+2. Create omoospace
+```bash
+omoospace create
+```
 
 We provide some DCC plugins for CG artists to easily manage your projects following omoospace rules.
 
