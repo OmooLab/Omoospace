@@ -1,7 +1,7 @@
 [中文文档](https://wcn96x0h20lt.feishu.cn/wiki/TAduwcqV3izhJ2kM3VpcZBW0n1d)
 
 # Omoospace
-![alt text](docs/assets/layout.png)
+![overview](docs/assets/overview.png)
 Omoospace is a directory structure guideline for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
 
 If you are not sure how to design your project directory right, you can follow the omoospace rules, [click here to start](https://omoolab.github.io/Omoospace/latest/why-omoospace)
