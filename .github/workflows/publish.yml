@@ -15,10 +15,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-      # - name: install xclip
-      #   run: |
-      #     sudo apt update
-      #     sudo apt install xsel
       - name: Checkout
         uses: actions/checkout@v5
       - name: Install uv
@@ -26,7 +22,7 @@ jobs:
       - name: Install Dependencies
         run: |
           uv python install 3.10
-          uv sync
+          uv tool install pytest
       - name: Build
         run: uv build
       # Check that basic features work and we didn't miss to include crucial files
