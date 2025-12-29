@@ -27,8 +27,8 @@ jobs:
         run: uv build
       # Check that basic features work and we didn't miss to include crucial files
       - name: Pytest test (wheel)
-        run: uv run --isolated --no-project --with dist/*.whl pytest tests
+        run: uv run --isolated --no-project --with dist/*.whl --with pytest pytest tests
       - name: Pytest test (source distribution)
-        run: uv run --isolated --no-project --with dist/*.tar.gz pytest tests
+        run: uv run --isolated --no-project --with dist/*.tar.gz --with pytestpytest tests
       - name: Publish
         run: uv publish
