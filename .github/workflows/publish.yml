@@ -19,14 +19,16 @@ jobs:
         uses: actions/checkout@v5
       - name: Install uv
         uses: astral-sh/setup-uv@v7
-      - name: Install Python 3.10
-        run: uv python install 3.10
+      - name: Install Dependencies
+        run: |
+          uv python install 3.10
+          uv sync
       - name: Build
         run: uv build
       # Check that basic features work and we didn't miss to include crucial files
       - name: Pytest test (wheel)
-        run: uv run --isolated --no-project --with dist/*.whl,pytest pytest tests
+        run: uv run --isolated --no-project --with dist/*.whl pytest tests
       - name: Pytest test (source distribution)
-        run: uv run --isolated --no-project --with dist/*.tar.gz,pytest pytest tests
+        run: uv run --isolated --no-project --with dist/*.tar.gz pytest tests
       - name: Publish
         run: uv publish
