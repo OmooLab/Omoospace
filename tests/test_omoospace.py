@@ -60,6 +60,7 @@ def test_omoospace(mini_omoos_path: Path):
     assert len(omoospace.entities) == 12
     tree_dict = omoospace.subspace_tree.to_dict()
     assert len(tree_dict) == 3
+    print(tree_dict)
     assert tree_dict[0]["data"].node_name == "AssetB"
     assert len(tree_dict[0]["data"].entities) == 1
     assert tree_dict[1]["data"].node_name == "AssetC"

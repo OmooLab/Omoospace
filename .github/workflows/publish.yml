@@ -15,6 +15,10 @@ jobs:
       id-token: write
       contents: read
     steps:
+      # - name: install xclip
+      #   run: |
+      #     sudo apt update
+      #     sudo apt install xsel
       - name: Checkout
         uses: actions/checkout@v5
       - name: Install uv
@@ -29,6 +33,6 @@ jobs:
       - name: Pytest test (wheel)
         run: uv run --isolated --no-project --with dist/*.whl --with pytest pytest tests
       - name: Pytest test (source distribution)
-        run: uv run --isolated --no-project --with dist/*.tar.gz --with pytestpytest tests
+        run: uv run --isolated --no-project --with dist/*.tar.gz --with pytest pytest tests
       - name: Publish
         run: uv publish
