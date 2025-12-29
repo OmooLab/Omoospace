@@ -16,7 +16,7 @@ uv sync
 Test Coverage
 
 ```bash
-uv run pytest --cov=omoospace tests/
+uv run pytest tests/
 ```
 
 Server Mkdocs

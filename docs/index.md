@@ -3,32 +3,32 @@
 # Omoospace
 ![overview](assets/overview.png)
 
-Omoospace is a directory structure guideline for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
+Omoospace is a folder structure guideline for digital creation works. 
 
-If you are not sure how to design your project directory right, you can follow the [omoospace principles](principles)
+Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d digital work or a animation production, it all fits.
+
+If you are not sure how to design your project directory right, you can follow the [omoospace principles](principles.md)
 
 
 ## Usage
 
-1. Install uv
+### Install uv
 
-    for windows
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+https://docs.astral.sh/uv/getting-started/installation/
+
+### Omoospace CLI
+
+Create an empty omoospace
+```bash
+uvx omoospace create <Name>
 ```
 
-    for macOS or linux
+or make current folder as an omoospace
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
-```
-    More info from https://docs.astral.sh/uv/getting-started/installation/
-
-1. Install tool
-```bash
-uv tool install omoospace
+uvx omoospace init
 ```
 
-1. Create omoospace
+more cli
 ```bash
-omoospace init
+uvx omoospace
 ```

@@ -2,39 +2,32 @@
 
 # Omoospace
 ![overview](docs/assets/overview.png)
-Omoospace is a directory structure guideline for digital creation works. Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d modeling task or a series production, it all fits.
 
-If you are not sure how to design your project directory right, you can follow the omoospace rules, [click here to start](https://omoolab.github.io/Omoospace/latest/why-omoospace)
+Omoospace is a folder structure guideline for digital creation works. 
 
+Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d digital work or a animation production, it all fits.
+
+If you are not sure how to design your project directory right, you can follow the [omoospace principles]([principles.md](https://omoolab.github.io/Omoospace/latest/why-omoospace))
 
 ## Usage
 
-1. Install uv
-for windows
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
+### Install uv
 
-for macOS or linux
+https://docs.astral.sh/uv/getting-started/installation/
+
+### Omoospace CLI
+
+Create an empty omoospace
 ```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+uvx omoospace create <Name>
 ```
 
-More info from https://docs.astral.sh/uv/getting-started/installation/
-
-3. Install tool
+or make current folder as an omoospace
 ```bash
-uv tool install omoospace
+uvx omoospace init
 ```
 
-2. Create omoospace
+more cli
 ```bash
-omoospace create
+uvx omoospace
 ```
-
-We provide some DCC plugins for CG artists to easily manage your projects following omoospace rules.
-
--   [Blender](https://omoolab.github.io/Omoospace/latest/plugins/blender)
--   [Houdini](https://omoolab.github.io/Omoospace/latest/plugins/houdini)
-
-We also provide a python library for developing plugins, [read me for more info.](https://omoolab.github.io/Omoospace/latest/develop-plugin)

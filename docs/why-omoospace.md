@@ -19,7 +19,7 @@ Everything in the workflow falls into 4 categories:
 
 - Outputs: Exported results (may be imported in next-step)
 
-- Staged data: Deletable/regenerable files (caches, backups)
+- Caches: Deletable/regenerable files
 
 This provides a basis for rational file classification, enabling a universal folder structure for all workflows in theory.
 

@@ -151,7 +151,7 @@ class OmoospaceStructure(TypedDict):
 
 class OmoospaceTree(DirectoryTree):
 
-    MAIN_DIRS = ["Contents", "Subspaces", "References", "Temp"]
+    MAIN_DIRS = ["Contents", "Subspaces", "References", "Void"]
 
     def __init__(self, structure: Structure = None) -> None:
         self.structure = structure or {}

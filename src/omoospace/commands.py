@@ -1,11 +1,17 @@
 import typer
 from pathlib import Path
+from ruamel.yaml import YAML
+from InquirerPy import inquirer
+
 from omoospace.omoospace import (
     create_omoospace,
     Omoospace,
 )
 from omoospace.utils import format_name
-from InquirerPy import inquirer
+
+
+yaml = YAML()
+yaml.indent(sequence=4, offset=2)
 
 # 主应用
 app = typer.Typer(help="Omoospace CLI", no_args_is_help=True)
@@ -125,10 +131,9 @@ def init():
     if void_dir != "Void":
         profile["void_mapping"] = void_dir
 
-    import yaml
+    with profile_path.open("w", encoding="utf-8") as file:
+        yaml.dump(profile, file)
 
-    with profile_path.open("w", encoding="utf-8") as f:
-        yaml.dump(profile, f, allow_unicode=True)
     typer.secho(f"Omoospace.yml created.", fg=typer.colors.GREEN)
 
     # 6. Generate README.md
