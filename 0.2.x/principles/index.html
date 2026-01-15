@@ -1037,7 +1037,7 @@
 </li>
 <li>
 <p><strong>Use universal, easy-to-understand expressions for naming, avoid abbreviations and codes.</strong><br />
-    Do not use incomprehensible abbreviations such as <code>BC</code>?, <code>TE</code>?.</p>
+    Do not use incomprehensible abbreviations such as <code>BC</code>? <code>TE</code>?</p>
 </li>
 <li>
 <p><strong>Action terms can be omitted, but object names must not be.</strong><br />
@@ -1045,7 +1045,7 @@
 </li>
 <li>
 <p><strong>Use prefixes (separated by <code>_</code>) for context and suffixes (separated by <code>.</code>) for modifiers.</strong><br />
-    For example: <code>Sc010_Anatomy_Skeleton.high.v001.blend</code> — <code>Sc010</code> and <code>Anatomy</code> are context prefixes; <code>.high</code> and <code>.v001</code> are modifiers. See more examples here: <a href="../how-to-add-suffixes/">How to use modifier suffixes?</a></p>
+    For example: <code>Sc010_Anatomy_Skeleton.high.v001.blend</code> — <code>Sc010</code> and <code>Anatomy</code> are context prefixes; <code>.high</code> and <code>.v001</code> are modifier suffixes. See more examples here: <a href="../how-to-add-suffixes/">How to use modifier suffixes?</a></p>
 </li>
 </ul>
 <h2 id="2-contents-stores-static-resource-files">2. <code>Contents/</code> stores static resource files</h2>
@@ -1090,7 +1090,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│<span class="w">       </span>├──<span class="w"> </span>Sc010.blend<span class="w">          </span><span class="c1"># (Layout) Scene 010</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│<span class="w">       </span>╰──<span class="w"> </span>TestExplosion.blend<span class="w">  </span><span class="c1"># Test Explosion Effect</span>
 </span></code></pre></div>
-See more examples here: How to set up folders?</p>
+See more examples here: <a href="../how-to-setup-folders/">How to set up folders?</a></p>
 <blockquote>
 <p>The <code>Subspaces/</code> folder is optional — source files can be placed directly in the root directory.</p>
 </blockquote>
@@ -1114,29 +1114,28 @@ See more examples here: How to set up folders?</p>
 </li>
 </ul>
 <h2 id="4-omoospace-records-project-information">4. <code>Omoospace.*</code> records project information</h2>
-<p>Use <code>Omoospace.*</code> to record overall project information. You can use any familiar document format (Markdown, TXT, Word, ...). </p>
+<p>Use <code>Omoospace.*</code> to record overall project information. You can use any familiar document format (Markdown, TXT, Word, etc.). </p>
 <p>For our tool, use <code>Omoospace.yml</code> (it can be an empty file, but it must exist — otherwise, our tool cannot recognize the workspace).</p>
 <div class="language-YAML highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Omoospace.yml</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">brief</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A great project.</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">brief</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An awesome IP project</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">notes</span><span class="p">:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">Client</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A great company</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">Client</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Tencent</span>
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nt">makers</span><span class="p">:</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">CreatorA</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">creatorA@example.com</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">CreatorB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">creatorB@example.com</span>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nt">tools</span><span class="p">:</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">Blender</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.2.0</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">  </span><span class="nt">Houdini</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0.0</span>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="nt">works</span><span class="p">:</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="nt">Work01</span><span class="p">:</span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Videos/Film01.mp4</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Images/Film01_Cover.png</span>
-</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">  </span><span class="nt">Work02</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Models/Prop01.glb</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">Omoolab</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">studio@omoolab.xyz</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nt">tools</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">Blender</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.2.0</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">Houdini</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0.0</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nt">works</span><span class="p">:</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">  </span><span class="nt">AwesomeProp01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Models/Prop02.glb</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="nt">AwesomeShort01</span><span class="p">:</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Videos/Short01.mp4</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Images/Short01_Cover.png</span>
 </span></code></pre></div>
-<p>For more complex project information, see <a href="omoospace-yml.md">Omoospace.yml</a></p>
+<p>For more complex project information, see <a href="../yml/">Omoospace.yml</a></p>
 
 
 
