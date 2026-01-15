@@ -1,9 +1,10 @@
-# For Code Contributors
+# Contribution
 
 ## Installation
 
-Install Poetry  
-[Poetry offical page about installation](https://python-poetry.org/docs/#installation)
+Install uv 
+
+[https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)
 
 Install Dependencies
 

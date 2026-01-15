@@ -3,31 +3,57 @@
 # Omoospace
 ![overview](docs/assets/overview.png)
 
-Omoospace is a folder structure guideline for digital creation works. 
+Omoospace is a set of principles for building folder structures for creative work. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](https://omoolab.github.io/Omoospace/latest/why)
 
-Its aim is universality, flexibility, and semantics not only for large projects and teamwork but also for small projects and solo work. Whether it is a 3d digital work or a animation production, it all fits.
 
-If you are not sure how to design your project directory right, you can follow the [omoospace principles]([principles.md](https://omoolab.github.io/Omoospace/latest/why-omoospace))
+## Getting Started
 
-## Usage
+### New Project
+
+1. Create a new folder as the project root.
+2. Create `Omoospace.yml` in the root.
+3. Create `Contents/` in the root and put your resource files in it.
+4. (Optional) Create `Subspaces/` in the root and put your source files in it.
+5. (Optional) Add other folders as needed and place the corresponding file types in them.
+
+
+### Existing Project
+
+1. Create `Omoospace.yml` in the project root.
+2. Edit `Omoospace.yml` and add:
+    ```YAML
+    contents_dir: <resource_folder_name>
+    ```
+    Example:
+    ```YAML
+    contents_dir: Assets
+    ```
+
+3. (Optional) Edit `Omoospace.yml` and add:
+    ```YAML
+    subspaces_dir: <source_folder_name>
+    ```
+    Example:
+    ```YAML
+    subspaces_dir: ProjectFiles
+    ```
+
+
+## Command Line Tool
 
 ### Install uv
 
-https://docs.astral.sh/uv/getting-started/installation/
+[https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)
 
-### Omoospace CLI
+### New Project
 
-Create an empty omoospace
 ```bash
 uvx omoospace create <Name>
 ```
 
-or make current folder as an omoospace
-```bash
-uvx omoospace init
-```
+### Existing Project
 
-more cli
 ```bash
-uvx omoospace
+cd <project folder>
+uvx omoospace init
 ```

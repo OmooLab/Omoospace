@@ -1,0 +1,44 @@
+简述: 一个超厉害的项目.
+
+记录列表:
+  动画A_角色A:
+    - "马南001: 做的不咋地..."
+    - "请用 Blender 5.0 打开"
+  模型A: 没法在游戏引擎中使用.
+
+主创列表:
+  马南001:
+    邮箱: manan001@example.com
+    网站: https://www.manan.com
+  马南002: manan002@example.com
+  偶魔数字:
+    网站: https://www.omoolab.xyz
+
+工具列表:
+  Blender:
+    版本: "v4.2.0"
+    扩展列表:
+      - Omoospace
+      - BioxelNodes
+    网站: https://www.blender.org
+  Houdini: "20.0.0"
+  Omoospace:
+    版本: ">=0.2.0"
+    网站: https://omoolab.github.io/Omoospace/latest/
+
+作品列表:
+  超厉害动画:
+    简述: 一个超厉害的动画.
+    版本: "1.0.0"
+    内容列表:
+      - 视频/动画A.mp4
+      - 图片/动画A_封面.png
+    贡献列表:
+      模型师:
+        - 马南003
+      动画师: [马南002, 马南003]
+      动画导演: 马南001
+  超厉害模型:
+    - 模型/模型A/模型A.fbx
+    - 模型/模型A/贴图
+  另一个超厉害模型: 模型/模型B.glb

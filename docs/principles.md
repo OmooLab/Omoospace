@@ -1,90 +1,123 @@
 # Omoospace Principles
 
-There are only 5 principles:
+![overview](assets/overview.png)
 
-1. 2+2 Main folders
+There are only 4 rules, easy to remember:
 
-2. `Subspaces` is dynamic, organized by creation objectives
-
-3. `Contents` is static, organized by resource types
-
-4. Name everything clearly and plainly
-
-5. `Omoospace.x` as workspace profile
+1. Name everything in a clear, specific way
+2. `Contents/` stores static resource files
+3. `Subspaces/` stores dynamic source files
+4. `Omoospace.*` rcords project information
 
 
-## 1. 2+2 Main folders
+## 1. Name everything in a clear, specific way
 
-- `Subspaces` Stores software project files
+- **Avoid special characters and spaces.**  
+    Only letters, numbers, underscores(`_`), periods(`.`), and hyphens(`-`) are allowed.
 
-- `Contents` Stores imported or exported resource files (project files are also allowed)
+- **Use universal, easy-to-understand expressions for naming, avoid abbreviations and codes.**  
+    Do not use incomprehensible abbreviations such as `BC`?, `TE`?.
 
-- `References` Stores reference materials (optional)
 
-- `Void` Stores temporary data (optional)
+- **Action terms can be omitted, but object names must not be.**  
+    For example: `ModelProp01.blend` can be simplified to `Prop01.blend`, but never `Modeling.blend`; `TestWaterEffect.hip` cannot be `Test.hip`.
 
-## 2. `Subspaces` is dynamic, organized by creation objectives
 
-- Everything here is dynamic
+- **Use prefixes (separated by `_`) for context and suffixes (separated by `.`) for modifiers.**  
+    For example: `Sc010_Anatomy_Skeleton.high.v001.blend` — `Sc010` and `Anatomy` are context prefixes; `.high` and `.v001` are modifiers. See more examples here: [How to use modifier suffixes?](how-to-add-suffixes.md)
 
-  Folder structure can be adjusted arbitrarily, and files can be moved freely. Content in project files can be in a messy state: WIP, R&D, unorganized.
 
-- Name files and folders based on creation objectives
+## 2. `Contents/` stores static resource files
 
-  A creation objective refers to the purpose of the project file, such as "modeling Prop A", "rigging Character B", "editing Film Sequence 010", "testing Effect D", etc.
+- **Stores referenced, imported, exported resource files and final deliverables.**   
+    Examples: images, videos, audio effects, models, even source files, data files, etc.
 
-- Object names in creation objectives cannot be omitted
+- **Organize subfolders by resource type**
 
-  You can omit action terms (e.g., modeling, editing), but must never omit object names (e.g., character names, sequence numbers). For example, for the objective "Rigging Skeleton", you can write `Skeleton`, but cannot only write `Rigging` (even if it is in a folder named `Skeleton`).
+    ```bash
+    ├── Contents/
+    │   ├── Audios/       # Audio assets
+    │   ├── Downloads/    # Files downloaded online
+    │   ├── Dynamics/     # Various FX simulations
+    │   ├── Images/       # Textures, image assets
+    │   ├── Models/       # Models, animated models
+    │   ├── Renders/      # Image sequences, rendered videos
+    │   ├── Data/         # Reference data
+    │   ╰── Videos/       # Final videos, video assets
+    ```
 
-## 3. `Contents` is static, organized by resource types
+    See more examples here: [How to set up folders?](how-to-setup-folders.md)
 
-- Everything here is static
+- **Do not easily adjust the folder structure or move files arbitrarily.**  
+    If adjustments are necessary, use the copy method to avoid losing original references.
 
-  It is not recommended to adjust the folder structure once set. Do not move files arbitrarily. If adjustment is absolutely necessary, use copy to ensure that filepath will not be lost.
+## 3. `Subspaces/` stores dynamic source files
 
-- Name folders by resource types
+- **Stores process-recorded source files and software-specific project files.**  
+    For examples: .psd, .blend, .word, .ppt.
 
-  e.g., `Models`, `Images`, `Videos`, for quick access to resources.
+- **Organize files and subfolders by objectives**
 
-- Save a copy of the project file here when its content is to be referenced
-  
-  For finalized project files whose content will be referenced by other project files, save a copy to Contents. This prevents dynamic, unorganized updates from affecting dependent files.
+    ```bash
+    ├── Subspaces/
+    │   ├── Assets/                  # (Prepare) Assets
+    │   │   ├── Prop01.blend         # Latest version
+    │   │   ╰── Prop01.v001.blend    # Backup version
+    │   ╰── Sc010/                   # (Make) Scene 010
+    │       ├── Sc010.prproj         # (Editing) Scene 010
+    │       ├── Sc010.blend          # (Layout) Scene 010
+    │       ╰── TestExplosion.blend  # Test Explosion Effect
+    ```
+    See more examples here: How to set up folders?
+    > The `Subspaces/` folder is optional — source files can be placed directly in the root directory.
 
-## 4. Name everything clearly and plainly
 
-- Use language understandable to both yourself and the team for naming
 
-- Use universal and easy-to-understand expressions for naming, avoid abbreviations and codes
+- **The folder structure can be adjusted arbitrarily, and files can be moved freely.**  
+    Messy states are allowed here, including work-in-progress, debugging, pending verification, and unorganized files.
 
-- For duplicate names, add context with prefixes (connected by `_`) and modifiers with suffixes (connected by `.`)
+- **If a file needs to be referenced, save a copy to `Contents/.`**  
+    Do not reference source files directly from each other to avoid dynamic, disorganized upstream changes affecting downstream files.
 
-- Use consistent expressions to describe the same thing
+    ```bash
+    ├── Contents/
+    │   ╰── Models/
+    │       ╰── **Prop01.blend**  # Referenced copy
+    ├── Subspaces/
+    │   ├── AssetPreparation/
+    │   │   ╰── Prop01.blend      # Working file
+    │   ╰── Scene010.blend        # File that needs references
+    ```
 
-- Avoid special characters and spaces
+    If `Scene010.blend` needs to reference `Prop01.blend`, copy `Prop01.blend` to `Contents/`. See details here: [How to back up copies?](how-to-backup.md)
 
-## 5. `Omoospace.x` as workspace profile
 
-Record project profile in any format you prefer. You can use .md, .yml or any document format, but we agree that the file name must be Omoospace to ensure it can be recognized as the workspace root.
+## 4. `Omoospace.*` records project information
 
-Our library supports .yml format as follows:
+Use `Omoospace.*` to record overall project information. You can use any familiar document format (Markdown, TXT, Word, ...). 
+
+For our tool, use `Omoospace.yml` (it can be an empty file, but it must exist — otherwise, our tool cannot recognize the workspace).
 
 ```YAML
-name: Omoospace's name
-description: Omoospace's description
-creators: # All creators/creation teams
-  - name: Creator/team name
-    email: Creator/team email
-    role: Creator/team role in the project
-    website: Creator/team website
-softwares: # Software used
-  - name: Software name
-    version: Software version
-    plugins: # Plugins used
-      - name: Plugin name
-        version: Plugin version
-works: # All final deliverables
-  - name: Deliverable name
-    items: 
-      - Relative path of the deliverable file/folder under Contents
+# Omoospace.yml
+brief: A great project.
+
+notes:
+  Client: A great company
+  
+makers:
+  CreatorA: creatorA@example.com
+  CreatorB: creatorB@example.com
+
+tools:
+  Blender: 4.2.0
+  Houdini: 20.0.0
+
+works:
+  Work01:
+    - Videos/Film01.mp4
+    - Images/Film01_Cover.png
+  Work02: Models/Prop01.glb
 ```
+
+For more complex project information, see [Omoospace.yml](omoospace-yml.md)

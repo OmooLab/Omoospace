@@ -1,141 +1,147 @@
-from pathlib import Path
-from ruamel.yaml import YAML
-from abc import ABC, abstractmethod
-from omoospace.utils import remove_duplicates
-
-yaml = YAML()
-yaml.indent(sequence=4, offset=2)
+from typing import Any
+from omoospace.utils import Opath, yaml
+from omoospace.language import key_dict
 
 
-class AttributeDict(ABC):
-    @abstractmethod
-    def _get_data(self, name):
-        return None
+class NodeData:
+    def __init__(self, name: str, subspaces: list[Opath] = []):
+        self.name = name
+        self.subspaces = subspaces
 
-    @abstractmethod
-    def _set_data(self, name, value):
-        pass
-
-    def __getattr__(self, name):
-        if name in self.__annotations__.keys():
-            return self._get_data(name)
-        else:
-            return object.__getattribute__(self, name)
-
-    def __setattr__(self, name, value):
-        if name in self.__annotations__.keys():
-            self._set_data(name, value)
-        else:
-            object.__setattr__(self, name, value)
+    def __repr__(self):
+        return self.name
 
 
-class ProfileItem(AttributeDict):
-    _item_list_key = "items"
-    _item_id_key = "id"
+class Profile:
+    """Abstract base class for read and write profile"""
 
-    def __init__(self, dict: dict, container: "ProfileContainer") -> None:
-        self._dict = dict
-        self._container = container
+    def _read_profile(self):
+        """Read profile data from Omoospace.yml file."""
+        if self.profile_file is None:
+            raise ValueError("profile file is None.")
 
-    def _get_data(self, name):
-        return self._dict.get(name)
-
-    def _set_data(self, name, value):
-        identify = self._dict[self._item_id_key]
-        self._dict[name] = value
-        self._container._set_profile_data(self, identify)
-
-
-class ProfileItemList:
-    def __init__(self, item_list: list[ProfileItem]) -> None:
-        self._item_list = item_list
-
-    def set(self, data: ProfileItem, identify: str = None):
-        _item_id_key = data._item_id_key
-        identify = identify or getattr(data, _item_id_key)
-
-        index = self.__get_matched_index(_item_id_key, identify)
-
-        if index >= 0:
-            self._item_list[index] = data
-        else:
-            self._item_list.append(data)
-
-    def __get_matched_index(self, key: str, value: any):
-        index = -1
-        for i, data in enumerate(self._item_list):
-            if getattr(data, key) == value:
-                index = i
-                break
-
-        return index
-
-    def to_dict_list(self):
-        return [data._dict for data in self._item_list]
-
-    def find(self, key: str, value: any):
-        index = self.__get_matched_index(key, value)
-
-        if index >= 0:
-            return self._item_list[index]
-        else:
-            return None
-
-
-class ProfileContainer(AttributeDict):
-    profile_path: Path = Path()
-
-    def _read_profile_file(self):
-        if self.profile_path is None:
+        if not self.profile_file.exists():
             return {}
-        if not self.profile_path.exists():
-            return {}
-        with self.profile_path.open("r", encoding="utf-8") as file:
+        with self.profile_file.open("r", encoding="utf-8") as file:
             return yaml.load(file) or {}
 
-    def _write_profile_file(self, profile):
-        if self.profile_path is None:
-            return
-        self.profile_path.parent.mkdir(parents=True, exist_ok=True)
-        if not self.profile_path.exists():
-            self.profile_path.touch()
-        with self.profile_path.open("w", encoding="utf-8") as file:
-            yaml.dump(profile, file)
+    def _write_profile(self, data):
+        """Write profile data to Omoospace.yml file."""
+        if self.profile_file is None:
+            raise ValueError("profile file is None.")
 
-    def _get_data(self, name):
-        profile = self._read_profile_file()
-        return profile.get(name)
+        self.profile_file.parent.mkdir(parents=True, exist_ok=True)
+        with self.profile_file.open("w", encoding="utf-8") as file:
+            yaml.dump(data, file)
 
-    def _set_data(self, name, value):
-        profile = self._read_profile_file()
-        profile[name] = value
-        self._write_profile_file(profile)
+    @property
+    def language(self) -> str:
+        """str: Omoospace language."""
+        parts = self.profile_file.stem.split(".")
+        return parts[-1] if len(parts) > 1 else "en"
 
-    def _get_item_list(self, data_class):
-        item_list_key = data_class._item_list_key
-        item_id_key = data_class._item_id_key
+    def _key(self, key) -> str:
+        return key_dict[key][self.language]
 
-        profile = self._read_profile_file()
-        item_list = profile.get(item_list_key) or []
+    def get(self, key: str) -> Any:
+        """Get the latest data for this item from the profile file."""
+        profile = self._read_profile()
+        return profile.get(self._key(key))
 
-        # remove data that is not dict
-        item_list = [data for data in item_list if isinstance(data, dict)]
+    def set(self, key: str, value: Any):
+        """Set the value for the given key in the profile file."""
+        profile = self._read_profile()
+        profile[self._key(key)] = value
+        self._write_profile(profile)
 
-        # remove data that key value is None
-        item_list = [data for data in item_list if data.get(item_id_key)]
 
-        # remove duplicates in key
-        item_list = remove_duplicates(item_list, item_id_key)
+class ProfileItem:
+    """Abstract class for profile items like Maker, Tool, and Work.
 
-        # reassign modified data
-        self._set_data(item_list_key, item_list)
+    This base class provides a unified way to access and update profile data, ensuring
+    that attribute access always returns the latest data from the configuration file.
+    """
 
-        # wrap dict into class
-        return [data_class(data, self) for data in item_list]
+    """The name used in the profile dictionary (e.g., "makers", "tools", "works")."""
+    _dict_name: str
+    _item_name: str
 
-    def _set_profile_data(self, data: ProfileItem, identify: str = None):
-        item_list_key = data._item_list_key
+    def __init__(self, omoospace: "Omoospace", name: str) -> None:
+        self._item_name = name
+        self._omoospace = omoospace
 
-        item_list = ProfileItemList(getattr(self, item_list_key))
-        item_list.set(data, identify)
-        self._set_data(item_list_key, item_list.to_dict_list())
+        # init item with name if not find in profile
+        item_dict = self._omoospace.get(self._dict_name) or {}
+        if self._item_name not in item_dict:
+            item_dict[self._item_name] = {}
+
+        self._omoospace.set(self._dict_name, item_dict)
+
+    def __repr__(self):
+        return self.name
+
+    def _key(self, key) -> str:
+        return key_dict[key][self._omoospace.language]
+
+    @property
+    def data(self):
+        # e.g. makers
+        item_dict = self._omoospace.get(self._dict_name)
+        if item_dict is None:
+            raise AttributeError(f"{self._dict_name} not found in profile.")
+
+        # e.g. maker
+        data = item_dict.get(self._item_name)
+        if data is None:
+            raise AttributeError(f"{self._item_name} not found in {self._dict_name}.")
+        return data
+
+    @data.setter
+    def data(self, value: Any):
+        """Update the profile with current data."""
+        items = self._omoospace.get(self._dict_name) or {}
+
+        items[self._item_name] = value
+
+        self._omoospace.set(self._dict_name, items)
+
+    def get(self, key: str) -> Any:
+        """Get the latest data for this item from the profile file."""
+        return self.data.get(self._key(key)) if isinstance(self.data, dict) else None
+
+    def set(self, key: str, value: Any):
+        """Update the profile with current data."""
+        data = self.data if isinstance(self.data, dict) else {}
+
+        data[self._key(key)] = value
+
+        self.data = data
+
+    def remove(self):
+        """Remove this item from the profile."""
+        item_dict = self._omoospace.get(self._dict_name)
+        if item_dict is None:
+            raise AttributeError(f"{self._dict_name} not found in profile.")
+
+        if self._item_name in item_dict:
+            del item_dict[self._item_name]
+            self._omoospace.set(self._dict_name, item_dict)
+        else:
+            raise AttributeError(f"{self._item_name} not found in {self._dict_name}.")
+
+    @property
+    def name(self) -> str:
+        """Get the name from the latest profile data."""
+        return self._item_name
+
+    @name.setter
+    def name(self, value: str):
+        item_dict = self._omoospace.get(self._dict_name)
+
+        if self.name in item_dict:
+            del item_dict[self.name]
+
+        item_dict[value] = self.data
+        self._omoospace.set(self._dict_name, item_dict)
+
+        self._item_name = value

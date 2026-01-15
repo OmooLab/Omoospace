@@ -9,16 +9,24 @@ repo_url: https://github.com/OmooLab/Omoospace
 nav:
   - Overview:
       - index.md
-      - Why Omoospace?: why-omoospace.md
-      - Omoospace Principles: principles.md
-  - Develop a Plugin:
-      - develop-plugin.md
+      - why.md
+      - principles.md
+      - yml.md
+      - terms.md
+  - How-to: 
+      - how-to-add-suffixes.md
+      - how-to-setup-folders.md
+      - how-to-backup.md
+  - Develop:
+      - develop.md
+      - contribution.md
       - API Reference:
-          - Omoospace: apis/omoospace.md
-          - Subspace: apis/subspace.md
-          - Package: apis/package.md
-          - Utils: apis/utils.md
-  - Contribution: contribution.md
+          - apis/omoospace.md
+          - apis/functions.md
+          - apis/common.md
+          - apis/items.md
+          - apis/validators.md
+          - apis/utils.md
 
 theme:
   name: material

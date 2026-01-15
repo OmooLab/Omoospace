@@ -1,0 +1,48 @@
+brief: A great project.
+
+ignore:
+  - "FilmB"
+  - "FilmC/ModelA.*"
+
+notes:
+  FilmA_CharA:
+    - "MaNan001: very good..."
+    - "Open with Blender 5.0"
+  ModelA: not game-ready.
+
+makers:
+  MaNan001:
+    email: manan001@example.com
+    website: https://www.manan.com
+  MaNan002: manan002@example.com
+  OmooLab:
+    website: https://www.omoolab.xyz
+
+tools:
+  Blender:
+    version: "v4.2.0"
+    extensions:
+      - Omoospace
+      - BioxelNodes
+    website: https://www.blender.org
+  Houdini: "20.0.0"
+  Omoospace:
+    version: ">=0.2.0"
+    website: https://omoolab.github.io/Omoospace/latest/
+
+works:
+  GreatFilm:
+    brief: A great film.
+    version: "1.0.0"
+    contents:
+      - Videos/FilmA.mp4
+      - Images/FilmA_Cover.png
+    contributions:
+      Modeler:
+        - MaNan003
+      Animator: [MaNan002, MaNan003]
+      Director: MaNan001
+  GreatModel:
+    - Models/ModelA/ModelA.fbx
+    - Models/ModelA/Textures
+  AnotherGreatModel: Models/ModelB.glb
