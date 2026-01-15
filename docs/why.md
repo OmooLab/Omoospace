@@ -96,7 +96,7 @@ If they are mixed together, conflicts are inevitable:
 
 So they should be stored separately. This is the core idea of Omoospace.
 
-### Omoospace Is a "Guide", Not a "Strict Rulebook"
+### Omoospace Is a "Guideline", Not a "Strict Rulebook"
 
 Omoospace does not enforce a specific folder structure, and it is not a management tool (though tools can help). It is more like a set of principles that gives you a direction when you’re unsure how to organize your files.
 

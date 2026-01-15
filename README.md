@@ -3,7 +3,7 @@
 # Omoospace
 ![overview](docs/assets/overview.png)
 
-Omoospace is a set of principles for building folder structures for creative work. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](https://omoolab.github.io/Omoospace/latest/why)
+Omoospace is a universal folder structure guideline for creative projects. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](https://omoolab.github.io/Omoospace/latest/why)
 
 
 ## Getting Started
