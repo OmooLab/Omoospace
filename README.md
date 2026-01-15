@@ -41,19 +41,23 @@ Omoospace is a universal folder structure guideline for creative projects. Its g
 
 ## Command Line Tool
 
-### Install uv
+### Install uv and tool
 
 [https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)
+
+```bash
+uv tool install omoospace[cli]
+```
 
 ### New Project
 
 ```bash
-uvx omoospace create <Name>
+omoos create <Name>
 ```
 
 ### Existing Project
 
 ```bash
 cd <project folder>
-uvx omoospace init
+omoos init
 ```
