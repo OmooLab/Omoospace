@@ -16,7 +16,7 @@ There are only 4 rules, easy to remember:
     Only letters, numbers, underscores(`_`), periods(`.`), and hyphens(`-`) are allowed.
 
 - **Use universal, easy-to-understand expressions for naming, avoid abbreviations and codes.**  
-    Do not use incomprehensible abbreviations such as `BC`?, `TE`?.
+    Do not use incomprehensible abbreviations such as `BC`? `TE`?
 
 
 - **Action terms can be omitted, but object names must not be.**  
@@ -24,7 +24,7 @@ There are only 4 rules, easy to remember:
 
 
 - **Use prefixes (separated by `_`) for context and suffixes (separated by `.`) for modifiers.**  
-    For example: `Sc010_Anatomy_Skeleton.high.v001.blend` — `Sc010` and `Anatomy` are context prefixes; `.high` and `.v001` are modifiers. See more examples here: [How to use modifier suffixes?](how-to-add-suffixes.md)
+    For example: `Sc010_Anatomy_Skeleton.high.v001.blend` — `Sc010` and `Anatomy` are context prefixes; `.high` and `.v001` are modifier suffixes. See more examples here: [How to use modifier suffixes?](how-to-add-suffixes.md)
 
 
 ## 2. `Contents/` stores static resource files
@@ -68,9 +68,9 @@ There are only 4 rules, easy to remember:
     │       ├── Sc010.blend          # (Layout) Scene 010
     │       ╰── TestExplosion.blend  # Test Explosion Effect
     ```
-    See more examples here: How to set up folders?
-    > The `Subspaces/` folder is optional — source files can be placed directly in the root directory.
+    See more examples here: [How to set up folders?](how-to-setup-folders.md)
 
+    > The `Subspaces/` folder is optional — source files can be placed directly in the root directory.
 
 
 - **The folder structure can be adjusted arbitrarily, and files can be moved freely.**  
@@ -94,30 +94,29 @@ There are only 4 rules, easy to remember:
 
 ## 4. `Omoospace.*` records project information
 
-Use `Omoospace.*` to record overall project information. You can use any familiar document format (Markdown, TXT, Word, ...). 
+Use `Omoospace.*` to record overall project information. You can use any familiar document format (Markdown, TXT, Word, etc.). 
 
 For our tool, use `Omoospace.yml` (it can be an empty file, but it must exist — otherwise, our tool cannot recognize the workspace).
 
 ```YAML
 # Omoospace.yml
-brief: A great project.
+brief: An awesome IP project
 
 notes:
-  Client: A great company
+  Client: Tencent
   
 makers:
-  CreatorA: creatorA@example.com
-  CreatorB: creatorB@example.com
+  Omoolab: studio@omoolab.xyz
 
 tools:
   Blender: 4.2.0
   Houdini: 20.0.0
 
 works:
-  Work01:
-    - Videos/Film01.mp4
-    - Images/Film01_Cover.png
-  Work02: Models/Prop01.glb
+  AwesomeProp01: Models/Prop02.glb
+  AwesomeShort01:
+    - Videos/Short01.mp4
+    - Images/Short01_Cover.png
 ```
 
-For more complex project information, see [Omoospace.yml](omoospace-yml.md)
+For more complex project information, see [Omoospace.yml](yml.md)

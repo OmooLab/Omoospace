@@ -30,21 +30,42 @@ def test_is_url():
 
 
 def test_is_version():
-    assert is_version("123") == False
-    assert is_version("1.2..3") == False
-    assert is_version("V123.") == False
-    assert is_version("abc") == False
-    assert is_version(">=0.2.0,<=1.0.0") == True
-    assert is_version("1.2.3") == True
-    assert is_version("v1.2.3") == True
-    assert is_version("v001") == True
-    assert is_version(">=0.2.0") == True
-    assert is_version("~0.2.0") == True
-    assert is_version("^0.2.0") == True
-    assert is_version("0.2.0") == True
-    assert is_version("0.2.0-alpha") == True
-    assert is_version("0.2.0,1.0.0") == True
-    assert is_version(">=0.2.0,<=1.0.0") == True
+    valid_versions = [
+        "v0.1.0",
+        "0.1.0",
+        "4.2",
+        "v5.0",
+        "20.0",
+        "v001",
+        "v002",
+        "v260115",
+        "v4",
+        "v8",
+        "0.1.0-alpha",
+        "0.1.0-rc",
+        "0.1.0-beta",
+        "0.1.0-stable",
+        "0.1.0-latest",
+        "beta",
+        "stable",
+        "latest",
+        "pre-alpha",
+        ">=3.11",
+        "^3.11",
+        "~3.11",
+        ">=0.2.0,<=1.0.0",
+    ]
+
+    # 非法的版本号
+    invalid_versions = ["123", "001", "0001", "1001", "1.2..3", "abc"]
+
+    # 测试合法版本号
+    for version in valid_versions:
+        assert is_version(version) is True
+
+    # 测试非法版本号
+    for version in invalid_versions:
+        assert is_version(version) is False
 
 
 def test_is_autosave():

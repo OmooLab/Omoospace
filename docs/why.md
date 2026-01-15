@@ -8,7 +8,7 @@ Any work with even a little complexity usually involves more than one file. When
 
 Files in all creative workflows can be divided into two main types:
 
-- **Resource files**: Images, audio, video, models, and other files that are imported or referenced.
+- **Resource files**: Images, audios, videos, models, and other files that are imported or referenced.
 - **Source files**: Files in software-specific formats that you work on (your working files).
 
 Additionally, all workflows can be abstracted into a cycle:

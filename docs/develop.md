@@ -47,13 +47,13 @@ Example omoospace:
 ```bash
 Project01
 ├── Contents
-├── AssetA.blend
-├── AssetB
-│   ├── 001-ModelAssetB.zpr
-│   ├── 002-TextureAssetB.spp
-│   ╰── 003-RenderAssetB.blend
-├── AssetC
-│   ├── AssetC.blend
+├── Prop01.blend
+├── Prop02
+│   ├── 001-ModelProp02.zpr
+│   ├── 002-TextureProp02.spp
+│   ╰── 003-RenderProp02.blend
+├── Prop03
+│   ├── Prop03.blend
 │   ├── PartA.blend
 │   ╰── PartB.blend
 ╰── Omoospace.yml
@@ -77,23 +77,23 @@ assert objective_tree.count == 8
 print(objective_tree.format())
 
 # Project01
-# ├── AssetA
-# ├── AssetB
-# │   ├── 001-ModelAssetB
-# │   ├── 002-TextureAssetB
-# │   ╰── 003-RenderAssetB
-# ╰── AssetC
+# ├── Prop01
+# ├── Prop02
+# │   ├── 001-ModelProp02
+# │   ├── 002-TextureProp02
+# │   ╰── 003-RenderProp02
+# ╰── Prop03
 #     ├── PartA.blend
 #     ╰── PartB.blend
 
 for o in objective_tree:
-    if o.name == "AssetA":
+    if o.name == "Prop01":
         assert len(o.subspaces) == 1
         assert len(o.children) == 0
-    elif o.name == "AssetB":
+    elif o.name == "Prop02":
         assert len(o.subspaces) == 1
         assert len(o.children) == 3
-    elif o.name == "AssetC":
+    elif o.name == "Prop03":
         assert len(o.subspaces) == 2
         assert len(o.children) == 2
 ```
@@ -149,19 +149,19 @@ assert Opath(omoospace.subspaces_dir, "Heart/Heart_Valves.v001.spp").exists()
 ```python
 from omoospace import extract_pathname
 
-assert extract_pathname("Sc010_AssetA.blend") == "Sc010_AssetA"
-assert extract_pathname("SQ010/AssetA.blend") == "Sc010_AssetA"
-assert extract_pathname("Sc010_Shot0100/AssetA.blend") == "Sc010_AssetA"
-assert extract_pathname("Sc010_Shot0100/Shot0100_AssetA.blend") == "Sc010_Shot0100_AssetA"
-assert extract_pathname("Sc010_Shot0100/Sc010_Shot0100_AssetA.blend") == "Sc010_Shot0100_AssetA"
-assert extract_pathname("PartA/AssetA_PartA.blend") == "PartA_AssetA_PartA"
-assert extract_pathname("AssetA.001.blend") == "AssetA"
-assert extract_pathname("AssetA.v001.blend") == "AssetA"
+assert extract_pathname("Sc010_Prop01.blend") == "Sc010_Prop01"
+assert extract_pathname("SQ010/Prop01.blend") == "Sc010_Prop01"
+assert extract_pathname("Sc010_Shot0100/Prop01.blend") == "Sc010_Prop01"
+assert extract_pathname("Sc010_Shot0100/Shot0100_Prop01.blend") == "Sc010_Shot0100_Prop01"
+assert extract_pathname("Sc010_Shot0100/Sc010_Shot0100_Prop01.blend") == "Sc010_Shot0100_Prop01"
+assert extract_pathname("PartA/Prop01_PartA.blend") == "PartA_Prop01_PartA"
+assert extract_pathname("Prop01.001.blend") == "Prop01"
+assert extract_pathname("Prop01.v001.blend") == "Prop01"
 assert extract_pathname("Asset-A.v001.blend") == "Asset-A"
-assert extract_pathname("AssetA.v001.autosave.blend") == "AssetA"
+assert extract_pathname("Prop01.v001.autosave.blend") == "Prop01"
 assert extract_pathname("头骨/头骨.blend") == "头骨"
-assert extract_pathname("Asset A/AssetA.blend") == "AssetA"
-assert extract_pathname("AssetA_AssetA.blend") == "AssetA_AssetA"
+assert extract_pathname("Asset A/Prop01.blend") == "Prop01"
+assert extract_pathname("Prop01_Prop01.blend") == "Prop01_Prop01"
 ```
 
 
@@ -276,58 +276,58 @@ assert len(omoospace.works) == 2
 ```python
 root = mini_omoos_path
 make_path(
-    "AssetA.blend",
-    "AssetB/001-ModelAssetB.zpr",
-    "AssetB/002-TextureAssetB.spp",
-    "AssetB/003-RenderAssetB.blend",
-    "AssetC/AssetC.blend",
-    "AssetC/PartA.blend",
-    "AssetC/PartB.blend",
+    "Prop01.blend",
+    "Prop02/001-ModelProp02.zpr",
+    "Prop02/002-TextureProp02.spp",
+    "Prop02/003-RenderProp02.blend",
+    "Prop03/Prop03.blend",
+    "Prop03/PartA.blend",
+    "Prop03/PartB.blend",
     under=root,
 )
 
-Opath(root / "AssetA.blend").copy_to(root / "Temp")
-assert (root / "AssetA.blend").exists()
-assert (root / "Temp" / "AssetA.blend").exists()
+Opath(root / "Prop01.blend").copy_to(root / "Temp")
+assert (root / "Prop01.blend").exists()
+assert (root / "Temp" / "Prop01.blend").exists()
 
 # if the same, return self
 assert (
-    Opath(root / "AssetA.blend").copy_to(root, overwrite=True)
-    == root / "AssetA.blend"
+    Opath(root / "Prop01.blend").copy_to(root, overwrite=True)
+    == root / "Prop01.blend"
 )
 
 # Asset.blend is already in Temp, copy fail
 with pytest.raises(FileExistsError):
-    Opath(root / "AssetA.blend").copy_to(root / "Temp")
+    Opath(root / "Prop01.blend").copy_to(root / "Temp")
 
-# with overwrite=True, AssetA.blend in Temp will be overwritten
-Opath(root / "AssetA.blend").copy_to(root / "Temp", overwrite=True)
-assert (root / "Temp" / "AssetA.blend").exists()
+# with overwrite=True, Prop01.blend in Temp will be overwritten
+Opath(root / "Prop01.blend").copy_to(root / "Temp", overwrite=True)
+assert (root / "Temp" / "Prop01.blend").exists()
 
 # Asset.blend is already in Temp, move fail
 with pytest.raises(FileExistsError):
-    Opath(root / "AssetA.blend").move_to(root / "Temp")
+    Opath(root / "Prop01.blend").move_to(root / "Temp")
 
-# with overwrite=True, AssetA.blend in Temp will be overwritten
-Opath(root / "AssetA.blend").move_to(root / "Temp", overwrite=True)
-assert (root / "Temp" / "AssetA.blend").exists()
-assert not (root / "AssetA.blend").exists()
+# with overwrite=True, Prop01.blend in Temp will be overwritten
+Opath(root / "Prop01.blend").move_to(root / "Temp", overwrite=True)
+assert (root / "Temp" / "Prop01.blend").exists()
+assert not (root / "Prop01.blend").exists()
 
-# copy folder AssetC to Temp
-Opath(root / "AssetC").copy_to(root / "Temp")
-assert (root / "AssetC").exists()
-assert (root / "Temp" / "AssetC").exists()
-assert (root / "Temp" / "AssetC" / "PartA.blend").exists()
-assert (root / "Temp" / "AssetC" / "PartB.blend").exists()
+# copy folder Prop03 to Temp
+Opath(root / "Prop03").copy_to(root / "Temp")
+assert (root / "Prop03").exists()
+assert (root / "Temp" / "Prop03").exists()
+assert (root / "Temp" / "Prop03" / "PartA.blend").exists()
+assert (root / "Temp" / "Prop03" / "PartB.blend").exists()
 
-make_path("AssetC/PartC.blend", under=root)
+make_path("Prop03/PartC.blend", under=root)
 # Asset.blend is already in Temp, copy fail
 with pytest.raises(FileExistsError):
-    Opath(root / "AssetC").copy_to(root / "Temp")
+    Opath(root / "Prop03").copy_to(root / "Temp")
 
-# copy folder AssetC to Temp
-Opath(root / "AssetC").copy_to(root / "Temp", overwrite=True)
-assert (root / "Temp" / "AssetC" / "PartC.blend").exists()
+# copy folder Prop03 to Temp
+Opath(root / "Prop03").copy_to(root / "Temp", overwrite=True)
+assert (root / "Temp" / "Prop03" / "PartC.blend").exists()
 ```
 
 Reveal in Explorer

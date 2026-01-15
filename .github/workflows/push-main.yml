@@ -1,0 +1,30 @@
+name: Push Main
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+      - name: Install Dependencies
+        run: |
+          uv python install 3.10
+          uv tool install pytest
+      - name: Build
+        run: uv build
+      # Check that basic features work and we didn't miss to include crucial files
+      - name: Pytest test (wheel)
+        run: uv run --isolated --no-project --with dist/*.whl --with pytest pytest tests
+      - name: Pytest test (source distribution)
+        run: uv run --isolated --no-project --with dist/*.tar.gz --with pytest pytest tests

@@ -130,8 +130,8 @@ class Tool(ProfileItem):
     @property
     def version(self) -> Optional[str]:
         """Get the version from the latest profile data."""
-        if isinstance(self.data, str):
-            return self.data.removeprefix("v")
+        if isinstance(self.data, str) or isinstance(self.data, float):
+            return str(self.data).removeprefix("v")
 
         return (v := self.get("version")) and v.removeprefix("v")
 

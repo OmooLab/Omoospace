@@ -1,48 +1,44 @@
-brief: A great project.
+brief: An awesome IP project
 
 ignore:
-  - "Film02"
-  - "Film03/Prop01.*"
+  - "Short02"
+  - "Short03/Prop01.*"
 
 notes:
-  Film01_CharA:
-    - "MaNan001: very good..."
-    - "Open with Blender 5.0"
-  Prop01: not game-ready.
+  Client: Tencent
 
 makers:
-  MaNan001:
-    email: manan001@example.com
-    website: https://www.manan.com
-  MaNan002: manan002@example.com
+  MaNan001: manan001@example.com
+  MaNan002:
+    email: manan002@example.com
   OmooLab:
+    email: studio@omoolab.xyz
     website: https://www.omoolab.xyz
 
 tools:
+  Houdini: 20.0
+  DaVinciResolve:
+    version: 20.5
   Blender:
-    version: "v4.2.0"
+    version: 4.2.0
+    website: https://www.blender.org
     extensions:
       - Omoospace
       - BioxelNodes
-    website: https://www.blender.org
-  Houdini: "20.0.0"
-  Omoospace:
-    version: ">=0.2.0"
-    website: https://omoolab.github.io/Omoospace/latest/
 
 works:
-  GreatFilm:
-    brief: A great film.
+  AwesomeProp01: Models/Prop01.glb
+  AwesomeProp02:
+    - Models/Prop02/Prop02.fbx
+    - Models/Prop02/Textures
+  AwesomeShort01:
+    brief: An awesome animated short.
     version: "1.0.0"
     contents:
-      - Videos/Film01.mp4
-      - Images/Film01_Cover.png
+      - Videos/Short01.mp4
+      - Images/Short01_Cover.png
     contributions:
       Modeler:
         - MaNan003
       Animator: [MaNan002, MaNan003]
       Director: MaNan001
-  GreatModel:
-    - Models/Prop01/Prop01.fbx
-    - Models/Prop01/Textures
-  AnotherGreatModel: Models/Prop02.glb

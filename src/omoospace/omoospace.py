@@ -606,7 +606,7 @@ class Omoospace(Profile):
 
         return notes
 
-    def add_note(self, note: str, scope: str = None):
+    def add_note(self, scope: str, note: str):
         """Add note to this omoospace.
 
         Args:
