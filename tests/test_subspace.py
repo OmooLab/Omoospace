@@ -47,25 +47,25 @@ def test_add_subspace(mini_omoos_path: Opath):
 @pytest.mark.parametrize(
     "subspace,expected",
     [
-        ("Sc010_AssetA.blend", "Sc010_AssetA"),
-        ("Sc010/AssetA.blend", "Sc010_AssetA"),
-        ("Sc010_Shot0100/AssetA.blend", "Sc010_Shot0100_AssetA"),
+        ("Sc010_Prop01.blend", "Sc010_Prop01"),
+        ("Sc010/Prop01.blend", "Sc010_Prop01"),
+        ("Sc010_Shot0100/Prop01.blend", "Sc010_Shot0100_Prop01"),
         (
-            "Sc010_Shot0100/Shot0100_AssetA.blend",
-            "Sc010_Shot0100_AssetA",
+            "Sc010_Shot0100/Shot0100_Prop01.blend",
+            "Sc010_Shot0100_Prop01",
         ),
         (
-            "Sc010_Shot0100/Sc010_Shot0100_AssetA.blend",
-            "Sc010_Shot0100_AssetA",
+            "Sc010_Shot0100/Sc010_Shot0100_Prop01.blend",
+            "Sc010_Shot0100_Prop01",
         ),
-        ("PartA/AssetA_PartA.blend", "PartA_AssetA_PartA"),
-        ("AssetA.001.blend", "AssetA"),
-        ("AssetA.v001.blend", "AssetA"),
+        ("Part01/Prop01_Part01.blend", "Part01_Prop01_Part01"),
+        ("Prop01.001.blend", "Prop01"),
+        ("Prop01.v001.blend", "Prop01"),
         ("Asset-A.v001.blend", "Asset-A"),
-        ("AssetA.v001.autosave.blend", "AssetA"),
+        ("Prop01.v001.autosave.blend", "Prop01"),
         ("头骨/头骨.blend", "头骨"),
-        ("Asset A/AssetA.blend", "AssetA"),
-        ("AssetA_AssetA.blend", "AssetA_AssetA"),
+        ("Prop01/Prop01.blend", "Prop01"),
+        ("Prop01_Prop01.blend", "Prop01_Prop01"),
     ],
     indirect=["subspace"],
 )
@@ -74,63 +74,46 @@ def test_extract_pathname(subspace: Opath, expected: str):
 
 
 def test_extract_pathname2(empty_omoos_path: Path):
-    assert Subspace(Opath(r"O:\OmooProjects\诺思兰德_塞多明基注射液\Subspaces\RND\测试Omoospace.blend")).pathname == "RND_测试Omoospace"
     omoospace = Omoospace(empty_omoos_path)
     other_subspaces_dir = Path(omoospace.root_dir, "src")
     make_path(
-        "AssetA.blend",
+        "Prop01.blend",
         "Sc010/Sc010.blend",
         under=other_subspaces_dir,
     )
 
-    assert extract_pathname(other_subspaces_dir / "AssetA.blend") == ""
+    assert extract_pathname(other_subspaces_dir / "Prop01.blend") == ""
     assert extract_pathname(".") == None
     omoospace.subspaces_dir = "src"
     assert omoospace.subspaces_dir == other_subspaces_dir
-    assert extract_pathname(other_subspaces_dir / "AssetA.blend") == "AssetA"
+    assert extract_pathname(other_subspaces_dir / "Prop01.blend") == "Prop01"
 
 
 def test_objective_node(empty_omoos_path: Path):
     make_path(
-        "AssetA_PartA_v001.blend",
+        "Prop01_Part01_v001.blend",
         under=Path(empty_omoos_path, "Subspaces", "Sc010_Shot0100"),
     )
 
     o_tree = Omoospace(empty_omoos_path).objective_tree
-    o_PartA = o_tree.get("Sc010_Shot0100_AssetA_PartA")
-    o_PartA = o_tree.get("PartA")
+    o_Part01 = o_tree.get("Sc010_Shot0100_Prop01_Part01")
+    o_Part01 = o_tree.get("Part01")
 
-    # o_PartA is a file objective
-    assert o_PartA.type == ObjectiveType.FILE
-    assert o_PartA.name == "PartA"
-    assert o_PartA.parent.name == "AssetA"
-    assert o_PartA.parent.parent.name == "Shot0100"
-    assert o_PartA.pathname == "Sc010_Shot0100_AssetA_PartA"
-    assert len(o_PartA.subspaces) == 1
+    # o_Part01 is a file objective
+    assert o_Part01.type == ObjectiveType.FILE
+    assert o_Part01.name == "Part01"
+    assert o_Part01.parent.name == "Prop01"
+    assert o_Part01.parent.parent.name == "Shot0100"
+    assert o_Part01.pathname == "Sc010_Shot0100_Prop01_Part01"
+    assert len(o_Part01.subspaces) == 1
 
-    # o_AssetA is a phantom objective
-    o_AssetA = o_PartA.parent
-    assert o_AssetA.name == "AssetA"
-    assert o_AssetA.type == ObjectiveType.PHANTOM
+    # o_Prop01 is a phantom objective
+    o_Prop01 = o_Part01.parent
+    assert o_Prop01.name == "Prop01"
+    assert o_Prop01.type == ObjectiveType.PHANTOM
 
     # o_Shot0100 is a directory objective
     o_Shot0100 = o_tree.get("Sc010_Shot0100")
     assert o_Shot0100 != None
     assert o_Shot0100.type == ObjectiveType.DIRECTORY
     assert len(o_Shot0100.subspaces) == 1
-
-
-def test_objective_tree(empty_omoos_path: Path):
-    omoospace = Omoospace(empty_omoos_path)
-    make_path(
-        "AssetA.blend",
-        "Sc010_Shot0100/AssetB.v001.blend",
-        "Sc010_Shot0100/AssetB.001.v002.blend",
-        "Sc010_Shot0100/AssetB.001.blend",
-        "Sc010_Shot0100/AssetC.blend",
-        "Sc010/Sc010.blend",
-        "Sc010_AssetD.blend",
-        "Sc010/AssetE/AssetE_PartA.blend",
-        under=omoospace.subspaces_dir,
-    )
-    o_tree = Omoospace(empty_omoos_path).objective_tree

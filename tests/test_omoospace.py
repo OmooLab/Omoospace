@@ -35,13 +35,13 @@ def test_create_omoospace():
 
 def test_omoospace(mini_omoos_path: Opath):
     make_path(
-        "AssetA.blend",
-        "AssetB/001-ModelAssetB.zpr",
-        "AssetB/002-TextureAssetB.spp",
-        "AssetB/003-RenderAssetB.blend",
-        "AssetC/AssetC.blend",
-        "AssetC/PartA.blend",
-        "AssetC/PartB.blend",
+        "Prop01.blend",
+        "Prop02/001-ModelProp02.zpr",
+        "Prop02/002-TextureProp02.spp",
+        "Prop02/003-RenderProp02.blend",
+        "Prop03/Prop03.blend",
+        "Prop03/Part01.blend",
+        "Prop03/Part02.blend",
         under=mini_omoos_path,
     )
 
@@ -61,13 +61,13 @@ def test_omoospace(mini_omoos_path: Opath):
     print(objective_tree.format())
 
     for o in objective_tree:
-        if o.name == "AssetA":
+        if o.name == "Prop01":
             assert len(o.subspaces) == 1
             assert len(o.children) == 0
-        elif o.name == "AssetB":
+        elif o.name == "Prop02":
             assert len(o.subspaces) == 1
             assert len(o.children) == 3
-        elif o.name == "AssetC":
+        elif o.name == "Prop03":
             assert len(o.subspaces) == 2
             assert len(o.children) == 2
 

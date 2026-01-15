@@ -6,14 +6,14 @@ en_profile_content = """
 brief: A great project.
 
 ignore:
-  - "FilmB"
-  - "FilmC/ModelA.*"
+  - "Film02"
+  - "Film03/Prop01.*"
 
 notes:
-  FilmA_CharA:
+  Film01_CharA:
     - "MaNan001: very good..."
     - "Open with Blender 5.0"
-  ModelA: not game-ready.
+  Prop01: not game-ready.
 
 makers:
   MaNan001:
@@ -40,17 +40,17 @@ works:
     brief: A great film.
     version: "1.0.0"
     contents:
-      - Videos/FilmA.mp4
-      - Images/FilmA_Cover.png
+      - Videos/Film01.mp4
+      - Images/Film01_Cover.png
     contributions:
       Modeler:
         - MaNan003
       Animator: [MaNan002, MaNan003]
       Director: MaNan001
   GreatModel:
-    - Models/ModelA/ModelA.fbx
-    - Models/ModelA/Textures
-  AnotherGreatModel: Models/ModelB.glb
+    - Models/Prop01/Prop01.fbx
+    - Models/Prop01/Textures
+  AnotherGreatModel: Models/Prop02.glb
 """
 
 
@@ -58,10 +58,10 @@ zh_profile_content = """
 简述: 一个超厉害的项目.
 
 记录列表:
-  动画A_角色A:
+  动画01_角色A:
     - "马南001: 做的不咋地..."
     - "请用 Blender 5.0 打开"
-  模型A: 没法在游戏引擎中使用.
+  道具01: 没法在游戏引擎中使用.
 
 主创列表:
   马南001:
@@ -87,33 +87,33 @@ zh_profile_content = """
     简述: 一个超厉害的动画.
     版本: "1.0.0"
     内容列表:
-      - 视频/动画A.mp4
-      - 图片/动画A_封面.png
+      - 视频/动画01.mp4
+      - 图片/动画01_封面.png
     贡献列表:
       模型师:
         - 马南003
       动画师: [马南002, 马南003]
       动画导演: 马南001
   超厉害模型:
-    - 模型/模型A/模型A.fbx
-    - 模型/模型A/贴图
-  另一个超厉害模型: 模型/模型B.glb
+    - 模型/道具01/道具01.fbx
+    - 模型/道具01/贴图
+  另一个超厉害模型: 模型/道具02.glb
 """
 
 
 def test_en_profile():
     make_path(
-        "FilmA/FilmA.blend",
-        "FilmA/CharA.blend",
-        "FilmB/Sc010.blend",
-        "FilmC/ModelA.c4d",
-        "FilmC/ModelA.blend",
-        "ModelA.blend",
-        "Contents/Models/ModelA/ModelA.fbx",
-        "Contents/Models/ModelA/Textures/",
-        "Contents/Models/ModelB.glb",
-        "Contents/Videos/FilmA.mp4",
-        "Contents/Images/FilmA_Cover.png",
+        "Film01/Film01.blend",
+        "Film01/CharA.blend",
+        "Film02/Sc010.blend",
+        "Film03/Prop01.c4d",
+        "Film03/Prop01.blend",
+        "Prop01.blend",
+        "Contents/Models/Prop01/Prop01.fbx",
+        "Contents/Models/Prop01/Textures/",
+        "Contents/Models/Prop02.glb",
+        "Contents/Videos/Film01.mp4",
+        "Contents/Images/Film01_Cover.png",
         {
             "Omoospace.yml": en_profile_content,
         },
@@ -127,23 +127,23 @@ def test_en_profile():
     omoospace.brief = "A fantastic project."
     assert omoospace.brief == "A fantastic project."
     assert omoospace.subspaces == [
-        "ModelA.blend",
-        "FilmA",
-        "FilmA/FilmA.blend",
-        "FilmA/CharA.blend",
-        "FilmC",
+        "Prop01.blend",
+        "Film01",
+        "Film01/Film01.blend",
+        "Film01/CharA.blend",
+        "Film03",
     ]
 
     # read notes
-    assert omoospace.get_note("FilmA_CharA") == [
+    assert omoospace.get_note("Film01_CharA") == [
         "MaNan001: very good...",
         "Open with Blender 5.0",
     ]
-    assert omoospace.get_note("ModelA") == ["not game-ready."]
+    assert omoospace.get_note("Prop01") == ["not game-ready."]
 
-    # add note to scope"ModelA"
-    omoospace.add_note("Other note", "ModelA")
-    assert omoospace.get_note("ModelA") == ["not game-ready.", "Other note"]
+    # add note to scope"Prop01"
+    omoospace.add_note("Other note", "Prop01")
+    assert omoospace.get_note("Prop01") == ["not game-ready.", "Other note"]
 
     # read makers
     maker = omoospace.get_maker("MaNan001")
@@ -216,8 +216,8 @@ def test_en_profile():
     assert work.brief == "A great film."
     assert work.version == "1.0.0"
     assert work.contents == [
-        "Videos/FilmA.mp4",
-        "Images/FilmA_Cover.png",
+        "Videos/Film01.mp4",
+        "Images/Film01_Cover.png",
     ]
     assert work.contributions["Animator"] == ["MaNan003", "MaNan002"]
     assert work.contributions["Director"] == ["MaNan001"]
@@ -225,21 +225,21 @@ def test_en_profile():
     work = omoospace.get_work("GreatModel")
     assert work.brief == None
     assert work.version == None
-    assert work.contents == ["Models/ModelA/ModelA.fbx", "Models/ModelA/Textures"]
+    assert work.contents == ["Models/Prop01/Prop01.fbx", "Models/Prop01/Textures"]
     assert len(work.contributions) == 0
     work.add_contribution("MaNan003", contribution="Modeler")
     assert work.contributions["Modeler"] == ["MaNan003"]
-    assert work.contents == ["Models/ModelA/ModelA.fbx", "Models/ModelA/Textures"]
+    assert work.contents == ["Models/Prop01/Prop01.fbx", "Models/Prop01/Textures"]
 
     work = omoospace.get_work("AnotherGreatModel")
     assert work.brief == None
     assert work.version == None
-    assert work.contents == ["Models/ModelB.glb"]
+    assert work.contents == ["Models/Prop02.glb"]
     assert len(work.contributions) == 0
 
     work.brief = "A great model."
     assert work.brief == "A great model."
-    assert work.contents == ["Models/ModelB.glb"]
+    assert work.contents == ["Models/Prop02.glb"]
 
     # set contributions
     work.contributions = {
@@ -260,14 +260,14 @@ def test_en_profile():
 
 def test_zh_profile():
     make_path(
-        "动画A/动画A.blend",
-        "动画A/角色A.blend",
-        "模型A.blend",
-        "Contents/模型/模型A/模型A.fbx",
-        "Contents/模型/模型A/贴图/",
-        "Contents/模型/模型B.glb",
-        "Contents/视频/动画A.mp4",
-        "Contents/图片/动画A_封面.png",
+        "动画01/动画01.blend",
+        "动画01/角色A.blend",
+        "道具01.blend",
+        "Contents/模型/道具01/道具01.fbx",
+        "Contents/模型/道具01/贴图/",
+        "Contents/模型/道具02.glb",
+        "Contents/视频/动画01.mp4",
+        "Contents/图片/动画01_封面.png",
         {
             "Omoospace.zh.yml": zh_profile_content,
         },
@@ -281,15 +281,15 @@ def test_zh_profile():
     assert omoospace.brief == "一个超酷的项目."
 
     # read notes
-    assert omoospace.get_note("动画A_角色A") == [
+    assert omoospace.get_note("动画01_角色A") == [
         "马南001: 做的不咋地...",
         "请用 Blender 5.0 打开",
     ]
-    assert omoospace.get_note("模型A") == ["没法在游戏引擎中使用."]
+    assert omoospace.get_note("道具01") == ["没法在游戏引擎中使用."]
 
-    # add note to scope"ModelA"
-    omoospace.add_note("其他记录", "模型A")
-    assert omoospace.get_note("模型A") == ["没法在游戏引擎中使用.", "其他记录"]
+    # add note to scope"Prop01"
+    omoospace.add_note("其他记录", "道具01")
+    assert omoospace.get_note("道具01") == ["没法在游戏引擎中使用.", "其他记录"]
 
     # read makers
     maker = omoospace.get_maker("马南001")
@@ -343,8 +343,8 @@ def test_zh_profile():
     assert work.brief == "一个超厉害的动画."
     assert work.version == "1.0.0"
     assert work.contents == [
-        "视频/动画A.mp4",
-        "图片/动画A_封面.png",
+        "视频/动画01.mp4",
+        "图片/动画01_封面.png",
     ]
     assert work.contributions["动画师"] == ["马南003", "马南002"]
     assert work.contributions["动画导演"] == ["马南001"]
@@ -352,21 +352,21 @@ def test_zh_profile():
     work = omoospace.get_work("超厉害模型")
     assert work.brief == None
     assert work.version == None
-    assert work.contents == ["模型/模型A/模型A.fbx", "模型/模型A/贴图"]
+    assert work.contents == ["模型/道具01/道具01.fbx", "模型/道具01/贴图"]
     assert len(work.contributions) == 0
     work.add_contribution("马南003", contribution="模型师")
     assert work.contributions["模型师"] == ["马南003"]
-    assert work.contents == ["模型/模型A/模型A.fbx", "模型/模型A/贴图"]
+    assert work.contents == ["模型/道具01/道具01.fbx", "模型/道具01/贴图"]
 
     work = omoospace.get_work("另一个超厉害模型")
     assert work.brief == None
     assert work.version == None
-    assert work.contents == ["模型/模型B.glb"]
+    assert work.contents == ["模型/道具02.glb"]
     assert len(work.contributions) == 0
 
     work.brief = "一个超酷的模型."
     assert work.brief == "一个超酷的模型."
-    assert work.contents == ["模型/模型B.glb"]
+    assert work.contents == ["模型/道具02.glb"]
 
     # set contributions
     work.contributions = {

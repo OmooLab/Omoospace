@@ -1,14 +1,14 @@
 brief: A great project.
 
 ignore:
-  - "FilmB"
-  - "FilmC/ModelA.*"
+  - "Film02"
+  - "Film03/Prop01.*"
 
 notes:
-  FilmA_CharA:
+  Film01_CharA:
     - "MaNan001: very good..."
     - "Open with Blender 5.0"
-  ModelA: not game-ready.
+  Prop01: not game-ready.
 
 makers:
   MaNan001:
@@ -35,14 +35,14 @@ works:
     brief: A great film.
     version: "1.0.0"
     contents:
-      - Videos/FilmA.mp4
-      - Images/FilmA_Cover.png
+      - Videos/Film01.mp4
+      - Images/Film01_Cover.png
     contributions:
       Modeler:
         - MaNan003
       Animator: [MaNan002, MaNan003]
       Director: MaNan001
   GreatModel:
-    - Models/ModelA/ModelA.fbx
-    - Models/ModelA/Textures
-  AnotherGreatModel: Models/ModelB.glb
+    - Models/Prop01/Prop01.fbx
+    - Models/Prop01/Textures
+  AnotherGreatModel: Models/Prop02.glb

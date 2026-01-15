@@ -15,58 +15,58 @@ from omoospace.utils import make_path
 def test_opath(mini_omoos_path: Opath):
     root = mini_omoos_path
     make_path(
-        "AssetA.blend",
-        "AssetB/001-ModelAssetB.zpr",
-        "AssetB/002-TextureAssetB.spp",
-        "AssetB/003-RenderAssetB.blend",
-        "AssetC/AssetC.blend",
-        "AssetC/PartA.blend",
-        "AssetC/PartB.blend",
+        "Prop01.blend",
+        "Prop02/001-ModelProp02.zpr",
+        "Prop02/002-TextureProp02.spp",
+        "Prop02/003-RenderProp02.blend",
+        "Prop03/Prop03.blend",
+        "Prop03/Part01.blend",
+        "Prop03/Part02.blend",
         under=root,
     )
 
-    Opath(root / "AssetA.blend").copy_to(root / "Temp")
-    assert (root / "AssetA.blend").exists()
-    assert (root / "Temp" / "AssetA.blend").exists()
+    Opath(root / "Prop01.blend").copy_to(root / "Temp")
+    assert (root / "Prop01.blend").exists()
+    assert (root / "Temp" / "Prop01.blend").exists()
 
     # if the same, return self
     assert (
-        Opath(root / "AssetA.blend").copy_to(root, overwrite=True)
-        == root / "AssetA.blend"
+        Opath(root / "Prop01.blend").copy_to(root, overwrite=True)
+        == root / "Prop01.blend"
     )
 
     # Asset.blend is already in Temp, copy fail
     with pytest.raises(FileExistsError):
-        Opath(root / "AssetA.blend").copy_to(root / "Temp")
+        Opath(root / "Prop01.blend").copy_to(root / "Temp")
 
-    # with overwrite=True, AssetA.blend in Temp will be overwritten
-    Opath(root / "AssetA.blend").copy_to(root / "Temp", overwrite=True)
-    assert (root / "Temp" / "AssetA.blend").exists()
+    # with overwrite=True, Prop01.blend in Temp will be overwritten
+    Opath(root / "Prop01.blend").copy_to(root / "Temp", overwrite=True)
+    assert (root / "Temp" / "Prop01.blend").exists()
 
     # Asset.blend is already in Temp, move fail
     with pytest.raises(FileExistsError):
-        Opath(root / "AssetA.blend").move_to(root / "Temp")
+        Opath(root / "Prop01.blend").move_to(root / "Temp")
 
-    # with overwrite=True, AssetA.blend in Temp will be overwritten
-    Opath(root / "AssetA.blend").move_to(root / "Temp", overwrite=True)
-    assert (root / "Temp" / "AssetA.blend").exists()
-    assert not (root / "AssetA.blend").exists()
+    # with overwrite=True, Prop01.blend in Temp will be overwritten
+    Opath(root / "Prop01.blend").move_to(root / "Temp", overwrite=True)
+    assert (root / "Temp" / "Prop01.blend").exists()
+    assert not (root / "Prop01.blend").exists()
 
-    # copy folder AssetC to Temp
-    Opath(root / "AssetC").copy_to(root / "Temp")
-    assert (root / "AssetC").exists()
-    assert (root / "Temp" / "AssetC").exists()
-    assert (root / "Temp" / "AssetC" / "PartA.blend").exists()
-    assert (root / "Temp" / "AssetC" / "PartB.blend").exists()
+    # copy folder Prop03 to Temp
+    Opath(root / "Prop03").copy_to(root / "Temp")
+    assert (root / "Prop03").exists()
+    assert (root / "Temp" / "Prop03").exists()
+    assert (root / "Temp" / "Prop03" / "Part01.blend").exists()
+    assert (root / "Temp" / "Prop03" / "Part02.blend").exists()
 
-    make_path("AssetC/PartC.blend", under=root)
+    make_path("Prop03/PartC.blend", under=root)
     # Asset.blend is already in Temp, copy fail
     with pytest.raises(FileExistsError):
-        Opath(root / "AssetC").copy_to(root / "Temp")
+        Opath(root / "Prop03").copy_to(root / "Temp")
 
-    # copy folder AssetC to Temp
-    Opath(root / "AssetC").copy_to(root / "Temp", overwrite=True)
-    assert (root / "Temp" / "AssetC" / "PartC.blend").exists()
+    # copy folder Prop03 to Temp
+    Opath(root / "Prop03").copy_to(root / "Temp", overwrite=True)
+    assert (root / "Temp" / "Prop03" / "PartC.blend").exists()
 
 
 def test_oset(mini_omoos_path: Opath):
@@ -99,19 +99,19 @@ def test_oset(mini_omoos_path: Opath):
     [
         ("Sc010_001", "Sc010"),
         ("Sc010_Shot0100.v001", "Sc010_Shot0100"),
-        ("Asset A v001", "AssetA"),
-        ("Asset A_autosave", "AssetA"),
-        ("Asset_A.autosave", "Asset_A"),
+        ("Prop01 v001", "Prop01"),
+        ("Prop01_autosave", "Prop01"),
+        ("Prop01.autosave", "Prop01"),
         ("Asset_aa 001", "Asset_Aa"),
-        ("Asset_a_autosave_v001", "Asset_A"),
+        ("Prop_01_autosave_v001", "Prop"),
         ("头骨2.v001", "头骨2"),
         ("头骨.2.0001", "头骨"),
-        ("Asset头骨.0001", "Asset头骨"),
-        ("AssetA-1.v3", "AssetA-1"),
-        ("AssetAA.v3", "AssetAA"),
-        ("AssetAa.v001", "AssetAa"),
-        ("AssetA_recovered 1", "AssetA"),
-        ("AssetA_recovered.v001", "AssetA"),
+        ("Prop头骨.0001", "Prop头骨"),
+        ("Prop01-1.v3", "Prop01-1"),
+        ("Prop01A.v3", "Prop01A"),
+        ("Prop01a.v001", "Prop01a"),
+        ("Prop01_recovered 1", "Prop01"),
+        ("Prop01_recovered.v001", "Prop01"),
     ],
 )
 def test_normalize_name(name: str, expected: str):
