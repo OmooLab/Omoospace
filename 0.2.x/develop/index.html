@@ -1,0 +1,1549 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Omoospace is a scalable directory structure solution for digital creation works.">
+      
+      
+        <meta name="author" content="OmooLab">
+      
+      
+        <link rel="canonical" href="https://omoolab.github.io/Omoospace/0.2.x/develop/">
+      
+      
+        <link rel="prev" href="../how-to-backup/">
+      
+      
+        <link rel="next" href="../contribution/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.8">
+    
+    
+      
+        <title>Develop Addon with Python - Omoospace Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4b4a2bd9.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.356b1318.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i%7CCascadia+Code:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Open Sans";--md-code-font:"Cascadia Code"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#develop-addon-with-python" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Omoospace Docs" class="md-header__button md-logo" aria-label="Omoospace Docs" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Omoospace Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Develop Addon with Python
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_3" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M448 256c0-106-86-192-192-192v384c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0 256 256 0 1 1-512 0z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M144.7 98.7c-21 34.1-33.1 74.3-33.1 117.3 0 98 62.8 181.4 150.4 211.7-12.4 2.8-25.3 4.3-38.6 4.3C126.6 432 48 353.3 48 256c0-68.9 39.4-128.4 96.8-157.3zm62.1-66C91.1 41.2 0 137.9 0 256c0 123.7 100 224 223.5 224 47.8 0 92-15 128.4-40.6 1.9-1.3 3.7-2.7 5.5-4 4.8-3.6 9.4-7.4 13.9-11.4 2.7-2.4 5.3-4.8 7.9-7.3 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-3.7.6-7.4 1.2-11.1 1.6-5 .5-10.1.9-15.3 1h-4c-96.8-.2-175.2-78.9-175.2-176 0-54.8 24.9-103.7 64.1-136 1-.9 2.1-1.7 3.2-2.6 4-3.2 8.2-6.2 12.5-9 3.1-2 6.3-4 9.6-5.8 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-3.6-.3-7.1-.5-10.7-.6-2.7-.1-5.5-.1-8.2-.1-3.3 0-6.5.1-9.8.2-2.3.1-4.6.2-6.9.4z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_3">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M223.5 32C100 32 0 132.3 0 256s100 224 223.5 224c60.6 0 115.5-24.2 155.8-63.4 5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6-96.9 0-175.5-78.8-175.5-176 0-65.8 36-123.1 89.3-153.3 6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/OmooLab/Omoospace" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OmooLab/Omoospace
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+    
+  
+  Overview
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../how-to-add-suffixes/" class="md-tabs__link">
+          
+  
+    
+  
+  How-to
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+    
+  
+  Develop
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Omoospace Docs" class="md-nav__button md-logo" aria-label="Omoospace Docs" data-md-component="logo">
+      
+  <img src="../assets/logo.png" alt="logo">
+
+    </a>
+    Omoospace Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/OmooLab/Omoospace" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    OmooLab/Omoospace
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Overview
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../why/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Why Omoospace?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../principles/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omoospace Principles
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omoospace.yml
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../terms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Terms
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    How-to
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            How-to
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-add-suffixes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to add modifier suffixes?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-setup-folders/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to setup folders
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../how-to-backup/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    How to backup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Develop
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Develop
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Develop Addon with Python
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Develop Addon with Python
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-dependencies" class="md-nav__link">
+    Add dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use" class="md-nav__link">
+    How to use
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omoospace" class="md-nav__link">
+    Omoospace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subspace" class="md-nav__link">
+    Subspace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maker" class="md-nav__link">
+    Maker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool" class="md-nav__link">
+    Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#work" class="md-nav__link">
+    Work
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opath" class="md-nav__link">
+    Opath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oset" class="md-nav__link">
+    Oset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contribution
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/omoospace/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Omoospace
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/functions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/common/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Common
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/items/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Items
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/validators/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validators
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../apis/utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-dependencies" class="md-nav__link">
+    Add dependencies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-use" class="md-nav__link">
+    How to use
+  </a>
+  
+    <nav class="md-nav" aria-label="How to use">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#omoospace" class="md-nav__link">
+    Omoospace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subspace" class="md-nav__link">
+    Subspace
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maker" class="md-nav__link">
+    Maker
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool" class="md-nav__link">
+    Tool
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#work" class="md-nav__link">
+    Work
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opath" class="md-nav__link">
+    Opath
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oset" class="md-nav__link">
+    Oset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#utils" class="md-nav__link">
+    Utils
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="develop-addon-with-python">Develop Addon with Python</h1>
+<h2 id="add-dependencies">Add dependencies</h2>
+<p>omoospace requires Python version 3.10 or above.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>add<span class="w"> </span>omoospace
+</span></code></pre></div>
+<h2 id="how-to-use">How to use</h2>
+<h3 id="omoospace">Omoospace</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">create_omoospace</span><span class="p">,</span> <span class="n">Opath</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">omoospace</span> <span class="o">=</span> <span class="n">create_omoospace</span><span class="p">(</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s2">&quot;new project&quot;</span><span class="p">,</span> 
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">under</span><span class="o">=</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> 
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">brief</span><span class="o">=</span><span class="s2">&quot;A new project for testing.&quot;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># the name conversion rule is:</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># 1. convert to &quot;PascalCase&quot;</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1"># 2. remove special characters and spaces</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># so the name &quot;new project&quot; is converted to &quot;NewProject&quot;</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="c1"># &quot;NewProject&quot; is also the project folder name</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;NewProject&quot;</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;NewProject&quot;</span><span class="p">)</span>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;NewProject&quot;</span><span class="p">,</span> <span class="s2">&quot;Subspaces&quot;</span><span class="p">)</span>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">contents_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;NewProject&quot;</span><span class="p">,</span> <span class="s2">&quot;Contents&quot;</span><span class="p">)</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">profile_file</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span> <span class="s2">&quot;NewProject&quot;</span><span class="p">,</span> <span class="s2">&quot;Omoospace.yml&quot;</span><span class="p">)</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>
+</span><span id="__span-1-21"><a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="c1"># a empty project is created.</span>
+</span><span id="__span-1-22"><a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">brief</span> <span class="o">==</span> <span class="s2">&quot;A new project for testing.&quot;</span>
+</span><span id="__span-1-23"><a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-1-24"><a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+</span><span id="__span-1-25"><a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="c1"># %$ is not allowed as a omoospace name.</span>
+</span><span id="__span-1-26"><a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
+</span><span id="__span-1-27"><a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>    <span class="n">create_omoospace</span><span class="p">(</span><span class="s2">&quot;%$&quot;</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="s2">&quot;temp&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Example omoospace:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Project01
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├──<span class="w"> </span>Contents
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>├──<span class="w"> </span>AssetA.blend
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├──<span class="w"> </span>AssetB
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│<span class="w">   </span>├──<span class="w"> </span><span class="m">001</span>-ModelAssetB.zpr
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│<span class="w">   </span>├──<span class="w"> </span><span class="m">002</span>-TextureAssetB.spp
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│<span class="w">   </span>╰──<span class="w"> </span><span class="m">003</span>-RenderAssetB.blend
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>├──<span class="w"> </span>AssetC
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>│<span class="w">   </span>├──<span class="w"> </span>AssetC.blend
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>│<span class="w">   </span>├──<span class="w"> </span>PartA.blend
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>│<span class="w">   </span>╰──<span class="w"> </span>PartB.blend
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>╰──<span class="w"> </span>Omoospace.yml
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">Opath</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">omoospace</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s2">&quot;ProjectRoot&quot;</span><span class="p">)</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">root_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;ProjectRoot&quot;</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;ProjectRoot&quot;</span><span class="p">)</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">contents_dir</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;ProjectRoot&quot;</span><span class="p">,</span> <span class="s2">&quot;Contents&quot;</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">profile_file</span> <span class="o">==</span> <span class="n">Opath</span><span class="p">(</span><span class="s2">&quot;ProjectRoot&quot;</span><span class="p">,</span> <span class="s2">&quot;Omoospace.yml&quot;</span><span class="p">)</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">contents_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">profile_file</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="n">objective_tree</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">objective_tree</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">assert</span> <span class="n">objective_tree</span><span class="o">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">8</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="nb">print</span><span class="p">(</span><span class="n">objective_tree</span><span class="o">.</span><span class="n">format</span><span class="p">())</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="c1"># Project01</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="c1"># ├── AssetA</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="c1"># ├── AssetB</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="c1"># │   ├── 001-ModelAssetB</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="c1"># │   ├── 002-TextureAssetB</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="c1"># │   ╰── 003-RenderAssetB</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="c1"># ╰── AssetC</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="c1">#     ├── PartA.blend</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="c1">#     ╰── PartB.blend</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">objective_tree</span><span class="p">:</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;AssetA&quot;</span><span class="p">:</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="k">elif</span> <span class="n">o</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;AssetB&quot;</span><span class="p">:</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="k">elif</span> <span class="n">o</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">:</span>
+</span><span id="__span-3-35"><a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span><span id="__span-3-36"><a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span></code></pre></div>
+<h3 id="subspace">Subspace</h3>
+<p>Example omoospace:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Project02
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├──<span class="w"> </span>Contents
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>├──<span class="w"> </span>Subspaces
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>│<span class="w">   </span>├──<span class="w"> </span>Heart.blend
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>│<span class="w">   </span>├──<span class="w"> </span>Heart_v001.blend
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>│<span class="w">   </span>├──<span class="w"> </span>Heart_Valves.blend
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>│<span class="w">   </span>├──<span class="w"> </span>Heart_Valves_v001_autosave.spp
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>│<span class="w">   </span>╰──<span class="w"> </span>Liver.zpr
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>╰──<span class="w"> </span>Omoospace.yml
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">Opath</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">omoospace</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s1">&#39;path/to/Project&#39;</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">make_heart</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">add_subspace</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;heart&quot;</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1"># &quot;add_subspace&quot; will collect subspaces that has same objective.</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="c1"># All files except &quot;Liver.zpr&quot; will move to Heart/</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart.v001.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart_Valves.spp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart_Valves.v001.spp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Liver.zpr&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="k">assert</span> <span class="s2">&quot;Heart&quot;</span> <span class="ow">in</span> <span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="k">assert</span> <span class="s2">&quot;Heart/Heart.blend&quot;</span> <span class="ow">in</span> <span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="k">assert</span> <span class="s2">&quot;Heart/Heart.v001.blend&quot;</span> <span class="ow">in</span> <span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="k">assert</span> <span class="s2">&quot;Heart/Heart_Valves.spp&quot;</span> <span class="ow">in</span> <span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="k">assert</span> <span class="s2">&quot;Heart/Heart_Valves.v001.spp&quot;</span> <span class="ow">in</span> <span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># Add subspace under heart.</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="n">make_valves</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">add_subspace</span><span class="p">(</span><span class="s2">&quot;valves&quot;</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="n">make_heart</span><span class="p">)</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="k">assert</span> <span class="n">make_valves</span><span class="o">.</span><span class="n">pathname</span> <span class="o">==</span> <span class="s2">&quot;Heart_Valves&quot;</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">make_heart</span><span class="o">.</span><span class="n">subspaces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="c1"># Heart_Valves.spp not move to Heart/Valves/</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart_Valves.spp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="k">assert</span> <span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">subspaces_dir</span><span class="p">,</span> <span class="s2">&quot;Heart/Heart_Valves.v001.spp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">extract_pathname</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Sc010_AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sc010_AssetA&quot;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;SQ010/AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sc010_AssetA&quot;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Sc010_Shot0100/AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sc010_AssetA&quot;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Sc010_Shot0100/Shot0100_AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sc010_Shot0100_AssetA&quot;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Sc010_Shot0100/Sc010_Shot0100_AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Sc010_Shot0100_AssetA&quot;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;PartA/AssetA_PartA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;PartA_AssetA_PartA&quot;</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;AssetA.001.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AssetA&quot;</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;AssetA.v001.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AssetA&quot;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Asset-A.v001.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;Asset-A&quot;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;AssetA.v001.autosave.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AssetA&quot;</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;头骨/头骨.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;头骨&quot;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;Asset A/AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AssetA&quot;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="k">assert</span> <span class="n">extract_pathname</span><span class="p">(</span><span class="s2">&quot;AssetA_AssetA.blend&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AssetA_AssetA&quot;</span>
+</span></code></pre></div>
+<h3 id="maker">Maker</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># read makers</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">maker</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_maker</span><span class="p">(</span><span class="s2">&quot;马南001&quot;</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="s2">&quot;manan001@example.com&quot;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="s2">&quot;https://www.manan.com&quot;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">maker</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_maker</span><span class="p">(</span><span class="s2">&quot;马南002&quot;</span><span class="p">)</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="s2">&quot;manan002@example.com&quot;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">maker</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="s2">&quot;https://www.manan2.com&quot;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="s2">&quot;https://www.manan2.com&quot;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="s2">&quot;manan002@example.com&quot;</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">maker</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_maker</span><span class="p">(</span><span class="s2">&quot;偶魔数字&quot;</span><span class="p">)</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">email</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="k">assert</span> <span class="n">maker</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="s2">&quot;https://www.omoolab.xyz&quot;</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="c1"># add maker</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="n">maker</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">add_maker</span><span class="p">(</span><span class="s2">&quot;icrdr&quot;</span><span class="p">)</span>
+</span><span id="__span-7-17"><a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">makers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span>
+</span><span id="__span-7-18"><a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="k">assert</span> <span class="s2">&quot;icrdr&quot;</span> <span class="ow">in</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">makers</span>
+</span><span id="__span-7-19"><a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">makers</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;马南001&quot;</span><span class="p">,</span> <span class="s2">&quot;马南002&quot;</span><span class="p">,</span> <span class="s2">&quot;偶魔数字&quot;</span><span class="p">,</span> <span class="s2">&quot;icrdr&quot;</span><span class="p">]</span>
+</span></code></pre></div>
+<h3 id="tool">Tool</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">tool</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;Blender&quot;</span><span class="p">)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;4.2.0&quot;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="s2">&quot;https://www.blender.org&quot;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">extensions</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;Omoospace&quot;</span><span class="p">,</span> <span class="s2">&quot;BioxelNodes&quot;</span><span class="p">]</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">tool</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;Houdini&quot;</span><span class="p">)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;20.0.0&quot;</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;21.0.0&quot;</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;21.0.0&quot;</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="n">tool</span><span class="o">.</span><span class="n">website</span> <span class="o">=</span> <span class="s2">&quot;https://www.houdini.com&quot;</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;21.0.0&quot;</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="k">assert</span> <span class="n">tool</span><span class="o">.</span><span class="n">website</span> <span class="o">==</span> <span class="s2">&quot;https://www.houdini.com&quot;</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="c1"># edit tool Blender</span>
+</span><span id="__span-8-17"><a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="n">tool</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;Blender&quot;</span><span class="p">)</span>
+</span><span id="__span-8-18"><a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">tool</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Omoospace&quot;</span><span class="p">]</span>
+</span><span id="__span-8-19"><a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="n">tool</span><span class="o">.</span><span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;&gt;3.6.5&quot;</span>
+</span><span id="__span-8-20"><a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="k">assert</span> <span class="s2">&quot;BioxelNodes&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tool</span><span class="o">.</span><span class="n">extensions</span>
+</span><span id="__span-8-21"><a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>
+</span><span id="__span-8-22"><a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a><span class="c1"># get tool by name</span>
+</span><span id="__span-8-23"><a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="k">assert</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_tool</span><span class="p">(</span><span class="s2">&quot;Blender&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;&gt;3.6.5&quot;</span>
+</span><span id="__span-8-24"><a id="__codelineno-8-24" name="__codelineno-8-24" href="#__codelineno-8-24"></a>
+</span><span id="__span-8-25"><a id="__codelineno-8-25" name="__codelineno-8-25" href="#__codelineno-8-25"></a><span class="c1"># remove tool</span>
+</span><span id="__span-8-26"><a id="__codelineno-8-26" name="__codelineno-8-26" href="#__codelineno-8-26"></a><span class="n">omoospace</span><span class="o">.</span><span class="n">remove_tool</span><span class="p">(</span><span class="s2">&quot;Blender&quot;</span><span class="p">)</span>
+</span><span id="__span-8-27"><a id="__codelineno-8-27" name="__codelineno-8-27" href="#__codelineno-8-27"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">tools</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span></code></pre></div>
+<h3 id="work">Work</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">omoospace</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s1">&#39;path/to/Project&#39;</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">work</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_work</span><span class="p">(</span><span class="s2">&quot;超厉害动画&quot;</span><span class="p">)</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">brief</span> <span class="o">==</span> <span class="s2">&quot;一个超厉害的动画.&quot;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="s2">&quot;1.0.0&quot;</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contents</span> <span class="o">==</span> <span class="p">[</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="s2">&quot;视频/动画A.mp4&quot;</span><span class="p">,</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="s2">&quot;图片/动画A_封面.png&quot;</span><span class="p">,</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="p">]</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">[</span><span class="s2">&quot;动画师&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;马南003&quot;</span><span class="p">,</span> <span class="s2">&quot;马南002&quot;</span><span class="p">]</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">[</span><span class="s2">&quot;动画导演&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;马南001&quot;</span><span class="p">]</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+</span><span id="__span-9-14"><a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="n">work</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_work</span><span class="p">(</span><span class="s2">&quot;超厉害模型&quot;</span><span class="p">)</span>
+</span><span id="__span-9-15"><a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">brief</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-9-17"><a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contents</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;模型/模型A/模型A.fbx&quot;</span><span class="p">,</span> <span class="s2">&quot;模型/模型A/贴图&quot;</span><span class="p">]</span>
+</span><span id="__span-9-18"><a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-9-19"><a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="n">work</span><span class="o">.</span><span class="n">add_contribution</span><span class="p">(</span><span class="s2">&quot;马南003&quot;</span><span class="p">,</span> <span class="n">contribution</span><span class="o">=</span><span class="s2">&quot;模型师&quot;</span><span class="p">)</span>
+</span><span id="__span-9-20"><a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">[</span><span class="s2">&quot;模型师&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;马南003&quot;</span><span class="p">]</span>
+</span><span id="__span-9-21"><a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contents</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;模型/模型A/模型A.fbx&quot;</span><span class="p">,</span> <span class="s2">&quot;模型/模型A/贴图&quot;</span><span class="p">]</span>
+</span><span id="__span-9-22"><a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+</span><span id="__span-9-23"><a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="n">work</span> <span class="o">=</span> <span class="n">omoospace</span><span class="o">.</span><span class="n">get_work</span><span class="p">(</span><span class="s2">&quot;另一个超厉害模型&quot;</span><span class="p">)</span>
+</span><span id="__span-9-24"><a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">brief</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-9-25"><a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">version</span> <span class="o">==</span> <span class="kc">None</span>
+</span><span id="__span-9-26"><a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contents</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;模型/模型B.glb&quot;</span><span class="p">]</span>
+</span><span id="__span-9-27"><a id="__codelineno-9-27" name="__codelineno-9-27" href="#__codelineno-9-27"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-9-28"><a id="__codelineno-9-28" name="__codelineno-9-28" href="#__codelineno-9-28"></a>
+</span><span id="__span-9-29"><a id="__codelineno-9-29" name="__codelineno-9-29" href="#__codelineno-9-29"></a><span class="n">work</span><span class="o">.</span><span class="n">brief</span> <span class="o">=</span> <span class="s2">&quot;一个超酷的模型.&quot;</span>
+</span><span id="__span-9-30"><a id="__codelineno-9-30" name="__codelineno-9-30" href="#__codelineno-9-30"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">brief</span> <span class="o">==</span> <span class="s2">&quot;一个超酷的模型.&quot;</span>
+</span><span id="__span-9-31"><a id="__codelineno-9-31" name="__codelineno-9-31" href="#__codelineno-9-31"></a><span class="k">assert</span> <span class="n">work</span><span class="o">.</span><span class="n">contents</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;模型/模型B.glb&quot;</span><span class="p">]</span>
+</span><span id="__span-9-32"><a id="__codelineno-9-32" name="__codelineno-9-32" href="#__codelineno-9-32"></a>
+</span><span id="__span-9-33"><a id="__codelineno-9-33" name="__codelineno-9-33" href="#__codelineno-9-33"></a><span class="c1"># set contributions</span>
+</span><span id="__span-9-34"><a id="__codelineno-9-34" name="__codelineno-9-34" href="#__codelineno-9-34"></a><span class="n">work</span><span class="o">.</span><span class="n">contributions</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-9-35"><a id="__codelineno-9-35" name="__codelineno-9-35" href="#__codelineno-9-35"></a>    <span class="s2">&quot;模型师&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;马南003&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;马南002&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;manan2@example.com&quot;</span><span class="p">}]</span>
+</span><span id="__span-9-36"><a id="__codelineno-9-36" name="__codelineno-9-36" href="#__codelineno-9-36"></a><span class="p">}</span>
+</span><span id="__span-9-37"><a id="__codelineno-9-37" name="__codelineno-9-37" href="#__codelineno-9-37"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">[</span><span class="s2">&quot;模型师&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span>
+</span><span id="__span-9-38"><a id="__codelineno-9-38" name="__codelineno-9-38" href="#__codelineno-9-38"></a><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">KeyError</span><span class="p">):</span>
+</span><span id="__span-9-39"><a id="__codelineno-9-39" name="__codelineno-9-39" href="#__codelineno-9-39"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">work</span><span class="o">.</span><span class="n">contributions</span><span class="p">[</span><span class="s2">&quot;主创&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-9-40"><a id="__codelineno-9-40" name="__codelineno-9-40" href="#__codelineno-9-40"></a>
+</span><span id="__span-9-41"><a id="__codelineno-9-41" name="__codelineno-9-41" href="#__codelineno-9-41"></a><span class="c1"># delete content will affect work items</span>
+</span><span id="__span-9-42"><a id="__codelineno-9-42" name="__codelineno-9-42" href="#__codelineno-9-42"></a><span class="n">Opath</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">contents_dir</span><span class="p">,</span> <span class="s2">&quot;模型&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+</span><span id="__span-9-43"><a id="__codelineno-9-43" name="__codelineno-9-43" href="#__codelineno-9-43"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">work</span><span class="o">.</span><span class="n">contents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span id="__span-9-44"><a id="__codelineno-9-44" name="__codelineno-9-44" href="#__codelineno-9-44"></a>
+</span><span id="__span-9-45"><a id="__codelineno-9-45" name="__codelineno-9-45" href="#__codelineno-9-45"></a><span class="c1"># remove work</span>
+</span><span id="__span-9-46"><a id="__codelineno-9-46" name="__codelineno-9-46" href="#__codelineno-9-46"></a><span class="n">omoospace</span><span class="o">.</span><span class="n">remove_work</span><span class="p">(</span><span class="s2">&quot;另一个超厉害模型&quot;</span><span class="p">)</span>
+</span><span id="__span-9-47"><a id="__codelineno-9-47" name="__codelineno-9-47" href="#__codelineno-9-47"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">omoospace</span><span class="o">.</span><span class="n">works</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span></code></pre></div>
+<h3 id="opath">Opath</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">root</span> <span class="o">=</span> <span class="n">mini_omoos_path</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">make_path</span><span class="p">(</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="s2">&quot;AssetB/001-ModelAssetB.zpr&quot;</span><span class="p">,</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="s2">&quot;AssetB/002-TextureAssetB.spp&quot;</span><span class="p">,</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="s2">&quot;AssetB/003-RenderAssetB.blend&quot;</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="s2">&quot;AssetC/AssetC.blend&quot;</span><span class="p">,</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="s2">&quot;AssetC/PartA.blend&quot;</span><span class="p">,</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="s2">&quot;AssetC/PartB.blend&quot;</span><span class="p">,</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="n">under</span><span class="o">=</span><span class="n">root</span><span class="p">,</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">)</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">)</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="c1"># if the same, return self</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="k">assert</span> <span class="p">(</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>    <span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="o">==</span> <span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="p">)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="c1"># Asset.blend is already in Temp, copy fail</span>
+</span><span id="__span-10-24"><a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">FileExistsError</span><span class="p">):</span>
+</span><span id="__span-10-25"><a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>    <span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">)</span>
+</span><span id="__span-10-26"><a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
+</span><span id="__span-10-27"><a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="c1"># with overwrite=True, AssetA.blend in Temp will be overwritten</span>
+</span><span id="__span-10-28"><a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-29"><a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-30"><a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>
+</span><span id="__span-10-31"><a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a><span class="c1"># Asset.blend is already in Temp, move fail</span>
+</span><span id="__span-10-32"><a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">FileExistsError</span><span class="p">):</span>
+</span><span id="__span-10-33"><a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>    <span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">)</span>
+</span><span id="__span-10-34"><a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>
+</span><span id="__span-10-35"><a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a><span class="c1"># with overwrite=True, AssetA.blend in Temp will be overwritten</span>
+</span><span id="__span-10-36"><a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a><span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">move_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-37"><a id="__codelineno-10-37" name="__codelineno-10-37" href="#__codelineno-10-37"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-38"><a id="__codelineno-10-38" name="__codelineno-10-38" href="#__codelineno-10-38"></a><span class="k">assert</span> <span class="ow">not</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-39"><a id="__codelineno-10-39" name="__codelineno-10-39" href="#__codelineno-10-39"></a>
+</span><span id="__span-10-40"><a id="__codelineno-10-40" name="__codelineno-10-40" href="#__codelineno-10-40"></a><span class="c1"># copy folder AssetC to Temp</span>
+</span><span id="__span-10-41"><a id="__codelineno-10-41" name="__codelineno-10-41" href="#__codelineno-10-41"></a><span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">)</span>
+</span><span id="__span-10-42"><a id="__codelineno-10-42" name="__codelineno-10-42" href="#__codelineno-10-42"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-43"><a id="__codelineno-10-43" name="__codelineno-10-43" href="#__codelineno-10-43"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-44"><a id="__codelineno-10-44" name="__codelineno-10-44" href="#__codelineno-10-44"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span> <span class="o">/</span> <span class="s2">&quot;PartA.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-45"><a id="__codelineno-10-45" name="__codelineno-10-45" href="#__codelineno-10-45"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span> <span class="o">/</span> <span class="s2">&quot;PartB.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span><span id="__span-10-46"><a id="__codelineno-10-46" name="__codelineno-10-46" href="#__codelineno-10-46"></a>
+</span><span id="__span-10-47"><a id="__codelineno-10-47" name="__codelineno-10-47" href="#__codelineno-10-47"></a><span class="n">make_path</span><span class="p">(</span><span class="s2">&quot;AssetC/PartC.blend&quot;</span><span class="p">,</span> <span class="n">under</span><span class="o">=</span><span class="n">root</span><span class="p">)</span>
+</span><span id="__span-10-48"><a id="__codelineno-10-48" name="__codelineno-10-48" href="#__codelineno-10-48"></a><span class="c1"># Asset.blend is already in Temp, copy fail</span>
+</span><span id="__span-10-49"><a id="__codelineno-10-49" name="__codelineno-10-49" href="#__codelineno-10-49"></a><span class="k">with</span> <span class="n">pytest</span><span class="o">.</span><span class="n">raises</span><span class="p">(</span><span class="ne">FileExistsError</span><span class="p">):</span>
+</span><span id="__span-10-50"><a id="__codelineno-10-50" name="__codelineno-10-50" href="#__codelineno-10-50"></a>    <span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">)</span>
+</span><span id="__span-10-51"><a id="__codelineno-10-51" name="__codelineno-10-51" href="#__codelineno-10-51"></a>
+</span><span id="__span-10-52"><a id="__codelineno-10-52" name="__codelineno-10-52" href="#__codelineno-10-52"></a><span class="c1"># copy folder AssetC to Temp</span>
+</span><span id="__span-10-53"><a id="__codelineno-10-53" name="__codelineno-10-53" href="#__codelineno-10-53"></a><span class="n">Opath</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">copy_to</span><span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-54"><a id="__codelineno-10-54" name="__codelineno-10-54" href="#__codelineno-10-54"></a><span class="k">assert</span> <span class="p">(</span><span class="n">root</span> <span class="o">/</span> <span class="s2">&quot;Temp&quot;</span> <span class="o">/</span> <span class="s2">&quot;AssetC&quot;</span> <span class="o">/</span> <span class="s2">&quot;PartC.blend&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</span></code></pre></div>
+<p>Reveal in Explorer
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">Omoospace</span><span class="p">,</span> <span class="n">reveal_directory</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">omoos</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="s2">&quot;path/to/omoospace&quot;</span><span class="p">)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">reveal_directory</span><span class="p">(</span><span class="n">omoos</span><span class="o">.</span><span class="n">root_dir</span><span class="p">)</span>
+</span></code></pre></div></p>
+<h3 id="oset">Oset</h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">omoospace</span> <span class="o">=</span> <span class="n">Omoospace</span><span class="p">(</span><span class="n">mini_omoos_path</span><span class="p">)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">makers</span> <span class="o">=</span> <span class="n">Oset</span><span class="p">[</span><span class="n">Maker</span><span class="p">](</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="p">[</span><span class="n">Maker</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">),</span> <span class="n">Maker</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)],</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">)</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="k">assert</span> <span class="s2">&quot;Alice&quot;</span> <span class="ow">in</span> <span class="n">makers</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="k">assert</span> <span class="s2">&quot;Charlie&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">makers</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="k">assert</span> <span class="n">Maker</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Bob&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">makers</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="c1"># 测试添加重复属性值的对象（不会被添加）</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="n">makers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Maker</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Alice&quot;</span><span class="p">))</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">makers</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="k">assert</span> <span class="s2">&quot;Alice&quot;</span> <span class="ow">in</span> <span class="n">makers</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="k">assert</span> <span class="s2">&quot;Bob&quot;</span> <span class="ow">in</span> <span class="n">makers</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="c1"># 2. 测试Work类型的Oset（验证通用性）</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="n">works</span> <span class="o">=</span> <span class="n">Oset</span><span class="p">[</span><span class="n">Work</span><span class="p">](</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    <span class="p">[</span><span class="n">Work</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Coding&quot;</span><span class="p">),</span> <span class="n">Work</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Testing&quot;</span><span class="p">)],</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;name&quot;</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="p">)</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="k">assert</span> <span class="s2">&quot;Coding&quot;</span> <span class="ow">in</span> <span class="n">works</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="k">assert</span> <span class="n">Work</span><span class="p">(</span><span class="n">omoospace</span><span class="p">,</span> <span class="s2">&quot;Testing&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">works</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="k">assert</span> <span class="s2">&quot;Design&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">works</span>
+</span></code></pre></div>
+<h3 id="utils">Utils</h3>
+<p>Normalize a Name
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">normalize_name</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">assert</span> <span class="n">normalize_name</span><span class="p">(</span><span class="s1">&#39;Sc010_Shot0100.001&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;Sc010_Shot0100&#39;</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="c1">### Copy to Clipboard</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="err">```</span><span class="n">python</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="kn">from</span> <span class="nn">omoospace</span> <span class="kn">import</span> <span class="n">copy_to_clipboard</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="n">copy_to_clipboard</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
+</span></code></pre></div></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../how-to-backup/" class="md-footer__link md-footer__link--prev" aria-label="Previous: How to backup">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                How to backup
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../contribution/" class="md-footer__link md-footer__link--next" aria-label="Next: Contribution">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Contribution
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2020 - 2024 Omoolab
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.tabs", "navigation.tabs.sticky", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.81fa17fe.min.js"></script>
+      
+    
+  </body>
+</html>

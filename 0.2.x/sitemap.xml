@@ -2,47 +2,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://omoolab.github.io/Omoospace/0.2.x/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/Omoospace/0.2.x/contribution/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://omoolab.github.io/Omoospace/0.2.x/develop-plugin/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/develop/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/how-to-add-suffixes/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/how-to-backup/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/how-to-setup-folders/</loc>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/Omoospace/0.2.x/principles/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://omoolab.github.io/Omoospace/0.2.x/why-omoospace/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/terms/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/why/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/yml/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/common/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/functions/</loc>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/items/</loc>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/omoospace/</loc>
-         <lastmod>2025-12-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/package/</loc>
-         <lastmod>2025-12-29</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/subspace/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/utils/</loc>
-         <lastmod>2025-12-29</lastmod>
+         <lastmod>2026-01-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://omoolab.github.io/Omoospace/0.2.x/apis/validators/</loc>
+         <lastmod>2026-01-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
