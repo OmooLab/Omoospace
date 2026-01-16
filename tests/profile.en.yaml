@@ -1,8 +1,8 @@
 brief: An awesome IP project
 
 ignore:
-  - "Short02"
-  - "Short03/Prop01.*"
+  - Short02
+  - Short03/Prop01.*
 
 notes:
   Client: Tencent

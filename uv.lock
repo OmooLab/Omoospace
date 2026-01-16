@@ -701,13 +701,17 @@ wheels = [
 
 [[package]]
 name = "omoospace"
-version = "0.2.2"
+version = "0.2.5"
 source = { editable = "." }
 dependencies = [
-    { name = "inquirerpy" },
     { name = "nutree" },
     { name = "pypinyin" },
     { name = "ruamel-yaml" },
+]
+
+[package.optional-dependencies]
+cli = [
+    { name = "inquirerpy" },
     { name = "typer" },
 ]
 
@@ -728,12 +732,13 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "inquirerpy", specifier = ">=0.3.4" },
+    { name = "inquirerpy", marker = "extra == 'cli'", specifier = ">=0.3.4" },
     { name = "nutree", specifier = ">=0.5.1,<0.6" },
     { name = "pypinyin", specifier = ">=0.49.0,<0.50" },
     { name = "ruamel-yaml", specifier = ">=0.17.35,<0.18" },
-    { name = "typer", specifier = ">=0.20.1" },
+    { name = "typer", marker = "extra == 'cli'", specifier = ">=0.20.1" },
 ]
+provides-extras = ["cli"]
 
 [package.metadata.requires-dev]
 dev = [

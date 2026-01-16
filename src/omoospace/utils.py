@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 import shutil
 from pathlib import Path
 from typing import Any, Generic, Iterable, Optional, TypeVar, Union
@@ -31,10 +32,12 @@ class Opath(NativePath):
 
     def reveal_in_explorer(self):
         """Open the directory in file exploarer"""
-        try:
-            os.startfile(self)
-        except Exception as err:
-            print("Fail to reveal", err)
+        if sys.platform == "win32":
+            os.startfile(self.as_posix())
+        elif sys.platform == "darwin":  # macOS
+            os.system(f"open '{self.as_posix()}'")
+        else:  # Linux/Unix
+            os.system(f"xdg-open '{self.as_posix()}'")
 
     def is_under(self, b: Union[str, Path, "Opath"], or_equal=False) -> bool:
         """Return True if a is a subpath of b .
@@ -240,7 +243,7 @@ def make_path(
                     maked_path.touch()
 
             maked_paths.append(maked_path)
-            
+
         else:
             for path, content in p.items():
                 maked_path = Opath(under, path).resolve()
