@@ -1,7 +1,7 @@
 [中文文档](https://wcn96x0h20lt.feishu.cn/wiki/TAduwcqV3izhJ2kM3VpcZBW0n1d)
 
 # Omoospace
-![overview](docs/assets/overview.png)
+![overview](https://omoolab.github.io/Omoospace/latest/assets/overview.png)
 
 Omoospace is a universal folder structure guideline for creative projects. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](https://omoolab.github.io/Omoospace/latest/why)
 
