@@ -11,7 +11,6 @@ When you have the same thing but in different versions, states, or with differen
 
 Both `.high` and `.v001` are modifier suffixes.
 
-
 ## Common Modifier Suffixes
 
 | Suffix                                              | Meaning                                      |

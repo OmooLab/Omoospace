@@ -1,0 +1,11 @@
+{
+  "interfaceFontFamily": "Noto Sans SC",
+  "textFontFamily": "霞鹜文楷",
+  "monospaceFontFamily": "Fira Code Retina,霞鹜文楷",
+  "baseFontSize": 16,
+  "baseFontSizeAction": false,
+  "enabledCssSnippets": [
+    "canvas",
+    "fix_canvas"
+  ]
+}

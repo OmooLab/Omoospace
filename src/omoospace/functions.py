@@ -2,6 +2,135 @@ from omoospace.language import ALLOWED_LANGS, Language
 from omoospace.omoospace import Omoospace, Subspace, Objective
 from omoospace.utils import make_path, normalize_name, Opath, AnyPath
 
+gitattributes_content = """# Define macros (only works in top-level gitattributes files)
+[attr]lfs               filter=lfs diff=lfs merge=lfs -text
+
+
+# 3D models
+*.collada               lfs
+*.dae                   lfs
+*.dxf                   lfs
+*.FBX                   lfs
+*.fbx                   lfs
+*.jas                   lfs
+*.lws                   lfs
+*.lxo                   lfs
+*.obj                   lfs
+*.ply                   lfs
+*.skp                   lfs
+*.stl                   lfs
+*.usd                   lfs
+*.usda                  lfs
+*.usdc                  lfs
+*.usdz                  lfs
+*.glb                   lfs
+*.gltf                  lfs
+
+# Audio
+*.aif                   lfs
+*.aiff                  lfs
+*.it                    lfs
+*.mod                   lfs
+*.mp3                   lfs
+*.ogg                   lfs
+*.s3m                   lfs
+*.wav                   lfs
+*.xm                    lfs
+
+# Video
+*.asf                   lfs
+*.avi                   lfs
+*.flv                   lfs
+*.mov                   lfs
+*.mp4                   lfs
+*.mpeg                  lfs
+*.mpg                   lfs
+*.ogv                   lfs
+*.wmv                   lfs
+
+# Images
+*.bmp                   lfs
+*.exr                   lfs
+*.gif                   lfs
+*.hdr                   lfs
+*.iff                   lfs
+*.jpeg                  lfs
+*.jpg                   lfs
+*.pict                  lfs
+*.png                   lfs
+*.psd                   lfs
+*.tga                   lfs
+*.tif                   lfs
+*.tiff                  lfs
+*.webp                  lfs
+
+# Compressed Archive
+*.7z                    lfs
+*.bz2                   lfs
+*.gz                    lfs
+*.rar                   lfs
+*.tar                   lfs
+*.zip                   lfs
+
+# Compiled Dynamic Library
+*.dll                   lfs
+*.pdb                   lfs
+*.so                    lfs
+
+# Fonts
+*.otf                   lfs
+*.ttf                   lfs
+*.woff                  lfs
+*.woff2                 lfs
+
+# Executable/Installer
+*.apk                   lfs
+*.exe                   lfs
+
+# Documents
+*.pdf                   lfs
+
+# Adobe
+*.psd                    lfs
+*.ai                    lfs
+*.aep                   lfs
+*.prproj                lfs
+*.spp                   lfs
+
+# Zbrush
+*.zbr                   lfs
+*.zpr                   lfs
+*.ztl                   lfs
+*.c4d                   lfs
+
+# Autodesk
+*.max                   lfs
+*.ma                    lfs
+*.mb                    lfs
+*.3dm                   lfs
+*.3ds                   lfs
+
+# Blender
+*.blend                 lfs
+*.blend1                lfs
+*.c4d                   lfs
+
+# Imaging
+*.dicom                 lfs
+*.dcm                   lfs
+*.nii                   lfs
+*.ome                   lfs
+*.map                   lfs
+*.mrc                   lfs
+"""
+
+gitignore_content = """
+# Blender
+*.blend1
+blendcache_*
+*.cats.txt~
+"""
+
 
 def create_omoospace(
     name: str,
@@ -11,23 +140,26 @@ def create_omoospace(
     subspaces_dir: str = "Subspaces",
     language: Language = None,
     readme: bool = False,
+    gitfiles: bool = False,
     chinese_to_pinyin: bool = False,
     reveal_in_explorer: bool = False,
 ) -> Omoospace:
     """Create an omoospace.
-
+    
     Args:
-        name (str): Omoospace name
-        under (str, optional): Add omoospace to which folder. Defaults to '.'.
-        brief (str, optional): Omoospace brief. Defaults to None.
-        chinese_to_pinyin (bool, optional): Whether convert chinese to pinyin. Defaults to False.
-        reveal_in_explorer (bool, optional): Whether open folder after or not. Defaults to True.
-    Raises:
-        ExistsError: Target path already exists.
-        CreateFailed: Fail to create directories.
+        name (str): The name of the omoospace.
+        under (str, optional): The directory under which to create the omoospace. Defaults to ".".
+        brief (str, optional): A brief description of the omoospace. Defaults to None.
+        contents_dir (str, optional): The name of the contents directory. Defaults to "Contents".
+        subspaces_dir (str, optional): The name of the subspaces directory. Defaults to "Subspaces".
+        language (Language, optional): The language of the omoospace profile. Defaults to None.
+        readme (bool, optional): Whether to create a README.md file. Defaults to False.
+        gitfiles (bool, optional): Whether to create .gitattributes and .gitignore files. Defaults to False.
+        chinese_to_pinyin (bool, optional): Whether to convert Chinese characters in the name to Pinyin. Defaults to False.
+        reveal_in_explorer (bool, optional): Whether to reveal the created omoospace in file explorer. Defaults to False.
 
     Returns:
-        Omoospace: New created omoospace.
+        Omoospace: The created omoospace.
     """
 
     if language and language not in ALLOWED_LANGS:
@@ -41,7 +173,7 @@ def create_omoospace(
     try:
         Omoospace(root_dir)
         raise FileExistsError(f"{root_dir} already exists.")
-    
+
     except FileNotFoundError:
         pass
 
@@ -57,6 +189,10 @@ def create_omoospace(
         readme_content = f"""# {name}
 {brief or ""}"""
         paths.append({"README.md": readme_content})
+
+    if gitfiles:
+        paths.append({".gitattributes": gitattributes_content})
+        paths.append({".gitignore": gitignore_content})
 
     make_path(
         *paths,
