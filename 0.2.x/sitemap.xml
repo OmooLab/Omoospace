@@ -1,283 +1,283 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-        <loc>None./</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="None"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/"/>
     </url>
     <url>
-        <loc>Noneblender/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/blender/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneblender/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/blender/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/blender/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/blender/"/>
     </url>
     <url>
-        <loc>Nonecli/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/cli/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonecli/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/cli/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/cli/"/>
     </url>
     <url>
-        <loc>Nonecontribution/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/contribution/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonecontribution/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/contribution/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/contribution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/contribution/"/>
     </url>
     <url>
-        <loc>Nonedevelop/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/develop/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonedevelop/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/develop/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/develop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/develop/"/>
     </url>
     <url>
-        <loc>Nonehow-to-add-suffixes/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/how-to-add-suffixes/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-add-suffixes/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-add-suffixes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/how-to-add-suffixes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/how-to-add-suffixes/"/>
     </url>
     <url>
-        <loc>Nonehow-to-backup/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/how-to-backup/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-backup/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-backup/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/how-to-backup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/how-to-backup/"/>
     </url>
     <url>
-        <loc>Nonehow-to-collaborate/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/how-to-collaborate/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-collaborate/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-collaborate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/how-to-collaborate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/how-to-collaborate/"/>
     </url>
     <url>
-        <loc>Nonehow-to-setup-folders/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/how-to-setup-folders/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-setup-folders/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-setup-folders/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/how-to-setup-folders/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/how-to-setup-folders/"/>
     </url>
     <url>
-        <loc>Nonehow-to-version-control/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/how-to-version-control/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-version-control/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-version-control/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/how-to-version-control/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/how-to-version-control/"/>
     </url>
     <url>
-        <loc>Noneprinciples/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/principles/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneprinciples/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/principles/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/principles/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/principles/"/>
     </url>
     <url>
-        <loc>Noneterms/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/terms/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneterms/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/terms/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/terms/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/terms/"/>
     </url>
     <url>
-        <loc>Nonewhy/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/why/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonewhy/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/why/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/why/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/why/"/>
     </url>
     <url>
-        <loc>Noneyml/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/yml/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneyml/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/yml/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/yml/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/yml/"/>
     </url>
     <url>
-        <loc>Noneapis/common/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/common/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/common/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/common/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/common/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/common/"/>
     </url>
     <url>
-        <loc>Noneapis/functions/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/functions/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/functions/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/functions/"/>
     </url>
     <url>
-        <loc>Noneapis/items/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/items/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/items/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/items/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/items/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/items/"/>
     </url>
     <url>
-        <loc>Noneapis/omoospace/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/omoospace/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/omoospace/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/omoospace/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/omoospace/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/omoospace/"/>
     </url>
     <url>
-        <loc>Noneapis/utils/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/utils/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/utils/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/utils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/utils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/utils/"/>
     </url>
     <url>
-        <loc>Noneapis/validators/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/apis/validators/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/validators/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/validators/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x/apis/validators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.xen/apis/validators/"/>
     </url>
     <url>
-        <loc>Noneen/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="None"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.x"/>
     </url>
     <url>
-        <loc>Noneen/blender/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/blender/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/blender/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneblender/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/blender/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xblender/"/>
     </url>
     <url>
-        <loc>Noneen/cli/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/cli/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/cli/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonecli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/cli/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xcli/"/>
     </url>
     <url>
-        <loc>Noneen/contribution/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/contribution/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/contribution/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonecontribution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/contribution/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xcontribution/"/>
     </url>
     <url>
-        <loc>Noneen/develop/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/develop/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/develop/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonedevelop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/develop/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xdevelop/"/>
     </url>
     <url>
-        <loc>Noneen/how-to-add-suffixes/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-add-suffixes/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-add-suffixes/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-add-suffixes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-add-suffixes/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xhow-to-add-suffixes/"/>
     </url>
     <url>
-        <loc>Noneen/how-to-backup/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-backup/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-backup/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-backup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-backup/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xhow-to-backup/"/>
     </url>
     <url>
-        <loc>Noneen/how-to-collaborate/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-collaborate/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-collaborate/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-collaborate/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-collaborate/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xhow-to-collaborate/"/>
     </url>
     <url>
-        <loc>Noneen/how-to-setup-folders/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-setup-folders/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-setup-folders/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-setup-folders/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-setup-folders/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xhow-to-setup-folders/"/>
     </url>
     <url>
-        <loc>Noneen/how-to-version-control/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-version-control/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/how-to-version-control/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonehow-to-version-control/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/how-to-version-control/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xhow-to-version-control/"/>
     </url>
     <url>
-        <loc>Noneen/principles/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/principles/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/principles/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneprinciples/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/principles/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xprinciples/"/>
     </url>
     <url>
-        <loc>Noneen/terms/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/terms/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/terms/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneterms/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/terms/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xterms/"/>
     </url>
     <url>
-        <loc>Noneen/why/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/why/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/why/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Nonewhy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/why/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xwhy/"/>
     </url>
     <url>
-        <loc>Noneen/yml/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/yml/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/yml/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneyml/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/yml/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xyml/"/>
     </url>
     <url>
-        <loc>Noneen/apis/common/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/common/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/common/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/common/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/common/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/common/"/>
     </url>
     <url>
-        <loc>Noneen/apis/functions/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/functions/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/functions/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/functions/"/>
     </url>
     <url>
-        <loc>Noneen/apis/items/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/items/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/items/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/items/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/items/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/items/"/>
     </url>
     <url>
-        <loc>Noneen/apis/omoospace/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/omoospace/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/omoospace/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/omoospace/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/omoospace/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/omoospace/"/>
     </url>
     <url>
-        <loc>Noneen/apis/utils/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/utils/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/utils/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/utils/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/utils/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/utils/"/>
     </url>
     <url>
-        <loc>Noneen/apis/validators/</loc>
+        <loc>https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/validators/</loc>
         <lastmod>2026-03-03</lastmod>
         <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="Noneen/apis/validators/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="Noneapis/validators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.omoolab.xyz/omoospace/0.2.x/en/apis/validators/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.omoolab.xyz/omoospace/0.2.xapis/validators/"/>
     </url>
 </urlset>
