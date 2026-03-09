@@ -1,63 +1,50 @@
-[中文文档](https://wcn96x0h20lt.feishu.cn/wiki/TAduwcqV3izhJ2kM3VpcZBW0n1d)
-
 # Omoospace
+
 ![overview](assets/overview.png)
 
-Omoospace is a universal folder structure guideline for creative projects. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](why.md)
+Omoospace 是构建创意工作文件夹结构的心法。它的目标是，通用性、灵活性和语义性。不仅适用于复杂项目和团队合作，也适用于简单项目和个人工作。 [Why Omoospace?](why.md)
 
+## 快速开始
 
-## Getting Started
+### 新建项目
 
-### New Project
+1. 新建文件夹作为项目根目录
+2. 根目录下新建文件`Omoospace.yml`
+3. 根目录下新建文件夹`Contents/`，把资源型文件放进去
+4. （可选）根目录下新建`Subspaces/`，把制作型文件放进去
+5. （可选）其他文件夹按需求设置，并放置对应类型的文件
 
-1. Create a new folder as the project root.
-2. Create `Omoospace.yml` in the root.
-3. Create `Contents/` in the root and put your resource files in it.
-4. (Optional) Create `Subspaces/` in the root and put your source files in it.
-5. (Optional) Add other folders as needed and place the corresponding file types in them.
+### 已有项目
 
+1. 根目录下新建文件`Omoospace.yml`
+2. 编辑`Omoospace.yml`  
+	添加`contents_dir: <资源型文件夹名>`  
+	例如`contents_dir: Assets`（Unity）
+      
+3. （可选）编辑`Omoospace.yml`  
+      添加`subspaces_dir: <制作型文件夹名>`  
+      例如`subspaces_dir: ProjectFiles`
+      
 
-### Existing Project
+## 开箱即用的小工具
 
-1. Create `Omoospace.yml` in the project root.
-2. Edit `Omoospace.yml` and add:
-    ```YAML
-    contents_dir: <resource_folder_name>
-    ```
-    Example:
-    ```YAML
-    contents_dir: Assets
-    ```
+### 安装 uv 和小工具
 
-3. (Optional) Edit `Omoospace.yml` and add:
-    ```YAML
-    subspaces_dir: <source_folder_name>
-    ```
-    Example:
-    ```YAML
-    subspaces_dir: ProjectFiles
-    ```
+https://docs.astral.sh/uv/getting-started/installation/
 
-
-## Command Line Tool
-
-### Install uv and tool
-
-[https://docs.astral.sh/uv/getting-started/installation/](https://docs.astral.sh/uv/getting-started/installation/)
-
-```bash
+```Bash
 uv tool install omoospace[cli]
 ```
 
-### New Project
+### 新建项目
 
-```bash
+```Bash
 omoos create <Name>
 ```
 
-### Existing Project
+### 已有项目
 
-```bash
+```Bash
 cd <project folder>
 omoos init
 ```

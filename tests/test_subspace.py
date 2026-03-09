@@ -82,8 +82,9 @@ def test_extract_pathname2(empty_omoos_path: Path):
         under=other_subspaces_dir,
     )
 
-    assert extract_pathname(other_subspaces_dir / "Prop01.blend") == ""
-    assert extract_pathname(".") == None
+    assert extract_pathname(other_subspaces_dir / "Prop01.blend") == None
+    with pytest.raises(FileNotFoundError):
+        extract_pathname(".")
     omoospace.subspaces_dir = "src"
     assert omoospace.subspaces_dir == other_subspaces_dir
     assert extract_pathname(other_subspaces_dir / "Prop01.blend") == "Prop01"

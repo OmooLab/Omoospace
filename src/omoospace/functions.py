@@ -145,7 +145,7 @@ def create_omoospace(
     reveal_in_explorer: bool = False,
 ) -> Omoospace:
     """Create an omoospace.
-    
+
     Args:
         name (str): The name of the omoospace.
         under (str, optional): The directory under which to create the omoospace. Defaults to ".".
@@ -227,9 +227,11 @@ def extract_pathname(path: AnyPath) -> str:
     try:
         return Subspace(path).pathname
     except FileNotFoundError:
-        return None
+        # Not in omoospace
+        raise FileNotFoundError(f"Path is not in an omoospace")
     except ValueError:
-        return ""
+        # Not a subspace
+        return None
 
 
 def extract_objective(path: AnyPath) -> Objective:
@@ -246,6 +248,8 @@ def extract_objective(path: AnyPath) -> Objective:
     try:
         return Subspace(path).objective
     except FileNotFoundError:
-        return None
+        # Not in omoospace
+        raise FileNotFoundError(f"Path is not in an omoospace")
     except ValueError:
+        # Not a subspace
         return None

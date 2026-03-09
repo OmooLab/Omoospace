@@ -1,126 +1,168 @@
 # Omoospace.yml
 
-## Brief
+## 简述
+
+项目的概述
 
 ```YAML
-brief: <Project description>
+brief: <简述项目>
 ```
 
-## Notes
+例如
+
+```YAML
+brief: 一个超厉害的IP项目
+```
+
+
+## 主文件夹指定
+
+通过设置文件夹名，可以不改变原路径，又能让结构符合 Omoospace。还可以兼容其他项目的固定文件夹名，比如 Unity 中资产文件夹名为 `Assets/`，Unreal 中为 `Content/`
+
+```YAML
+contents_dir: <资源型文件夹名>
+subspaces_dir: <制作型文件夹名>
+```
+
+例如
+
+```YAML
+contents_dir: Assets          #兼容 Unity 项目
+subspaces_dir: ProjectFiles
+```
+  
+
+## 忽略列表
+
+不被当作 Subspace 的文件、文件夹
+
+```YAML
+ignore: 
+  - <忽略规则>
+```
+
+例如
+
+```YAML
+ignore:
+  - Short02
+  - Short03/Prop01.*
+```
+  
+
+## 记录列表
 
 ```YAML
 notes:
-  <Record name>: <Record value>
+  <记录对象>: <记录内容>
 ```
 
-Example:
+例如
 
 ```YAML
 notes:
-  Client: Tencent
+  客户: 腾讯爸爸
 ```
+  
 
-## Makers
+## 主创列表
 
 ```YAML
 makers:
-  <Name>: <Email>
+  <个人/团队名>: <邮箱>
 ```
-
-or
 
 ```YAML
 makers:
-  <Name>:
-    email: <Email>
-    website: <Website/social>
+  <个人/团队名>:
+    email: <邮箱>
+    website: <网站/社交账号>
 ```
 
-Example:
+例如
 
 ```YAML
 makers:
-  MaNan001: manan001@example.com
-  MaNan002:
+  马南001: manan001@example.com
+  马南002:
     email: manan002@example.com
-  OmooLab:
+  偶魔数字:
     email: studio@omoolab.xyz
     website: https://www.omoolab.xyz
 ```
 
-## Tools
+  
+
+## 工具列表
 
 ```YAML
 tools:
-  <Tool name>: <Version>
+  <工具/软件名>: <版本>
 ```
 
-or
-
 ```YAML
 tools:
-  <Tool name>:
-    version: <Version>
-    website: <Website>
+  <工具/软件名>: 
+    version: <版本>
+    website: <官网>
     extensions:
-      - <Addon/plugin>
-      - <Addon/plugin>
+      - <插件>
+      - <插件>
 ```
 
-Example:
+例如
 
 ```YAML
 tools:
   Houdini: 20.0
-  DaVinci Resolve:
+  DaVinciResolve:
     version: 20.5
   Blender:
-    version: 5.0.0
+    version: 4.2.0
     website: https://www.blender.org
     extensions:
       - Omoospace
       - BioxelNodes
 ```
 
-## Works
+
+## 作品列表
 
 ```YAML
 works:
-  <Work name>:
-    - <Relative path under Contents>
+  <作品名>:
+    - <Contents文件夹的相对路径>
 ```
 
-or
-
 ```YAML
 works:
-  <Work name>:
-    brief: <Work description>
-    version: <Version>
+  <作品名>:
+    brief: <简述作品>
+    version: "0.1.0"
     contents:
-      - <Relative path under Contents>
+      - <Contents文件夹的相对路径>
     contributions:
-      <Role/what was done>:
-        - <Name>
+      <角色/做了什么>:
+        - <个人/团队名>
 ```
 
-Example:
+例如
 
 ```YAML
 works:
-  AwesomeProp01: Models/Prop02.glb
-  AwesomeProp02:
-    - Models/Prop01/Prop01.fbx
-    - Models/Prop01/Textures
-  AwesomeShort01:
-    brief: An awesome animated short.
-    version: 1.0.0
+  超厉害道具01: Models/道具01.glb
+  超厉害道具02:
+    - Models/道具02/道具02.fbx
+    - Models/道具02/Textures
+  超厉害短片01:
+    brief: 一个超厉害的IP动画短片
+    version: "1.0.0"
     contents:
-      - Videos/Short01.mp4
-      - Images/Short01_Cover.png
+      - Videos/动画短片01.mp4
+      - Images/动画短片01_封面.png
     contributions:
-      Modeler:
-        - MaNan003
-      Animator: [MaNan002, MaNan003]
-      Director: MaNan001
+      模型师:
+        - 马南003
+      动画师: [马南002, 马南003]
+      导演: 马南001
 ```

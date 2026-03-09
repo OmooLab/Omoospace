@@ -2,10 +2,9 @@ import typer
 from pathlib import Path
 from InquirerPy import inquirer
 
-from omoospace.functions import create_omoospace
+from omoospace.functions import create_omoospace, extract_objective, extract_pathname
 from omoospace.omoospace import Omoospace
-from omoospace.common import yaml
-from omoospace.utils import Opath, normalize_name
+from omoospace.utils import Opath
 
 # 主应用
 app = typer.Typer(help="Omoospace CLI", no_args_is_help=True)
@@ -167,6 +166,18 @@ def tree():
         print(omoospace.objective_tree.format())
     except Exception as err:
         typer.secho(f"Print tree failed: {err}", fg=typer.colors.RED)
+
+
+@app.command()
+def pathname(path: str = typer.Argument(..., help="Path to extract pathname")):
+    """Print pathname"""
+    print(extract_pathname(path))
+
+
+@app.command()
+def objective(path: str = typer.Argument(..., help="Path to extract objective")):
+    """Print objective"""
+    print(extract_objective(path))
 
 
 # -------------------------- Subspace 命令 --------------------------

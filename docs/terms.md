@@ -1,72 +1,70 @@
+# 术语
+## 工作空间
 
-## Subspace
+**Subspace**
 
-An **objective** is the purpose of your work (obviously 😄). To achieve a big objective, you usually need many smaller objectives. But objectives are abstract—they only become real through concrete source files or folders. These files and folders are called **subspaces**.
+目标（Objective）是创作的目的（真是废话），为了完一个大目标，往往需要设置多小目标。但目标是抽象的，它的具象存在依靠具体的制作文件或者文件夹，这些文件、文件夹就叫工作空间（Subspace）。
 
-**So the best way to name a subspace is to use its objective.**
+**因此，用"目标内容"去命名是最合适不过的**
 
+## 路径名
 
-## Pathname
+**Pathname**
 
-```bash
+```Bash
 ├── Subspaces/
-│   ╰── Short01/
-│       ├── Assets/
-│       │   ├── CharA/
-│       │   │   ├── CharA.zbr
-│       │   │   ├── CharA.zbr
-│       │   │   ├── CharA.spp
-│       │   │   ├── CharA.blend
-│       │   │   ╰── CharA.v001.blend
-│       │   ╰── CharB.blend
-│       ├── Sc010.blend
-│       ╰── Sc020.blend
+│   ╰── 动画短片01/
+│       ├── 资产/
+│       │   ├── 角色A/
+│       │   │   ├── 角色A.zbr
+│       │   │   ├── 角色A.zbr
+│       │   │   ├── 角色A.spp
+│       │   │   ├── 角色A.blend
+│       │   │   ╰── 角色A.v001.blend
+│       │   ╰── 角色B.blend
+│       ├── 场景010.blend
+│       ╰── 场景020.blend
 ```
 
-The folder structure clearly shows multi‑level objectives. From each file, we can see:
+可以通过文件夹结构非常清晰的看到多层级的目标，根据每个文件我们可以到：
 
-| Subspace         | Objective               | Path                     |
-| ---------------- | ----------------------- | ------------------------ |
-| Short01/         | Make short film Short01 | Short01                  |
-| Assets/          | Prepare assets          | Short01 / Assets         |
-| CharA/           | Prepare character CharA | Short01 / Assets / CharA |
-| CharA.zbr        | Sculpt CharA            | Short01 / Assets / CharA |
-| CharA.spp        | Paint CharA’s materials | Short01 / Assets / CharA |
-| CharA.blend      | Rig CharA               | Short01 / Assets / CharA |
-| CharA.v001.blend | Backup                  | Short01 / Assets / CharA |
-| CharB.blend      | Prepare character CharB | Short01 / Assets / CharB |
-| Sc010.blend      | Scene 010               | Short01 / Sc010          |
-| Sc020.blend      | Scene 020               | Short01 / Sc020          |
+| 工作空间           | 目的        | 路径                |
+| -------------- | --------- | ----------------- |
+| 动画短片01/        | 制作 动画短片01 | 动画短片01            |
+| 资产/            | 准备 资产     | 动画短片01 / 资产       |
+| 角色A/           | 准备 角色A    | 动画短片01 / 资产 / 角色A |
+| 角色A            | 雕刻 角色A    | 动画短片01 / 资产 / 角色A |
+| 角色A.spp        | 材质 角色A    | 动画短片01 / 资产 / 角色A |
+| 角色A.blend      | 装配 角色A    | 动画短片01 / 资产 / 角色A |
+| 角色A.v001.blend | 备份 角色A    | 动画短片01 / 资产 / 角色A |
+| 角色B.blend      | 准备 角色B    | 动画短片01 / 资产 / 角色B |
+| 场景010.blend    | 制作 场景010  | 动画短片01 / 场景010    |
+| 场景010.blend    | 制作 场景020  | 动画短片01 / 场景010    |
 
-Multi‑level objectives ordered from largest to smallest form the **subspace path**.  
+多层级的目标由大到小排列，我们称为工作空间的路径。基于路径生成的名字，即工作空间的**路径名**（Pathname）。
 
-A name generated from this path is called a **pathname**.
+例如，`动画短片01/场景010.blend`和`动画短片02/场景010.blend`，他们的路径名分别为`动画短片01_场景010`和`动画短片02_场景010`
 
-For example:
+**路径名用于生成附有含义且不会重名的导出路径。**
 
-- `Short01/Sc010.blend` → pathname is `Short01_Sc010`
-- `Short02/Sc010.blend` → pathname is `Short02_Sc010`
+## 目标树
 
-**Pathnames are used to generate meaningful, non‑conflicting export paths.**
+**Objective Tree**
 
+如果我们把这几条路径合并，就能形成树状结构，我们称为**目标树**（Objective Tree）
+你也可以用前缀实现完全一样结构的**目标树**
 
-## Objective Tree
-
-If we combine all these paths, we get a tree structure called an **objective tree**.
-
-You can also create the same objective tree using prefixes instead of folders:
-
-```bash
+```Bash
 ├── Subspaces
-│   ├── Short01_Assets_CharA.zbr
-│   ├── Short01_Assets_CharA.spp
-│   ├── Short01_Assets_CharA.blend
-│   ├── Short01_Assets_CharA.v001.blend
-│   ├── Short01_Assets_CharB.blend
-│   ├── Short01_Seq010.blend
-│   ╰── Short01_Seq020.blend
+│   ├── 动画短片01_资产_角色A.zbr
+│   ├── 动画短片01_资产_角色A.spp
+│   ├── 动画短片01_资产_角色A.blend
+│   ├── 动画短片01_资产_角色A.v001.blend
+│   ├── 动画短片01_资产_角色B.blend
+│   ├── 动画短片01_场景010.blend
+│   ╰── 动画短片01_场景020.blend
 ```
 
-You don’t even need prefixes like `Short01_` or `Short01_Assets_`, and you don’t need folders. You can just use `Seq010.blend` or `CharA.blend`.
+甚至可以不加`动画短片01_`、`动画短片01_资产_`语境前缀，也不用设置那些文件夹。完全可以只写`场景010.blend`、`角色A.blend`。
 
-**Folders and prefixes are only needed when you have naming conflicts or too many files. You can keep everything flat if you want.**
+**只有当你想解决重名、文件太多问题的时候，才有必要加文件夹或者前缀。**

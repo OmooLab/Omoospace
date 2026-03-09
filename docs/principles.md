@@ -1,122 +1,134 @@
-# Omoospace Principles
+# Omoospace 心法
 
 ![overview](assets/overview.png)
 
-There are only 4 rules, easy to remember:
+只有四条法则，非常容易记忆：
 
-1. Name everything in a clear, specific way
-2. `Contents/` stores static resource files
-3. `Subspaces/` stores dynamic source files
-4. `Omoospace.*` rcords project information
-
-
-## 1. Name everything in a clear, specific way
-
-- **Avoid special characters and spaces.**  
-    Only letters, numbers, underscores(`_`), periods(`.`), and hyphens(`-`) are allowed.
-
-- **Use universal, easy-to-understand expressions for naming, avoid abbreviations and codes.**  
-    Do not use incomprehensible abbreviations such as `BC`? `TE`?
+1. 用直白、具体的表达，命名一切
+2. `Contents/` 存静态的资源型文件
+3. `Subspaces/` 存动态的制作型文件
+4. `Omoospace.*` 记录信息
 
 
-- **Action terms can be omitted, but object names must not be.**  
-    For example: `ModelProp01.blend` can be simplified to `Prop01.blend`, but never `Modeling.blend`; `TestWaterEffect.hip` cannot be `Test.hip`.
+## 1. 用直白、具体的表达，命名一切
 
+- **避免特殊符号和空格。**  
+	仅接受字母、数字、下划线`_`、英文点`.`、连接符`-`
 
-- **Use prefixes (separated by `_`) for context and suffixes (separated by `.`) for modifiers.**  
-    For example: `Sc010_Anatomy_Skeleton.high.v001.blend` — `Sc010` and `Anatomy` are context prefixes; `.high` and `.v001` are modifier suffixes. See more examples here: [How to use modifier suffixes?](how-to-add-suffixes.md)
+- **用易于理解的通用表达命名，避免缩写、代号。**  
+	不用简略到无法理解的缩写，例如`BC`？`TE`？`空上`？
 
+- **可以省略动作，但不能省略对象。**  
+	例如`建模道具01.blend`可以写`道具01.blend`，不能写`建模.blend`。`测试水特效.hip`不能写`测试.hip`
 
-## 2. `Contents/` stores static resource files
+- **可以用前缀设置语境（下划线****`_`****分隔），用后缀添加修饰（英文点****`.`****分隔）。**  
+	例如`场景010_解剖资产_骨骼模型.high.v001.blend`。`场景010`、`解剖资产`是语境，`.high`、`.v001`是修饰，他们都是对`骨骼模型`的补充说明，更多示例看这里，[如何设置前缀、后缀？](how-to-add-suffixes.md)
 
-- **Stores referenced, imported, exported resource files and final deliverables.**   
-    Examples: images, videos, audio effects, models, even source files, data files, etc.
+## 2. **`Contents/`** 存静态的资源型文件
 
-- **Organize subfolders by resource type**
+- **存，被引用的、导入的、导出后的资源型文件、成品文件。**  
+	例如：图片、视频、音效、模型、甚至工程文件，数据等等“只读”的文件
 
-    ```bash
+- **按资源类型设置子文件夹**  
+    ```Bash
     ├── Contents/
-    │   ├── Audios/       # Audio assets
-    │   ├── Downloads/    # Files downloaded online
-    │   ├── Dynamics/     # Various FX simulations
-    │   ├── Images/       # Textures, image assets
-    │   ├── Models/       # Models, animated models
-    │   ├── Renders/      # Image sequences, rendered videos
-    │   ├── Data/         # Reference data
-    │   ╰── Videos/       # Final videos, video assets
+    │   ├── Audios/      # 音频素材
+    │   ├── Downloads/   # 网上下载的
+    │   ├── Dynamics/    # 各种 FX 结算
+    │   ├── Images/      # 贴图、图片素材
+    │   ├── Models/      # 模型，动态模型
+    │   ├── Renders/     # 序列帧、渲染视频
+    │   ├── Data/        # 引用数据
+    │   ╰── Videos/      # 成片、视频素材
     ```
+	更多示例看这里，[如何设置文件夹？](how-to-setup-folders.md)
 
-    See more examples here: [How to set up folders?](how-to-setup-folders.md)
+- **文件夹结构不要轻易调整，文件也不要随意移动。**   
+	如果一定要调整，可以用复制的方式，以避免原引用丢失。
 
-- **Do not easily adjust the folder structure or move files arbitrarily.**  
-    If adjustments are necessary, use the copy method to avoid losing original references.
 
-## 3. `Subspaces/` stores dynamic source files
+## 3. **`Subspaces/`** **存动态的制作型文件**
 
-- **Stores process-recorded source files and software-specific project files.**  
-    For examples: .psd, .blend, .word, .ppt.
+- **存，用于记录过程的制作型文件，软件的工程文件。**  
+	例如：`.psd`、`.blend`、`.word`、`.ppt`
 
-- **Organize files and subfolders by objectives**
-
-    ```bash
+- **按目标设置文件和子文件夹**  
+    ```Bash
     ├── Subspaces/
-    │   ├── Assets/                  # (Prepare) Assets
-    │   │   ├── Prop01.blend         # Latest version
-    │   │   ╰── Prop01.v001.blend    # Backup version
-    │   ╰── Sc010/                   # (Make) Scene 010
-    │       ├── Sc010.prproj         # (Editing) Scene 010
-    │       ├── Sc010.blend          # (Layout) Scene 010
-    │       ╰── TestExplosion.blend  # Test Explosion Effect
+    │   ├── 资产/                  # （准备）资产
+    │   │   ├── 道具01.blend       # 最新版本
+    │   │   ╰── 道具01.v001.blend  # 备份版本
+    │   ╰── 场景010/               # (制作) 场景010
+    │       ├── 场景010.prproj     #（剪辑）场景010
+    │       ├── 场景010.blend      #（搭建）场景010
+    │       ╰── 测试爆炸效果.blend  # 测试爆炸效果
     ```
-    See more examples here: [How to set up folders?](how-to-setup-folders.md)
+	更多示例看这里，[如何设置文件夹？](how-to-setup-folders.md)  
+    可以不设置`Subspaces/`文件夹，直接把制作型文件放在根目录。
 
-    > The `Subspaces/` folder is optional — source files can be placed directly in the root directory.
+- **文件夹结构可以任意调整，文件也可以随意移动。**  
+    这里允许散乱的状态，制作中的、调试中的、有待验证的、没有整理的。
 
-
-- **The folder structure can be adjusted arbitrarily, and files can be moved freely.**  
-    Messy states are allowed here, including work-in-progress, debugging, pending verification, and unorganized files.
-
-- **If a file needs to be referenced, save a copy to `Contents/.`**  
-    Do not reference source files directly from each other to avoid dynamic, disorganized upstream changes affecting downstream files.
-
-    ```bash
+- **文件若要被引用，另存到****`Contents/`****下。**  
+	制作型文件互相不能引用，以避免动态散乱的上游内容影响下游文件。
+    ```Bash
     ├── Contents/
     │   ╰── Models/
-    │       ╰── **Prop01.blend**  # Referenced copy
+    │       ╰── **道具01.blend**
     ├── Subspaces/
-    │   ├── AssetPreparation/
-    │   │   ╰── Prop01.blend      # Working file
-    │   ╰── Scene010.blend        # File that needs references
+    │   ├── 准备资产/
+    │   │   ╰── 道具01.blend
+    │   ╰── 场景010.blend
     ```
+	`场景010.blend` 想要引用`道具001.blend`，就把后者复制到`Contents/`下。详情看这里，[如何备份副本？](how-to-backup.md)
+  
 
-    If `Scene010.blend` needs to reference `Prop01.blend`, copy `Prop01.blend` to `Contents/`. See details here: [How to back up copies?](how-to-backup.md)
+## 4. `Omoospace.*`记录信息
 
-
-## 4. `Omoospace.*` records project information
-
-Use `Omoospace.*` to record overall project information. You can use any familiar document format (Markdown, TXT, Word, etc.). 
-
-For our tool, use `Omoospace.yml` (it can be an empty file, but it must exist — otherwise, our tool cannot recognize the workspace).
+约定`Omoospace.*`来记录整个项目的信息。可以选择任意你习惯的文档格式（markdown，txt，word，…），小工具使用`Omoospace.yml`进行记录（可以为一个空的文件，不能没有，不然小工具无法识别）
 
 ```YAML
-# Omoospace.yml
-brief: An awesome IP project
+# 除了加粗字是固定表达，其他键值随意
+brief: 一个超厉害的IP项目
 
 notes:
-  Client: Tencent
+  客户: 腾讯爸爸
   
 makers:
-  Omoolab: studio@omoolab.xyz
+  偶魔数字: studio@omoolab.xyz
 
 tools:
   Blender: 4.2.0
-  Houdini: 20.0.0
+  Houdini: 20.0
 
 works:
-  AwesomeProp01: Models/Prop02.glb
-  AwesomeShort01:
-    - Videos/Short01.mp4
-    - Images/Short01_Cover.png
+  超厉害道具01: Models/道具01.glb
+  超厉害短片01: 
+    - Videos/动画短片01.mp4
+    - Images/动画短片01_封面.png
 ```
 
-For more complex project information, see [Omoospace.yml](yml.md)
+YAML 语法简单直接，详细了解看这里：
+https://curder.github.io/yaml-study/guide/rules.html
+
+`Omoospace.zh.yml` 可以用中文记录key名
+
+```YAML
+简述: 一个超厉害的IP项目
+
+记录列表:
+  客户: 腾讯爸爸
+  
+主创列表:
+  偶魔数字: studio@omoolab.xyz
+
+工具列表:
+  Blender: 4.2.0
+  Houdini: 20.0
+
+作品列表:
+  超厉害道具01: Models/道具01.glb
+  超厉害短片01: 
+    - Videos/动画短片01.mp4
+    - Images/动画短片01_封面.png
+```

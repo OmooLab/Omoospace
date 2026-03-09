@@ -1,5 +1,5 @@
 site_name: Omoospace Docs
-site_url: https://omoolab.github.io/Omoospace/
+site_url: https://docs.omoolab.xyz/omoospace/
 site_author: OmooLab
 site_description: Omoospace is a scalable directory structure solution for digital creation works.
 
@@ -7,17 +7,21 @@ repo_name: OmooLab/Omoospace
 repo_url: https://github.com/OmooLab/Omoospace
 
 nav:
-  - Overview:
+  - Omoospace:
       - index.md
       - why.md
       - principles.md
       - yml.md
       - terms.md
-  - How-to: 
+      - cli.md
+      - blender.md
+  - How-to:
       - how-to-add-suffixes.md
       - how-to-setup-folders.md
       - how-to-backup.md
-  - Develop:
+      - how-to-collaborate.md
+      - how-to-version-control.md
+  - 开发者:
       - develop.md
       - contribution.md
       - API Reference:
@@ -31,7 +35,7 @@ nav:
 theme:
   name: material
   logo: assets/logo.png
-  language: en
+  language: zh
   font:
     text: Open Sans
     code: Cascadia Code
@@ -58,6 +62,7 @@ theme:
       toggle:
         icon: fontawesome/solid/moon
         name: Switch to system preference
+
   features:
     - header.autohide
     - navigation.footer
@@ -80,6 +85,16 @@ copyright: Copyright &copy; 2020 - 2024 Omoolab
 plugins:
   - search
   - mkdocstrings
+  - i18n:
+      docs_structure: suffix
+      languages:
+        - locale: zh
+          name: 中文
+          default: true
+        - locale: en
+          name: English
+          nav_translations:
+            开发者: Develop
 
 markdown_extensions:
   - mkdocs-click
@@ -91,6 +106,10 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
   - pymdownx.tabbed:
       alternate_style: true
+      

@@ -1,6 +1,6 @@
 [project]
 name = "omoospace"
-version = "0.2.5"
+version = "0.2.6"
 description = ""
 authors = [{ name = "manan", email = "icrdr2010@outlook.com" }]
 requires-python = ">=3.10,<4"
@@ -13,8 +13,8 @@ dependencies = [
 
 [project.optional-dependencies]
 cli = [
-    "typer>=0.20.1",
     "inquirerpy>=0.3.4",
+    "typer>=0.24.1",
 ]
 
 [dependency-groups]
@@ -22,7 +22,6 @@ dev = [
     "ipykernel>=6.25.2,<7",
     "pytest>=7.4.2,<8",
     "pytest-dependency>=0.5.1,<0.6",
-    "mkdocs>=1.5.3,<2",
     "mkdocs-material>=9.4.6,<10",
     "mkdocstrings[python]>=0.23.0,<0.24",
     "mkdocs-click>=0.8.1,<0.9",
@@ -30,6 +29,8 @@ dev = [
     "pytest-cov>=4.1.0,<5",
     "mike>=2.0.0,<3",
     "pip>=25.3",
+    "mkdocs-static-i18n[material]>=1.3.1",
+    "mkdocs>=1.5.3",
 ]
 
 [project.scripts]

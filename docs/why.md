@@ -1,103 +1,87 @@
 # Why Omoospace?
 
-Any work with even a little complexity usually involves more than one file. When there are too many files, you need folders to organize them. A good folder structure helps you revisit and understand the project later. So how should you design it?
+稍微有复杂度的工作，往往不止一个文件。当文件过多，就需要文件夹去归纳它们。好的文件夹结构可以帮助回顾项目。应该如何设计文件夹结构呢？
 
-## Points to Consider
+## 应该考虑的点
+### 不同工作流的共性
 
-### Common Ground Across Workflows
+所有的创作类工作的文件都可以被归到这两大类：
 
-Files in all creative workflows can be divided into two main types:
+- **资源型文件** 指图片、音频、视频、模型等这类被引用、导入的文件
+- **制作型文件** 指制作中的，软件专属格式的文件
 
-- **Resource files**: Images, audios, videos, models, and other files that are imported or referenced.
-- **Source files**: Files in software-specific formats that you work on (your working files).
+另外，所有的工作流，都可以抽象成这样的一个结构：
 
-Additionally, all workflows can be abstracted into a cycle:
-
-```
-Resource → Production → Resource → Production → Resource → ...
-```
-
-### Software-native Solutions Are Incompatible
-
-Most software that uses external resources has its own way to collect or pack assets, such as:
-
-- After Effects: [Collect Files](https://helpx.adobe.com/after-effects/using/automated-rendering-network-rendering.html)
-- Blender: [Pack Resources](https://docs.blender.org/manual/en/latest/files/blend/packed_data.html#pack-resources)
-- Cinema 4D: [Save Project with Assets](https://help.maxon.net/c4d/en-us/#html/5595.html#PLUGIN_CMD_12255)
-
-Some software also helps you create project folders, such as:
-
-- Maya: [Set a Project](https://help.autodesk.com/view/MAYAUL/2024/ENU/?guid=GUID-D5CA162A-0956-49C6-9FAC-2F73DCF03409)
-- Houdini: [$JOB](https://www.sidefx.com/docs/houdini/basics/project.html)
-
-These features are useful, but each software organizes files differently. This makes it hard to collaborate across multiple tools.
-
-
-### You Need a Place to Record Information
-
-You need a place to record:
-
-- Software versions used
-- Extensions used
-- Team members and their roles
-- Project description, client information, etc.
-
-
-### Keep It Maintainable, But Respect Laziness
-
-Few people can maintain a very complex folder structure, and even fewer want to write lots of comments. So it’s important to make the project “self-explanatory” with minimal effort. Here are some ways to save time:
-
-- **Use filenames as comments**  
-    Not every file can have a written description, so the filename itself should be clear and plain.
-- **Use prefixes and suffixes to add meaning**. For example:
-    - `Sc010_` as a scene context prefix
-    - `.v001` as a version suffix
-    - `.480p` as a resolution suffix
-    - `.low` as a low-poly suffix
-- **Use consistent output paths**. For example:
-    - Render outputs go to `Renders`
-    - Video exports go to `Videos`
-- **Accept mess for unimportant files**  
-    f a file isn’t important, you don’t need to organize it strictly. But if it is important, don’t be too casual—your future self will thank you 🥲.
-
-
-### The Conflict: Flexibility vs Stability
-
-If folders are too flexible, references break. If they are too fixed, the structure becomes rigid. Consider this example:
-
-```bash
-ProjectRoot/ 
-├── Prop01/ 
-│   ├── Prop01.blend      # Resource file (referenced by others) 
-│   ╰── Prop01.WIP.blend  # Source file (work in progress) 
+```mermaid
+graph LR
+资源 --> 制作 --> 资源 
 ```
 
-Later, you may want to move `Prop01/` into an `Assets/` folder. But moving it will break all references to `Prop01.blend`. To avoid this, you would have to plan the final structure from the very beginning.
+### 软件自带的方案，互相不兼容
 
-Is there a way to have both flexibility and stability? To start simple and grow the structure as the project expands—without breaking references?
+能资源导入的软件，大部分会自带整理资源型文件的功能，例如:  
 
+- After Effect 的 [Collect Files](https://helpx.adobe.com/after-effects/using/automated-rendering-network-rendering.html)
+- Blender 的 [Pack Resources](https://docs.blender.org/manual/en/latest/files/blend/packed_data.html#pack-resources)
+- Cinema 4D 的 [Save Project with Assets](https://help.maxon.net/c4d/en-us/#html/5595.html#PLUGIN_CMD_12255)
 
+还有的软件会提供创建项目文件夹的功能，例如:  
 
-## Omoospace Principles
+- Maya 的 [Set a Project](https://help.autodesk.com/view/MAYAUL/2024/ENU/?guid=GUID-D5CA162A-0956-49C6-9FAC-2F73DCF03409)
+- Houdini 的 [$JOB](https://www.sidefx.com/docs/houdini/basics/project.html)。
 
-No single software can cover all workflows, and workflows keep changing with new technology. We need a unified way to guide how files are stored on disk. That’s why Omoospace was created.
+这类功能确实很棒，但是问题在于各家整理方式不同，生成的文件夹结构也不同。这导致，一旦需要多软件协同，就难以互相兼容。
 
-### Core Idea: Separate Resource Files and Source Files
+### 需要地方记录一些信息
 
-To solve the flexibility/stability conflict, we ask:
+归档的项目，用新版本软件打开很可能会出错，所以需要一个地方去记录当时用的是什么版本。
+除此之外，还有参与的人员、作品的信息，项目的客户等等都可能需要记录
 
-- Who needs to be stable? **Resource files**
-- And who needs to be flexible? **Source files**
+### 要维护，但尊重懒惰
 
-If they are mixed together, conflicts are inevitable:
+少有人能坚持维护复杂的项目文件夹，也不会有很多精力写注释，所以如何以最小的操作量来完成项目的“自释”显得尤为重要。为此，我认为可以做这些：
 
-- Prioritizing stability makes the structure rigid
-- Prioritizing flexibility breaks references
+- **文件名替代注释。**  
+	不可能给每个文件写说明注释，那么就要求文件名足够直白清楚，名字是最基础的说明。
+      
+- **用前缀和后缀来补充说明。**例如：  
+    - `Sc010_`的场景编号语境前缀
+    - `.v001`的版本修饰后缀
+    - `.480p`的分辨率修饰后缀
+    - `.low`低面数修饰后缀
 
-So they should be stored separately. This is the core idea of Omoospace.
+- **统一输出路径。**例如：  
+	- 渲染的输出路径都统一在 `Renders` 下
+    - 视频剪辑的输出路径都统一在 `Videos` 下。
 
-### Omoospace Is a "Guideline", Not a "Strict Rulebook"
+- **不重要的，接受混乱。**  
+	但反之，如果重要，那么也别太随便了，不然苦的未来的自己🥲
 
-Omoospace does not enforce a specific folder structure, and it is not a management tool (though tools can help). It is more like a set of principles that gives you a direction when you’re unsure how to organize your files.
+### 太随意导致引用失效，太固定又不灵活
 
-Omoospace is simple. It has only four rules: [Omoospace Principles](principles.md).
+我们先看下面这种情况
+
+```Bash
+项目根目录/
+├── 道具01/
+│   ├── 道具01.blend      # 被引用的资源型文件
+│   ╰── 道具01.WIP.blend  # 建模中的制作型文件
+```
+
+随着道具资产变多，我想把`道具01/`文件夹放进`资产/`文件夹。但如果这样做，引用`道具01.blend`的其他文件势必会出现引用丢失。这就要求从一开始就预判到后面的情况，提前定好`资产/`文件夹。
+
+有没有可能兼得灵活性和稳定性？在项目刚开始能轻装上阵，随着项目扩大再逐渐把文件夹结构变复杂，但同时又能不导致引用问题。
+
+## Omoospace 心法
+
+眼下，没有一个单一软件能覆盖所有工作流，而且工作流也因为技术迭代一直在变化中。需要一个统一的方式去指导如何存文件到硬盘，由此，Omoospace 心法诞生。
+
+### 隔离资源型文件和制作型文件
+
+为了解决上述中“灵活和固定”的冲突，核心点在于，谁需要灵活？谁需要固定？
+
+没错！答案很清楚：**资源型文件需要固定，而制作型文件需要灵活。**它们在一起势必会导致矛盾。迁就静，就导致文件夹结构死板。迁就动，就导致引用失效。因此，他们需要分开放。这就是 Omoospace 的核心思想。
+
+### 仅指导方向，提供合理依据
+
+Omoospace 不提供具体的结构，更不是管理工具（虽然有插件协助）。它更像是一个心法，在你疑惑该以何种方式摆放文件时候，提供一个方向。它只有四条法则：[Omoospace 心法](principles.md)

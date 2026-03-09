@@ -301,8 +301,11 @@ class Omoospace(Profile):
             prev_names = [d.name for d in objectives]
             prev_count = len(prev_names)
 
-            # Normalize subspace name for objective name
-            subspace_name = normalize_name(subspace.stem)
+            try:
+                # Normalize subspace name for objective name
+                subspace_name = normalize_name(subspace.stem)
+            except Exception:
+                continue
 
             # Objective names are the strings that splited by "_".
             # e.g. `Seq010_Shot0100.blend` has two objective (names): `Seq010` and `Shot0100`

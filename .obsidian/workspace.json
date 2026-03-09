@@ -8,17 +8,17 @@
         "type": "tabs",
         "children": [
           {
-            "id": "fa746f20b34604f0",
+            "id": "9df80422092440a4",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/how-to-add-suffixes.md",
+                "file": "docs/principles.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
-              "title": "how-to-add-suffixes"
+              "title": "principles"
             }
           }
         ]
@@ -44,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "文件列表"
+              "title": "Files"
             }
           },
           {
@@ -133,7 +133,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-tags",
-              "title": "标签"
+              "title": "Tags"
             }
           },
           {
@@ -147,7 +147,7 @@
                 "searchQuery": ""
               },
               "icon": "lucide-archive",
-              "title": "添加笔记属性"
+              "title": "All properties"
             }
           },
           {
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/how-to-add-suffixes.md",
+                "file": "docs/principles.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "how-to-add-suffixes 的大纲"
+              "title": "Outline of principles"
             }
           }
         ],
@@ -170,40 +170,62 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 402.5
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:打开快速切换": false,
-      "graph:查看关系图谱": false,
-      "canvas:新建白板": false,
-      "daily-notes:打开/创建今天的日记": false,
-      "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "bases:新建数据库": false,
-      "homepage:Open homepage": false,
-      "obsidian-git:Open Git source control": false
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
     }
   },
-  "active": "9a98c8fd04bdfd37",
+  "active": "47f7b74626240748",
   "lastOpenFiles": [
-    "site/search/search_index.json",
-    "site/search",
-    "site/apis/validators/index.html",
-    "site/apis/validators",
-    "site/apis/utils/index.html",
-    "site/apis/utils",
-    "site/apis/omoospace/index.html",
-    "site/apis/omoospace",
-    "site/apis/items/index.html",
-    "site/apis/items",
-    "site/apis/functions/index.html",
-    "docs/assets/Pasted image 20260302155556.png",
-    "docs/contribution.md",
-    "docs/develop.md",
+    "site/en/apis/validators/index.html",
+    "site/en/apis/validators",
+    "site/en/apis/utils/index.html",
+    "site/en/apis/utils",
+    "site/en/apis/omoospace/index.html",
+    "site/en/apis/omoospace",
+    "site/en/apis/items/index.html",
+    "site/en/apis/items",
+    "site/en/apis/functions/index.html",
+    "site/en/apis/functions",
+    "site/en/apis/common/index.html",
+    "site/assets/overview.png",
+    "site/assets/logo.png",
+    "site/assets/Pasted image 20260303104428.png",
+    "site/assets/Pasted image 20260303103545.png",
+    "site/assets/images/favicon.png",
     "docs/how-to-setup-folders.md",
+    "docs/principles.md",
     "docs/how-to-backup.md",
+    "docs/how-to-backup.en.md",
+    "docs/how-to-collaborate.md",
+    "docs/index.en.md",
     "docs/how-to-add-suffixes.md",
+    "docs/how-to-add-suffixes.en.md",
+    "docs/develop.md",
+    "docs/index.md",
+    "docs/terms.en.md",
+    "docs/terms.md",
+    "docs/why.md",
+    "docs/why.en.md",
+    "docs/principles.en.md",
+    "docs/contribution.md",
+    "docs/blender.md",
+    "docs/assets/Pasted image 20260303104428.png",
+    "docs/cli.md",
+    "docs/how-to-version-control.md",
+    "docs/yml.md",
+    "docs/how-to-setup-folders.en.md",
+    "docs/assets/Pasted image 20260303103545.png",
+    "docs/yml.en.md",
+    "docs/assets/Pasted image 20260302155556.png",
     "README.md"
   ]
 }
