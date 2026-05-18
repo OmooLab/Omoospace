@@ -11,11 +11,12 @@ def mini_omoos_path():
 
     # create the test omoospace.
     make_path(
-        "Contents/",
+        "contents/",
         {
-            "Omoospace.yml": """
-        brief: A mini omoospace.
-        """,
+            "OMOOSPACE.md": """---
+brief: A mini omoospace.
+---
+""",
         },
         under=omoos_path,
     )
@@ -31,14 +32,14 @@ def empty_omoos_path():
 
     # create the test omoospace.
     make_path(
-        "Contents/",
+        "contents/",
         "Subspaces/",
         "References/",
-        "Void/",
         {
-            "Omoospace.yml": """
-        brief: An empty omoospace.
-        """,
+            "OMOOSPACE.md": """---
+brief: An empty omoospace.
+---
+""",
         },
         under=omoos_path,
     )

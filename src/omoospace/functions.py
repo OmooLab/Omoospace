@@ -1,4 +1,3 @@
-from omoospace.language import ALLOWED_LANGS, Language
 from omoospace.omoospace import Omoospace, Subspace, Objective
 from omoospace.utils import make_path, normalize_name, Opath, AnyPath
 
@@ -136,9 +135,8 @@ def create_omoospace(
     name: str,
     under: str = ".",
     brief: str = None,
-    contents_dir: str = "Contents",
-    subspaces_dir: str = "Subspaces",
-    language: Language = None,
+    contents_dir: str = "contents",
+    subspaces_dir: str = "subspaces",
     readme: bool = False,
     gitfiles: bool = False,
     chinese_to_pinyin: bool = False,
@@ -150,8 +148,8 @@ def create_omoospace(
         name (str): The name of the omoospace.
         under (str, optional): The directory under which to create the omoospace. Defaults to ".".
         brief (str, optional): A brief description of the omoospace. Defaults to None.
-        contents_dir (str, optional): The name of the contents directory. Defaults to "Contents".
-        subspaces_dir (str, optional): The name of the subspaces directory. Defaults to "Subspaces".
+        contents_dir (str, optional): The name of the contents directory. Defaults to "contents".
+        subspaces_dir (str, optional): The name of the subspaces directory. Defaults to "subspaces".
         language (Language, optional): The language of the omoospace profile. Defaults to None.
         readme (bool, optional): Whether to create a README.md file. Defaults to False.
         gitfiles (bool, optional): Whether to create .gitattributes and .gitignore files. Defaults to False.
@@ -161,10 +159,6 @@ def create_omoospace(
     Returns:
         Omoospace: The created omoospace.
     """
-
-    if language and language not in ALLOWED_LANGS:
-        raise ValueError(f"{language} is not a valid language.")
-    language = language or "en"
 
     dirname = normalize_name(name, chinese_to_pinyin=chinese_to_pinyin)
     root_dir = Opath(under, dirname).resolve()
@@ -177,10 +171,10 @@ def create_omoospace(
     except FileNotFoundError:
         pass
 
-    profile_file = f"Omoospace.{language}.yml" if language != "en" else "Omoospace.yml"
-    contents_dir = contents_dir or "Contents"
+    profile_file = "OMOOSPACE.md"
+    contents_dir = contents_dir or "contents"
 
-    paths = [profile_file, f"{contents_dir}/"]
+    paths = [{"OMOOSPACE.md": f"---\nbrief: {brief or name}\n---"}, f"{contents_dir}/"]
 
     if subspaces_dir:
         paths.append(f"{subspaces_dir}/")
@@ -207,7 +201,7 @@ def create_omoospace(
 
     if subspaces_dir:
         omoospace.subspaces_dir = subspaces_dir
-    if contents_dir != "Contents":
+    if contents_dir != "contents":
         omoospace.contents_dir = contents_dir
 
     return omoospace

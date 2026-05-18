@@ -12,7 +12,6 @@ from omoospace.items import (
     Work,
     WorkDict,
 )
-from omoospace.language import ALLOWED_LANGS, Language
 from omoospace.utils import Oset, make_path, normalize_name, Opath, AnyPath
 from omoospace.validators import is_ignore
 
@@ -246,55 +245,47 @@ class Omoospace(Profile):
     ``
     """
 
-    def __init__(self, detect_dir: AnyPath, language: Language = None):
+    def __init__(self, detect_dir: AnyPath):
         """Initialize from an existing Omoospace."""
-
-        if language and language not in ALLOWED_LANGS:
-            raise ValueError(f"{language} is not a valid language.")
 
         detect_path = Opath(detect_dir).resolve()
         detect_path_parents = [detect_path, *detect_path.parents]
 
         for detect_path_parent in detect_path_parents:
-            # Find a file named 'Omoospace' with any extension (or no extension)
-            candidates = list(Opath(detect_path_parent).glob("Omoospace.*"))
+            # Find a file named 'Omoospace' or 'OMOOSPACE' with any extension
+            candidates = list(Opath(detect_path_parent).glob("Omoospace.*")) + list(Opath(detect_path_parent).glob("OMOOSPACE.*"))
             candidates = [c for c in candidates if c.is_file()]
             if len(candidates) == 0:
                 continue
 
             self.root_dir = detect_path_parent
 
-            # Check for Omoospace.md with valid frontmatter first (priority)
-            md_file = self.root_dir / "Omoospace.md"
-            yml_file = self.root_dir / "Omoospace.yml"
+            # Check for OMOOSPACE.md with valid frontmatter first (priority)
+            omoospace_md_file = self.root_dir / "OMOOSPACE.md"
+            omoospace_yml_file = self.root_dir / "Omoospace.yml"
 
-            if md_file.exists():
+            if omoospace_md_file.exists():
                 try:
-                    post = frontmatter.load(md_file)
+                    post = frontmatter.load(omoospace_md_file)
                     fm_data = dict(post)
                     if fm_data:
-                        self.profile_file = md_file
+                        self.profile_file = omoospace_md_file
                         # Log warning if both MD and YAML exist
-                        if yml_file.exists():
+                        if omoospace_yml_file.exists():
                             logger.info(
-                                f"Both Omoospace.md and Omoospace.yml exist. "
-                                f"Omoospace.md takes priority."
+                                f"Both OMOOSPACE.md and Omoospace.yml exist. "
+                                f"OMOOSPACE.md takes priority."
                             )
                         return
                 except Exception:
                     # Frontmatter parsing failed or empty, fall through to YAML
                     pass
 
-            # Fall back to YAML file
-            if language:
-                self.profile_file = self.root_dir / f"Omoospace.{language}.yml"
-                return
-            else:
-                default = self.root_dir / f"Omoospace.yml"
-                self.profile_file = next(
-                    (c for c in candidates if c.suffix == ".yml"), default
-                )
-                return
+            default = self.root_dir / f"Omoospace.yml"
+            self.profile_file = next(
+                (c for c in candidates if c.suffix in (".yml", ".yaml")), default
+            )
+            return
 
         raise FileNotFoundError(f"Omoospace not found in {detect_dir}")
 
@@ -423,7 +414,7 @@ class Omoospace(Profile):
     @property
     def subspaces_dir(self) -> Opath:
         """Opath: Subspaces directory path."""
-        subspaces_dirname = self.get("subspaces_dir") or "Subspaces"
+        subspaces_dirname = self.get("subspaces_dir") or "subspaces"
         subspaces_dir = self.root_dir / subspaces_dirname
         return subspaces_dir if subspaces_dir.is_dir() else self.root_dir
 
@@ -439,7 +430,7 @@ class Omoospace(Profile):
     @property
     def contents_dir(self) -> Opath:
         """Opath: Contents directory path."""
-        contents_dirname = self.get("contents_dir") or "Contents"
+        contents_dirname = self.get("contents_dir") or "contents"
         return self.root_dir / contents_dirname
 
     @contents_dir.setter
@@ -502,7 +493,7 @@ class Omoospace(Profile):
         exists = path.exists() if require_exists else True
         in_subspaces = path.is_under(self.subspaces_dir)
         not_profile_file = not (
-            path.name.startswith("Omoospace.") and path.parent == self.root_dir
+            (path.name.startswith("Omoospace.") or path.name == "OMOOSPACE.md") and path.parent == self.root_dir
         )
         not_readme = "README.md" not in path.name
         not_contents = not path.is_under(self.contents_dir, or_equal=True)

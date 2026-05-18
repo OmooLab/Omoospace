@@ -1,3 +1,4 @@
+---
 brief: An awesome IP project
 
 ignore:
@@ -27,18 +28,19 @@ tools:
       - BioxelNodes
 
 works:
-  AwesomeProp01: Models/Prop01.glb
+  AwesomeProp01: models/Prop01.glb
   AwesomeProp02:
-    - Models/Prop02/Prop02.fbx
-    - Models/Prop02/Textures
+    - models/Prop02/Prop02.fbx
+    - models/Prop02/Textures
   AwesomeShort01:
     brief: An awesome animated short.
     version: "1.0.0"
     contents:
-      - Videos/Short01.mp4
-      - Images/Short01_Cover.png
+      - videos/Short01.mp4
+      - images/Short01_Cover.png
     contributions:
       Modeler:
         - MaNan003
       Animator: [MaNan002, MaNan003]
       Director: MaNan001
+---

@@ -1,7 +1,7 @@
 from typing import Any
 import frontmatter
 from omoospace.utils import Opath, yaml
-from omoospace.language import key_dict
+from dataclasses import dataclass
 
 
 class NodeData:
@@ -37,18 +37,22 @@ class Profile:
                 return yaml.load(file) or {}
 
     def _write_profile(self, data):
-        """Write profile data to Omoospace.yml file or YAML fallback."""
+        """Write profile data to Omoospace.yml or OMOOSPACE.md file."""
         if self.profile_file is None:
             raise ValueError("profile file is None.")
 
-        if self.profile_file.suffix == ".md":
-            # Switch to YAML file for writing
-            yaml_path = self.profile_file.parent / "Omoospace.yml"
-            self.profile_file = yaml_path
-
         self.profile_file.parent.mkdir(parents=True, exist_ok=True)
-        with self.profile_file.open("w", encoding="utf-8") as file:
-            yaml.dump(data, file)
+
+        if self.profile_file.suffix == ".md":
+            # Write to Markdown file with YAML frontmatter
+            post = frontmatter.Post("")
+            post.metadata = data
+            with self.profile_file.open("w", encoding="utf-8") as file:
+                file.write(frontmatter.dumps(post))
+        else:
+            # Write to YAML file
+            with self.profile_file.open("w", encoding="utf-8") as file:
+                yaml.dump(data, file)
 
     @property
     def language(self) -> str:
@@ -57,17 +61,17 @@ class Profile:
         return parts[-1] if len(parts) > 1 else "en"
 
     def _key(self, key) -> str:
-        return key_dict[key][self.language]
+        return key
 
     def get(self, key: str) -> Any:
         """Get the latest data for this item from the profile file."""
         profile = self._read_profile()
-        return profile.get(self._key(key))
+        return profile.get(key)
 
     def set(self, key: str, value: Any):
         """Set the value for the given key in the profile file."""
         profile = self._read_profile()
-        profile[self._key(key)] = value
+        profile[key] = value
         self._write_profile(profile)
 
 
@@ -97,7 +101,7 @@ class ProfileItem:
         return self.name
 
     def _key(self, key) -> str:
-        return key_dict[key][self._omoospace.language]
+        return key
 
     @property
     def data(self):
@@ -123,13 +127,13 @@ class ProfileItem:
 
     def get(self, key: str) -> Any:
         """Get the latest data for this item from the profile file."""
-        return self.data.get(self._key(key)) if isinstance(self.data, dict) else None
+        return self.data.get(key) if isinstance(self.data, dict) else None
 
     def set(self, key: str, value: Any):
         """Update the profile with current data."""
         data = self.data if isinstance(self.data, dict) else {}
 
-        data[self._key(key)] = value
+        data[key] = value
 
         self.data = data
 

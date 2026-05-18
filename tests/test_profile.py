@@ -3,7 +3,7 @@ from omoospace import make_path, Opath, Omoospace
 from shutil import copy
 
 
-def test_en_profile():
+def test_profile():
     make_path(
         "Short01/Short01.blend",
         "Short01/CharA.blend",
@@ -11,14 +11,14 @@ def test_en_profile():
         "Short03/Prop01.c4d",
         "Short03/Prop01.blend",
         "Prop01.blend",
-        "Contents/Models/Prop02/Prop02.fbx",
-        "Contents/Models/Prop02/Textures/",
-        "Contents/Models/Prop01.glb",
-        "Contents/Videos/Short01.mp4",
-        "Contents/Images/Short01_Cover.png",
+        "contents/models/Prop02/Prop02.fbx",
+        "contents/models/Prop02/Textures/",
+        "contents/models/Prop01.glb",
+        "contents/videos/Short01.mp4",
+        "contents/images/Short01_Cover.png",
         under="temp/AwesomeProject",
     )
-    copy("tests/profile.en.yaml", "temp/AwesomeProject/Omoospace.yml")
+    copy("tests/profile.example.md", "temp/AwesomeProject/OMOOSPACE.md")
     omoospace = Omoospace("temp/AwesomeProject")
 
     # read/write brief
@@ -100,8 +100,8 @@ def test_en_profile():
     assert work.brief == "An awesome animated short."
     assert work.version == "1.0.0"
     assert work.contents == [
-        "Videos/Short01.mp4",
-        "Images/Short01_Cover.png",
+        "videos/Short01.mp4",
+        "images/Short01_Cover.png",
     ]
     assert work.contributions["Animator"] == ["MaNan003", "MaNan002"]
     assert work.contributions["Director"] == ["MaNan001"]
@@ -109,12 +109,12 @@ def test_en_profile():
     work = omoospace.get_work("AwesomeProp02")
     assert work.brief == None
     assert work.version == None
-    assert work.contents == ["Models/Prop02/Prop02.fbx", "Models/Prop02/Textures"]
+    assert work.contents == ["models/Prop02/Prop02.fbx", "models/Prop02/Textures"]
     assert len(work.contributions) == 0
 
     work.add_contribution("MaNan003", contribution="Modeler")
     assert work.contributions["Modeler"] == ["MaNan003"]
-    assert work.contents == ["Models/Prop02/Prop02.fbx", "Models/Prop02/Textures"]
+    assert work.contents == ["models/Prop02/Prop02.fbx", "models/Prop02/Textures"]
 
     # set contributions
     work.contributions = {
@@ -126,74 +126,9 @@ def test_en_profile():
         assert len(work.contributions["Maker"]) == 0
 
     # delete content will affect work items
-    Opath(omoospace.contents_dir, "Models").remove()
+    Opath(omoospace.contents_dir, "models").remove()
     assert len(work.contents) == 0
 
     # remove work
     omoospace.remove_work("AwesomeProp02")
     assert len(omoospace.works) == 2
-
-
-def test_zh_profile():
-    make_path(
-        "动画短片01/动画短片01.blend",
-        "动画短片01/角色A.blend",
-        "道具01.blend",
-        "Contents/Models/道具02/道具02.fbx",
-        "Contents/Models/道具02/Textures/",
-        "Contents/Models/道具01.glb",
-        "Contents/Videos/动画短片01.mp4",
-        "Contents/Images/动画短片01_封面.png",
-        under="temp/超厉害IP项目",
-    )
-    copy("tests/profile.zh.yaml", "temp/超厉害IP项目/Omoospace.zh.yml")
-    omoospace = Omoospace("temp/超厉害IP项目", language="zh")
-
-    # read/write brief
-    assert omoospace.brief == "一个超厉害的IP项目"
-    omoospace.brief = "一个酷炫的项目"
-    assert omoospace.brief == "一个酷炫的项目"
-    assert omoospace.subspaces == [
-        "道具01.blend",
-        "动画短片01",
-        "动画短片01/动画短片01.blend",
-        "动画短片01/角色A.blend",
-    ]
-
-    # read notes
-    assert omoospace.get_note("客户") == ["腾讯爸爸"]
-
-    # read makers
-    maker = omoospace.get_maker("马南001")
-    assert maker.email == "manan001@example.com"
-    maker = omoospace.get_maker("马南002")
-    assert maker.email == "manan002@example.com"
-    assert maker.website == None
-    maker = omoospace.get_maker("偶魔数字")
-    assert maker.email == "studio@omoolab.xyz"
-    assert maker.website == "https://www.omoolab.xyz"
-
-    tool = omoospace.get_tool("Houdini")
-    assert tool.version == "20.0"
-    assert tool.website == None
-
-    tool = omoospace.get_tool("Blender")
-    assert tool.version == "4.2.0"
-    assert tool.website == "https://www.blender.org"
-    assert tool.extensions == ["Omoospace", "BioxelNodes"]
-
-    work = omoospace.get_work("超厉害短片01")
-    assert work.brief == "一个超厉害的IP动画短片"
-    assert work.version == "1.0.0"
-    assert work.contents == [
-        "Videos/动画短片01.mp4",
-        "Images/动画短片01_封面.png",
-    ]
-    assert work.contributions["动画师"] == ["马南003", "马南002"]
-    assert work.contributions["导演"] == ["马南001"]
-
-    work = omoospace.get_work("超厉害道具02")
-    assert work.brief == None
-    assert work.version == None
-    assert work.contents == ["Models/道具02/道具02.fbx", "Models/道具02/Textures"]
-    assert len(work.contributions) == 0
