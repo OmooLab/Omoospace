@@ -44,7 +44,7 @@ Both `.high` and `.v001` are modifier suffixes.
 ├── Seq010_Skeleton.v001
 │   ├── Seq010_Skeleton.low.glb
 │   ├── Seq010_Skeleton.high.glb
-│   ╰── Textures
+│   ╰── textures
 │       ├── Seq010_Skeleton.basecolor.1k.png
 │       ├── Seq010_Skeleton.basecolor.2k.png
 │       ├── Seq010_Skeleton.roughness.1k.png

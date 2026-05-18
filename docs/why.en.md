@@ -55,8 +55,8 @@ Few people can maintain a very complex folder structure, and even fewer want to 
     - `.480p` as a resolution suffix
     - `.low` as a low-poly suffix
 - **Use consistent output paths**. For example:
-    - Render outputs go to `Renders`
-    - Video exports go to `Videos`
+    - Render outputs go to `renders`
+    - Video exports go to `videos`
 - **Accept mess for unimportant files**  
     f a file isn’t important, you don’t need to organize it strictly. But if it is important, don’t be too casual—your future self will thank you 🥲.
 

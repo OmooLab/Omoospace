@@ -29,9 +29,9 @@ omoospace = create_omoospace(
 # "NewProject" is also the project folder name
 assert omoospace.name == "NewProject"
 assert omoospace.root_dir == Opath("temp", "NewProject")
-assert omoospace.subspaces_dir == Opath("temp", "NewProject", "Subspaces")
-assert omoospace.contents_dir == Opath("temp", "NewProject", "Contents")
-assert omoospace.profile_file == Opath("temp", "NewProject", "Omoospace.yml")
+assert omoospace.subspaces_dir == Opath("temp", "NewProject", "subspaces")
+assert omoospace.contents_dir == Opath("temp", "NewProject", "contents")
+assert omoospace.profile_file == Opath("temp", "NewProject", "OMOOSPACE.md")
 
 # a empty project is created.
 assert omoospace.brief == "A new project for testing."
@@ -46,7 +46,7 @@ Example omoospace:
 
 ```bash
 Project01
-├── Contents
+├── contents
 ├── Prop01.blend
 ├── Prop02
 │   ├── 001-ModelProp02.zpr
@@ -56,7 +56,7 @@ Project01
 │   ├── Prop03.blend
 │   ├── PartA.blend
 │   ╰── PartB.blend
-╰── Omoospace.yml
+╰── OMOOSPACE.md
 ```
 
 ```python
@@ -65,8 +65,8 @@ from omoospace import Omoospace, Opath
 omoospace = Omoospace("ProjectRoot")
 assert omoospace.root_dir == Opath("ProjectRoot")
 assert omoospace.subspaces_dir == Opath("ProjectRoot")
-assert omoospace.contents_dir == Opath("ProjectRoot", "Contents")
-assert omoospace.profile_file == Opath("ProjectRoot", "Omoospace.yml")
+assert omoospace.contents_dir == Opath("ProjectRoot", "contents")
+assert omoospace.profile_file == Opath("ProjectRoot", "OMOOSPACE.md")
 assert omoospace.contents_dir.is_dir()
 assert omoospace.subspaces_dir.is_dir()
 assert omoospace.profile_file.is_file()
@@ -104,14 +104,14 @@ Example omoospace:
 
 ```bash
 Project02
-├── Contents
-├── Subspaces
+├── contents
+├── subspaces
 │   ├── Heart.blend
 │   ├── Heart_v001.blend
 │   ├── Heart_Valves.blend
 │   ├── Heart_Valves_v001_autosave.spp
 │   ╰── Liver.zpr
-╰── Omoospace.yml
+╰── OMOOSPACE.md
 ```
 
 ```python

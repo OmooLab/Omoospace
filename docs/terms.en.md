@@ -9,7 +9,7 @@ An **objective** is the purpose of your work (obviously 😄). To achieve a big 
 ## Pathname
 
 ```bash
-├── Subspaces/
+├── subspaces/
 │   ╰── Short01/
 │       ├── Assets/
 │       │   ├── CharA/
@@ -57,7 +57,7 @@ If we combine all these paths, we get a tree structure called an **objective tre
 You can also create the same objective tree using prefixes instead of folders:
 
 ```bash
-├── Subspaces
+├── subspaces
 │   ├── Short01_Assets_CharA.zbr
 │   ├── Short01_Assets_CharA.spp
 │   ├── Short01_Assets_CharA.blend

@@ -1,44 +1,55 @@
-# Omoospace.yml
+# OMOOSPACE.md
 
 ## Brief
 
-```YAML
+```markdown
+---
 brief: <Project description>
+---
 ```
 
 ## Notes
 
-```YAML
+```markdown
+---
 notes:
   <Record name>: <Record value>
+---
 ```
 
 Example:
 
-```YAML
+```markdown
+---
 notes:
   Client: Tencent
+---
 ```
 
 ## Makers
 
-```YAML
+```markdown
+---
 makers:
   <Name>: <Email>
+---
 ```
 
 or
 
-```YAML
+```markdown
+---
 makers:
   <Name>:
     email: <Email>
     website: <Website/social>
+---
 ```
 
 Example:
 
-```YAML
+```markdown
+---
 makers:
   MaNan001: manan001@example.com
   MaNan002:
@@ -46,18 +57,22 @@ makers:
   OmooLab:
     email: studio@omoolab.xyz
     website: https://www.omoolab.xyz
+---
 ```
 
 ## Tools
 
-```YAML
+```markdown
+---
 tools:
   <Tool name>: <Version>
+---
 ```
 
 or
 
-```YAML
+```markdown
+---
 tools:
   <Tool name>:
     version: <Version>
@@ -65,11 +80,13 @@ tools:
     extensions:
       - <Addon/plugin>
       - <Addon/plugin>
+---
 ```
 
 Example:
 
-```YAML
+```markdown
+---
 tools:
   Houdini: 20.0
   DaVinci Resolve:
@@ -80,47 +97,53 @@ tools:
     extensions:
       - Omoospace
       - BioxelNodes
+---
 ```
 
 ## Works
 
-```YAML
+```markdown
+---
 works:
-  <Work name>:
-    - <Relative path under Contents>
+  <Work name>: <Relative path under contents>
+---
 ```
 
 or
 
-```YAML
+```markdown
+---
 works:
   <Work name>:
     brief: <Work description>
     version: <Version>
     contents:
-      - <Relative path under Contents>
+      - <Relative path under contents>
     contributions:
       <Role/what was done>:
         - <Name>
+---
 ```
 
 Example:
 
-```YAML
+```markdown
+---
 works:
-  AwesomeProp01: Models/Prop02.glb
+  AwesomeProp01: models/Prop02.glb
   AwesomeProp02:
-    - Models/Prop01/Prop01.fbx
-    - Models/Prop01/Textures
+    - models/Prop01/Prop01.fbx
+    - models/Prop01/Textures
   AwesomeShort01:
     brief: An awesome animated short.
     version: 1.0.0
     contents:
-      - Videos/Short01.mp4
-      - Images/Short01_Cover.png
+      - videos/Short01.mp4
+      - images/Short01_Cover.png
     contributions:
       Modeler:
         - MaNan003
       Animator: [MaNan002, MaNan003]
       Director: MaNan001
+---
 ```
