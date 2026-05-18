@@ -97,3 +97,137 @@ def test_omoospace_other_dir():
     assert omoospace.contents_dir.is_dir()
     assert omoospace.subspaces_dir.is_dir()
     assert omoospace.profile_file.is_file()
+
+
+def test_omoospace_md_priority():
+    """Test that Omoospace.md takes priority over Omoospace.yml when both exist."""
+    omoos_path = Opath("temp", "MDPriorityProject").resolve()
+
+    make_path(
+        "contents/",
+        {
+            "Omoospace.md": """---
+brief: From MD file
+makers:
+  TestMaker:
+    email: test@example.com
+---
+# Content here is ignored
+""",
+            "Omoospace.yml": """
+brief: From YAML file
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    assert omoospace.root_dir == omoos_path
+    # MD file should take priority
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.md")
+    assert omoospace.brief == "From MD file"
+    # Maker exists in MD frontmatter, can read without writing
+    maker = omoospace.get_maker("TestMaker")
+    assert maker.email == "test@example.com"
+
+
+def test_omoospace_md_only():
+    """Test that Omoospace works with only Omoospace.md present."""
+    omoos_path = Opath("temp", "MDOnlyProject").resolve()
+
+    make_path(
+        "Contents/",
+        {
+            "Omoospace.md": """---
+brief: MD only project
+tools:
+  Blender:
+    version: "4.2.0"
+---
+# Just a markdown file
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    assert omoospace.root_dir == omoos_path
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.md")
+    assert omoospace.brief == "MD only project"
+    # Tool exists in MD frontmatter, can read without writing
+    tool = omoospace.get_tool("Blender")
+    assert tool.version == "4.2.0"
+
+
+def test_omoospace_yaml_fallback():
+    """Test that Omoospace falls back to YAML when MD doesn't exist."""
+    omoos_path = Opath("temp", "YAMLFallbackProject").resolve()
+
+    make_path(
+        "Contents/",
+        {
+            "Omoospace.yml": """
+brief: YAML fallback project
+tools:
+  Houdini:
+    version: "20.0"
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    assert omoospace.root_dir == omoos_path
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yml")
+    assert omoospace.brief == "YAML fallback project"
+    tool = omoospace.get_tool("Houdini")
+    assert tool.version == "20.0"
+
+
+def test_omoospace_md_empty_frontmatter_fallback():
+    """Test that Omoospace falls back to YAML when MD has empty frontmatter."""
+    omoos_path = Opath("temp", "EmptyFMFallbackProject").resolve()
+
+    make_path(
+        "Contents/",
+        {
+            "Omoospace.md": """# Just a title
+No frontmatter here.
+""",
+            "Omoospace.yml": """
+brief: Fallback from empty MD
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    assert omoospace.root_dir == omoos_path
+    # Should fall back to YAML since MD has no frontmatter
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yml")
+    assert omoospace.brief == "Fallback from empty MD"
+
+
+def test_omoospace_md_read_only():
+    """Test that Omoospace.md is read-only (writes redirect to YAML)."""
+    omoos_path = Opath("temp", "MDReadOnlyProject").resolve()
+
+    make_path(
+        "Contents/",
+        {
+            "Omoospace.md": """---
+brief: MD read-only test
+---
+# Markdown content
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.md")
+    # Writing to MD should redirect to YAML file
+    omoospace.brief = "Trying to write to MD"
+    # After redirect, profile_file should be YAML
+    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yml")
+    assert omoospace.brief == "Trying to write to MD"

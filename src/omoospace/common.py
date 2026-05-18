@@ -1,4 +1,5 @@
 from typing import Any
+import frontmatter
 from omoospace.utils import Opath, yaml
 from omoospace.language import key_dict
 
@@ -16,19 +17,34 @@ class Profile:
     """Abstract base class for read and write profile"""
 
     def _read_profile(self):
-        """Read profile data from Omoospace.yml file."""
+        """Read profile data from Omoospace.yml or Omoospace.md file."""
         if self.profile_file is None:
             raise ValueError("profile file is None.")
 
         if not self.profile_file.exists():
             return {}
-        with self.profile_file.open("r", encoding="utf-8") as file:
-            return yaml.load(file) or {}
+
+        if self.profile_file.suffix == ".md":
+            # Handle Markdown file with YAML frontmatter
+            try:
+                post = frontmatter.load(self.profile_file)
+                return dict(post) or {}
+            except Exception:
+                return {}
+        else:
+            # Handle YAML file
+            with self.profile_file.open("r", encoding="utf-8") as file:
+                return yaml.load(file) or {}
 
     def _write_profile(self, data):
-        """Write profile data to Omoospace.yml file."""
+        """Write profile data to Omoospace.yml file or YAML fallback."""
         if self.profile_file is None:
             raise ValueError("profile file is None.")
+
+        if self.profile_file.suffix == ".md":
+            # Switch to YAML file for writing
+            yaml_path = self.profile_file.parent / "Omoospace.yml"
+            self.profile_file = yaml_path
 
         self.profile_file.parent.mkdir(parents=True, exist_ok=True)
         with self.profile_file.open("w", encoding="utf-8") as file:

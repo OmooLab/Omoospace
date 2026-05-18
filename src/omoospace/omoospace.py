@@ -1,6 +1,8 @@
 from enum import Enum
+import logging
 from typing import Optional, Union
 from nutree import Tree, Node
+import frontmatter
 from omoospace.common import Profile, NodeData
 from omoospace.items import (
     Maker,
@@ -13,6 +15,8 @@ from omoospace.items import (
 from omoospace.language import ALLOWED_LANGS, Language
 from omoospace.utils import Oset, make_path, normalize_name, Opath, AnyPath
 from omoospace.validators import is_ignore
+
+logger = logging.getLogger(__name__)
 
 
 class ObjectiveType(Enum):
@@ -259,6 +263,29 @@ class Omoospace(Profile):
                 continue
 
             self.root_dir = detect_path_parent
+
+            # Check for Omoospace.md with valid frontmatter first (priority)
+            md_file = self.root_dir / "Omoospace.md"
+            yml_file = self.root_dir / "Omoospace.yml"
+
+            if md_file.exists():
+                try:
+                    post = frontmatter.load(md_file)
+                    fm_data = dict(post)
+                    if fm_data:
+                        self.profile_file = md_file
+                        # Log warning if both MD and YAML exist
+                        if yml_file.exists():
+                            logger.info(
+                                f"Both Omoospace.md and Omoospace.yml exist. "
+                                f"Omoospace.md takes priority."
+                            )
+                        return
+                except Exception:
+                    # Frontmatter parsing failed or empty, fall through to YAML
+                    pass
+
+            # Fall back to YAML file
             if language:
                 self.profile_file = self.root_dir / f"Omoospace.{language}.yml"
                 return
