@@ -32,8 +32,3 @@ uv run mike deploy --push --update-aliases 0.2.x latest
 ```
 
 Publish to Pypi
-
-```bash
-uv build
-uv publish
-```

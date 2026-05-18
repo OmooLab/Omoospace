@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/principles.md",
+                "file": "docs/terms.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "principles"
+              "title": "terms"
             }
           }
         ]
@@ -156,13 +156,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/principles.md",
+                "file": "docs/terms.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of principles"
+              "title": "Outline of terms"
             }
           }
         ],
@@ -183,8 +183,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "47f7b74626240748",
+  "active": "9df80422092440a4",
   "lastOpenFiles": [
+    "docs/yml.md",
+    "docs/why.md",
+    "docs/principles.en.md",
+    "docs/index.en.md",
+    "docs/index.md",
+    "docs/how-to-version-control.md",
+    "docs/how-to-setup-folders.en.md",
+    "docs/how-to-collaborate.md",
+    "docs/how-to-backup.md",
+    "docs/develop.md",
+    "docs/how-to-add-suffixes.md",
+    "README.md",
+    "docs/contribution.md",
+    "docs/principles.md",
     "site/en/apis/validators/index.html",
     "site/en/apis/validators",
     "site/en/apis/utils/index.html",
@@ -195,37 +209,22 @@
     "site/en/apis/items",
     "site/en/apis/functions/index.html",
     "site/en/apis/functions",
-    "site/en/apis/common/index.html",
     "site/assets/overview.png",
     "site/assets/logo.png",
     "site/assets/Pasted image 20260303104428.png",
     "site/assets/Pasted image 20260303103545.png",
     "site/assets/images/favicon.png",
     "docs/how-to-setup-folders.md",
-    "docs/principles.md",
-    "docs/how-to-backup.md",
     "docs/how-to-backup.en.md",
-    "docs/how-to-collaborate.md",
-    "docs/index.en.md",
-    "docs/how-to-add-suffixes.md",
     "docs/how-to-add-suffixes.en.md",
-    "docs/develop.md",
-    "docs/index.md",
     "docs/terms.en.md",
     "docs/terms.md",
-    "docs/why.md",
     "docs/why.en.md",
-    "docs/principles.en.md",
-    "docs/contribution.md",
     "docs/blender.md",
     "docs/assets/Pasted image 20260303104428.png",
     "docs/cli.md",
-    "docs/how-to-version-control.md",
-    "docs/yml.md",
-    "docs/how-to-setup-folders.en.md",
     "docs/assets/Pasted image 20260303103545.png",
     "docs/yml.en.md",
-    "docs/assets/Pasted image 20260302155556.png",
-    "README.md"
+    "docs/assets/Pasted image 20260302155556.png"
   ]
 }
