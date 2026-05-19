@@ -184,18 +184,18 @@ tools:
     assert tool.version == "20.0"
 
 
-def test_omoospace_md_empty_frontmatter_fallback():
-    """Test that Omoospace falls back to YAML when MD has empty frontmatter."""
-    omoos_path = Opath("temp", "EmptyFMFallbackProject").resolve()
+def test_omoospace_md_without_frontmatter():
+    """Test that OMOOSPACE.md is used even without frontmatter block."""
+    omoos_path = Opath("temp", "MDNoFrontmatterProject").resolve()
 
     make_path(
-        "contents/",
+        "Contents/",
         {
             "OMOOSPACE.md": """# Just a title
-No frontmatter here.
+No frontmatter here at all.
 """,
             "Omoospace.yml": """
-brief: Fallback from empty MD
+brief: This should be ignored
 """,
         },
         under=omoos_path,
@@ -203,9 +203,8 @@ brief: Fallback from empty MD
 
     omoospace = Omoospace(omoos_path)
     assert omoospace.root_dir == omoos_path
-    # Should fall back to YAML since MD has no frontmatter
-    assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yml")
-    assert omoospace.brief == "Fallback from empty MD"
+    # OMOOSPACE.md should be used regardless of frontmatter presence
+    assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
 
 
 def test_omoospace_md_read_write():
@@ -231,6 +230,30 @@ brief: MD read-write test
     # Profile file should remain MD
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
     assert omoospace.brief == "Now writing to MD"
+
+
+def test_omoospace_md_empty_frontmatter_read_write():
+    """Test that OMOOSPACE.md with empty frontmatter can be read and written."""
+    omoos_path = Opath("temp", "EmptyFMReadWrite").resolve()
+
+    make_path(
+        "Contents/",
+        {
+            "OMOOSPACE.md": """---
+---
+# Just a title
+""",
+        },
+        under=omoos_path,
+    )
+
+    omoospace = Omoospace(omoos_path)
+    # Empty frontmatter MD should still be recognized and used
+    assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
+    # Write should work and stay on MD file
+    omoospace.brief = "New brief from test"
+    assert omoospace.brief == "New brief from test"
+    assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
 
 
 def test_create_omoospace_generates_omoospace_md():

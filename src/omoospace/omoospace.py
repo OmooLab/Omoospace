@@ -2,7 +2,6 @@ from enum import Enum
 import logging
 from typing import Optional, Union
 from nutree import Tree, Node
-import frontmatter
 from omoospace.common import Profile, NodeData
 from omoospace.items import (
     Maker,
@@ -265,21 +264,14 @@ class Omoospace(Profile):
             omoospace_yml_file = self.root_dir / "Omoospace.yml"
 
             if omoospace_md_file.exists():
-                try:
-                    post = frontmatter.load(omoospace_md_file)
-                    fm_data = dict(post)
-                    if fm_data:
-                        self.profile_file = omoospace_md_file
-                        # Log warning if both MD and YAML exist
-                        if omoospace_yml_file.exists():
-                            logger.info(
-                                f"Both OMOOSPACE.md and Omoospace.yml exist. "
-                                f"OMOOSPACE.md takes priority."
-                            )
-                        return
-                except Exception:
-                    # Frontmatter parsing failed or empty, fall through to YAML
-                    pass
+                # OMOOSPACE.md exists - always use it, never fall back to YAML
+                self.profile_file = omoospace_md_file
+                if omoospace_yml_file.exists():
+                    logger.info(
+                        f"Both OMOOSPACE.md and Omoospace.yml exist. "
+                        f"OMOOSPACE.md takes priority."
+                    )
+                return
 
             default = self.root_dir / f"Omoospace.yml"
             self.profile_file = next(
@@ -375,12 +367,6 @@ class Omoospace(Profile):
         pathname = cls.extract_pathname(path)
         omoospace = cls(path)
         return omoospace.objective_tree.get(pathname)
-
-    @property
-    def language(self) -> str:
-        """str: Omoospace language."""
-        parts = self.profile_file.stem.split(".")
-        return parts[-1] if len(parts) > 1 else "en"
 
     @property
     def _profile(self) -> Profile:

@@ -24,7 +24,7 @@ class Profile:
         if not self.profile_file.exists():
             return {}
 
-        if self.profile_file.suffix == ".md":
+        if self.profile_file.suffix.lower() == ".md":
             # Handle Markdown file with YAML frontmatter
             try:
                 post = frontmatter.load(self.profile_file)
@@ -43,7 +43,7 @@ class Profile:
 
         self.profile_file.parent.mkdir(parents=True, exist_ok=True)
 
-        if self.profile_file.suffix == ".md":
+        if self.profile_file.suffix.lower() == ".md":
             # Write to Markdown file with YAML frontmatter
             post = frontmatter.Post("")
             post.metadata = data

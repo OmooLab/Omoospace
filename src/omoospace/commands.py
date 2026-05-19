@@ -168,6 +168,53 @@ def tree():
         typer.secho(f"Print tree failed: {err}", fg=typer.colors.RED)
 
 
+@app.command("subspaces-dir")
+def subspaces_dir(value: str = typer.Argument(None, help="Set subspaces_dir")):
+    """Print or set subspaces directory path"""
+    omoospace = detect_omoospace_or_exit()
+    if value is None:
+        print(omoospace.subspaces_dir)
+    else:
+        omoospace.subspaces_dir = value
+
+
+@app.command("contents-dir")
+def contents_dir(value: str = typer.Argument(None, help="Set contents_dir")):
+    """Print or set contents directory path"""
+    omoospace = detect_omoospace_or_exit()
+    if value is None:
+        print(omoospace.contents_dir)
+    else:
+        omoospace.contents_dir = value
+
+
+@app.command("name")
+def name(value: str = typer.Argument(None, help="Set name")):
+    """Print or set omoospace name"""
+    omoospace = detect_omoospace_or_exit()
+    if value is None:
+        print(omoospace.name)
+    else:
+        omoospace.name = value
+
+
+@app.command("brief")
+def brief(value: str = typer.Argument(None, help="Set brief")):
+    """Print or set omoospace brief"""
+    omoospace = detect_omoospace_or_exit()
+    if value is None:
+        print(omoospace.brief)
+    else:
+        omoospace.brief = value
+
+
+@app.command("root-dir")
+def root_dir():
+    """Print root directory path"""
+    omoospace = detect_omoospace_or_exit()
+    print(omoospace.root_dir)
+
+
 @app.command()
 def pathname(path: str = typer.Argument(..., help="Path to extract pathname")):
     """Print pathname"""
