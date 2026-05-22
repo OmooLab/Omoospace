@@ -9,11 +9,11 @@ from omoospace import (
 
 def test_create_omoospace():
     omoospace = create_omoospace(
-        "new project", under="temp", brief="A new project for testing."
+        "new project", under="temp", description="A new project for testing."
     )
 
     assert omoospace.root_dir == Opath("temp", "NewProject").resolve()
-    assert omoospace.brief == "A new project for testing."
+    assert omoospace.description == "A new project for testing."
     assert len(omoospace.subspaces) == 0
 
     with pytest.raises(ValueError):
@@ -22,15 +22,14 @@ def test_create_omoospace():
 
 def test_create_omoospace():
     omoospace = create_omoospace(
-        "new project",
-        under="temp",
-        brief="A new project for testing.",
-        contents_dir="Content",
-        subspaces_dir="Subspace",
+        "temp/new project",
+        description="A new project for testing.",
+        contents_dir="content",
+        subspaces_dir="subspace",
     )
 
-    assert omoospace.subspaces_dir == Opath("temp", "NewProject", "Subspace").resolve()
-    assert omoospace.contents_dir == Opath("temp", "NewProject", "Content").resolve()
+    assert omoospace.subspaces_dir == Opath("temp", "new project", "subspace").resolve()
+    assert omoospace.contents_dir == Opath("temp", "new project", "content").resolve()
 
 
 def test_omoospace(mini_omoos_path: Opath):
@@ -80,7 +79,7 @@ def test_omoospace_other_dir():
         "SourceFiles/",
         {
             "Omoospace.yml": """
-        brief: A mini omoospace.
+        description: A mini omoospace.
         contents_dir: Assets
         subspaces_dir: SourceFiles
         """
@@ -107,15 +106,15 @@ def test_omoospace_md_priority():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: From MD file
+description: From MD file
 makers:
   TestMaker:
     email: test@example.com
 ---
-# Content here is ignored
+# content here is ignored
 """,
             "Omoospace.yml": """
-brief: From YAML file
+description: From YAML file
 """,
         },
         under=omoos_path,
@@ -125,7 +124,7 @@ brief: From YAML file
     assert omoospace.root_dir == omoos_path
     # MD file should take priority
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
-    assert omoospace.brief == "From MD file"
+    assert omoospace.description == "From MD file"
     # Maker exists in MD frontmatter, can read without writing
     maker = omoospace.get_maker("TestMaker")
     assert maker.email == "test@example.com"
@@ -139,7 +138,7 @@ def test_omoospace_md_only():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: MD only project
+description: MD only project
 tools:
   Blender:
     version: "4.2.0"
@@ -153,7 +152,7 @@ tools:
     omoospace = Omoospace(omoos_path)
     assert omoospace.root_dir == omoos_path
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
-    assert omoospace.brief == "MD only project"
+    assert omoospace.description == "MD only project"
     # Tool exists in MD frontmatter, can read without writing
     tool = omoospace.get_tool("Blender")
     assert tool.version == "4.2.0"
@@ -167,7 +166,7 @@ def test_omoospace_yaml_fallback():
         "contents/",
         {
             "Omoospace.yml": """
-brief: YAML fallback project
+description: YAML fallback project
 tools:
   Houdini:
     version: "20.0"
@@ -179,7 +178,7 @@ tools:
     omoospace = Omoospace(omoos_path)
     assert omoospace.root_dir == omoos_path
     assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yml")
-    assert omoospace.brief == "YAML fallback project"
+    assert omoospace.description == "YAML fallback project"
     tool = omoospace.get_tool("Houdini")
     assert tool.version == "20.0"
 
@@ -189,13 +188,13 @@ def test_omoospace_md_without_frontmatter():
     omoos_path = Opath("temp", "MDNoFrontmatterProject").resolve()
 
     make_path(
-        "Contents/",
+        "contents/",
         {
             "OMOOSPACE.md": """# Just a title
 No frontmatter here at all.
 """,
             "Omoospace.yml": """
-brief: This should be ignored
+description: This should be ignored
 """,
         },
         under=omoos_path,
@@ -215,7 +214,7 @@ def test_omoospace_md_read_write():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: MD read-write test
+description: MD read-write test
 ---
 # Markdown content
 """,
@@ -226,10 +225,10 @@ brief: MD read-write test
     omoospace = Omoospace(omoos_path)
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
     # Writing to MD should stay on MD file
-    omoospace.brief = "Now writing to MD"
+    omoospace.description = "Now writing to MD"
     # Profile file should remain MD
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
-    assert omoospace.brief == "Now writing to MD"
+    assert omoospace.description == "Now writing to MD"
 
 
 def test_omoospace_md_empty_frontmatter_read_write():
@@ -237,7 +236,7 @@ def test_omoospace_md_empty_frontmatter_read_write():
     omoos_path = Opath("temp", "EmptyFMReadWrite").resolve()
 
     make_path(
-        "Contents/",
+        "contents/",
         {
             "OMOOSPACE.md": """---
 ---
@@ -251,17 +250,16 @@ def test_omoospace_md_empty_frontmatter_read_write():
     # Empty frontmatter MD should still be recognized and used
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
     # Write should work and stay on MD file
-    omoospace.brief = "New brief from test"
-    assert omoospace.brief == "New brief from test"
+    omoospace.description = "New description from test"
+    assert omoospace.description == "New description from test"
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
 
 
 def test_create_omoospace_generates_omoospace_md():
     """Test that create_omoospace generates OMOOSPACE.md by default."""
     omoospace = create_omoospace(
-        "MDProject",
-        under="temp",
-        brief="Created with OMOOSPACE.md",
+        "temp/MDProject",
+        description="Created with OMOOSPACE.md",
     )
 
     assert omoospace.profile_file == Opath("temp", "MDProject", "OMOOSPACE.md").resolve()
@@ -269,7 +267,7 @@ def test_create_omoospace_generates_omoospace_md():
     # Verify it's MD format (has frontmatter)
     content = omoospace.profile_file.read_text(encoding="utf-8")
     assert content.startswith("---")
-    assert "brief: Created with OMOOSPACE.md" in content
+    assert "description: Created with OMOOSPACE.md" in content
 
 
 def test_omoospace_md_roundtrip():
@@ -280,7 +278,7 @@ def test_omoospace_md_roundtrip():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: Initial brief
+description: Initial description
 makers:
   TestDev:
     email: dev@example.com
@@ -294,17 +292,17 @@ makers:
     # Initial load
     omoospace = Omoospace(omoos_path)
     assert omoospace.profile_file == Opath(omoos_path, "OMOOSPACE.md")
-    assert omoospace.brief == "Initial brief"
+    assert omoospace.description == "Initial description"
     assert omoospace.get_maker("TestDev").email == "dev@example.com"
 
     # Modify configuration
-    omoospace.brief = "Updated brief"
+    omoospace.description = "Updated description"
     omoospace.add_maker("AnotherDev")
 
     # Reload to verify persistence
     omoospace2 = Omoospace(omoos_path)
     assert omoospace2.profile_file == Opath(omoos_path, "OMOOSPACE.md")
-    assert omoospace2.brief == "Updated brief"
+    assert omoospace2.description == "Updated description"
     assert omoospace2.get_maker("TestDev").email == "dev@example.com"
     assert omoospace2.get_maker("AnotherDev").email == None
 
@@ -317,7 +315,7 @@ def test_omoospace_md_with_subitems():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: Subitems test
+description: Subitems test
 makers:
   LeadDev:
     email: lead@example.com
@@ -328,17 +326,17 @@ tools:
     website: https://blender.org
 works:
   TestVideo:
-    brief: A test video
+    description: A test video
     version: "1.0.0"
 ---
-# Content
+# content
 """,
         },
         under=omoos_path,
     )
 
     omoospace = Omoospace(omoos_path)
-    assert omoospace.brief == "Subitems test"
+    assert omoospace.description == "Subitems test"
 
     maker = omoospace.get_maker("LeadDev")
     assert maker.email == "lead@example.com"
@@ -349,7 +347,7 @@ works:
     assert tool.website == "https://blender.org"
 
     work = omoospace.get_work("TestVideo")
-    assert work.brief == "A test video"
+    assert work.description == "A test video"
     assert work.version == "1.0.0"
 
     # Modify and persist
@@ -365,13 +363,12 @@ works:
 def test_create_omoospace_lowercase_defaults():
     """Test that create_omoospace uses lowercase directory names by default."""
     omoospace = create_omoospace(
-        "LowercaseProject",
-        under="temp",
-        brief="Lowercase defaults test",
+        "temp/LowercaseProject",
+        description="Lowercase defaults test",
     )
 
     # Default directories should be lowercase
-    assert omoospace.subspaces_dir.name == "subspaces"
+    assert omoospace.subspaces_dir.name == "LowercaseProject"
     assert omoospace.contents_dir.name == "contents"
     assert omoospace.subspaces_dir.exists()
     assert omoospace.contents_dir.exists()
@@ -385,7 +382,7 @@ def test_omoospace_yaml_extension():
         "contents/",
         {
             "Omoospace.yaml": """
-brief: From .yaml file
+description: From .yaml file
 tools:
   Maya:
     version: "2024.0"
@@ -396,6 +393,6 @@ tools:
 
     omoospace = Omoospace(omoos_path)
     assert omoospace.profile_file == Opath(omoos_path, "Omoospace.yaml")
-    assert omoospace.brief == "From .yaml file"
+    assert omoospace.description == "From .yaml file"
     tool = omoospace.get_tool("Maya")
     assert tool.version == "2024.0"

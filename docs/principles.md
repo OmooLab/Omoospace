@@ -90,7 +90,7 @@
 
 ```YAML
 ---
-brief: 一个超厉害的IP项目
+description: 一个超厉害的IP项目
 notes:
   客户: 腾讯爸爸
 makers:
@@ -101,7 +101,7 @@ tools:
 works:
   超厉害道具01: models/道具01.glb
   超厉害短片01:
-    brief: 一个超厉害的动画短片
+    description: 一个超厉害的动画短片
     version: "1.0.0"
     contents:
       - videos/动画短片01.mp4

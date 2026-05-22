@@ -1,5 +1,5 @@
 ---
-brief: An awesome IP project
+description: An awesome IP project
 
 ignore:
   - Short02
@@ -33,7 +33,7 @@ works:
     - models/Prop02/Prop02.fbx
     - models/Prop02/Textures
   AwesomeShort01:
-    brief: An awesome animated short.
+    description: An awesome animated short.
     version: "1.0.0"
     contents:
       - videos/Short01.mp4

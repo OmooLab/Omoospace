@@ -252,7 +252,9 @@ class Omoospace(Profile):
 
         for detect_path_parent in detect_path_parents:
             # Find a file named 'Omoospace' or 'OMOOSPACE' with any extension
-            candidates = list(Opath(detect_path_parent).glob("Omoospace.*")) + list(Opath(detect_path_parent).glob("OMOOSPACE.*"))
+            candidates = list(Opath(detect_path_parent).glob("Omoospace.*")) + list(
+                Opath(detect_path_parent).glob("OMOOSPACE.*")
+            )
             candidates = [c for c in candidates if c.is_file()]
             if len(candidates) == 0:
                 continue
@@ -380,22 +382,30 @@ class Omoospace(Profile):
     @property
     def name(self) -> str:
         """str: Omoospace name."""
-        return self.root_dir.name
+        return self.get("name")
 
-    @property
-    def brief(self) -> str:
-        """str: Omoospace name. Prefer Omoospace.yml, fallback to folder name."""
-        brief = self.get("brief")
-        return brief or self.name
-
-    @brief.setter
-    def brief(self, value):
-        """Set the Omoospace brief.
+    @name.setter
+    def name(self, value):
+        """Set the Omoospace name.
 
         Args:
-            value (str): The new brief to set for the Omoospace.
+            value (str): The new name to set for the Omoospace.
         """
-        self.set("brief", value)
+        self.set("name", value)
+
+    @property
+    def description(self) -> str:
+        """str: Omoospace name. Prefer Omoospace.yml, fallback to folder name."""
+        return self.get("description")
+
+    @description.setter
+    def description(self, value):
+        """Set the Omoospace description.
+
+        Args:
+            value (str): The new description to set for the Omoospace.
+        """
+        self.set("description", value)
 
     @property
     def subspaces_dir(self) -> Opath:
@@ -479,7 +489,8 @@ class Omoospace(Profile):
         exists = path.exists() if require_exists else True
         in_subspaces = path.is_under(self.subspaces_dir)
         not_profile_file = not (
-            (path.name.startswith("Omoospace.") or path.name == "OMOOSPACE.md") and path.parent == self.root_dir
+            (path.name.startswith("Omoospace.") or path.name == "OMOOSPACE.md")
+            and path.parent == self.root_dir
         )
         not_readme = "README.md" not in path.name
         not_contents = not path.is_under(self.contents_dir, or_equal=True)

@@ -21,10 +21,10 @@ def test_profile():
     copy("tests/profile.example.md", "temp/AwesomeProject/OMOOSPACE.md")
     omoospace = Omoospace("temp/AwesomeProject")
 
-    # read/write brief
-    assert omoospace.brief == "An awesome IP project"
-    omoospace.brief = "A fantastic project."
-    assert omoospace.brief == "A fantastic project."
+    # read/write description
+    assert omoospace.description == "An awesome IP project"
+    omoospace.description = "A fantastic project."
+    assert omoospace.description == "A fantastic project."
     assert omoospace.subspaces == [
         "Prop01.blend",
         "Short01",
@@ -97,7 +97,7 @@ def test_profile():
     assert len(omoospace.tools) == 2
 
     work = omoospace.get_work("AwesomeShort01")
-    assert work.brief == "An awesome animated short."
+    assert work.description == "An awesome animated short."
     assert work.version == "1.0.0"
     assert work.contents == [
         "videos/Short01.mp4",
@@ -107,7 +107,7 @@ def test_profile():
     assert work.contributions["Director"] == ["MaNan001"]
 
     work = omoospace.get_work("AwesomeProp02")
-    assert work.brief == None
+    assert work.description == None
     assert work.version == None
     assert work.contents == ["models/Prop02/Prop02.fbx", "models/Prop02/Textures"]
     assert len(work.contributions) == 0

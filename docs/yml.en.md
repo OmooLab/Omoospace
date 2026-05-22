@@ -4,7 +4,7 @@
 
 ```markdown
 ---
-brief: <Project description>
+description: <Project description>
 ---
 ```
 
@@ -115,7 +115,7 @@ or
 ---
 works:
   <Work name>:
-    brief: <Work description>
+    description: <Work description>
     version: <Version>
     contents:
       - <Relative path under contents>
@@ -135,7 +135,7 @@ works:
     - models/Prop01/Prop01.fbx
     - models/Prop01/Textures
   AwesomeShort01:
-    brief: An awesome animated short.
+    description: An awesome animated short.
     version: 1.0.0
     contents:
       - videos/Short01.mp4

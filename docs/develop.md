@@ -18,7 +18,7 @@ from omoospace import create_omoospace, Opath
 omoospace = create_omoospace(
     "new project", 
     under="temp", 
-    brief="A new project for testing."
+    description="A new project for testing."
 )
 
 # the name conversion rule is:
@@ -34,7 +34,7 @@ assert omoospace.contents_dir == Opath("temp", "NewProject", "contents")
 assert omoospace.profile_file == Opath("temp", "NewProject", "OMOOSPACE.md")
 
 # a empty project is created.
-assert omoospace.brief == "A new project for testing."
+assert omoospace.description == "A new project for testing."
 assert len(omoospace.subspaces) == 0
 
 # %$ is not allowed as a omoospace name.
@@ -227,7 +227,7 @@ from omoospace import Omoospace
 omoospace = Omoospace('path/to/Project')
 
 work = omoospace.get_work("超厉害动画")
-assert work.brief == "一个超厉害的动画."
+assert work.description == "一个超厉害的动画."
 assert work.version == "1.0.0"
 assert work.contents == [
     "视频/动画A.mp4",
@@ -237,7 +237,7 @@ assert work.contributions["动画师"] == ["马南003", "马南002"]
 assert work.contributions["动画导演"] == ["马南001"]
 
 work = omoospace.get_work("超厉害模型")
-assert work.brief == None
+assert work.description == None
 assert work.version == None
 assert work.contents == ["模型/模型A/模型A.fbx", "模型/模型A/贴图"]
 assert len(work.contributions) == 0
@@ -246,13 +246,13 @@ assert work.contributions["模型师"] == ["马南003"]
 assert work.contents == ["模型/模型A/模型A.fbx", "模型/模型A/贴图"]
 
 work = omoospace.get_work("另一个超厉害模型")
-assert work.brief == None
+assert work.description == None
 assert work.version == None
 assert work.contents == ["模型/模型B.glb"]
 assert len(work.contributions) == 0
 
-work.brief = "一个超酷的模型."
-assert work.brief == "一个超酷的模型."
+work.description = "一个超酷的模型."
+assert work.description == "一个超酷的模型."
 assert work.contents == ["模型/模型B.glb"]
 
 # set contributions

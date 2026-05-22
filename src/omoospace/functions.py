@@ -132,36 +132,30 @@ blendcache_*
 
 
 def create_omoospace(
-    name: str,
-    under: str = ".",
-    brief: str = None,
-    contents_dir: str = "contents",
-    subspaces_dir: str = "subspaces",
-    readme: bool = False,
+    dirname: str,
+    name: str = None,
+    description: str = None,
+    contents_dir: str = None,
+    subspaces_dir: str = None,
     gitfiles: bool = False,
-    chinese_to_pinyin: bool = False,
     reveal_in_explorer: bool = False,
 ) -> Omoospace:
     """Create an omoospace.
 
     Args:
-        name (str): The name of the omoospace.
-        under (str, optional): The directory under which to create the omoospace. Defaults to ".".
-        brief (str, optional): A brief description of the omoospace. Defaults to None.
+        dirname (str): The directory name of the omoospace.
+        name (str, optional): The name of the omoospace.
+        description (str, optional): The description of the omoospace.
         contents_dir (str, optional): The name of the contents directory. Defaults to "contents".
         subspaces_dir (str, optional): The name of the subspaces directory. Defaults to "subspaces".
-        language (Language, optional): The language of the omoospace profile. Defaults to None.
-        readme (bool, optional): Whether to create a README.md file. Defaults to False.
         gitfiles (bool, optional): Whether to create .gitattributes and .gitignore files. Defaults to False.
-        chinese_to_pinyin (bool, optional): Whether to convert Chinese characters in the name to Pinyin. Defaults to False.
         reveal_in_explorer (bool, optional): Whether to reveal the created omoospace in file explorer. Defaults to False.
 
     Returns:
         Omoospace: The created omoospace.
     """
 
-    dirname = normalize_name(name, chinese_to_pinyin=chinese_to_pinyin)
-    root_dir = Opath(under, dirname).resolve()
+    root_dir = Opath(dirname).resolve()
 
     # Check if root_dir is in a omoospace
     try:
@@ -171,20 +165,21 @@ def create_omoospace(
     except FileNotFoundError:
         pass
 
-    profile_file = "OMOOSPACE.md"
     contents_dir = contents_dir or "contents"
 
-    paths = [{"OMOOSPACE.md": f"---\nbrief: {brief or name}\n---"}, f"{contents_dir}/"]
+    paths = [
+        "OMOOSPACE.md",
+        f"{contents_dir}/",
+    ]
 
     if subspaces_dir:
         paths.append(f"{subspaces_dir}/")
 
-    if readme:
-        readme_content = f"""# {name}
-{brief or ""}"""
-        paths.append({"README.md": readme_content})
-
     if gitfiles:
+        readme_content = f"""# {name}
+{description or ""}"""
+
+        paths.append({"README.md": readme_content})
         paths.append({".gitattributes": gitattributes_content})
         paths.append({".gitignore": gitignore_content})
 
@@ -197,9 +192,12 @@ def create_omoospace(
         root_dir.reveal_in_explorer()
 
     omoospace = Omoospace(root_dir)
-    omoospace.brief = brief or name
 
-    if subspaces_dir:
+    if name:
+        omoospace.name = name
+    if description:
+        omoospace.description = description
+    if subspaces_dir != "subspaces" and subspaces_dir:
         omoospace.subspaces_dir = subspaces_dir
     if contents_dir != "contents":
         omoospace.contents_dir = contents_dir

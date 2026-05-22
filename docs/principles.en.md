@@ -93,7 +93,7 @@ Use `OMOOSPACE.*` to record overall project information. Currently, markdown for
 
 ```YAML
 ---
-brief: An awesome IP project
+description: An awesome IP project
 notes:
   Client: Tencent
 makers:
@@ -104,7 +104,7 @@ tools:
 works:
   AwesomeProp01: models/Prop02.glb
   AwesomeShort01:
-    brief: An awesome animated short
+    description: An awesome animated short
     version: "1.0.0"
     contents:
       - videos/Short01.mp4

@@ -1,6 +1,6 @@
+from InquirerPy import inquirer
 import typer
 from pathlib import Path
-from InquirerPy import inquirer
 
 from omoospace.functions import create_omoospace, extract_objective, extract_pathname
 from omoospace.omoospace import Omoospace
@@ -20,7 +20,7 @@ def detect_omoospace_or_exit():
     try:
         return Omoospace(Path.cwd())
     except Exception as err:
-        typer.secho(f"Error: {e}", fg=typer.colors.RED)
+        typer.secho(f"Error: {err}", fg=typer.colors.RED)
         raise typer.Exit(1)
 
 
@@ -54,12 +54,13 @@ def init():
 
     contents_candidates = find_candidates(
         [
+            "contents",
             "Contents",
             "Content",
+            "assets",
             "Assets",
-            "Asset",
+            "resources",
             "Resources",
-            "Resource",
             "res",
             "dist",
             "public",
@@ -68,27 +69,20 @@ def init():
 
     subspaces_candidates = find_candidates(
         [
+            "subspaces",
             "Subspaces",
-            "Subspace",
             "SourceFiles",
-            "SourceFile",
-            "Source File",
             "Source Files",
             "sources",
             "source",
             "src",
             "ProjectFiles",
-            "ProjectFile",
             "Project Files",
-            "Project File",
         ]
     )
 
     # 4. Select or create logic (single step, English, skip if exact match)
     def select_or_create(folder_type, candidates, default):
-        # If exact match exists, use it directly
-        if default in candidates:
-            return default
         # If there are candidates, ask user to select or create new
         if candidates:
             choices = candidates + [f"Create new '{folder_type}'"]
@@ -103,56 +97,41 @@ def init():
 
         return inquirer.text(message=f"{folder_type}:", default=default).execute()
 
-    brief = inquirer.text(message="Brief:", default="").execute()
-
-    contents_dir = select_or_create("Contents Folder", contents_candidates, "Contents")
+    contents_dir = select_or_create("Contents Folder", contents_candidates, "contents")
     subspaces_dir = select_or_create(
-        "Subspaces Folder", subspaces_candidates, "Subspaces"
+        "Subspaces Folder", subspaces_candidates, "subspaces"
     )
-
-    chinese_to_pinyin = inquirer.confirm(
-        message="Convert Chinese to pinyin?", default=False
-    ).execute()
-
-    readme = inquirer.confirm(message="Add README.md?", default=True).execute()
 
     omoospace = create_omoospace(
-        name=cwd.name,
-        brief=brief,
-        under=cwd.parent,
-        chinese_to_pinyin=chinese_to_pinyin,
+        dirname=".",
         contents_dir=contents_dir,
         subspaces_dir=subspaces_dir,
-        readme=readme,
-        reveal_in_explorer=True,
     )
-    typer.secho(f"Omoospace created: {omoospace.root_dir}", fg=typer.colors.GREEN)
 
 
 @app.command()
-def create(name: str = typer.Argument(..., help="Omoospace name")):
+def create(
+    dirname: str = typer.Argument(..., help="Omoospace name"),
+    name: str = typer.Option("", "--name", help="Project name"),
+    description: str = typer.Option("", "--description", help="Project description"),
+    contents: str = typer.Option(
+        "contents", "--contents-dir", help="Contents folder name"
+    ),
+    subspaces: str = typer.Option(
+        "subspaces", "--subspaces-dir", help="Subspaces folder name"
+    ),
+    gitfiles: bool = typer.Option(
+        False, "--git", help="Add .gitattributes and .gitignore files"
+    ),
+):
     """Create a new omoospace."""
-    brief = inquirer.text(message="Brief:", default="").execute()
-
-    contents_dir = inquirer.text(
-        message="Contents Folder:", default="Contents"
-    ).execute()
-    subspaces_dir = inquirer.text(
-        message="Subspaces Folder:", default="Subspaces"
-    ).execute()
-
-    chinese_to_pinyin = inquirer.confirm(
-        message="Convert Chinese to pinyin?", default=False
-    ).execute()
-    readme = inquirer.confirm(message="Add README.md?", default=True).execute()
-
     omoospace = create_omoospace(
+        dirname,
         name=name,
-        brief=brief,
-        contents_dir=contents_dir,
-        subspaces_dir=subspaces_dir,
-        chinese_to_pinyin=chinese_to_pinyin,
-        readme=readme,
+        description=description,
+        contents_dir=contents,
+        subspaces_dir=subspaces,
+        gitfiles=gitfiles,
         reveal_in_explorer=True,
     )
     typer.secho(f"Omoospace created: {omoospace.root_dir}", fg=typer.colors.GREEN)
@@ -198,14 +177,14 @@ def name(value: str = typer.Argument(None, help="Set name")):
         omoospace.name = value
 
 
-@app.command("brief")
-def brief(value: str = typer.Argument(None, help="Set brief")):
-    """Print or set omoospace brief"""
+@app.command("description")
+def description(value: str = typer.Argument(None, help="Set description")):
+    """Print or set omoospace description"""
     omoospace = detect_omoospace_or_exit()
     if value is None:
-        print(omoospace.brief)
+        print(omoospace.description)
     else:
-        omoospace.brief = value
+        omoospace.description = value
 
 
 @app.command("root-dir")
@@ -229,27 +208,21 @@ def objective(path: str = typer.Argument(..., help="Path to extract objective"))
 
 # -------------------------- Subspace 命令 --------------------------
 @subspace_app.command("add")
-def add_subspace(name: str = typer.Argument(..., help="Subspace name")):
+def add_subspace(
+    name: str = typer.Argument(..., help="Subspace name"),
+    parent: str = typer.Option(".", "--parent", help="Parent directory"),
+    collect: bool = typer.Option(
+        True, "--collect/--no-collect", help="Auto collect related subspaces"
+    ),
+):
     """Add a new subspace"""
     omoospace = detect_omoospace_or_exit()
     subspaces_dir = omoospace.subspaces_dir
-    subdirs = [p for p in subspaces_dir.glob("**/") if p.is_dir()]
-    subdirs = [str(p.relative_to(subspaces_dir)) for p in subdirs]
-    if not subdirs:
-        subdirs = ["."]
-    parent_dir = inquirer.select(
-        message="Under which directory:",
-        choices=subdirs,
-        default=".",
-    ).execute()
-    collect_children = inquirer.confirm(
-        message="Auto collect related subspaces?", default=True
-    ).execute()
     try:
         subs = omoospace.add_subspace(
             name=name,
-            under=str(subspaces_dir / parent_dir) if parent_dir != "." else None,
-            collect_children=collect_children,
+            under=str(subspaces_dir / parent) if parent != "." else None,
+            collect_children=collect,
             reveal_in_explorer=True,
         )
         typer.secho(f"Subspace {subs.pathname} added", fg=typer.colors.GREEN)
@@ -260,13 +233,23 @@ def add_subspace(name: str = typer.Argument(..., help="Subspace name")):
 # -------------------------- Work 命令 --------------------------
 @work_app.command("add")
 def add_work(
-    items: list[str] = typer.Argument(..., help="Content path(s) to Contents folder")
+    name: str = typer.Argument(..., help="Work name"),
+    contents: str = typer.Option(
+        "", "--contents", help="Content path(s) to Contents folder"
+    ),
+    description: str = typer.Option("", "--description", help="Work description"),
 ):
     """Add a new work"""
     omoospace = detect_omoospace_or_exit()
-    contents = []
 
-    for item in items:
+    if not contents:
+        typer.secho("Error: --contents is required", fg=typer.colors.RED)
+        raise typer.Exit(1)
+
+    content_list = [c.strip() for c in contents.split(",")]
+    contents_parsed = []
+
+    for item in content_list:
         abs_path = Opath(item).resolve()
         rel_path = omoospace.contents_dir / item
         is_abs = omoospace.is_content(abs_path)
@@ -277,15 +260,13 @@ def add_work(
             raise typer.Exit(1)
 
         content = str(abs_path.relative_to(omoospace.contents_dir)) if is_abs else item
-        contents.append(content)
+        contents_parsed.append(content)
 
-    name = inquirer.text(message="Name:", default="").execute()
-    brief = inquirer.text(message="Brief:", default="").execute()
-    name = name or contents[0].split("/")[-1].split(".")[0]
+    work_name = name or contents_parsed[0].split("/")[-1].split(".")[0]
 
-    work = {"name": name, "version": "0.1.0", "contents": contents}
-    if brief:
-        work["brief"] = brief
+    work = {"name": work_name, "version": "0.1.0", "contents": contents_parsed}
+    if description:
+        work["description"] = description
 
     work = omoospace.add_work(work)
     typer.secho(f"Work {work.name} added", fg=typer.colors.GREEN)
@@ -303,7 +284,7 @@ def list_work():
 
     for work in works:
         typer.echo(
-            f"- {work.name}{f': v{work.version}' if work.version else ''}{f' ({work.brief})' if work.brief else ''}"
+            f"- {work.name}{f': v{work.version}' if work.version else ''}{f' ({work.description})' if work.description else ''}"
         )
         for idx, content in enumerate(work.contents, 1):
             if idx != len(work.contents):
@@ -315,19 +296,21 @@ def list_work():
 
 # -------------------------- tool 命令 --------------------------
 @tool_app.command("add")
-def add_tool(name: str = typer.Argument(..., help="tool name")):
+def add_tool(
+    name: str = typer.Argument(..., help="Tool name"),
+    version: str = typer.Option("", "--version", help="Tool version"),
+    website: str = typer.Option("", "--website", help="Tool website"),
+):
     """Add a new tool"""
     omoospace = detect_omoospace_or_exit()
     tool = {"name": name}
-    version = inquirer.text(message="tool version:", default="").execute()
-    website = inquirer.text(message="Website:", default="").execute()
     if version:
         tool["version"] = version
     if website:
         tool["website"] = website
 
     tool = omoospace.add_tool(tool)
-    typer.secho(f"tool {tool.name} added", fg=typer.colors.GREEN)
+    typer.secho(f"Tool {tool.name} added", fg=typer.colors.GREEN)
 
 
 @tool_app.command("list")
@@ -348,12 +331,12 @@ def list_tool():
 # -------------------------- maker 命令 --------------------------
 @maker_app.command("add")
 def add_maker(
-    name: str = typer.Argument(..., help="maker name"),
+    name: str = typer.Argument(..., help="Maker name"),
+    email: str = typer.Option("", "--email", help="Maker email"),
+    website: str = typer.Option("", "--website", help="Maker website"),
 ):
     """Add a new maker"""
     omoospace = detect_omoospace_or_exit()
-    email = inquirer.text(message="Email:", default="").execute()
-    website = inquirer.text(message="Website:", default="").execute()
     maker = {"name": name}
     if email:
         maker["email"] = email

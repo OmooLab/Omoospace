@@ -6,7 +6,7 @@
 
 ```markdown
 ---
-brief: <简述项目>
+description: <简述项目>
 ---
 ```
 
@@ -14,7 +14,7 @@ brief: <简述项目>
 
 ```markdown
 ---
-brief: 一个超厉害的IP项目
+description: 一个超厉害的IP项目
 ---
 ```
 
@@ -173,7 +173,7 @@ works:
 ---
 works:
   <作品名>:
-    brief: <简述作品>
+    description: <简述作品>
     version: "0.1.0"
     contents:
       - <contents文件夹的相对路径>
@@ -193,7 +193,7 @@ works:
     - models/道具02/道具02.fbx
     - models/道具02/Textures
   超厉害短片01:
-    brief: 一个超厉害的IP动画短片
+    description: 一个超厉害的IP动画短片
     version: "1.0.0"
     contents:
       - videos/动画短片01.mp4

@@ -179,7 +179,7 @@ class Tool(ProfileItem):
 
 class WorkDict(TypedDict):
     name: str
-    brief: Optional[str]
+    description: Optional[str]
     version: Optional[str]
     contents: Optional[Union[list[str], set[str]]]
     contributions: Optional[
@@ -202,8 +202,8 @@ class Work(ProfileItem):
 
         elif isinstance(work, dict) and "name" in work:
             super().__init__(omoospace, work["name"])
-            if "brief" in work:
-                self.brief = work["brief"]
+            if "description" in work:
+                self.description = work["description"]
 
             if "version" in work:
                 self.version = work["version"]
@@ -217,8 +217,8 @@ class Work(ProfileItem):
         elif isinstance(work.name, str):
             super().__init__(omoospace, work.name)
 
-            if work.brief:
-                self.brief = work.brief
+            if work.description:
+                self.description = work.description
 
             if work.version:
                 self.version = work.version
@@ -232,19 +232,19 @@ class Work(ProfileItem):
             raise ValueError(f"{work} is not a valid Work.")
 
     @property
-    def brief(self) -> Optional[str]:
-        """Get the brief from the latest profile data."""
-        return self.get("brief")
+    def description(self) -> Optional[str]:
+        """Get the description from the latest profile data."""
+        return self.get("description")
 
-    @brief.setter
-    def brief(self, value: str):
+    @description.setter
+    def description(self, value: str):
 
         if isinstance(self.data, list):
             self.set("contents", self.data)
         if isinstance(self.data, str):
             self.set("contents", [self.data])
 
-        self.set("brief", value)
+        self.set("description", value)
 
     @property
     def version(self) -> Optional[str]:

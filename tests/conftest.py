@@ -14,7 +14,7 @@ def mini_omoos_path():
         "contents/",
         {
             "OMOOSPACE.md": """---
-brief: A mini omoospace.
+description: A mini omoospace.
 ---
 """,
         },
@@ -37,7 +37,7 @@ def empty_omoos_path():
         "References/",
         {
             "OMOOSPACE.md": """---
-brief: An empty omoospace.
+description: An empty omoospace.
 ---
 """,
         },
