@@ -484,7 +484,7 @@
         
   
   <span class="md-ellipsis">
-    Omoospace.yml
+    OMOOSPACE.md
   </span>
   
 
@@ -582,6 +582,34 @@
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     已有项目
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    init 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    属性命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    create 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#claude-code-commands" class="md-nav__link">
+    Claude Code Commands
   </a>
   
 </li>
@@ -1102,6 +1130,34 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#init" class="md-nav__link">
+    init 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    属性命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    create 命令
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#claude-code-commands" class="md-nav__link">
+    Claude Code Commands
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1131,6 +1187,27 @@
 <h2 id="_2">已有项目</h2>
 <div class="language-Bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>&lt;project<span class="w"> </span>folder&gt;
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>omoos<span class="w"> </span>init
+</span></code></pre></div>
+<h2 id="init">init 命令</h2>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>omoos<span class="w"> </span>init
+</span></code></pre></div>
+<h2 id="_3">属性命令</h2>
+<p>打印或设置 Omoospace 属性：</p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>omoos<span class="w"> </span>subspaces-dir<span class="w">          </span><span class="c1"># 打印 subspaces 目录路径</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>omoos<span class="w"> </span>subspaces-dir<span class="w"> </span>Projects<span class="w"> </span><span class="c1"># 设置 subspaces 目录为 Projects</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>omoos<span class="w"> </span>contents-dir<span class="w">           </span><span class="c1"># 打印 contents 目录路径</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>omoos<span class="w"> </span>contents-dir<span class="w"> </span>Assets<span class="w">    </span><span class="c1"># 设置 contents 目录为 Assets</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>omoos<span class="w"> </span>name<span class="w">                   </span><span class="c1"># 打印项目名</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>omoos<span class="w"> </span>description<span class="w">            </span><span class="c1"># 打印简介</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>omoos<span class="w"> </span>root-dir<span class="w">               </span><span class="c1"># 打印根目录</span>
+</span></code></pre></div>
+<h2 id="create">create 命令</h2>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>omoos<span class="w"> </span>create<span class="w"> </span><span class="s2">&quot;动画短片01&quot;</span><span class="w"> </span>--description<span class="w"> </span><span class="s2">&quot;一个神秘的项目&quot;</span><span class="w"> </span>--contents<span class="w"> </span>contents<span class="w"> </span>--subspaces<span class="w"> </span>subspaces
+</span></code></pre></div>
+<h2 id="claude-code-commands">Claude Code Commands</h2>
+<p>安装 init 后可使用：</p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>omoos:lint<span class="w">    </span><span class="c1"># 检查命名规范、文件放置、frontmatter</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>omoos:setup<span class="w">   </span><span class="c1"># 分析现有结构，提议迁移到 omoospace</span>
 </span></code></pre></div>
 
 

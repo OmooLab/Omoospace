@@ -514,21 +514,21 @@
       
         <li class="md-nav__item">
   <a href="#2-contents" class="md-nav__link">
-    2. Contents/ 存静态的资源型文件
+    2. contents/ 存静态的资源型文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#3-subspaces" class="md-nav__link">
-    3. Subspaces/ 存动态的制作型文件
+    3. subspaces/ 存动态的制作型文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-omoospace" class="md-nav__link">
-    4. Omoospace.*记录信息
+  <a href="#4-omoospacemd" class="md-nav__link">
+    4. OMOOSPACE.md记录信息
   </a>
   
 </li>
@@ -552,7 +552,7 @@
         
   
   <span class="md-ellipsis">
-    Omoospace.yml
+    OMOOSPACE.md
   </span>
   
 
@@ -1097,21 +1097,21 @@
       
         <li class="md-nav__item">
   <a href="#2-contents" class="md-nav__link">
-    2. Contents/ 存静态的资源型文件
+    2. contents/ 存静态的资源型文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#3-subspaces" class="md-nav__link">
-    3. Subspaces/ 存动态的制作型文件
+    3. subspaces/ 存动态的制作型文件
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-omoospace" class="md-nav__link">
-    4. Omoospace.*记录信息
+  <a href="#4-omoospacemd" class="md-nav__link">
+    4. OMOOSPACE.md记录信息
   </a>
   
 </li>
@@ -1139,63 +1139,63 @@
 <p>只有四条法则，非常容易记忆：</p>
 <ol>
 <li>用直白、具体的表达，命名一切</li>
-<li><code>Contents/</code> 存静态的资源型文件</li>
-<li><code>Subspaces/</code> 存动态的制作型文件</li>
-<li><code>Omoospace.*</code> 记录信息</li>
+<li><code>contents/</code> 存静态的资源型文件</li>
+<li><code>subspaces/</code> 存动态的制作型文件</li>
+<li><code>OMOOSPACE.md</code> 记录信息</li>
 </ol>
 <h2 id="1">1. 用直白、具体的表达，命名一切</h2>
 <ul>
 <li>
 <p><strong>避免特殊符号和空格。</strong><br />
-    仅接受字母、数字、下划线<code>_</code>、英文点<code>.</code>、连接符<code>-</code></p>
+  仅接受字母、数字、下划线<code>_</code>、英文点<code>.</code>、连接符<code>-</code></p>
 </li>
 <li>
 <p><strong>用易于理解的通用表达命名，避免缩写、代号。</strong><br />
-    不用简略到无法理解的缩写，例如<code>BC</code>？<code>TE</code>？<code>空上</code>？</p>
+  不用简略到无法理解的缩写，例如<code>BC</code>？<code>TE</code>？<code>空上</code>？</p>
 </li>
 <li>
 <p><strong>可以省略动作，但不能省略对象。</strong><br />
-    例如<code>建模道具01.blend</code>可以写<code>道具01.blend</code>，不能写<code>建模.blend</code>。<code>测试水特效.hip</code>不能写<code>测试.hip</code></p>
+  例如<code>建模道具01.blend</code>可以写<code>道具01.blend</code>，不能写<code>建模.blend</code>。<code>测试水特效.hip</code>不能写<code>测试.hip</code></p>
 </li>
 <li>
-<p><strong>可以用前缀设置语境（下划线</strong><strong><code>_</code></strong><strong>分隔），用后缀添加修饰（英文点</strong><strong><code>.</code></strong><strong>分隔）。</strong><br />
-    例如<code>场景010_解剖资产_骨骼模型.high.v001.blend</code>。<code>场景010</code>、<code>解剖资产</code>是语境，<code>.high</code>、<code>.v001</code>是修饰，他们都是对<code>骨骼模型</code>的补充说明，更多示例看这里，<a href="../how-to-add-suffixes/">如何设置前缀、后缀？</a></p>
+<p><strong>可以用前缀设置语境（下划线**</strong><code>_</code>*<strong>*分隔），用后缀添加修饰（英文点**</strong><code>.</code>*<strong>*分隔）。</strong><br />
+  例如<code>场景010_解剖资产_骨骼模型.high.v001.blend</code>。<code>场景010</code>、<code>解剖资产</code>是语境，<code>.high</code>、<code>.v001</code>是修饰，他们都是对<code>骨骼模型</code>的补充说明，更多示例看这里，<a href="../how-to-add-suffixes/">如何设置前缀、后缀？</a></p>
 </li>
 </ul>
-<h2 id="2-contents">2. <strong><code>Contents/</code></strong> 存静态的资源型文件</h2>
+<h2 id="2-contents">2. <strong><code>contents/</code></strong> 存静态的资源型文件</h2>
 <ul>
 <li>
 <p><strong>存，被引用的、导入的、导出后的资源型文件、成品文件。</strong><br />
-    例如：图片、视频、音效、模型、甚至工程文件，数据等等“只读”的文件</p>
+  例如：图片、视频、音效、模型、甚至工程文件，数据等等“只读”的文件</p>
 </li>
 <li>
-<p><strong>按资源类型设置子文件夹</strong><br />
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>├──<span class="w"> </span>Contents/
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│<span class="w">   </span>├──<span class="w"> </span>Audios/<span class="w">      </span><span class="c1"># 音频素材</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│<span class="w">   </span>├──<span class="w"> </span>Downloads/<span class="w">   </span><span class="c1"># 网上下载的</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│<span class="w">   </span>├──<span class="w"> </span>Dynamics/<span class="w">    </span><span class="c1"># 各种 FX 结算</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│<span class="w">   </span>├──<span class="w"> </span>Images/<span class="w">      </span><span class="c1"># 贴图、图片素材</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│<span class="w">   </span>├──<span class="w"> </span>Models/<span class="w">      </span><span class="c1"># 模型，动态模型</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│<span class="w">   </span>├──<span class="w"> </span>Renders/<span class="w">     </span><span class="c1"># 序列帧、渲染视频</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│<span class="w">   </span>├──<span class="w"> </span>Data/<span class="w">        </span><span class="c1"># 引用数据</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│<span class="w">   </span>╰──<span class="w"> </span>Videos/<span class="w">      </span><span class="c1"># 成片、视频素材</span>
+<p><strong>按资源类型设置子文件夹</strong></p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>├──<span class="w"> </span>contents/
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│<span class="w">   </span>├──<span class="w"> </span>audios/<span class="w">      </span><span class="c1"># 音频素材</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│<span class="w">   </span>├──<span class="w"> </span>downloads/<span class="w">   </span><span class="c1"># 网上下载的</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│<span class="w">   </span>├──<span class="w"> </span>dynamics/<span class="w">    </span><span class="c1"># 各种 FX 结算</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│<span class="w">   </span>├──<span class="w"> </span>images/<span class="w">      </span><span class="c1"># 贴图、图片素材</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│<span class="w">   </span>├──<span class="w"> </span>models/<span class="w">      </span><span class="c1"># 模型，动态模型</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│<span class="w">   </span>├──<span class="w"> </span>renders/<span class="w">     </span><span class="c1"># 序列帧、渲染视频</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│<span class="w">   </span>├──<span class="w"> </span>data/<span class="w">        </span><span class="c1"># 引用数据</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│<span class="w">   </span>╰──<span class="w"> </span>videos/<span class="w">      </span><span class="c1"># 成片、视频素材</span>
 </span></code></pre></div>
-    更多示例看这里，<a href="../how-to-setup-folders/">如何设置文件夹？</a></p>
+<p>更多示例看这里，<a href="../how-to-setup-folders/">如何设置文件夹？</a></p>
 </li>
 <li>
-<p><strong>文件夹结构不要轻易调整，文件也不要随意移动。</strong> <br />
-    如果一定要调整，可以用复制的方式，以避免原引用丢失。</p>
+<p><strong>文件夹结构不要轻易调整，文件也不要随意移动。</strong><br />
+  如果一定要调整，可以用复制的方式，以避免原引用丢失。</p>
 </li>
 </ul>
-<h2 id="3-subspaces">3. <strong><code>Subspaces/</code></strong> <strong>存动态的制作型文件</strong></h2>
+<h2 id="3-subspaces">3. <strong><code>subspaces/</code></strong> <strong>存动态的制作型文件</strong></h2>
 <ul>
 <li>
 <p><strong>存，用于记录过程的制作型文件，软件的工程文件。</strong><br />
-    例如：<code>.psd</code>、<code>.blend</code>、<code>.word</code>、<code>.ppt</code></p>
+  例如：<code>.psd</code>、<code>.blend</code>、<code>.word</code>、<code>.ppt</code></p>
 </li>
 <li>
-<p><strong>按目标设置文件和子文件夹</strong><br />
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>├──<span class="w"> </span>Subspaces/
+<p><strong>按目标设置文件和子文件夹</strong></p>
+<div class="language-Bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>├──<span class="w"> </span>subspaces/
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>│<span class="w">   </span>├──<span class="w"> </span>资产/<span class="w">                  </span><span class="c1"># （准备）资产</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>道具01.blend<span class="w">       </span><span class="c1"># 最新版本</span>
 </span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>│<span class="w">   </span>│<span class="w">   </span>╰──<span class="w"> </span>道具01.v001.blend<span class="w">  </span><span class="c1"># 备份版本</span>
@@ -1204,68 +1204,49 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│<span class="w">       </span>├──<span class="w"> </span>场景010.blend<span class="w">      </span><span class="c1">#（搭建）场景010</span>
 </span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│<span class="w">       </span>╰──<span class="w"> </span>测试爆炸效果.blend<span class="w">  </span><span class="c1"># 测试爆炸效果</span>
 </span></code></pre></div>
-    更多示例看这里，<a href="../how-to-setup-folders/">如何设置文件夹？</a><br />
-    可以不设置<code>Subspaces/</code>文件夹，直接把制作型文件放在根目录。</p>
+<p>更多示例看这里，<a href="../how-to-setup-folders/">如何设置文件夹？</a><br />
+ 可以不设置<code>subspaces/</code>文件夹，直接把制作型文件放在根目录。</p>
 </li>
 <li>
 <p><strong>文件夹结构可以任意调整，文件也可以随意移动。</strong><br />
-    这里允许散乱的状态，制作中的、调试中的、有待验证的、没有整理的。</p>
+  这里允许散乱的状态，制作中的、调试中的、有待验证的、没有整理的。</p>
 </li>
 <li>
-<p><strong>文件若要被引用，另存到</strong><strong><code>Contents/</code></strong><strong>下。</strong><br />
-    制作型文件互相不能引用，以避免动态散乱的上游内容影响下游文件。
-    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>├──<span class="w"> </span>Contents/
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│<span class="w">   </span>╰──<span class="w"> </span>Models/
+<p><strong>文件若要被引用，另存到**</strong><code>contents/</code>*<strong>*下。</strong><br />
+  制作型文件互相不能引用，以避免动态散乱的上游内容影响下游文件。
+    <div class="language-Bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>├──<span class="w"> </span>contents/
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>│<span class="w">   </span>╰──<span class="w"> </span>models/
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>│<span class="w">       </span>╰──<span class="w"> </span>**道具01.blend**
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├──<span class="w"> </span>Subspaces/
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>├──<span class="w"> </span>subspaces/
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>│<span class="w">   </span>├──<span class="w"> </span>准备资产/
 </span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>│<span class="w">   </span>│<span class="w">   </span>╰──<span class="w"> </span>道具01.blend
 </span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>│<span class="w">   </span>╰──<span class="w"> </span>场景010.blend
 </span></code></pre></div>
-    <code>场景010.blend</code> 想要引用<code>道具001.blend</code>，就把后者复制到<code>Contents/</code>下。详情看这里，<a href="../how-to-backup/">如何备份副本？</a></p>
+    <code>场景010.blend</code> 想要引用<code>道具001.blend</code>，就把后者复制到<code>contents/</code>下。详情看这里，<a href="../how-to-backup/">如何备份副本？</a></p>
 </li>
 </ul>
-<h2 id="4-omoospace">4. <code>Omoospace.*</code>记录信息</h2>
-<p>约定<code>Omoospace.*</code>来记录整个项目的信息。可以选择任意你习惯的文档格式（markdown，txt，word，…），小工具使用<code>Omoospace.yml</code>进行记录（可以为一个空的文件，不能没有，不然小工具无法识别）</p>
-<div class="language-YAML highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># 除了加粗字是固定表达，其他键值随意</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">brief</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">一个超厉害的IP项目</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nt">notes</span><span class="p">:</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span><span class="nt">客户</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">腾讯爸爸</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nt">makers</span><span class="p">:</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">偶魔数字</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">studio@omoolab.xyz</span>
-</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nt">tools</span><span class="p">:</span>
-</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">Blender</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.2.0</span>
-</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">Houdini</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
-</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="nt">works</span><span class="p">:</span>
-</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">  </span><span class="nt">超厉害道具01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Models/道具01.glb</span>
-</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">  </span><span class="nt">超厉害短片01</span><span class="p">:</span><span class="w"> </span>
-</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Videos/动画短片01.mp4</span>
-</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Images/动画短片01_封面.png</span>
-</span></code></pre></div>
-<p>YAML 语法简单直接，详细了解看这里：
-https://curder.github.io/yaml-study/guide/rules.html</p>
-<p><code>Omoospace.zh.yml</code> 可以用中文记录key名</p>
-<div class="language-YAML highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">简述</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">一个超厉害的IP项目</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nt">记录列表</span><span class="p">:</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="nt">客户</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">腾讯爸爸</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="nt">主创列表</span><span class="p">:</span>
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">  </span><span class="nt">偶魔数字</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">studio@omoolab.xyz</span>
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="nt">工具列表</span><span class="p">:</span>
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="w">  </span><span class="nt">Blender</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.2.0</span>
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">  </span><span class="nt">Houdini</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
-</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
-</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nt">作品列表</span><span class="p">:</span>
-</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">  </span><span class="nt">超厉害道具01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Models/道具01.glb</span>
-</span><span id="__span-4-15"><a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">  </span><span class="nt">超厉害短片01</span><span class="p">:</span><span class="w"> </span>
-</span><span id="__span-4-16"><a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Videos/动画短片01.mp4</span>
-</span><span id="__span-4-17"><a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Images/动画短片01_封面.png</span>
+<h2 id="4-omoospacemd">4. <code>OMOOSPACE.md</code>记录信息</h2>
+<p>约定<code>OMOOSPACE.md</code>来记录整个项目的信息。</p>
+<div class="language-YAML highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nn">---</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">一个超厉害的IP项目</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nt">notes</span><span class="p">:</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nt">客户</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">腾讯爸爸</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="nt">makers</span><span class="p">:</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span><span class="nt">偶魔数字</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">studio@omoolab.xyz</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nt">tools</span><span class="p">:</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">  </span><span class="nt">Blender</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4.2.0</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">  </span><span class="nt">Houdini</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">20.0</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="nt">works</span><span class="p">:</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">  </span><span class="nt">超厉害道具01</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">models/道具01.glb</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">  </span><span class="nt">超厉害短片01</span><span class="p">:</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">一个超厉害的动画短片</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;1.0.0&quot;</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="nt">contents</span><span class="p">:</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">videos/动画短片01.mp4</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">images/动画短片01_封面.png</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="nn">---</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="l l-Scalar l-Scalar-Plain">这里记录任何关于项目的说明文档</span>
 </span></code></pre></div>
 
 
@@ -1305,13 +1286,13 @@ https://curder.github.io/yaml-study/guide/rules.html</p>
         
         
           
-          <a href="../yml/" class="md-footer__link md-footer__link--next" aria-label="下一页: Omoospace.yml">
+          <a href="../yml/" class="md-footer__link md-footer__link--next" aria-label="下一页: OMOOSPACE.md">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 下一页
               </span>
               <div class="md-ellipsis">
-                Omoospace.yml
+                OMOOSPACE.md
               </div>
             </div>
             <div class="md-footer__button md-icon">
