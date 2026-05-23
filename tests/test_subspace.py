@@ -4,7 +4,7 @@ from omoospace import ObjectiveType, extract_pathname, Omoospace, make_path, Opa
 from omoospace.omoospace import Subspace
 from tests.helper import factory_make_item
 
-subspace = factory_make_item("Subspaces")
+subspace = factory_make_item("subspaces")
 
 
 def test_add_subspace(mini_omoos_path: Opath):
