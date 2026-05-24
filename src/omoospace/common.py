@@ -1,6 +1,5 @@
 from typing import Any
-import frontmatter
-from omoospace.utils import Opath, yaml
+from omoospace.utils import Opath, yaml, parse_frontmatter, dump_frontmatter
 from dataclasses import dataclass
 
 
@@ -27,8 +26,9 @@ class Profile:
         if self.profile_file.suffix.lower() == ".md":
             # Handle Markdown file with YAML frontmatter
             try:
-                post = frontmatter.load(self.profile_file)
-                return dict(post) or {}
+                content = self.profile_file.read_text(encoding="utf-8")
+                metadata, _ = parse_frontmatter(content)
+                return metadata if metadata else {}
             except Exception:
                 return {}
         else:
@@ -45,10 +45,9 @@ class Profile:
 
         if self.profile_file.suffix.lower() == ".md":
             # Write to Markdown file with YAML frontmatter
-            post = frontmatter.Post("")
-            post.metadata = data
+            content = dump_frontmatter(data)
             with self.profile_file.open("w", encoding="utf-8") as file:
-                file.write(frontmatter.dumps(post))
+                file.write(content)
         else:
             # Write to YAML file
             with self.profile_file.open("w", encoding="utf-8") as file:

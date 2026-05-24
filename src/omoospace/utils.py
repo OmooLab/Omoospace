@@ -3,6 +3,7 @@ import os
 import sys
 import shutil
 from pathlib import Path
+from io import StringIO
 from typing import Any, Generic, Iterable, Optional, TypeVar, Union
 
 
@@ -519,3 +520,49 @@ class Oset(Generic[T], set):
             set: Standard set containing primitive values or object key attributes
         """
         return {self._get_item_key(item) for item in self}
+
+
+_FRONTMATTER_PATTERN = re.compile(r"^---\s*\n(.*?)\n---\s*\n?", re.DOTALL)
+
+
+def parse_frontmatter(content: str) -> tuple[dict, str]:
+    """Parse frontmatter from markdown content.
+
+    Args:
+        content: Markdown string that may contain YAML frontmatter
+
+    Returns:
+        Tuple of (metadata dict, body content). metadata is empty dict if no frontmatter found.
+    """
+    match = _FRONTMATTER_PATTERN.match(content)
+    if not match:
+        return {}, content
+
+    yaml_content = match.group(1)
+    yaml = YAML()
+    yaml.preserve_quotes = True
+
+    metadata = yaml.load(StringIO(yaml_content)) or {}
+    body = content[match.end():]
+    return dict(metadata), body
+
+
+def dump_frontmatter(metadata: dict, content: str = "") -> str:
+    """Serialize metadata and content to markdown with frontmatter.
+
+    Args:
+        metadata: YAML metadata dict
+        content: Body content (default empty string)
+
+    Returns:
+        Markdown string with frontmatter. If metadata is empty, returns just the content.
+    """
+    if not metadata:
+        return content
+
+    yaml = YAML()
+    buf = StringIO()
+    yaml.dump(dict(metadata), buf)
+    frontmatter = buf.getvalue()
+
+    return f"---\n{frontmatter}---\n{content}"

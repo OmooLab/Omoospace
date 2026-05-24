@@ -732,7 +732,6 @@ source = { editable = "." }
 dependencies = [
     { name = "nutree" },
     { name = "pypinyin" },
-    { name = "python-frontmatter" },
     { name = "ruamel-yaml" },
 ]
 
@@ -763,7 +762,6 @@ requires-dist = [
     { name = "inquirerpy", marker = "extra == 'cli'", specifier = ">=0.3.4" },
     { name = "nutree", specifier = ">=0.5.1,<0.6" },
     { name = "pypinyin", specifier = ">=0.49.0,<0.50" },
-    { name = "python-frontmatter", specifier = ">=1.2.0" },
     { name = "ruamel-yaml", specifier = ">=0.17.35,<0.18" },
     { name = "typer", marker = "extra == 'cli'", specifier = ">=0.24.1" },
 ]
@@ -1017,18 +1015,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/4c/c4/13b4776ea2d76c115c1d1b84579f3764ee6d57204f6be27119f13a61d0a9/python-dateutil-2.8.2.tar.gz", hash = "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86", size = 357324, upload-time = "2021-07-14T08:19:19.783Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/36/7a/87837f39d0296e723bb9b62bbb257d0355c7f6128853c78955f57342a56d/python_dateutil-2.8.2-py2.py3-none-any.whl", hash = "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9", size = 247702, upload-time = "2021-07-14T08:19:18.161Z" },
-]
-
-[[package]]
-name = "python-frontmatter"
-version = "1.2.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pyyaml" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e9/21/88aefb4f1de6661b5a003175e21e4a5ad94f5e52b2abf4170a11883c7d81/python_frontmatter-1.2.0.tar.gz", hash = "sha256:5b26ccd3cb85af77feb11d83b922c7bb5aeccb0c9d3fb236b938c600b6322984", size = 16890, upload-time = "2026-05-17T23:42:05.493Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/1c/b1/ec12e3e746234006b77dec69d53878253b1da09dbb55fa3cb456083d9069/python_frontmatter-1.2.0-py3-none-any.whl", hash = "sha256:e1ee1d4300450a2f84e778eb4f70edf573da6cd7d463801066f05edc4e819c78", size = 10396, upload-time = "2026-05-17T23:42:04.637Z" },
 ]
 
 [[package]]
