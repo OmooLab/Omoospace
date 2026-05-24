@@ -33,8 +33,8 @@ def empty_omoos_path():
     # create the test omoospace.
     make_path(
         "contents/",
-        "Subspaces/",
-        "References/",
+        "subspaces/",
+        "references/",
         {
             "OMOOSPACE.md": """---
 description: An empty omoospace.

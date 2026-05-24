@@ -93,7 +93,7 @@ def test_extract_pathname2(empty_omoos_path: Path):
 def test_objective_node(empty_omoos_path: Path):
     make_path(
         "Prop01_Part01_v001.blend",
-        under=Path(empty_omoos_path, "Subspaces", "Sc010_Shot0100"),
+        under=Path(empty_omoos_path, "subspaces", "Sc010_Shot0100"),
     )
 
     o_tree = Omoospace(empty_omoos_path).objective_tree
