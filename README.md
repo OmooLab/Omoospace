@@ -6,39 +6,31 @@
 
 Omoospace is a universal folder structure guideline for creative projects. Its goals are **universality, flexibility, and semantic clarity**. It works for complex projects and team collaboration, as well as simple projects and individual work. [Why Omoospace?](https://docs.omoolab.xyz/omoospace/0.2.x/en/why/)
 
-
 ## Getting Started
 
 ### New Project
 
 1. Create a new folder as the project root.
-2. Create `Omoospace.yml` in the root.
-3. Create `Contents/` in the root and put your resource files in it.
-4. (Optional) Create `Subspaces/` in the root and put your source files in it.
+2. Create `OMOOSPACE.md` in the root.
+3. Create `contents/` in the root and put your resource files in it.
+4. (Optional) Create `subspaces/` in the root and put your source files in it.
 5. (Optional) Add other folders as needed and place the corresponding file types in them.
-
 
 ### Existing Project
 
-1. Create `Omoospace.yml` in the project root.
-2. Edit `Omoospace.yml` and add:
-    ```YAML
-    contents_dir: <resource_folder_name>
-    ```
-    Example:
-    ```YAML
-    contents_dir: Assets
-    ```
+Create and edit `OMOOSPACE.md` in the project root.
 
-3. (Optional) Edit `Omoospace.yml` and add:
-    ```YAML
-    subspaces_dir: <source_folder_name>
-    ```
-    Example:
-    ```YAML
-    subspaces_dir: ProjectFiles
-    ```
+```YAML
+---
+contents_dir: <resource_folder_name> # e.g. assets
+subspaces_dir: <source_folder_name> # e.g. sources
+---
 
+# Project Name
+
+...
+
+```
 
 ## Command Line Tool
 

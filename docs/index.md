@@ -16,15 +16,19 @@ Omoospace 是构建创意工作文件夹结构的心法。它的目标是，通�
 
 ### 已有项目
 
-1. 根目录下新建文件`OMOOSPACE.md`
-2. 编辑`OMOOSPACE.md`  
-   添加`contents_dir: <资源型文件夹名>`  
-   例如`contents_dir: Assets`（Unity）
-     
-3. （可选）编辑`subspaces_dir: ProjectFiles`  
-   添加`subspaces_dir: <制作型文件夹名>`  
-   例如`subspaces_dir: ProjectFiles`
-     
+根目录下新建文件`OMOOSPACE.md`
+
+```YAML
+---
+contents_dir: <资源型文件夹名> # e.g. Assets
+subspaces_dir: <制作型文件夹名> # e.g. sources
+---
+
+# Project Name
+
+...
+
+```
 
 ## 开箱即用的小工具
 

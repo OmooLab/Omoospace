@@ -7,7 +7,7 @@ There are only 4 rules, easy to remember:
 1. Name everything in a clear, specific way
 2. `contents/` stores static resource files
 3. `subspaces/` stores dynamic source files
-4. `OMOOSPACE.*` rcords project information
+4. `OMOOSPACE.md` rcords project information
 
 ## 1. Name everything in a clear, specific way
 
@@ -87,9 +87,9 @@ There are only 4 rules, easy to remember:
 
     If `Scene010.blend` needs to reference `Prop01.blend`, copy `Prop01.blend` to `contents/`. See details here: [How to back up copies?](how-to-backup.md)
 
-## 4. `OMOOSPACE.*` records project information
+## 4. `OMOOSPACE.md` records project information
 
-Use `OMOOSPACE.*` to record overall project information. Currently, markdown format (`OMOOSPACE.md`) is recommended. The file must exist — otherwise, the tool cannot recognize the workspace.
+Use `OMOOSPACE.md` to record overall project information.
 
 ```YAML
 ---
