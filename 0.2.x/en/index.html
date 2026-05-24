@@ -1112,36 +1112,27 @@
 <li>(Optional) Add other folders as needed and place the corresponding file types in them.</li>
 </ol>
 <h3 id="existing-project">Existing Project</h3>
-<ol>
-<li>Create <code>OMOOSPACE.md</code> in the project root.</li>
-<li>
-<p>Edit <code>OMOOSPACE.md</code> and add:
-    <div class="language-YAML highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">contents_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;resource_folder_name&gt;</span>
+<p>Create and edit <code>OMOOSPACE.md</code> in the project root.</p>
+<div class="language-YAML highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nn">---</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">contents_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;resource_folder_name&gt;</span><span class="w"> </span><span class="c1"># e.g. assets</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">subspaces_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;source_folder_name&gt;</span><span class="w"> </span><span class="c1"># e.g. sources</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nn">---</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Project Name</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nn">...</span>
 </span></code></pre></div>
-    Example:
-    <div class="language-YAML highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">contents_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Assets</span>
-</span></code></pre></div></p>
-</li>
-<li>
-<p>(Optional) Edit <code>OMOOSPACE.md</code> and add:
-    <div class="language-YAML highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">subspaces_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;source_folder_name&gt;</span>
-</span></code></pre></div>
-    Example:
-    <div class="language-YAML highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">subspaces_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ProjectFiles</span>
-</span></code></pre></div></p>
-</li>
-</ol>
 <h2 id="command-line-tool">Command Line Tool</h2>
 <h3 id="install-uv-and-tool">Install uv and tool</h3>
 <p><a href="https://docs.astral.sh/uv/getting-started/installation/">https://docs.astral.sh/uv/getting-started/installation/</a></p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>omoospace<span class="o">[</span>cli<span class="o">]</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>tool<span class="w"> </span>install<span class="w"> </span>omoospace<span class="o">[</span>cli<span class="o">]</span>
 </span></code></pre></div>
 <h3 id="new-project_1">New Project</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>omoos<span class="w"> </span>create<span class="w"> </span>&lt;Name&gt;
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>omoos<span class="w"> </span>create<span class="w"> </span>&lt;Name&gt;
 </span></code></pre></div>
 <h3 id="existing-project_1">Existing Project</h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">cd</span><span class="w"> </span>&lt;project<span class="w"> </span>folder&gt;
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>omoos<span class="w"> </span>init
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>&lt;project<span class="w"> </span>folder&gt;
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>omoos<span class="w"> </span>init
 </span></code></pre></div>
 
 
